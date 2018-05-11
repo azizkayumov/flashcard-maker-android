@@ -1,0 +1,145 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:7079011173431514391",
+      "lastPropertyId": "10:5809453386149891171",
+      "name": "Set",
+      "properties": [
+        {
+          "id": "1:4499851336150652402",
+          "name": "id"
+        },
+        {
+          "id": "2:7292873222155408029",
+          "name": "title"
+        },
+        {
+          "id": "4:8209945402282130624",
+          "name": "useCount"
+        },
+        {
+          "id": "5:6448712699578746177",
+          "name": "lastEdited"
+        },
+        {
+          "id": "6:1324340488997189943",
+          "name": "labels"
+        },
+        {
+          "id": "7:1116185927039438040",
+          "name": "count"
+        },
+        {
+          "id": "8:4468596803835891067",
+          "name": "isTrash"
+        },
+        {
+          "id": "9:8382385960928695654",
+          "name": "color"
+        },
+        {
+          "id": "10:5809453386149891171",
+          "name": "isFavorite"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:7184769437621975448",
+      "lastPropertyId": "15:5582885766526590817",
+      "name": "Card",
+      "properties": [
+        {
+          "id": "1:3345446122252383190",
+          "name": "id"
+        },
+        {
+          "id": "2:4101135805770091325",
+          "name": "setId"
+        },
+        {
+          "id": "3:2815770061159973647",
+          "name": "front"
+        },
+        {
+          "id": "4:5992328209186022017",
+          "name": "back"
+        },
+        {
+          "id": "6:3162313340196123284",
+          "name": "frontTextColor"
+        },
+        {
+          "id": "7:2684315856726852079",
+          "name": "backTextColor"
+        },
+        {
+          "id": "8:6672673813680595469",
+          "name": "frontImage"
+        },
+        {
+          "id": "9:7985930435657139476",
+          "name": "backImage"
+        },
+        {
+          "id": "10:7524704625329763196",
+          "name": "frontAudio"
+        },
+        {
+          "id": "11:5549217052494067319",
+          "name": "backAudio"
+        },
+        {
+          "id": "12:1048827196800403951",
+          "name": "trueAnswers"
+        },
+        {
+          "id": "13:3773094873184608536",
+          "name": "totalSeen"
+        },
+        {
+          "id": "14:5888154181059781268",
+          "name": "frontColor"
+        },
+        {
+          "id": "15:5582885766526590817",
+          "name": "backColor"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:8354295739269847359",
+      "lastPropertyId": "2:1143964330374824551",
+      "name": "Label",
+      "properties": [
+        {
+          "id": "1:2919498701289546466",
+          "name": "id"
+        },
+        {
+          "id": "2:1143964330374824551",
+          "name": "title"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "3:8354295739269847359",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    6624241706456189141,
+    7797565662299043331
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}

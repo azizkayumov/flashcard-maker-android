@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Flashcards</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="all_sets">All sets</string>
+    <string name="favorite">Favorite</string>
+    <string name="trash">Trash</string>
+    <string name="about">About</string>
+    <string name="last_edited">Last edited</string>
+    <string name="today">Today</string>
+    <string name="title_activity_set">SetActivity</string>
+    <string name="new_set">New set</string>
+    <string name="move_to_trash">Move to Trash</string>
+    <string name="set_color">Set Color</string>
+    <string name="card_text_color">Card Text Color</string>
+    <string name="card_background_color">Card Background Color</string>
+    <string name="set_name">Set Name</string>
+    <string name="add_to_favorite">Add to favorite</string>
+    <string name="add_new_card">Add new card</string>
+    <string name="study">Study</string>
+    <string name="quiz">Quiz</string>
+
+    <string name="are_you_sure_you_want_to_empty_the_trash">Are you sure you want to empty Trash?</string>
+    <string name="example_front">Hello, World!</string>
+    <string name="example_back">Привет мир!</string>
+    <string name="put_back">Would you like to put back this set?</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+
+</resources>
