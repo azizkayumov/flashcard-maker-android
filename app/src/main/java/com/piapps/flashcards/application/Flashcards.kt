@@ -1,6 +1,7 @@
 package com.piapps.flashcards.application
 
 import android.app.Application
+import com.blankj.utilcode.util.Utils
 import com.piapps.flashcards.model.Card
 import com.piapps.flashcards.model.Label
 import com.piapps.flashcards.model.MyObjectBox
@@ -21,6 +22,7 @@ class Flashcards : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        Utils.init(this);
         db = MyObjectBox.builder().androidContext(this).build()
     }
 

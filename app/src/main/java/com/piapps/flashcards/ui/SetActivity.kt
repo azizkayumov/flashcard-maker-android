@@ -1,17 +1,24 @@
 package com.piapps.flashcards.ui
 
-import android.content.DialogInterface
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.WindowManager
+import com.blankj.utilcode.util.ImageUtils
+import com.blankj.utilcode.util.KeyboardUtils
 import com.piapps.flashcards.R
 import com.piapps.flashcards.application.Flashcards
 import com.piapps.flashcards.model.Card
@@ -20,13 +27,16 @@ import com.piapps.flashcards.model.Set
 import com.piapps.flashcards.ui.controller.SetController
 import com.piapps.flashcards.ui.fragment.CardFragment
 import com.piapps.flashcards.util.Extensions
+import com.piapps.flashcards.util.save
 import com.piapps.flashcards.util.toColor
 import com.piapps.flashcards.util.toHexColor
 import eltos.simpledialogfragment.SimpleDialog
 import eltos.simpledialogfragment.color.SimpleColorDialog
 import eltos.simpledialogfragment.input.SimpleInputDialog
 import kotlinx.android.synthetic.main.activity_set.*
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
+import org.jetbrains.anko.uiThread
 
 class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
 
@@ -43,8 +53,11 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
     val DIALOG_SET_TEXT_COLOR_FRONT = "DIALOG_SET_TEXT_COLOR_FRONT"
     val DIALOG_SET_TEXT_COLOR_BACK = "DIALOG_SET_TEXT_COLOR_BACK"
 
-
+    val ACTIVITY_CHOOSE_IMAGE = 1995
     lateinit var setController: SetController
+    lateinit var bottomSheet: BottomSheetBehavior<View>
+    // is user editing the back side of the current flash card?
+    var isEditingBack = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,8 +95,6 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         setController = SetController(set.id, supportFragmentManager)
         viewPager.setPageTransformer(true, SetController.ZoomOutPageTransformer())
         viewPager.adapter = setController
-        indicator.setViewPager(viewPager)
-        setController.registerDataSetObserver(indicator.dataSetObserver)
 
         val query = Flashcards.instance.cards()
                 .query().equal(Card_.setId, set.id)
@@ -122,8 +133,48 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
                     .show(this, tag)
         }
 
+        bottomSheet = BottomSheetBehavior.from(linearLayoutBottomSheet)
+        imageViewText.setOnClickListener {
+            isEditingBack = setController.list[viewPager.currentItem].isEditingBack
+            bottomSheet.state = BottomSheetBehavior.STATE_EXPANDED
+            KeyboardUtils.showSoftInput(editText)
+
+            if (isEditingBack) {
+                editText.setText(setController.list[viewPager.currentItem].card.back)
+                textViewCounter.text = "${setController.list[viewPager.currentItem].card.front.length}/250"
+            } else {
+                editText.setText(setController.list[viewPager.currentItem].card.front)
+                textViewCounter.text = "${setController.list[viewPager.currentItem].card.front.length}/250"
+            }
+        }
+
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun afterTextChanged(p0: Editable?) {
+                textViewCounter.text = "${p0.toString().length}/250"
+            }
+        })
+
+        imageViewDone.setOnClickListener {
+            setController.list[viewPager.currentItem].setText(editText.text.toString(), isEditingBack)
+            bottomSheet.state = BottomSheetBehavior.STATE_HIDDEN
+            KeyboardUtils.hideSoftInput(editText)
+
+            setLastEdited()
+        }
+
+        imageViewCancel.setOnClickListener {
+            bottomSheet.state = BottomSheetBehavior.STATE_HIDDEN
+            KeyboardUtils.hideSoftInput(editText)
+        }
+
         imageViewInsertImage.setOnClickListener {
-            toast("Insert image Card ${viewPager.currentItem}")
+            isEditingBack = setController.list[viewPager.currentItem].isEditingBack
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(intent, ACTIVITY_CHOOSE_IMAGE)
         }
 
         imageViewInsertAudio.setOnClickListener {
@@ -132,11 +183,9 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
     }
 
     fun addNewCard() {
-
         linearLayoutCardEditor.visibility = VISIBLE
 
-        set.lastEdited = System.currentTimeMillis()
-        Flashcards.instance.sets().put(set)
+        setLastEdited()
 
         val card = Card(System.currentTimeMillis(), set.id)
         card.front = getString(R.string.example_front)
@@ -164,8 +213,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         // executes after 200 millis
         Handler().postDelayed(Runnable {
             // update 'Last edited' time
-            set.lastEdited = System.currentTimeMillis()
-            Flashcards.instance.sets().put(set)
+            setLastEdited()
 
             // delete from db
             val card = setController.list[currentItem].card
@@ -232,8 +280,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
             val color = extras.getInt(SimpleColorDialog.COLOR)
             val hexColor = color.toHexColor()
             set.color = hexColor
-            set.lastEdited = System.currentTimeMillis()
-            Flashcards.instance.sets().put(set)
+            setLastEdited()
             // update ui
             toolbar.setBackgroundColor(color)
             changeStatusBarColor(color)
@@ -242,8 +289,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         if (dialogTag == DIALOG_SET_NAME) {
             val title = extras.getString(SimpleInputDialog.TEXT)
             set.title = title
-            set.lastEdited = System.currentTimeMillis()
-            Flashcards.instance.sets().put(set)
+            setLastEdited()
             // update ui
             toolbar.title = title
         }
@@ -253,6 +299,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
             val color = extras.getInt(SimpleColorDialog.COLOR)
             val hexColor = color.toHexColor()
             setController.list[viewPager.currentItem].setCardColor(hexColor)
+            setLastEdited()
         }
 
         // card back color set
@@ -260,6 +307,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
             val color = extras.getInt(SimpleColorDialog.COLOR)
             val hexColor = color.toHexColor()
             setController.list[viewPager.currentItem].setCardColor(hexColor, true)
+            setLastEdited()
         }
 
         // card front text color
@@ -267,6 +315,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
             val color = extras.getInt(SimpleColorDialog.COLOR)
             val hexColor = color.toHexColor()
             setController.list[viewPager.currentItem].setTextColor(hexColor)
+            setLastEdited()
         }
 
         // card back text color
@@ -274,9 +323,33 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
             val color = extras.getInt(SimpleColorDialog.COLOR)
             val hexColor = color.toHexColor()
             setController.list[viewPager.currentItem].setTextColor(hexColor, true)
+            setLastEdited()
         }
 
         return true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode != Activity.RESULT_OK) return
+
+        if (requestCode == ACTIVITY_CHOOSE_IMAGE) {
+
+            var bitmap: Bitmap? = null
+            try {
+                bitmap = ImageUtils.getBitmap(contentResolver.openInputStream(data?.data))
+            } catch (e: Exception) {
+                e.printStackTrace()
+                return
+            }
+
+            doAsync {
+                val path = bitmap.save(set.id, viewPager.currentItem, this@SetActivity)
+                uiThread {
+                    setController.list[viewPager.currentItem].setImage(path, isEditingBack)
+                    setLastEdited()
+                }
+            }
+        }
     }
 
     fun changeStatusBarColor(color: Int) {
@@ -289,6 +362,11 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         }
     }
 
+    fun setLastEdited(){
+        set.lastEdited = System.currentTimeMillis()
+        Flashcards.instance.sets().put(set)
+    }
+
     override fun onPause() {
         set.count = setController.list.size
         Flashcards.instance.sets().put(set)
@@ -299,6 +377,13 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         set.count = setController.list.size
         Flashcards.instance.sets().put(set)
         super.onDestroy()
+    }
+
+    override fun onBackPressed() {
+        if (bottomSheet.state != BottomSheetBehavior.STATE_HIDDEN) {
+            bottomSheet.state = BottomSheetBehavior.STATE_HIDDEN
+        } else
+            super.onBackPressed()
     }
 
 }

@@ -26,51 +26,53 @@
 
             <ImageView
                 android:id="@+id/imageViewCardColor"
-                app:srcCompat="@drawable/ic_color_black"
-                android:padding="12dp"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="?selectableItemBackground"
-                android:layout_height="match_parent" />
+                android:padding="12dp"
+                app:srcCompat="@drawable/ic_color_black" />
 
             <ImageView
                 android:id="@+id/imageViewTextColor"
-                app:srcCompat="@drawable/ic_text_color"
-                android:padding="12dp"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="?selectableItemBackground"
-                android:layout_height="match_parent" />
+                android:padding="12dp"
+                app:srcCompat="@drawable/ic_text_color" />
+
+            <ImageView
+                android:id="@+id/imageViewText"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?selectableItemBackground"
+                android:padding="12dp"
+                app:srcCompat="@drawable/ic_insert_text_black" />
 
             <ImageView
                 android:id="@+id/imageViewInsertImage"
-                app:srcCompat="@drawable/ic_image_black"
-                android:padding="12dp"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="?selectableItemBackground"
-                android:layout_height="match_parent" />
+                android:padding="12dp"
+                app:srcCompat="@drawable/ic_image_black" />
 
             <ImageView
                 android:id="@+id/imageViewInsertAudio"
-                app:srcCompat="@drawable/ic_voice_black"
-                android:padding="12dp"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="?selectableItemBackground"
-                android:layout_height="match_parent" />
+                android:padding="12dp"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_voice_black" />
 
         </LinearLayout>
 
     </android.support.design.widget.AppBarLayout>
-
-    <me.relex.circleindicator.CircleIndicator
-        android:id="@+id/indicator"
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:layout_marginTop="104dp"
-        app:ci_drawable="@drawable/ic_voice_black"
-        app:ci_drawable_unselected="@drawable/ic_delete_black"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
@@ -96,8 +98,81 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
-        app:elevation="8dp"
         android:layout_margin="@dimen/fab_margin"
+        app:elevation="8dp"
         app:srcCompat="@drawable/ic_add_white" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutBottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/md_grey_50"
+        android:elevation="16dp"
+        android:orientation="vertical"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="0dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageViewCancel"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_cancel_black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/insert_text"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+
+            <ImageView
+                android:id="@+id/imageViewDone"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_done_black" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/md_blue_grey_50" />
+
+        <TextView
+            android:id="@+id/textViewCounter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:gravity="right"
+            android:text="0/250"
+            android:textColor="@color/md_red_500"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="top"
+            android:hint="@string/type_something"
+            android:maxLength="250" />
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

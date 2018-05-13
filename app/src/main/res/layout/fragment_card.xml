@@ -21,6 +21,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/imageViewFront"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
             <com.piapps.flashcards.ui.view.AutoResizeTextView
                 android:id="@+id/textFront"
                 android:layout_width="match_parent"
@@ -41,6 +46,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/imageViewBack"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <com.piapps.flashcards.ui.view.AutoResizeTextView
                 android:id="@+id/textBack"

@@ -32,12 +32,12 @@ class SetsController(var list: ArrayList<Set>) : RecyclerView.Adapter<SetsContro
     var isTrash = false
     var sortingOrder: SORTING_ORDER = SORTING_ORDER.LAST_EDITED
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): SetViewHolder {
-        return SetViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.item_set, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SetViewHolder {
+        return SetViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_set, parent, false))
     }
 
-    override fun onBindViewHolder(holder: SetViewHolder?, position: Int) {
-        holder?.bind(position, list[position])
+    override fun onBindViewHolder(holder: SetViewHolder, position: Int) {
+        holder.bind(position, list[position])
     }
 
     override fun getItemCount(): Int {

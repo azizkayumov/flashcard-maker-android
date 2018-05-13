@@ -27,4 +27,11 @@
     <string name="yes">Yes</string>
     <string name="cancel">Cancel</string>
 
+    <string name="insert_image">Insert image</string>
+    <string name="drawing">Drawing</string>
+    <string name="cannot_load">Could not load image to card, try again ..</string>
+
+    <string name="insert_text">Insert text</string>
+    <string name="type_something">Type something ..</string>
+
 </resources>

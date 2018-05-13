@@ -24,13 +24,15 @@ class SetController(val id: Long, fm: FragmentManager) : FragmentStatePagerAdapt
         return list[position]
     }
 
-    override fun getItemPosition(`object`: Any?): Int {
+    override fun getItemPosition(`object`: Any): Int {
         val index = list.indexOf(`object`)
 
         return if (index == -1)
             PagerAdapter.POSITION_NONE
         else
             index
+
+        return super.getItemPosition(`object`)
     }
 
     fun addFragment(fragment: CardFragment) {
