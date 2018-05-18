@@ -5,6 +5,9 @@ import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.view.View
+import com.piapps.flashcards.application.Flashcards
+import com.piapps.flashcards.model.Card_
+import com.piapps.flashcards.ui.SetActivity
 import com.piapps.flashcards.ui.fragment.CardFragment
 
 
@@ -44,6 +47,15 @@ class SetController(val id: Long, fm: FragmentManager) : FragmentStatePagerAdapt
         if (pos < 0 || pos >= list.size) return
         list.removeAt(pos)
         notifyDataSetChanged()
+    }
+
+    fun loadMoreCards(){
+        val query = Flashcards.instance.cards()
+                .query().equal(Card_.setId, id)
+                .build()
+        query.find(list.size.toLong(),10).forEach {
+            addFragment(CardFragment.newInstance(it.id))
+        }
     }
 
     class ZoomOutPageTransformer : ViewPager.PageTransformer {

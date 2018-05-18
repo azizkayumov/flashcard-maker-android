@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
@@ -95,17 +96,22 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         setController = SetController(set.id, supportFragmentManager)
         viewPager.setPageTransformer(true, SetController.ZoomOutPageTransformer())
         viewPager.adapter = setController
+        tabLayout.setupWithViewPager(viewPager, true)
 
-        val query = Flashcards.instance.cards()
-                .query().equal(Card_.setId, set.id)
-                .build()
-        query.find().forEach {
-            setController.addFragment(CardFragment.newInstance(it.id))
-        }
-        if (setController.list.isEmpty())
-            linearLayoutCardEditor.visibility = View.GONE
-        else
-            linearLayoutCardEditor.visibility = View.VISIBLE
+        setController.loadMoreCards()
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                if (position >= setController.count - 1)
+                    setController.loadMoreCards()
+            }
+
+            override fun onPageSelected(position: Int) {
+            }
+        })
 
         fab.setOnClickListener {
             addNewCard()
@@ -362,26 +368,26 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         }
     }
 
-    fun setLastEdited(){
+    fun setLastEdited() {
         set.lastEdited = System.currentTimeMillis()
         Flashcards.instance.sets().put(set)
     }
 
     override fun onPause() {
-        set.count = setController.list.size
-        Flashcards.instance.sets().put(set)
+        doAsync {
+            set.count = Flashcards.instance.cards().find(Card_.setId, set.id).size
+            Flashcards.instance.sets().put(set)
+        }
         super.onPause()
     }
 
-    override fun onDestroy() {
-        set.count = setController.list.size
-        Flashcards.instance.sets().put(set)
-        super.onDestroy()
-    }
-
     override fun onBackPressed() {
-        if (bottomSheet.state != BottomSheetBehavior.STATE_HIDDEN) {
-            bottomSheet.state = BottomSheetBehavior.STATE_HIDDEN
+        doAsync {
+            set.count = Flashcards.instance.cards().find(Card_.setId, set.id).size
+            Flashcards.instance.sets().put(set)
+        }
+        if (bottomSheet.state != BottomSheetBehavior.STATE_COLLAPSED) {
+            bottomSheet.state = BottomSheetBehavior.STATE_COLLAPSED
         } else
             super.onBackPressed()
     }
