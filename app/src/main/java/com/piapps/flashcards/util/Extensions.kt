@@ -9,6 +9,7 @@ import com.blankj.utilcode.util.ImageUtils
 import com.piapps.flashcards.R
 import com.piapps.flashcards.application.Flashcards
 import java.io.File
+import java.util.*
 
 /**
  * Created by abduaziz on 4/27/18.
@@ -105,4 +106,8 @@ fun Bitmap.save(setId: Long, currentItem: Int,context: Context): String {
     val file = File(context.getDir("imageDir", Context.MODE_PRIVATE), "${setId}_${currentItem}_${System.currentTimeMillis()}.jpg")
     val isSaved = ImageUtils.save(this, file.path, Bitmap.CompressFormat.JPEG)
     return if (isSaved) file.absolutePath else ""
+}
+
+fun Int.Companion.rand(from: Int, to: Int): Int {
+    return (Random().nextInt(to - from) + from)
 }

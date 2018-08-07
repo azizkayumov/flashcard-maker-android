@@ -34,4 +34,8 @@
     <string name="insert_text">Insert text</string>
     <string name="type_something">Type something ..</string>
 
+    <string name="title_activity_study">StudyActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
 </resources>

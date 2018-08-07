@@ -15,7 +15,7 @@ import com.piapps.flashcards.ui.fragment.CardFragment
  * Created by abduaziz on 5/6/18.
  */
 
-class SetController(val id: Long, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+class SetController(val id: Long, fm: FragmentManager, var isDeletable: Boolean = true) : FragmentStatePagerAdapter(fm) {
 
     val list = arrayListOf<CardFragment>()
 
@@ -49,12 +49,12 @@ class SetController(val id: Long, fm: FragmentManager) : FragmentStatePagerAdapt
         notifyDataSetChanged()
     }
 
-    fun loadMoreCards(){
+    fun loadMoreCards() {
         val query = Flashcards.instance.cards()
                 .query().equal(Card_.setId, id)
                 .build()
-        query.find(list.size.toLong(),10).forEach {
-            addFragment(CardFragment.newInstance(it.id))
+        query.find(list.size.toLong(), 10).forEach {
+            addFragment(CardFragment.newInstance(it.id, isDeletable))
         }
     }
 

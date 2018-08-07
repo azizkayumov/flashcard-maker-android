@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
@@ -93,10 +94,9 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
                     .show(this, DIALOG_SET_NAME)
         }
 
-        setController = SetController(set.id, supportFragmentManager)
+        setController = SetController(set.id, supportFragmentManager, true)
         viewPager.setPageTransformer(true, SetController.ZoomOutPageTransformer())
         viewPager.adapter = setController
-        tabLayout.setupWithViewPager(viewPager, true)
 
         setController.loadMoreCards()
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -110,6 +110,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
             }
 
             override fun onPageSelected(position: Int) {
+                textViewCardNumber.text = "${position + 1} / ${set.count}"
             }
         })
 
@@ -118,6 +119,10 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         }
 
         imageViewCardColor.setOnClickListener {
+            if (setController.list.isEmpty()) {
+                toast(R.string.add_new_card)
+                return@setOnClickListener
+            }
             val card = setController.list[viewPager.currentItem]
             val tag = if (card.side() == 0) DIALOG_SET_CARD_COLOR_FRONT else DIALOG_SET_CARD_COLOR_BACK
             SimpleColorDialog()
@@ -129,6 +134,10 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         }
 
         imageViewTextColor.setOnClickListener {
+            if (setController.list.isEmpty()) {
+                toast(R.string.add_new_card)
+                return@setOnClickListener
+            }
             val card = setController.list[viewPager.currentItem]
             val tag = if (card.side() == 0) DIALOG_SET_TEXT_COLOR_FRONT else DIALOG_SET_TEXT_COLOR_BACK
             SimpleColorDialog()
@@ -141,6 +150,10 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
 
         bottomSheet = BottomSheetBehavior.from(linearLayoutBottomSheet)
         imageViewText.setOnClickListener {
+            if (setController.list.isEmpty()) {
+                toast(R.string.add_new_card)
+                return@setOnClickListener
+            }
             isEditingBack = setController.list[viewPager.currentItem].isEditingBack
             bottomSheet.state = BottomSheetBehavior.STATE_EXPANDED
             KeyboardUtils.showSoftInput(editText)
@@ -163,6 +176,10 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         })
 
         imageViewDone.setOnClickListener {
+            if (setController.list.isEmpty()) {
+                toast(R.string.add_new_card)
+                return@setOnClickListener
+            }
             setController.list[viewPager.currentItem].setText(editText.text.toString(), isEditingBack)
             bottomSheet.state = BottomSheetBehavior.STATE_HIDDEN
             KeyboardUtils.hideSoftInput(editText)
@@ -176,6 +193,10 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         }
 
         imageViewInsertImage.setOnClickListener {
+            if (setController.list.isEmpty()) {
+                toast(R.string.add_new_card)
+                return@setOnClickListener
+            }
             isEditingBack = setController.list[viewPager.currentItem].isEditingBack
             val intent = Intent()
             intent.type = "image/*"
@@ -186,12 +207,33 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         imageViewInsertAudio.setOnClickListener {
             toast("Insert audio Card ${viewPager.currentItem}")
         }
+
+        bottomNavigationViewMain.onNavigationItemSelectedListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                if (item.itemId == R.id.bottom_nav_study) {
+                    openStudyActivity(false)
+                    return true
+                }
+                if (item.itemId == R.id.bottom_nav_quiz) {
+                    openStudyActivity(true)
+                    return true
+                }
+                return false
+            }
+        }
+    }
+
+    fun openStudyActivity(isQuiz: Boolean) {
+        val intent = Intent(this@SetActivity, StudyActivity::class.java)
+        intent.putExtra("setId", set.id)
+        intent.putExtra("isQuiz", isQuiz)
+        startActivity(intent)
     }
 
     fun addNewCard() {
         linearLayoutCardEditor.visibility = VISIBLE
 
-        setLastEdited()
+        setLastEdited(1)
 
         val card = Card(System.currentTimeMillis(), set.id)
         card.front = getString(R.string.example_front)
@@ -219,7 +261,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         // executes after 200 millis
         Handler().postDelayed(Runnable {
             // update 'Last edited' time
-            setLastEdited()
+            setLastEdited(-1)
 
             // delete from db
             val card = setController.list[currentItem].card
@@ -368,7 +410,8 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         }
     }
 
-    fun setLastEdited() {
+    fun setLastEdited(count: Int = 0) {
+        set.count = set.count + count
         set.lastEdited = System.currentTimeMillis()
         Flashcards.instance.sets().put(set)
     }

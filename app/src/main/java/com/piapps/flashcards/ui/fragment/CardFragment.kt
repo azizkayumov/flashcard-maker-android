@@ -26,16 +26,18 @@ import org.jetbrains.anko.toast
 class CardFragment : Fragment() {
 
     companion object {
-        fun newInstance(id: Long): CardFragment {
+        fun newInstance(id: Long, isDeletable: Boolean = true): CardFragment {
             val fragment = CardFragment()
             val bundle = Bundle()
             bundle.putLong("id", id)
+            bundle.putBoolean("isDeletable", isDeletable)
             fragment.arguments = bundle
             return fragment
         }
     }
 
     var id: Long = 1L
+    var isDeletable: Boolean = true
     lateinit var flip: FlipAnimation
     lateinit var flipBack: FlipAnimation
     lateinit var card: Card
@@ -44,6 +46,7 @@ class CardFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         id = arguments!!.getLong("id", 1L)
+        isDeletable = arguments!!.getBoolean("isDeletable", true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -54,6 +57,11 @@ class CardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         card = Flashcards.instance.cards().get(id)
+
+        if (!isDeletable) {
+            imageViewDelete.visibility = View.GONE
+            imageViewFlip.visibility = View.GONE
+        }
 
         // set texts
         textFront.text = card.front
@@ -147,13 +155,13 @@ class CardFragment : Fragment() {
         Flashcards.instance.cards().put(card)
     }
 
-    fun setText(text: String, isBack: Boolean = false){
-        if (isBack){
+    fun setText(text: String, isBack: Boolean = false) {
+        if (isBack) {
             Glide.with(this).clear(imageViewBack)
             card.back = text
             card.backImage = ""
             textBack.text = text
-        }else{
+        } else {
             Glide.with(this).clear(imageViewFront)
             card.front = text
             card.frontImage = ""

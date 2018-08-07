@@ -72,12 +72,17 @@
 
         </LinearLayout>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="4dp"/>
-
     </android.support.design.widget.AppBarLayout>
+
+    <TextView
+        android:id="@+id/textViewCardNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="56dp"
+        android:gravity="right"
+        android:textSize="12sp"
+        android:padding="4dp"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
