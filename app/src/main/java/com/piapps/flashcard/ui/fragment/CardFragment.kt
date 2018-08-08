@@ -1,4 +1,4 @@
-package com.piapps.flashcards.ui.fragment
+package com.piapps.flashcard.ui.fragment
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -11,14 +11,13 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.piapps.flashcards.R
-import com.piapps.flashcards.application.Flashcards
-import com.piapps.flashcards.model.Card
-import com.piapps.flashcards.ui.SetActivity
-import com.piapps.flashcards.ui.anim.FlipAnimation
-import com.piapps.flashcards.util.toColor
+import com.piapps.flashcard.R
+import com.piapps.flashcard.application.Flashcards
+import com.piapps.flashcard.model.Card
+import com.piapps.flashcard.ui.SetActivity
+import com.piapps.flashcard.ui.anim.FlipAnimation
+import com.piapps.flashcard.util.toColor
 import kotlinx.android.synthetic.main.fragment_card.*
-import org.jetbrains.anko.toast
 
 /**
  * Created by abduaziz on 5/6/18.
@@ -26,11 +25,12 @@ import org.jetbrains.anko.toast
 class CardFragment : Fragment() {
 
     companion object {
-        fun newInstance(id: Long, isDeletable: Boolean = true): CardFragment {
+        fun newInstance(id: Long, isDeletable: Boolean = true, isFlippable: Boolean = true): CardFragment {
             val fragment = CardFragment()
             val bundle = Bundle()
             bundle.putLong("id", id)
             bundle.putBoolean("isDeletable", isDeletable)
+            bundle.putBoolean("isFlippable", isFlippable)
             fragment.arguments = bundle
             return fragment
         }
@@ -38,6 +38,7 @@ class CardFragment : Fragment() {
 
     var id: Long = 1L
     var isDeletable: Boolean = true
+    var isFlippable: Boolean = true
     lateinit var flip: FlipAnimation
     lateinit var flipBack: FlipAnimation
     lateinit var card: Card
@@ -47,6 +48,7 @@ class CardFragment : Fragment() {
         super.onCreate(savedInstanceState)
         id = arguments!!.getLong("id", 1L)
         isDeletable = arguments!!.getBoolean("isDeletable", true)
+        isFlippable = arguments!!.getBoolean("isFlippable", true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -60,6 +62,9 @@ class CardFragment : Fragment() {
 
         if (!isDeletable) {
             imageViewDelete.visibility = View.GONE
+        }
+
+        if (!isFlippable) {
             imageViewFlip.visibility = View.GONE
         }
 

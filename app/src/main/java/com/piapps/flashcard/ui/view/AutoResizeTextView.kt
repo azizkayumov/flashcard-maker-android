@@ -1,4 +1,4 @@
-package com.piapps.flashcards.ui.view
+package com.piapps.flashcard.ui.view
 
 import android.content.Context
 import android.support.v7.widget.AppCompatTextView

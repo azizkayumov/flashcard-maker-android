@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.piapps.flashcards.ui.SetActivity">
+    tools:context="com.piapps.flashcard.ui.SetActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -89,7 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="72dp"
-        android:layout_marginTop="56dp" />
+        android:layout_marginTop="104dp" />
 
     <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
         android:id="@+id/bottomNavigationViewMain"

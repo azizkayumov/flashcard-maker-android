@@ -1,5 +1,6 @@
-package com.piapps.flashcards.ui
+package com.piapps.flashcard.ui
 
+import android.content.Intent
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -7,15 +8,14 @@ import android.support.v4.view.ViewPager
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
-import com.piapps.flashcards.R
-import com.piapps.flashcards.application.Flashcards
-import com.piapps.flashcards.model.Set
-import com.piapps.flashcards.ui.controller.SetController
-import com.piapps.flashcards.util.Extensions
-import com.piapps.flashcards.util.rand
-import com.piapps.flashcards.util.toColor
+import com.piapps.flashcard.R
+import com.piapps.flashcard.application.Flashcards
+import com.piapps.flashcard.model.Set
+import com.piapps.flashcard.ui.controller.SetController
+import com.piapps.flashcard.util.Extensions
+import com.piapps.flashcard.util.rand
+import com.piapps.flashcard.util.toColor
 import kotlinx.android.synthetic.main.activity_study.*
-import org.jetbrains.anko.toast
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -25,6 +25,7 @@ class StudyActivity : AppCompatActivity() {
 
     lateinit var set: Set
     lateinit var setController: SetController
+    var isQuiz = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +34,7 @@ class StudyActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        val isQuiz = intent.getBooleanExtra("isQuiz", false)
+        isQuiz = intent.getBooleanExtra("isQuiz", false)
         if (isQuiz) {
             fabShuffle.visibility = View.GONE
             fabFlip.visibility = View.GONE
@@ -55,11 +56,12 @@ class StudyActivity : AppCompatActivity() {
             changeStatusBarColor(Extensions.color(set.id))
         }
 
-        setController = SetController(set.id, supportFragmentManager, false)
+        setController = SetController(set.id, supportFragmentManager, false, false)
         viewPager.setPageTransformer(true, SetController.ZoomOutPageTransformer())
         viewPager.adapter = setController
 
         setController.loadMoreCards()
+        textViewCardNumber.text = "${1} / ${set.count}"
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 
@@ -82,6 +84,9 @@ class StudyActivity : AppCompatActivity() {
 
         fabFlip.setOnClickListener {
             setController.list[viewPager.currentItem].flip()
+            val card = setController.list[viewPager.currentItem].card
+            card.totalStudied += 1
+            Flashcards.instance.cards().put(card)
         }
 
         fabTrue.setOnClickListener {
@@ -102,9 +107,16 @@ class StudyActivity : AppCompatActivity() {
 
     fun scrollNext() {
         val next = viewPager.currentItem + 1
-        if (next < setController.list.size) {
+        if (next < set.count) {
             viewPager.currentItem = next
         } else {
+            fabWrong.isEnabled = false
+            fabTrue.isEnabled = false
+            if (isQuiz) {
+                val intent = Intent(this, StatisticsActivity::class.java)
+                intent.putExtra("id", set.id)
+                startActivity(intent)
+            }
             finish()
         }
     }

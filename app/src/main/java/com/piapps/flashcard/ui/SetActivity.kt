@@ -1,4 +1,4 @@
-package com.piapps.flashcards.ui
+package com.piapps.flashcard.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -21,24 +21,22 @@ import android.view.View.VISIBLE
 import android.view.WindowManager
 import com.blankj.utilcode.util.ImageUtils
 import com.blankj.utilcode.util.KeyboardUtils
-import com.piapps.flashcards.R
-import com.piapps.flashcards.application.Flashcards
-import com.piapps.flashcards.model.Card
-import com.piapps.flashcards.model.Card_
-import com.piapps.flashcards.model.Set
-import com.piapps.flashcards.ui.controller.SetController
-import com.piapps.flashcards.ui.fragment.CardFragment
-import com.piapps.flashcards.util.Extensions
-import com.piapps.flashcards.util.save
-import com.piapps.flashcards.util.toColor
-import com.piapps.flashcards.util.toHexColor
+import com.piapps.flashcard.R
+import com.piapps.flashcard.application.Flashcards
+import com.piapps.flashcard.model.Card
+import com.piapps.flashcard.model.Card_
+import com.piapps.flashcard.model.Set
+import com.piapps.flashcard.ui.controller.SetController
+import com.piapps.flashcard.ui.fragment.CardFragment
+import com.piapps.flashcard.util.Extensions
+import com.piapps.flashcard.util.save
+import com.piapps.flashcard.util.toColor
+import com.piapps.flashcard.util.toHexColor
 import eltos.simpledialogfragment.SimpleDialog
 import eltos.simpledialogfragment.color.SimpleColorDialog
 import eltos.simpledialogfragment.input.SimpleInputDialog
 import kotlinx.android.synthetic.main.activity_set.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.toast
-import org.jetbrains.anko.uiThread
+import org.jetbrains.anko.*
 
 class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
 
@@ -94,7 +92,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
                     .show(this, DIALOG_SET_NAME)
         }
 
-        setController = SetController(set.id, supportFragmentManager, true)
+        setController = SetController(set.id, supportFragmentManager, true, true)
         viewPager.setPageTransformer(true, SetController.ZoomOutPageTransformer())
         viewPager.adapter = setController
 
@@ -247,34 +245,42 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
     }
 
     fun deleteCard() {
-        // remember the current item to be removed
-        val currentItem = viewPager.currentItem
+        alert {
+            messageResource = R.string.are_you_sure_you_want_to_delete_the_card
+            yesButton {
+                // remember the current item to be removed
+                val currentItem = viewPager.currentItem
 
-        // animate to give a feeling of removing a card
-        var nextCurrentItem = viewPager.currentItem + 1
-        if (nextCurrentItem >= setController.list.size)
-            nextCurrentItem = viewPager.currentItem - 1
-        if (nextCurrentItem >= 0)
-            viewPager.currentItem = nextCurrentItem
+                // animate to give a feeling of removing a card
+                var nextCurrentItem = viewPager.currentItem + 1
+                if (nextCurrentItem >= setController.list.size)
+                    nextCurrentItem = viewPager.currentItem - 1
+                if (nextCurrentItem >= 0)
+                    viewPager.currentItem = nextCurrentItem
 
-        // give time to show the slide next animation
-        // executes after 200 millis
-        Handler().postDelayed(Runnable {
-            // update 'Last edited' time
-            setLastEdited(-1)
+                // give time to show the slide next animation
+                // executes after 200 millis
+                Handler().postDelayed(Runnable {
+                    // update 'Last edited' time
+                    setLastEdited(-1)
 
-            // delete from db
-            val card = setController.list[currentItem].card
-            Flashcards.instance.cards().remove(card)
+                    // delete from db
+                    val card = setController.list[currentItem].card
+                    Flashcards.instance.cards().remove(card)
 
-            // delete from ui
-            setController.deleteFragment(currentItem)
+                    // delete from ui
+                    setController.deleteFragment(currentItem)
 
-            // hide editor view
-            if (setController.list.isEmpty()) {
-                linearLayoutCardEditor.visibility = GONE
+                    // hide editor view
+                    if (setController.list.isEmpty()) {
+                        linearLayoutCardEditor.visibility = GONE
+                    }
+                }, 200)
             }
-        }, 200)
+            noButton {
+                it.dismiss()
+            }
+        }.show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -312,9 +318,17 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         }
 
         if (item?.itemId == R.id.action_delete) {
-            set.isTrash = true
-            Flashcards.instance.sets().put(set)
-            finish()
+            alert {
+                messageResource = R.string.are_you_sure_you_want_to_delete_the_set
+                yesButton {
+                    set.isTrash = true
+                    Flashcards.instance.sets().put(set)
+                    finish()
+                }
+                noButton {
+                    it.dismiss()
+                }
+            }.show()
             return true
         }
         return super.onOptionsItemSelected(item)

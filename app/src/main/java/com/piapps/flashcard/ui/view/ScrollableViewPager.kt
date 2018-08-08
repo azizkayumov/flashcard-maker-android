@@ -1,8 +1,7 @@
-package com.piapps.flashcards.ui.view
+package com.piapps.flashcard.ui.view
 
 import android.content.Context
 import android.view.MotionEvent
-import android.text.method.Touch.onTouchEvent
 import android.support.v4.view.ViewPager
 import android.util.AttributeSet
 

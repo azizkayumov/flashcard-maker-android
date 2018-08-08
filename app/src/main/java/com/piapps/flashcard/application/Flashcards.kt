@@ -1,11 +1,11 @@
-package com.piapps.flashcards.application
+package com.piapps.flashcard.application
 
 import android.app.Application
 import com.blankj.utilcode.util.Utils
-import com.piapps.flashcards.model.Card
-import com.piapps.flashcards.model.Label
-import com.piapps.flashcards.model.MyObjectBox
-import com.piapps.flashcards.model.Set
+import com.piapps.flashcard.model.Card
+import com.piapps.flashcard.model.Label
+import com.piapps.flashcard.model.MyObjectBox
+import com.piapps.flashcard.model.Set
 import io.objectbox.BoxStore
 
 /**

@@ -1,4 +1,4 @@
-package com.piapps.flashcards.model
+package com.piapps.flashcard.model
 
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
@@ -22,5 +22,6 @@ class Card(@Id(assignable = true)
            var frontAudio: String = "", // path to audio file
            var backAudio: String = "", // path to audio file
            var trueAnswers: Int = 0, // true answers reached in Quiz mode
-           var totalSeen: Int = 0 // total seen by user
+           var totalSeen: Int = 0, // total seen by user
+           var totalStudied: Int = 0 // total studied in Study mode
 )

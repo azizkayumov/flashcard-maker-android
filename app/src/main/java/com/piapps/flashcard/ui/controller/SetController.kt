@@ -1,21 +1,20 @@
-package com.piapps.flashcards.ui.controller
+package com.piapps.flashcard.ui.controller
 
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.view.View
-import com.piapps.flashcards.application.Flashcards
-import com.piapps.flashcards.model.Card_
-import com.piapps.flashcards.ui.SetActivity
-import com.piapps.flashcards.ui.fragment.CardFragment
+import com.piapps.flashcard.application.Flashcards
+import com.piapps.flashcard.model.Card_
+import com.piapps.flashcard.ui.fragment.CardFragment
 
 
 /**
  * Created by abduaziz on 5/6/18.
  */
 
-class SetController(val id: Long, fm: FragmentManager, var isDeletable: Boolean = true) : FragmentStatePagerAdapter(fm) {
+class SetController(val id: Long, fm: FragmentManager, var isDeletable: Boolean = true, var isFlippable: Boolean = true) : FragmentStatePagerAdapter(fm) {
 
     val list = arrayListOf<CardFragment>()
 
@@ -54,7 +53,7 @@ class SetController(val id: Long, fm: FragmentManager, var isDeletable: Boolean 
                 .query().equal(Card_.setId, id)
                 .build()
         query.find(list.size.toLong(), 10).forEach {
-            addFragment(CardFragment.newInstance(it.id, isDeletable))
+            addFragment(CardFragment.newInstance(it.id, isDeletable, isFlippable))
         }
     }
 

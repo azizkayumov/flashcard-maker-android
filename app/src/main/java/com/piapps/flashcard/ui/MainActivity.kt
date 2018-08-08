@@ -1,4 +1,4 @@
-package com.piapps.flashcards.ui
+package com.piapps.flashcard.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,12 +6,12 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import com.piapps.flashcards.R
-import com.piapps.flashcards.application.Flashcards
-import com.piapps.flashcards.model.Set
-import com.piapps.flashcards.ui.controller.SetsController
-import com.piapps.flashcards.util.Extensions
-import com.piapps.flashcards.util.toHexColor
+import com.piapps.flashcard.R
+import com.piapps.flashcard.application.Flashcards
+import com.piapps.flashcard.model.Set
+import com.piapps.flashcard.ui.controller.SetsController
+import com.piapps.flashcard.util.Extensions
+import com.piapps.flashcard.util.toHexColor
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.*
 
@@ -159,8 +159,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_settings -> {
-                toast("Settings")
+            R.id.action_about -> {
+                startActivity(Intent(this, AboutActivity::class.java))
                 return true
             }
             else -> return super.onOptionsItemSelected(item)

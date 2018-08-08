@@ -37,5 +37,15 @@
     <string name="title_activity_study">StudyActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="are_you_sure_you_want_to_delete_the_set">Are you sure you want to delete the set?</string>
+    <string name="are_you_sure_you_want_to_delete_the_card">Are you sure you want to delete the card?</string>
+    <string name="true_answers">True answers</string>
+    <string name="true_answers_explanation">Percentage of true answers in Quiz mode</string>
+    <string name="studied">Studied</string>
+    <string name="studied_explanation">Number of times you flipped the card in Study mode</string>
+
+    <string name="copy_right">Flashcards © %1$d</string>
+    <string name="description">Speed up your learning with Flashcards! Create sets, add flashcards and play with them anywhere.\nFlashcards is free, and always will be. One thing you give us is 5 stars!</string>
+
 
 </resources>

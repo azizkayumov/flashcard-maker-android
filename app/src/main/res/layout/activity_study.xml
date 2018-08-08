@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.piapps.flashcards.ui.StudyActivity">
+    tools:context="com.piapps.flashcard.ui.StudyActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
         android:padding="4dp"
         android:textSize="12sp" />
 
-    <com.piapps.flashcards.ui.view.ScrollableViewPager
+    <com.piapps.flashcard.ui.view.ScrollableViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

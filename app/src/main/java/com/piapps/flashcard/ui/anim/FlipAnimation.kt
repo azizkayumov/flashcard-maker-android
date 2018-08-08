@@ -1,4 +1,4 @@
-package com.piapps.flashcards.ui.anim
+package com.piapps.flashcard.ui.anim
 
 import android.graphics.Camera
 import android.view.View

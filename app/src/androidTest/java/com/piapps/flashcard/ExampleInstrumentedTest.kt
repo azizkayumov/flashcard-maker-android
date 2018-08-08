@@ -1,4 +1,4 @@
-package com.piapps.flashcards
+package com.piapps.flashcard
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

@@ -1,4 +1,4 @@
-package com.piapps.flashcards.model
+package com.piapps.flashcard.model
 
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
