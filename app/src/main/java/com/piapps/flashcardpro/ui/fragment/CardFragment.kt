@@ -1,4 +1,4 @@
-package com.piapps.flashcard.ui.fragment
+package com.piapps.flashcardpro.ui.fragment
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -11,12 +11,12 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.piapps.flashcard.R
-import com.piapps.flashcard.application.Flashcards
-import com.piapps.flashcard.model.Card
-import com.piapps.flashcard.ui.SetActivity
-import com.piapps.flashcard.ui.anim.FlipAnimation
-import com.piapps.flashcard.util.toColor
+import com.piapps.flashcardpro.R
+import com.piapps.flashcardpro.application.Flashcards
+import com.piapps.flashcardpro.model.Card
+import com.piapps.flashcardpro.ui.SetActivity
+import com.piapps.flashcardpro.ui.anim.FlipAnimation
+import com.piapps.flashcardpro.util.toColor
 import kotlinx.android.synthetic.main.fragment_card.*
 
 /**

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.piapps.flashcard.ui.StatisticsActivity">
+    tools:context="com.piapps.flashcardpro.ui.StatisticsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
         android:padding="4dp"
         android:textSize="12sp" />
 
-    <com.piapps.flashcard.ui.view.ScrollableViewPager
+    <com.piapps.flashcardpro.ui.view.ScrollableViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -45,7 +45,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="4dp">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -95,7 +96,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="4dp">
 
         <LinearLayout
             android:layout_width="0dp"

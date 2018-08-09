@@ -11,11 +11,11 @@ apply plugin: 'io.objectbox'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.piapps.flashcard"
+        applicationId "com.piapps.flashcardpro"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 40
-        versionName "4.0"
+        versionCode 1
+        versionName "v0.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

@@ -1,4 +1,4 @@
-package com.piapps.flashcard.ui
+package com.piapps.flashcardpro.ui
 
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
@@ -6,14 +6,14 @@ import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.view.MenuItem
 import android.view.WindowManager
-import com.piapps.flashcard.R
-import com.piapps.flashcard.application.Flashcards
-import com.piapps.flashcard.model.Card
-import com.piapps.flashcard.model.Card_
-import com.piapps.flashcard.model.Set
-import com.piapps.flashcard.ui.controller.SetController
-import com.piapps.flashcard.util.Extensions
-import com.piapps.flashcard.util.toColor
+import com.piapps.flashcardpro.R
+import com.piapps.flashcardpro.application.Flashcards
+import com.piapps.flashcardpro.model.Card
+import com.piapps.flashcardpro.model.Card_
+import com.piapps.flashcardpro.model.Set
+import com.piapps.flashcardpro.ui.controller.SetController
+import com.piapps.flashcardpro.util.Extensions
+import com.piapps.flashcardpro.util.toColor
 import kotlinx.android.synthetic.main.activity_statistics.*
 
 class StatisticsActivity : AppCompatActivity() {

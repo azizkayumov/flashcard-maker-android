@@ -1,4 +1,4 @@
-package com.piapps.flashcard.ui.controller
+package com.piapps.flashcardpro.ui.controller
 
 import android.content.Intent
 import android.support.v7.widget.CardView
@@ -9,14 +9,14 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.TextView
-import com.piapps.flashcard.R
-import com.piapps.flashcard.application.Flashcards
-import com.piapps.flashcard.model.Set
-import com.piapps.flashcard.ui.MainActivity
-import com.piapps.flashcard.ui.SetActivity
-import com.piapps.flashcard.util.DateUtils
-import com.piapps.flashcard.util.Extensions
-import com.piapps.flashcard.util.toColor
+import com.piapps.flashcardpro.R
+import com.piapps.flashcardpro.application.Flashcards
+import com.piapps.flashcardpro.model.Set
+import com.piapps.flashcardpro.ui.MainActivity
+import com.piapps.flashcardpro.ui.SetActivity
+import com.piapps.flashcardpro.util.DateUtils
+import com.piapps.flashcardpro.util.Extensions
+import com.piapps.flashcardpro.util.toColor
 import org.jetbrains.anko.alert
 
 /**

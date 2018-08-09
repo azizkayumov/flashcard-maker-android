@@ -1,12 +1,12 @@
-package com.piapps.flashcard.util
+package com.piapps.flashcardpro.util
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.support.v4.content.ContextCompat
 import com.blankj.utilcode.util.ImageUtils
-import com.piapps.flashcard.R
-import com.piapps.flashcard.application.Flashcards
+import com.piapps.flashcardpro.R
+import com.piapps.flashcardpro.application.Flashcards
 import java.io.File
 import java.util.*
 

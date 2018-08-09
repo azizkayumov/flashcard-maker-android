@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-            <com.piapps.flashcard.ui.view.AutoResizeTextView
+            <com.piapps.flashcardpro.ui.view.AutoResizeTextView
                 android:id="@+id/textFront"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-            <com.piapps.flashcard.ui.view.AutoResizeTextView
+            <com.piapps.flashcardpro.ui.view.AutoResizeTextView
                 android:id="@+id/textBack"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

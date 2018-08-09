@@ -1,13 +1,13 @@
-package com.piapps.flashcard.ui.controller
+package com.piapps.flashcardpro.ui.controller
 
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.view.View
-import com.piapps.flashcard.application.Flashcards
-import com.piapps.flashcard.model.Card_
-import com.piapps.flashcard.ui.fragment.CardFragment
+import com.piapps.flashcardpro.application.Flashcards
+import com.piapps.flashcardpro.model.Card_
+import com.piapps.flashcardpro.ui.fragment.CardFragment
 
 
 /**

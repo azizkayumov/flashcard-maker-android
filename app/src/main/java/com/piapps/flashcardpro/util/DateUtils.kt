@@ -1,7 +1,7 @@
-package com.piapps.flashcard.util
+package com.piapps.flashcardpro.util
 
-import com.piapps.flashcard.R
-import com.piapps.flashcard.application.Flashcards
+import com.piapps.flashcardpro.R
+import com.piapps.flashcardpro.application.Flashcards
 import java.text.SimpleDateFormat
 import java.util.*
 

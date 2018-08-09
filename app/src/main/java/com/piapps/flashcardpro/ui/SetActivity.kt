@@ -1,4 +1,4 @@
-package com.piapps.flashcard.ui
+package com.piapps.flashcardpro.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -21,17 +21,17 @@ import android.view.View.VISIBLE
 import android.view.WindowManager
 import com.blankj.utilcode.util.ImageUtils
 import com.blankj.utilcode.util.KeyboardUtils
-import com.piapps.flashcard.R
-import com.piapps.flashcard.application.Flashcards
-import com.piapps.flashcard.model.Card
-import com.piapps.flashcard.model.Card_
-import com.piapps.flashcard.model.Set
-import com.piapps.flashcard.ui.controller.SetController
-import com.piapps.flashcard.ui.fragment.CardFragment
-import com.piapps.flashcard.util.Extensions
-import com.piapps.flashcard.util.save
-import com.piapps.flashcard.util.toColor
-import com.piapps.flashcard.util.toHexColor
+import com.piapps.flashcardpro.R
+import com.piapps.flashcardpro.application.Flashcards
+import com.piapps.flashcardpro.model.Card
+import com.piapps.flashcardpro.model.Card_
+import com.piapps.flashcardpro.model.Set
+import com.piapps.flashcardpro.ui.controller.SetController
+import com.piapps.flashcardpro.ui.fragment.CardFragment
+import com.piapps.flashcardpro.util.Extensions
+import com.piapps.flashcardpro.util.save
+import com.piapps.flashcardpro.util.toColor
+import com.piapps.flashcardpro.util.toHexColor
 import eltos.simpledialogfragment.SimpleDialog
 import eltos.simpledialogfragment.color.SimpleColorDialog
 import eltos.simpledialogfragment.input.SimpleInputDialog
@@ -314,6 +314,13 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
                     .colorPreset(preset)
                     .cancelable(false)
                     .show(this, DIALOG_SET_COLOR)
+            return true
+        }
+
+        if (item?.itemId == R.id.action_stats) {
+            val intent = Intent(this, StatisticsActivity::class.java)
+            intent.putExtra("id", set.id)
+            startActivity(intent)
             return true
         }
 

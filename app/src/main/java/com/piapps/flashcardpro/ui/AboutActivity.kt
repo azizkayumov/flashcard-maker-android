@@ -1,11 +1,11 @@
-package com.piapps.flashcard.ui
+package com.piapps.flashcardpro.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
-import com.piapps.flashcard.R
+import com.piapps.flashcardpro.R
 import mehdi.sakout.aboutpage.AboutPage
 import mehdi.sakout.aboutpage.Element
 import java.util.*

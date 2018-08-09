@@ -1,4 +1,4 @@
-package com.piapps.flashcard.ui
+package com.piapps.flashcardpro.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,12 +6,13 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import com.piapps.flashcard.R
-import com.piapps.flashcard.application.Flashcards
-import com.piapps.flashcard.model.Set
-import com.piapps.flashcard.ui.controller.SetsController
-import com.piapps.flashcard.util.Extensions
-import com.piapps.flashcard.util.toHexColor
+import android.view.View
+import com.piapps.flashcardpro.R
+import com.piapps.flashcardpro.application.Flashcards
+import com.piapps.flashcardpro.model.Set
+import com.piapps.flashcardpro.ui.controller.SetsController
+import com.piapps.flashcardpro.util.Extensions
+import com.piapps.flashcardpro.util.toHexColor
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.*
 
@@ -148,6 +149,16 @@ class MainActivity : AppCompatActivity() {
                 (rvMain.adapter as SetsController).isTrash = true
                 rvMain.adapter.notifyDataSetChanged()
             }
+        }
+        var t = getString(R.string.no_sets_yet)
+        if (index == 3) {
+            t = getString(R.string.trash_is_empty)
+        }
+        if ((rvMain.adapter as SetsController).list.isEmpty()) {
+            textViewNoSets.text = t
+            textViewNoSets.visibility = View.VISIBLE
+        } else {
+            textViewNoSets.visibility = View.GONE
         }
     }
 

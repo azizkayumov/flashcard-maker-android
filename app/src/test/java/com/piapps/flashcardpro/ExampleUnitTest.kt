@@ -1,4 +1,4 @@
-package com.piapps.flashcard
+package com.piapps.flashcardpro
 
 import org.junit.Test
 
