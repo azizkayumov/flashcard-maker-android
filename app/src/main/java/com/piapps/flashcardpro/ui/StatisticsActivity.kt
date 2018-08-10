@@ -56,6 +56,7 @@ class StatisticsActivity : AppCompatActivity() {
             }
 
             override fun onPageSelected(position: Int) {
+                if (setController.list.isEmpty()) return
                 textViewCardNumber.text = "${position + 1} / ${set.count}"
                 val card = setController.list[viewPager.currentItem].card
                 updateStats(card)

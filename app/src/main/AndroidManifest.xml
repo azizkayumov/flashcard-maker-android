@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.piapps.flashcardpro">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="com.piapps.flashcardpro.application.Flashcards"
         android:allowBackup="false"
@@ -11,6 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="25ac7858692b9e8f386b0588527b5a12b800113a" />
+
         <activity
             android:name="com.piapps.flashcardpro.ui.MainActivity"
             android:label="@string/app_name"

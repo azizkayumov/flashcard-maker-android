@@ -49,5 +49,6 @@
     <string name="no_sets_yet">There are no flashcard sets..\nTo create new one, click on the button in the right corner</string>
     <string name="trash_is_empty">Trash is empty..\nRecycled flashcard sets will be stored here.</string>
     <string name="statistics">Statistics</string>
+    <string name="created">Created</string>
 
 </resources>

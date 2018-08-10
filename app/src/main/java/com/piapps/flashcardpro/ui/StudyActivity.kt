@@ -78,34 +78,39 @@ class StudyActivity : AppCompatActivity() {
         })
 
         fabShuffle.setOnClickListener {
+            if (setController.list.isEmpty()) return@setOnClickListener
             val random = Int.rand(0, setController.list.size - 1)
             viewPager.currentItem = random
         }
 
         fabFlip.setOnClickListener {
+            if (setController.list.isEmpty()) return@setOnClickListener
             setController.list[viewPager.currentItem].flip()
             val card = setController.list[viewPager.currentItem].card
-            card.totalStudied += 1
+            card.totalStudied = card.totalStudied + 1
             Flashcards.instance.cards().put(card)
         }
 
         fabTrue.setOnClickListener {
+            if (setController.list.isEmpty()) return@setOnClickListener
             val card = setController.list[viewPager.currentItem].card
-            card.trueAnswers += 1
-            card.totalSeen += 1
+            card.trueAnswers = card.trueAnswers + 1
+            card.totalSeen += card.totalSeen + 1
             Flashcards.instance.cards().put(card)
             scrollNext()
         }
 
         fabWrong.setOnClickListener {
+            if (setController.list.isEmpty()) return@setOnClickListener
             val card = setController.list[viewPager.currentItem].card
-            card.totalSeen += 1
+            card.totalSeen = card.totalSeen + 1
             Flashcards.instance.cards().put(card)
             scrollNext()
         }
     }
 
     fun scrollNext() {
+        if (setController.list.isEmpty()) return
         val next = viewPager.currentItem + 1
         if (next < set.count) {
             viewPager.currentItem = next

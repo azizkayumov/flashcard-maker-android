@@ -7,6 +7,8 @@ import com.piapps.flashcardpro.model.Label
 import com.piapps.flashcardpro.model.MyObjectBox
 import com.piapps.flashcardpro.model.Set
 import io.objectbox.BoxStore
+import com.crashlytics.android.Crashlytics
+import io.fabric.sdk.android.Fabric
 
 /**
  * Created by abduaziz on 4/18/18.
@@ -24,6 +26,7 @@ class Flashcards : Application() {
         instance = this
         Utils.init(this);
         db = MyObjectBox.builder().androidContext(this).build()
+        Fabric.with(this, Crashlytics())
     }
 
     fun sets() = db.boxFor(Set::class.java)

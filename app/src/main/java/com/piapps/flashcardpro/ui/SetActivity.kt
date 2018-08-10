@@ -219,6 +219,8 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
                 return false
             }
         }
+
+         
     }
 
     fun openStudyActivity(isQuiz: Boolean) {
@@ -365,6 +367,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
 
         // card front color set
         if (dialogTag == DIALOG_SET_CARD_COLOR_FRONT) {
+            if (setController.list.isEmpty()) return true
             val color = extras.getInt(SimpleColorDialog.COLOR)
             val hexColor = color.toHexColor()
             setController.list[viewPager.currentItem].setCardColor(hexColor)
@@ -373,6 +376,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
 
         // card back color set
         if (dialogTag == DIALOG_SET_CARD_COLOR_BACK) {
+            if (setController.list.isEmpty()) return true
             val color = extras.getInt(SimpleColorDialog.COLOR)
             val hexColor = color.toHexColor()
             setController.list[viewPager.currentItem].setCardColor(hexColor, true)
@@ -381,6 +385,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
 
         // card front text color
         if (dialogTag == DIALOG_SET_TEXT_COLOR_FRONT) {
+            if (setController.list.isEmpty()) return true
             val color = extras.getInt(SimpleColorDialog.COLOR)
             val hexColor = color.toHexColor()
             setController.list[viewPager.currentItem].setTextColor(hexColor)
@@ -389,6 +394,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
 
         // card back text color
         if (dialogTag == DIALOG_SET_TEXT_COLOR_BACK) {
+            if (setController.list.isEmpty()) return true
             val color = extras.getInt(SimpleColorDialog.COLOR)
             val hexColor = color.toHexColor()
             setController.list[viewPager.currentItem].setTextColor(hexColor, true)
@@ -414,6 +420,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
             doAsync {
                 val path = bitmap.save(set.id, viewPager.currentItem, this@SetActivity)
                 uiThread {
+                    if (setController.list.isEmpty()) return@uiThread
                     setController.list[viewPager.currentItem].setImage(path, isEditingBack)
                     setLastEdited()
                 }

@@ -6,7 +6,7 @@
         android:id="@+id/bottom_nav_all_sets"
         android:icon="@drawable/ic_all_sets_black"
         android:orderInCategory="100"
-        android:title="@string/all_sets"
+        android:title="@string/created"
         app:showAsAction="never" />
 
     <item
