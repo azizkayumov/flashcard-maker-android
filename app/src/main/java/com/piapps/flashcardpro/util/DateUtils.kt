@@ -17,6 +17,12 @@ object DateUtils {
         return time.format(date)
     }
 
+    fun getHour_Minute(d: Long?): String {
+        val date = Date(d!!)
+        val time = SimpleDateFormat("HH_mm")
+        return time.format(date)
+    }
+
     fun getHourMinuteSeconds(d: Long?): String {
         val date = Date(d!!)
         val time = SimpleDateFormat("HH:mm:ss:SSS")

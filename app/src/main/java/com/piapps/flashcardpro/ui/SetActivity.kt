@@ -1,7 +1,9 @@
 package com.piapps.flashcardpro.ui
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
@@ -28,10 +30,7 @@ import com.piapps.flashcardpro.model.Card_
 import com.piapps.flashcardpro.model.Set
 import com.piapps.flashcardpro.ui.controller.SetController
 import com.piapps.flashcardpro.ui.fragment.CardFragment
-import com.piapps.flashcardpro.util.Extensions
-import com.piapps.flashcardpro.util.save
-import com.piapps.flashcardpro.util.toColor
-import com.piapps.flashcardpro.util.toHexColor
+import com.piapps.flashcardpro.util.*
 import eltos.simpledialogfragment.SimpleDialog
 import eltos.simpledialogfragment.color.SimpleColorDialog
 import eltos.simpledialogfragment.input.SimpleInputDialog
@@ -220,7 +219,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
             }
         }
 
-         
+
     }
 
     fun openStudyActivity(isQuiz: Boolean) {
@@ -316,6 +315,11 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
                     .colorPreset(preset)
                     .cancelable(false)
                     .show(this, DIALOG_SET_COLOR)
+            return true
+        }
+
+        if (item?.itemId == R.id.action_export) {
+            checkAndExportToCSV()
             return true
         }
 
@@ -424,6 +428,50 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
                     setController.list[viewPager.currentItem].setImage(path, isEditingBack)
                     setLastEdited()
                 }
+            }
+        }
+    }
+
+    fun checkAndExportToCSV() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), CSVUtils.WRITE_EXTERNAL_STORAGE)
+            return
+        }
+        exportToCSV()
+    }
+
+    fun exportToCSV() {
+        val loadingDialog = indeterminateProgressDialog(getString(R.string.exporting_to_csv_plz_wait)) {
+            setCancelable(false)
+        }
+        loadingDialog.show()
+        doAsync {
+            val filename = CSVUtils.exportToCSV(set)
+            uiThread {
+                loadingDialog.hide()
+                if (filename.isNotBlank()) {
+                    alert {
+                        message = "${getString(R.string.exported_to_csv_file)}\n$filename"
+                        okButton {
+                            it.dismiss()
+                        }
+                    }.show()
+                } else {
+                    alert {
+                        messageResource = R.string.failed_to_export
+                        okButton {
+                            it.dismiss()
+                        }
+                    }.show()
+                }
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == CSVUtils.WRITE_EXTERNAL_STORAGE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                exportToCSV()
             }
         }
     }

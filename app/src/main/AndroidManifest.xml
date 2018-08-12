@@ -4,6 +4,7 @@
     package="com.piapps.flashcardpro">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name="com.piapps.flashcardpro.application.Flashcards"

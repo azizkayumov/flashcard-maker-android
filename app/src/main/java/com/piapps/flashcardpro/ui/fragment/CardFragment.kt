@@ -108,6 +108,7 @@ class CardFragment : Fragment() {
                 }
             }).into(imageViewFront)
         }
+
         if (!card.backImage.isBlank()) {
             Glide.with(this).load(card.backImage).listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
@@ -149,27 +150,19 @@ class CardFragment : Fragment() {
         if (isBack) {
             Glide.with(this).load(path).into(imageViewBack)
             card.backImage = path
-            card.back = ""
-            textBack.text = ""
         } else {
             Glide.with(this).load(path).into(imageViewFront)
             card.frontImage = path
-            card.front = ""
-            textFront.text = ""
         }
         Flashcards.instance.cards().put(card)
     }
 
     fun setText(text: String, isBack: Boolean = false) {
         if (isBack) {
-            Glide.with(this).clear(imageViewBack)
             card.back = text
-            card.backImage = ""
             textBack.text = text
         } else {
-            Glide.with(this).clear(imageViewFront)
             card.front = text
-            card.frontImage = ""
             textFront.text = text
         }
         Flashcards.instance.cards().put(card)

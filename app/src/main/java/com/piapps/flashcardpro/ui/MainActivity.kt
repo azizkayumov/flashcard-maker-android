@@ -1,7 +1,12 @@
 package com.piapps.flashcardpro.ui
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
@@ -11,10 +16,14 @@ import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.application.Flashcards
 import com.piapps.flashcardpro.model.Set
 import com.piapps.flashcardpro.ui.controller.SetsController
+import com.piapps.flashcardpro.util.CSVUtils
 import com.piapps.flashcardpro.util.Extensions
 import com.piapps.flashcardpro.util.toHexColor
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.*
+import com.abduaziz.lib.FilePicker
+import java.io.File
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -96,7 +105,6 @@ class MainActivity : AppCompatActivity() {
                 loadAdapter(bottomNavigationViewMain.currentItem)
             }
         }
-
     }
 
     fun update() {
@@ -162,6 +170,67 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun checkAndOpenFileExplorer() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), CSVUtils.READ_EXTERNAL_STORAGE)
+            return
+        }
+        openFileExplorer()
+    }
+
+    fun openFileExplorer() {
+        val filePicker = FilePicker()
+        filePicker.addOnFilesSelected(object : FilePicker.OnFilesSelected {
+            override fun onFilesSelected(selectedFiles: List<File>) {
+                importCSVFile(selectedFiles)
+            }
+        })
+        filePicker.show(supportFragmentManager, "FilePicker")
+    }
+
+    fun importCSVFile(selectedFiles: List<File>) {
+        if (selectedFiles.isEmpty()) return
+        val loadingDialog = progressDialog("") {
+            setMessage(getString(R.string.importing_from_csv_file))
+            progress = 0
+            max = selectedFiles.size
+            setCancelable(false)
+        }
+        loadingDialog.show()
+        selectedFiles.forEachIndexed { index, file ->
+            loadingDialog.setMessage(getString(R.string.importing_from_csv_file) + " ${file.name}")
+            loadingDialog.progress = index + 1
+            Handler().postDelayed({
+                doAsync {
+                    val set = CSVUtils.importFromCSV(file)
+                    uiThread {
+                        set?.let {
+                            loadingDialog.setMessage(getString(R.string.imported_new_set))
+                        }
+                        if (index == selectedFiles.size - 1) {
+
+                            loadingDialog.hide()
+                            doAsync {
+                                update()
+                                uiThread {
+                                    loadAdapter(bottomNavigationViewMain.currentItem)
+                                }
+                            }
+                        }
+                    }
+                }
+            }, 1000)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == CSVUtils.READ_EXTERNAL_STORAGE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openFileExplorer()
+            }
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
@@ -170,6 +239,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.action_import -> {
+                checkAndOpenFileExplorer()
+                return true
+            }
             R.id.action_about -> {
                 startActivity(Intent(this, AboutActivity::class.java))
                 return true

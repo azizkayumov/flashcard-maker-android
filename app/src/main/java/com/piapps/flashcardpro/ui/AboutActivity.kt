@@ -28,7 +28,7 @@ class AboutActivity : AppCompatActivity(){
                 .addWebsite("http://inha.uz")
                 .addFacebook("abduaziz.kayumov")
                 .addYoutube("UCnQ3vq3LNsxrYGlGdziTrhA")
-                .addPlayStore("com.piapps.flashcard")
+                .addPlayStore("com.piapps.flashcardpro")
                 .addItem(getCopyRightsElement())
                 .create()
         setContentView(aboutPage)
