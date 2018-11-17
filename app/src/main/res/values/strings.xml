@@ -17,6 +17,7 @@
     <string name="set_name">Set Name</string>
     <string name="add_to_favorite">Add to favorite</string>
     <string name="add_new_card">Add new card</string>
+    <string name="add_new_card_CAPS">ADD NEW CARD</string>
     <string name="study">Study</string>
     <string name="quiz">Quiz</string>
 

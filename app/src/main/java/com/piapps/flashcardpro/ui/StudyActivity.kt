@@ -2,9 +2,9 @@ package com.piapps.flashcardpro.ui
 
 import android.content.Intent
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.view.ViewPager
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
@@ -60,17 +60,11 @@ class StudyActivity : AppCompatActivity() {
         viewPager.setPageTransformer(true, SetController.ZoomOutPageTransformer())
         viewPager.adapter = setController
 
-        setController.loadMoreCards()
+        setController.loadCards()
         textViewCardNumber.text = "${1} / ${set.count}"
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {
-
-            }
-
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                if (position >= setController.count - 1)
-                    setController.loadMoreCards()
-            }
+            override fun onPageScrollStateChanged(state: Int) {}
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
             override fun onPageSelected(position: Int) {
                 textViewCardNumber.text = "${position + 1} / ${set.count}"

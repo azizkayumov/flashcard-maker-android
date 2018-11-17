@@ -58,7 +58,7 @@ class CardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        card = Flashcards.instance.cards().get(id)
+        card = Flashcards.instance.cards().get(id) ?: Card(System.currentTimeMillis(), 1L)
 
         if (!isDeletable) {
             imageViewDelete.visibility = View.GONE

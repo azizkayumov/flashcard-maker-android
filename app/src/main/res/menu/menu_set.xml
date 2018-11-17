@@ -17,6 +17,18 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/action_study"
+        android:icon="@drawable/ic_color_black"
+        android:orderInCategory="100"
+        android:title="@string/study" />
+
+    <item
+        android:id="@+id/action_quiz"
+        android:icon="@drawable/ic_color_black"
+        android:orderInCategory="100"
+        android:title="@string/quiz"/>
+
+    <item
         android:id="@+id/action_export"
         android:icon="@drawable/ic_stats_white"
         android:orderInCategory="100"

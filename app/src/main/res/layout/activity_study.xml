@@ -49,8 +49,7 @@
             android:layout_margin="@dimen/fab_margin"
             app:backgroundTint="@color/md_orange_500"
             app:elevation="8dp"
-            app:srcCompat="@drawable/ic_shuffle_white"
-            android:visibility="gone"/>
+            app:srcCompat="@drawable/ic_shuffle_white"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabFlip"

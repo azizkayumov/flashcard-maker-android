@@ -8,11 +8,11 @@ import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Menu
@@ -28,6 +28,7 @@ import com.piapps.flashcardpro.application.Flashcards
 import com.piapps.flashcardpro.model.Card
 import com.piapps.flashcardpro.model.Card_
 import com.piapps.flashcardpro.model.Set
+import com.piapps.flashcardpro.ui.controller.LabelsController
 import com.piapps.flashcardpro.ui.controller.SetController
 import com.piapps.flashcardpro.ui.fragment.CardFragment
 import com.piapps.flashcardpro.util.*
@@ -54,6 +55,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
 
     val ACTIVITY_CHOOSE_IMAGE = 1995
     lateinit var setController: SetController
+    lateinit var labelController: LabelsController
     lateinit var bottomSheet: BottomSheetBehavior<View>
     // is user editing the back side of the current flash card?
     var isEditingBack = false
@@ -95,23 +97,21 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         viewPager.setPageTransformer(true, SetController.ZoomOutPageTransformer())
         viewPager.adapter = setController
 
-        setController.loadMoreCards()
+        labelController = LabelsController("French Wine${LabelsController.DELIMITER}Spanish Wrench${LabelsController.DELIMITER}Spanish Wrench${LabelsController.DELIMITER}Spanish Wrench${LabelsController.DELIMITER}Spanish Wrench${LabelsController.DELIMITER}Spanish Wrench${LabelsController.DELIMITER}Spanish Wrench")
+        rvLabels.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rvLabels.adapter = labelController
+
+        setController.loadCards()
+
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {
-
-            }
-
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                if (position >= setController.count - 1)
-                    setController.loadMoreCards()
-            }
-
+            override fun onPageScrollStateChanged(state: Int) {}
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
             override fun onPageSelected(position: Int) {
                 textViewCardNumber.text = "${position + 1} / ${set.count}"
             }
         })
 
-        fab.setOnClickListener {
+        tvAddCard.setOnClickListener {
             addNewCard()
         }
 
@@ -205,21 +205,9 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
             toast("Insert audio Card ${viewPager.currentItem}")
         }
 
-        bottomNavigationViewMain.onNavigationItemSelectedListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
-            override fun onNavigationItemSelected(item: MenuItem): Boolean {
-                if (item.itemId == R.id.bottom_nav_study) {
-                    openStudyActivity(false)
-                    return true
-                }
-                if (item.itemId == R.id.bottom_nav_quiz) {
-                    openStudyActivity(true)
-                    return true
-                }
-                return false
-            }
+        rvLabels.setOnClickListener {
+            // todo: open LabelsActivity
         }
-
-
     }
 
     fun openStudyActivity(isQuiz: Boolean) {
@@ -230,8 +218,11 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
     }
 
     fun addNewCard() {
+        if (setController.list.size > 49) {
+            toast("Max 50 cards are allowed, please, try to open a new set")
+            return
+        }
         linearLayoutCardEditor.visibility = VISIBLE
-
         setLastEdited(1)
 
         val card = Card(System.currentTimeMillis(), set.id)
@@ -304,6 +295,16 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
             Flashcards.instance.sets().put(set)
             item.icon = if (set.isFavorite) ContextCompat.getDrawable(this, R.drawable.ic_star_black) else
                 ContextCompat.getDrawable(this, R.drawable.ic_star_empty_black)
+            return true
+        }
+
+        if (item?.itemId == R.id.action_study) {
+            openStudyActivity(false)
+            return true
+        }
+
+        if (item?.itemId == R.id.action_quiz) {
+            openStudyActivity(true)
             return true
         }
 

@@ -9,10 +9,10 @@
         android:id="@+id/cardViewRoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="48dp"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         app:cardBackgroundColor="@color/c14"
         app:cardUseCompatPadding="true">
 

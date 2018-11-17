@@ -43,17 +43,14 @@ class StatisticsActivity : AppCompatActivity() {
         viewPager.setPageTransformer(true, SetController.ZoomOutPageTransformer())
         viewPager.adapter = setController
 
-        setController.loadMoreCards()
+        setController.loadCards()
         textViewCardNumber.text = "${1} / ${set.count}"
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 
             }
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                if (position >= setController.count - 1)
-                    setController.loadMoreCards()
-            }
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
             override fun onPageSelected(position: Int) {
                 if (setController.list.isEmpty()) return

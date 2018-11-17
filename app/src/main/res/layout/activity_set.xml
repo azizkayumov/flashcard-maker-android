@@ -18,60 +18,6 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        <LinearLayout
-            android:id="@+id/linearLayoutCardEditor"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imageViewCardColor"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="?selectableItemBackground"
-                android:padding="12dp"
-                app:srcCompat="@drawable/ic_color_black" />
-
-            <ImageView
-                android:id="@+id/imageViewTextColor"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="?selectableItemBackground"
-                android:padding="12dp"
-                app:srcCompat="@drawable/ic_text_color" />
-
-            <ImageView
-                android:id="@+id/imageViewText"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="?selectableItemBackground"
-                android:padding="12dp"
-                app:srcCompat="@drawable/ic_insert_text_black" />
-
-            <ImageView
-                android:id="@+id/imageViewInsertImage"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="?selectableItemBackground"
-                android:padding="12dp"
-                app:srcCompat="@drawable/ic_image_black" />
-
-            <ImageView
-                android:id="@+id/imageViewInsertAudio"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="?selectableItemBackground"
-                android:padding="12dp"
-                android:visibility="gone"
-                app:srcCompat="@drawable/ic_voice_black" />
-
-        </LinearLayout>
-
     </android.support.design.widget.AppBarLayout>
 
     <TextView
@@ -81,36 +27,101 @@
         android:layout_gravity="bottom"
         android:layout_marginBottom="56dp"
         android:gravity="right"
-        android:textSize="12sp"
-        android:padding="4dp"/>
+        android:padding="4dp"
+        android:textSize="12sp" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="72dp"
-        android:layout_marginTop="104dp" />
+        android:layout_marginBottom="48dp"
+        android:layout_marginTop="56dp" />
 
-    <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
-        android:id="@+id/bottomNavigationViewMain"
+    <com.abduaziz.lib.view.RecyclerListView
+        android:id="@+id/rvLabels"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_gravity="bottom"
-        android:background="@color/white"
-        app:elevation="8dp"
-        app:itemIconTint="@drawable/bottom_nav_color_selector_set"
-        app:itemTextColor="@drawable/bottom_nav_color_selector_set"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/set_bottom_navigation" />
+        android:layout_height="32dp"
+        android:layout_marginTop="56dp"
+        android:clipToPadding="false"
+        android:paddingEnd="100dp"
+        android:paddingStart="4dp"
+        android:paddingTop="4dp" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/pre_lollipop_elevation_up" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutCardEditor"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageViewCardColor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:padding="12dp"
+            app:srcCompat="@drawable/ic_color_black" />
+
+        <ImageView
+            android:id="@+id/imageViewTextColor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:padding="12dp"
+            app:srcCompat="@drawable/ic_text_color" />
+
+        <ImageView
+            android:id="@+id/imageViewText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:padding="12dp"
+            app:srcCompat="@drawable/ic_insert_text_black" />
+
+        <ImageView
+            android:id="@+id/imageViewInsertImage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:padding="12dp"
+            app:srcCompat="@drawable/ic_image_black" />
+
+        <ImageView
+            android:id="@+id/imageViewInsertAudio"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:padding="12dp"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_voice_black" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvAddCard"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="bottom|center"
-        android:layout_margin="@dimen/fab_margin"
-        app:elevation="8dp"
-        app:srcCompat="@drawable/ic_add_white" />
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/fab_bg"
+        android:gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="@string/add_new_card_CAPS"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 
     <LinearLayout
         android:id="@+id/linearLayoutBottomSheet"

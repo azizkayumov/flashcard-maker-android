@@ -48,13 +48,14 @@ class SetController(val id: Long, fm: FragmentManager, var isDeletable: Boolean 
         notifyDataSetChanged()
     }
 
-    fun loadMoreCards() {
+    fun loadCards() {
         val query = Flashcards.instance.cards()
                 .query().equal(Card_.setId, id)
                 .build()
-        query.find(list.size.toLong(), 10).forEach {
+        query.find().forEach {
             addFragment(CardFragment.newInstance(it.id, isDeletable, isFlippable))
         }
+        query.close()
     }
 
     class ZoomOutPageTransformer : ViewPager.PageTransformer {

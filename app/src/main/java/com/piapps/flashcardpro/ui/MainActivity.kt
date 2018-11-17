@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                             Flashcards.instance.sets().remove(it.id)
                         }
                         trash.clear()
-                        rvMain.adapter.notifyDataSetChanged()
+                        rvMain.adapter?.notifyDataSetChanged()
                     }
                     noButton { it.dismiss() }
                 }.show()
@@ -137,25 +137,25 @@ class MainActivity : AppCompatActivity() {
                 (rvMain.adapter as SetsController).sortingOrder = SetsController.SORTING_ORDER.CREATED_TIME
                 (rvMain.adapter as SetsController).list = all
                 (rvMain.adapter as SetsController).isTrash = false
-                rvMain.adapter.notifyDataSetChanged()
+                rvMain.adapter?.notifyDataSetChanged()
             }
             1 -> {
                 (rvMain.adapter as SetsController).sortingOrder = SetsController.SORTING_ORDER.LAST_EDITED
                 (rvMain.adapter as SetsController).list = lastEdited
                 (rvMain.adapter as SetsController).isTrash = false
-                rvMain.adapter.notifyDataSetChanged()
+                rvMain.adapter?.notifyDataSetChanged()
             }
             2 -> {
                 (rvMain.adapter as SetsController).sortingOrder = SetsController.SORTING_ORDER.LAST_EDITED
                 (rvMain.adapter as SetsController).list = favorites
                 (rvMain.adapter as SetsController).isTrash = false
-                rvMain.adapter.notifyDataSetChanged()
+                rvMain.adapter?.notifyDataSetChanged()
             }
             3 -> {
                 (rvMain.adapter as SetsController).sortingOrder = SetsController.SORTING_ORDER.CREATED_TIME
                 (rvMain.adapter as SetsController).list = trash
                 (rvMain.adapter as SetsController).isTrash = true
-                rvMain.adapter.notifyDataSetChanged()
+                rvMain.adapter?.notifyDataSetChanged()
             }
         }
         var t = getString(R.string.no_sets_yet)
@@ -185,7 +185,11 @@ class MainActivity : AppCompatActivity() {
                 importCSVFile(selectedFiles)
             }
         })
-        filePicker.show(supportFragmentManager, "FilePicker")
+        supportFragmentManager.beginTransaction()
+                .add(filePicker,"FilePicker")
+                .addToBackStack("FilePicker")
+                .commitAllowingStateLoss()
+        //filePicker.show(supportFragmentManager, "FilePicker")
     }
 
     fun importCSVFile(selectedFiles: List<File>) {
