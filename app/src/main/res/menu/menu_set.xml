@@ -26,7 +26,13 @@
         android:id="@+id/action_quiz"
         android:icon="@drawable/ic_color_black"
         android:orderInCategory="100"
-        android:title="@string/quiz"/>
+        android:title="@string/quiz" />
+
+    <item
+        android:id="@+id/action_add_labels"
+        android:icon="@drawable/ic_color_black"
+        android:orderInCategory="100"
+        android:title="@string/labels" />
 
     <item
         android:id="@+id/action_export"

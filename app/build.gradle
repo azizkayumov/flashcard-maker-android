@@ -16,8 +16,8 @@ android {
         applicationId "com.piapps.flashcardpro"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 5
-        versionName "v0.0.5"
+        versionCode 6
+        versionName "v0.0.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -81,5 +81,5 @@ dependencies {
     compile 'com.github.AbduazizKayumov:FilePicker:v1.0.2'
 
     // flexbox
-    implementation 'com.google.android:flexbox:1.1.0'
+    implementation 'com.google.android:flexbox:1.0.0'
 }

@@ -21,8 +21,28 @@ class LabelsController(l: String) : RecyclerView.Adapter<LabelsController.LabelV
 
     init {
         l.split(DELIMITER).forEach {
-            labels.add(it)
+            if (it.isNotBlank())
+                labels.add(it)
         }
+    }
+
+    fun addLabel(l: String) {
+        if (l.isBlank() || labels.contains(l))
+            return
+        labels.add(l)
+        notifyItemInserted(labels.size - 1)
+    }
+
+    fun labelsString(): String {
+        var t = ""
+        labels.forEachIndexed { index, s ->
+            if (index == 0) {
+                t = s
+            } else {
+                t += "$DELIMITER$s"
+            }
+        }
+        return t
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LabelViewHolder {
@@ -39,5 +59,17 @@ class LabelsController(l: String) : RecyclerView.Adapter<LabelsController.LabelV
 
     inner class LabelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tv: TextView = itemView.findViewById(R.id.tvLabel)
+
+        init {
+            tv.setOnClickListener {
+                onLabelClickedListener?.onLabelClicked(labels[adapterPosition], adapterPosition)
+            }
+        }
+    }
+
+    var onLabelClickedListener: OnLabelClickedListener? = null
+
+    interface OnLabelClickedListener {
+        fun onLabelClicked(l: String, position: Int)
     }
 }

@@ -101,12 +101,13 @@ fun String.toColor(): Int {
     return Color.parseColor(this)
 }
 
-fun Bitmap.save(setId: Long, currentItem: Int,context: Context): String {
+fun Bitmap.save(setId: Long, currentItem: Int, context: Context): String {
     val file = File(context.getDir("imageDir", Context.MODE_PRIVATE), "${setId}_${currentItem}_${System.currentTimeMillis()}.jpg")
     val isSaved = ImageUtils.save(this, file.path, Bitmap.CompressFormat.JPEG)
     return if (isSaved) file.absolutePath else ""
 }
 
 fun Int.Companion.rand(from: Int, to: Int): Int {
+    if (from <= 0 || to - from <= 0) return 0
     return (Random().nextInt(to - from) + from)
 }

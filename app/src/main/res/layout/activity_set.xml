@@ -40,12 +40,11 @@
     <com.abduaziz.lib.view.RecyclerListView
         android:id="@+id/rvLabels"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:clipToPadding="false"
         android:paddingEnd="100dp"
-        android:paddingStart="4dp"
-        android:paddingTop="4dp" />
+        android:paddingStart="4dp" />
 
     <View
         android:layout_width="match_parent"
@@ -121,7 +120,7 @@
         android:paddingRight="16dp"
         android:text="@string/add_new_card_CAPS"
         android:textColor="@color/white"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/linearLayoutBottomSheet"

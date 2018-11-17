@@ -54,6 +54,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
     val DIALOG_SET_TEXT_COLOR_BACK = "DIALOG_SET_TEXT_COLOR_BACK"
 
     val ACTIVITY_CHOOSE_IMAGE = 1995
+    val ACTIVITY_SET_LABELS = 1996
     lateinit var setController: SetController
     lateinit var labelController: LabelsController
     lateinit var bottomSheet: BottomSheetBehavior<View>
@@ -97,7 +98,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         viewPager.setPageTransformer(true, SetController.ZoomOutPageTransformer())
         viewPager.adapter = setController
 
-        labelController = LabelsController("French Wine${LabelsController.DELIMITER}Spanish Wrench${LabelsController.DELIMITER}Spanish Wrench${LabelsController.DELIMITER}Spanish Wrench${LabelsController.DELIMITER}Spanish Wrench${LabelsController.DELIMITER}Spanish Wrench${LabelsController.DELIMITER}Spanish Wrench")
+        labelController = LabelsController(set.labels)
         rvLabels.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rvLabels.adapter = labelController
 
@@ -206,7 +207,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         }
 
         rvLabels.setOnClickListener {
-            // todo: open LabelsActivity
+            openLabelsActivity()
         }
     }
 
@@ -215,6 +216,12 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         intent.putExtra("setId", set.id)
         intent.putExtra("isQuiz", isQuiz)
         startActivity(intent)
+    }
+
+    fun openLabelsActivity() {
+        val intent = Intent(this@SetActivity, LabelsActivity::class.java)
+        intent.putExtra("labels", set.labels)
+        startActivityForResult(intent, ACTIVITY_SET_LABELS)
     }
 
     fun addNewCard() {
@@ -293,8 +300,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
             set.isFavorite = !set.isFavorite
             set.lastEdited = System.currentTimeMillis()
             Flashcards.instance.sets().put(set)
-            item.icon = if (set.isFavorite) ContextCompat.getDrawable(this, R.drawable.ic_star_black) else
-                ContextCompat.getDrawable(this, R.drawable.ic_star_empty_black)
+            item.icon = if (set.isFavorite) ContextCompat.getDrawable(this, R.drawable.ic_star_black) else ContextCompat.getDrawable(this, R.drawable.ic_star_empty_black)
             return true
         }
 
@@ -305,6 +311,11 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
 
         if (item?.itemId == R.id.action_quiz) {
             openStudyActivity(true)
+            return true
+        }
+
+        if (item?.itemId == R.id.action_add_labels) {
+            openLabelsActivity()
             return true
         }
 
@@ -429,6 +440,16 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
                     setController.list[viewPager.currentItem].setImage(path, isEditingBack)
                     setLastEdited()
                 }
+            }
+        }
+
+        if (requestCode == ACTIVITY_SET_LABELS) {
+            labelController.labels.clear()
+            data?.getStringArrayListExtra("labels")?.forEach {
+                labelController.labels.add(it)
+                labelController.notifyDataSetChanged()
+                set.labels = labelController.labelsString()
+                setLastEdited(0)
             }
         }
     }

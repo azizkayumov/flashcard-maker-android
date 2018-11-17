@@ -3,10 +3,12 @@
     android:id="@+id/tvLabel"
     android:layout_width="wrap_content"
     android:layout_height="24dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginTop="4dp"
     android:background="@drawable/label_bg"
+    android:gravity="center"
     android:paddingLeft="4dp"
     android:paddingRight="4dp"
-    android:layout_marginEnd="4dp"
-    android:gravity="center"
-    android:textColor="@color/md_white_1000"
-    android:text="French Wine" />
+    android:text="French Wine"
+    android:textColor="@color/md_white_1000" />
