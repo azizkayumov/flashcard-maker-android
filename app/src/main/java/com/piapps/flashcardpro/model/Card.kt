@@ -24,4 +24,6 @@ class Card(@Id(assignable = true)
            var trueAnswers: Int = 0, // true answers reached in Quiz mode
            var totalSeen: Int = 0, // total seen by user
            var totalStudied: Int = 0 // total studied in Study mode
-)
+){
+    constructor() : this(0,0)
+}

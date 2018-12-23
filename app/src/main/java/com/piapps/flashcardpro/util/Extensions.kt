@@ -107,7 +107,5 @@ fun Bitmap.save(setId: Long, currentItem: Int, context: Context): String {
     return if (isSaved) file.absolutePath else ""
 }
 
-fun Int.Companion.rand(from: Int, to: Int): Int {
-    if (from <= 0 || to - from <= 0) return 0
-    return (Random().nextInt(to - from) + from)
-}
+fun IntRange.random() =
+        Random().nextInt((endInclusive + 1) - start) +  start

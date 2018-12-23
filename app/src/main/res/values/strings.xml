@@ -49,8 +49,8 @@
     <string name="studied">Studied</string>
     <string name="studied_explanation">Number of times you flipped the card in Study mode</string>
 
-    <string name="copy_right">Flashcards © %1$d</string>
-    <string name="description">Speed up your learning with Flashcards! Create sets, add flashcards and play with them anywhere.\nGive us 5 stars!</string>
+    <string name="copy_right">Abduaziz Kayumov © 2018–2019</string>
+    <string name="description">Speed up your learning with Flashcards! Create sets, add flashcards and play with them anywhere. Export flashcard sets to CSV files and share them with friends.\nGive us 5 stars!</string>
     <string name="no_sets_yet">There are no flashcard sets..\nTo create new one, click on the button in the right corner</string>
 
     <string name="trash_is_empty">Trash is empty..\nRecycled flashcard sets will be stored here.</string>
@@ -63,5 +63,12 @@
     <string name="import_from_csv_file">Import from CSV file</string>
     <string name="importing_from_csv_file">Importing from CSV file:</string>
     <string name="imported_new_set">Imported new set</string>
+
+    <string name="about_contact_us">Contact us</string>
+    <string name="about_github">See source code on Github</string>
+    <string name="about_website">Visit our website</string>
+    <string name="about_facebook">Like us on Facebook</string>
+    <string name="about_youtube">Watch us on Youtube</string>
+    <string name="about_playstore">Rate us on Play Store</string>
 
 </resources>

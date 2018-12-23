@@ -58,7 +58,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
     lateinit var setController: SetController
     lateinit var labelController: LabelsController
     lateinit var bottomSheet: BottomSheetBehavior<View>
-    // is user editing the back side of the current flash card?
+    // is user editing the back side of the current flashcard?
     var isEditingBack = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -156,13 +156,11 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
             bottomSheet.state = BottomSheetBehavior.STATE_EXPANDED
             KeyboardUtils.showSoftInput(editText)
 
-            if (isEditingBack) {
-                editText.setText(setController.list[viewPager.currentItem].card.back)
-                textViewCounter.text = "${setController.list[viewPager.currentItem].card.front.length}/250"
-            } else {
-                editText.setText(setController.list[viewPager.currentItem].card.front)
-                textViewCounter.text = "${setController.list[viewPager.currentItem].card.front.length}/250"
-            }
+            var currentText = if (isEditingBack) setController.list[viewPager.currentItem].card.back else setController.list[viewPager.currentItem].card.front
+            if (currentText.equals(getString(R.string.example_back)) || currentText.equals(getString(R.string.example_front)))
+                currentText = ""
+            editText.setText(currentText)
+            textViewCounter.text = "${currentText.length}/250"
         }
 
         editText.addTextChangedListener(object : TextWatcher {
@@ -532,5 +530,4 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         } else
             super.onBackPressed()
     }
-
 }

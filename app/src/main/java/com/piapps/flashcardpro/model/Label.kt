@@ -9,5 +9,10 @@ import io.objectbox.annotation.Transient
  */
 
 @Entity
-class Label(@Id(assignable = true) var id: Long,
-            var title: String, @Transient var isSelected: Boolean = false)
+class Label(@Id(assignable = true)
+            var id: Long,
+            var title: String,
+            @Transient
+            var isSelected: Boolean = false) {
+    constructor() : this(0, "")
+}

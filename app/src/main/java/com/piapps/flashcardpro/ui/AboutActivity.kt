@@ -1,48 +1,47 @@
 package com.piapps.flashcardpro.ui
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.Gravity
-import android.view.View
-import android.widget.Toast
 import com.piapps.flashcardpro.R
-import mehdi.sakout.aboutpage.AboutPage
-import mehdi.sakout.aboutpage.Element
-import java.util.*
+import kotlinx.android.synthetic.main.activity_about.*
+
 
 /**
  * Created by abduaziz on 8/8/18.
  */
 
-class AboutActivity : AppCompatActivity(){
+class AboutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val aboutPage = AboutPage(this)
-                .isRTL(false)
-                .setImage(R.drawable.art)
-                .setDescription(getString(R.string.description))
-                .addItem(Element().setTitle("Version ${packageManager.getPackageInfo(packageName,0).versionName}"))
-                .addGroup("Connect with us")
-                .addEmail("kayumovabduaziz@gmail.com")
-                .addWebsite("http://inha.uz")
-                .addFacebook("abduaziz.kayumov")
-                .addYoutube("UCnQ3vq3LNsxrYGlGdziTrhA")
-                .addPlayStore("com.piapps.flashcardpro")
-                .addItem(getCopyRightsElement())
-                .create()
-        setContentView(aboutPage)
-    }
+        setContentView(R.layout.activity_about)
 
-    internal fun getCopyRightsElement(): Element {
-        val copyRightsElement = Element()
-        val copyrights = String.format(getString(R.string.copy_right), Calendar.getInstance().get(Calendar.YEAR))
-        copyRightsElement.setTitle(copyrights)
-        copyRightsElement.setIconTint(mehdi.sakout.aboutpage.R.color.about_item_icon_color)
-        copyRightsElement.iconNightTint = android.R.color.white
-        copyRightsElement.gravity = Gravity.CENTER
-        copyRightsElement.onClickListener = View.OnClickListener { Toast.makeText(this@AboutActivity, copyrights, Toast.LENGTH_SHORT).show() }
-        return copyRightsElement
-    }
+        tvVersion.text = "Version ${packageManager.getPackageInfo(packageName, 0).versionName}"
 
+        llEmail.setOnClickListener {
+            val emailIntent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"))
+            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, arrayOf("kayumovabduaziz@gmail.com"))
+            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Flashcards Maker")
+            startActivity(emailIntent)
+        }
+
+        llGithub.setOnClickListener {
+            val url = "https://github.com/AbduazizKayumov/Flashcard-Maker-Android"
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(url)
+            startActivity(i)
+        }
+
+        llPlayStore.setOnClickListener {
+            val appPackageName = packageName
+            try {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
+            } catch (anfe: android.content.ActivityNotFoundException) {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")))
+            }
+        }
+    }
 }

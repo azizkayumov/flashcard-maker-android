@@ -1,6 +1,7 @@
 package com.piapps.flashcardpro.application
 
 import android.app.Application
+import android.support.v7.app.AppCompatDelegate
 import com.blankj.utilcode.util.Utils
 import com.piapps.flashcardpro.model.Card
 import com.piapps.flashcardpro.model.Label
@@ -23,8 +24,9 @@ class Flashcards : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         instance = this
-        Utils.init(this);
+        Utils.init(this)
         db = MyObjectBox.builder().androidContext(this).build()
         Fabric.with(this, Crashlytics())
     }

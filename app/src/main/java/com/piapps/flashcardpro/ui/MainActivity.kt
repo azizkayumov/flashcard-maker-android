@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), FilterLabelsController.OnLabelClickedL
 
     /*
     *
-    * LOTS OF HARDCODED LINES, BE CAREFUL
+    * LOTS OF HARDCODING, BE CAREFUL
     * YOU JUST NEED TO FUCK OFF && ACCEPT THAT IT WORKS
     *
     * */
@@ -312,6 +312,8 @@ class MainActivity : AppCompatActivity(), FilterLabelsController.OnLabelClickedL
             R.id.action_filter -> {
                 if (rvLabels.visibility == View.VISIBLE) {
                     activeLabel = Label(-1L, "")
+                    labelsController.labels.forEach { it.isSelected = false }
+                    labelsController.notifyDataSetChanged()
                     rvLabels.visibility = View.GONE
                     loadAdapter(bottomNavigationViewMain.currentItem)
                 } else {

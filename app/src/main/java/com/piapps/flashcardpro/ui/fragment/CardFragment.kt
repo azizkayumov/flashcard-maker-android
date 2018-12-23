@@ -41,7 +41,10 @@ class CardFragment : Fragment() {
     var isFlippable: Boolean = true
     lateinit var flip: FlipAnimation
     lateinit var flipBack: FlipAnimation
-    lateinit var card: Card
+    var card: Card = Card().apply {
+        this.front = ""
+        this.back = ""
+    }
     var isEditingBack = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,7 +98,7 @@ class CardFragment : Fragment() {
         }
 
         // set images if they are present
-        if (!card.frontImage.isBlank()) {
+        if (card.frontImage.isNotBlank()) {
             Glide.with(this).load(card.frontImage).listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                     e?.printStackTrace()
@@ -109,7 +112,7 @@ class CardFragment : Fragment() {
             }).into(imageViewFront)
         }
 
-        if (!card.backImage.isBlank()) {
+        if (card.backImage.isNotBlank()) {
             Glide.with(this).load(card.backImage).listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                     e?.printStackTrace()
@@ -180,7 +183,7 @@ class CardFragment : Fragment() {
 
     // used to identify which side we are editing, see SetActivity.kt
     fun side(): Int {
-        if (relativeLayoutBack.visibility == View.GONE) {
+        if (relativeLayoutBack?.visibility == View.GONE) {
             return 0
         } else {
             return 1

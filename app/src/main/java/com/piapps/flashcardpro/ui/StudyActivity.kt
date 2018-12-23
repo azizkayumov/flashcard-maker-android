@@ -13,7 +13,7 @@ import com.piapps.flashcardpro.application.Flashcards
 import com.piapps.flashcardpro.model.Set
 import com.piapps.flashcardpro.ui.controller.SetController
 import com.piapps.flashcardpro.util.Extensions
-import com.piapps.flashcardpro.util.rand
+import com.piapps.flashcardpro.util.random
 import com.piapps.flashcardpro.util.toColor
 import kotlinx.android.synthetic.main.activity_study.*
 
@@ -73,7 +73,7 @@ class StudyActivity : AppCompatActivity() {
 
         fabShuffle.setOnClickListener {
             if (setController.list.isEmpty()) return@setOnClickListener
-            val random = Int.rand(0, setController.list.size - 1)
+            val random = (0 until setController.list.size).random()
             viewPager.currentItem = random
         }
 
