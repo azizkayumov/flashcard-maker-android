@@ -37,7 +37,7 @@ class StudyActivity : AppCompatActivity() {
         isQuiz = intent.getBooleanExtra("isQuiz", false)
         if (isQuiz) {
             fabShuffle.visibility = View.GONE
-            fabFlip.visibility = View.GONE
+            //fabFlip.visibility = View.GONE
             viewPager.setPagingEnabled(false)
         } else {
             fabTrue.visibility = View.GONE

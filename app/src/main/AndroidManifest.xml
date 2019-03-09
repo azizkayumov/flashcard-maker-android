@@ -34,7 +34,7 @@
             android:label="@string/title_activity_set"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustPan"/>
 
         <activity
             android:name=".ui.StudyActivity"

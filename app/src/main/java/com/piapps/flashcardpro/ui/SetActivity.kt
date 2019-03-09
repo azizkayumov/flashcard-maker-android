@@ -54,7 +54,7 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
     val DIALOG_SET_TEXT_COLOR_BACK = "DIALOG_SET_TEXT_COLOR_BACK"
 
     val ACTIVITY_CHOOSE_IMAGE = 1995
-    val ACTIVITY_SET_LABELS = 1996
+    val ACTIVITY_SET_LABELS = 1997
     lateinit var setController: SetController
     lateinit var labelController: LabelsController
     lateinit var bottomSheet: BottomSheetBehavior<View>
@@ -147,6 +147,15 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         }
 
         bottomSheet = BottomSheetBehavior.from(linearLayoutBottomSheet)
+        bottomSheet.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(p0: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_DRAGGING)
+                    bottomSheet.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+
+            override fun onSlide(p0: View, p1: Float) {}
+        })
+
         imageViewText.setOnClickListener {
             if (setController.list.isEmpty()) {
                 toast(R.string.add_new_card)
@@ -160,14 +169,14 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
             if (currentText.equals(getString(R.string.example_back)) || currentText.equals(getString(R.string.example_front)))
                 currentText = ""
             editText.setText(currentText)
-            textViewCounter.text = "${currentText.length}/250"
+            textViewCounter.text = "${currentText.length}"
         }
 
         editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {
-                textViewCounter.text = "${p0.toString().length}/250"
+                textViewCounter.text = "${p0.toString().length}"
             }
         })
 
@@ -184,8 +193,8 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         }
 
         imageViewCancel.setOnClickListener {
-            bottomSheet.state = BottomSheetBehavior.STATE_HIDDEN
             KeyboardUtils.hideSoftInput(editText)
+            bottomSheet.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         imageViewInsertImage.setOnClickListener {

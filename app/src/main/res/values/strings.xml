@@ -8,7 +8,7 @@
     <string name="about">About</string>
     <string name="last_edited">Last edited</string>
     <string name="today">Today</string>
-    <string name="title_activity_set">SetActivity</string>
+    <string name="title_activity_set" translatable="false">SetActivity</string>
     <string name="new_set">New set</string>
     <string name="move_to_trash">Move to Trash</string>
     <string name="set_color">Set Color</string>

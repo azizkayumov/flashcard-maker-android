@@ -178,7 +178,6 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
             android:gravity="right"
-            android:text="0/250"
             android:textColor="@color/md_red_500"
             android:textSize="10sp" />
 
@@ -190,8 +189,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:gravity="top"
-            android:hint="@string/type_something"
-            android:maxLength="250" />
+            android:hint="@string/type_something" />
 
     </LinearLayout>
 
