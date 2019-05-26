@@ -289,6 +289,21 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
         }.show()
     }
 
+    /**
+     * Shows bottom sheet for input text for Flash Card
+     */
+    fun showBottomSheet() {
+        isEditingBack = setController.list[viewPager.currentItem].isEditingBack
+        bottomSheet.state = BottomSheetBehavior.STATE_EXPANDED
+        KeyboardUtils.showSoftInput(editText)
+
+        var currentText = if (isEditingBack) setController.list[viewPager.currentItem].card.back else setController.list[viewPager.currentItem].card.front
+        if (currentText.equals(getString(R.string.example_back)) || currentText.equals(getString(R.string.example_front)))
+            currentText = ""
+        editText.setText(currentText)
+        textViewCounter.text = "${currentText.length}"
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_set, menu)
