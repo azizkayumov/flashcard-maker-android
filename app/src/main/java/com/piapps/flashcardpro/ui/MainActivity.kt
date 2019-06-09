@@ -44,13 +44,6 @@ class MainActivity : AppCompatActivity(), FilterLabelsController.OnLabelClickedL
     val labels = arrayListOf<Label>()
     lateinit var labelsController: FilterLabelsController
 
-    /*
-    *
-    * LOTS OF HARDCODING, BE CAREFUL
-    * YOU JUST NEED TO FUCK OFF && ACCEPT THAT IT WORKS
-    *
-    * */
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

@@ -24,6 +24,8 @@ import android.view.WindowManager
 import com.blankj.utilcode.util.ImageUtils
 import com.blankj.utilcode.util.KeyboardUtils
 import com.piapps.flashcardpro.R
+import com.piapps.flashcardpro.R.id.imageViewText
+import com.piapps.flashcardpro.R.id.linearLayoutBottomSheet
 import com.piapps.flashcardpro.application.Flashcards
 import com.piapps.flashcardpro.model.Card
 import com.piapps.flashcardpro.model.Card_
@@ -287,21 +289,6 @@ class SetActivity : AppCompatActivity(), SimpleDialog.OnDialogResultListener {
                 it.dismiss()
             }
         }.show()
-    }
-
-    /**
-     * Shows bottom sheet for input text for Flash Card
-     */
-    fun showBottomSheet() {
-        isEditingBack = setController.list[viewPager.currentItem].isEditingBack
-        bottomSheet.state = BottomSheetBehavior.STATE_EXPANDED
-        KeyboardUtils.showSoftInput(editText)
-
-        var currentText = if (isEditingBack) setController.list[viewPager.currentItem].card.back else setController.list[viewPager.currentItem].card.front
-        if (currentText.equals(getString(R.string.example_back)) || currentText.equals(getString(R.string.example_front)))
-            currentText = ""
-        editText.setText(currentText)
-        textViewCounter.text = "${currentText.length}"
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

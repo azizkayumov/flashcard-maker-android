@@ -8,8 +8,6 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'io.objectbox'
 
-apply plugin: 'io.fabric'
-
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -65,11 +63,6 @@ dependencies {
     // glide
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
-
-    // crashlitics
-    compile('com.crashlytics.sdk.android:crashlytics:2.9.4@aar') {
-        transitive = true
-    }
 
     // openCSV
     compile 'com.opencsv:opencsv:4.0'

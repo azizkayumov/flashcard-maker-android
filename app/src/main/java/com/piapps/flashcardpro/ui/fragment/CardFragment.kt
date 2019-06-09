@@ -65,7 +65,6 @@ class CardFragment : Fragment() {
 
         if (!isDeletable) {
             imageViewDelete.visibility = View.GONE
-            imageViewEdit.visibility = View.GONE
         }
 
         if (!isFlippable) {
@@ -96,10 +95,6 @@ class CardFragment : Fragment() {
 
         imageViewDelete.setOnClickListener {
             (activity as SetActivity).deleteCard()
-        }
-
-        imageViewEdit.setOnClickListener {
-            (activity as SetActivity).showBottomSheet()
         }
 
         // set images if they are present

@@ -84,14 +84,6 @@
             android:background="?selectableItemBackground"
             android:padding="12dp"
             app:srcCompat="@drawable/ic_delete_black" />
-        <ImageView
-            android:id="@+id/imageViewEdit"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="?selectableItemBackground"
-            android:padding="12dp"
-            app:srcCompat="@drawable/ic_edit_black" />
 
     </android.support.v7.widget.CardView>
 

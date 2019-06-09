@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.piapps.flashcardpro">
 
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -28,35 +27,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.SetActivity"
-            android:label="@string/title_activity_set"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"/>
-
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.StudyActivity"
-            android:label="@string/title_activity_study"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ui.StatisticsActivity"
-            android:label="@string/title_activity_study"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ui.AboutActivity"
-            android:label="@string/title_activity_study"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ui.LabelsActivity"
-            android:label="@string/title_activity_study"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

@@ -17,10 +17,6 @@ import com.piapps.flashcardpro.util.random
 import com.piapps.flashcardpro.util.toColor
 import kotlinx.android.synthetic.main.activity_study.*
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- */
 class StudyActivity : AppCompatActivity() {
 
     lateinit var set: Set

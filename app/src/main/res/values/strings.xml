@@ -70,5 +70,6 @@
     <string name="about_facebook">Like us on Facebook</string>
     <string name="about_youtube">Watch us on Youtube</string>
     <string name="about_playstore">Rate us on Play Store</string>
+    <string name="title_activity_set_preview">SetPreviewActivity</string>
 
 </resources>
