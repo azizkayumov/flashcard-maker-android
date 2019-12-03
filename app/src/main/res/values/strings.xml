@@ -1,75 +1,114 @@
 <resources>
     <string name="app_name">Flashcards</string>
+    <string name="app_short_info">Supercharge your learning with flashcards and get the grades you thought were
+        impossible.
+    </string>
 
-    <string name="action_settings">Settings</string>
-    <string name="all_sets">All sets</string>
-    <string name="favorite">Favorite</string>
-    <string name="trash">Trash</string>
+    <string name="settings">Settings</string>
+    <string name="rate_us">Rate us</string>
     <string name="about">About</string>
-    <string name="last_edited">Last edited</string>
-    <string name="today">Today</string>
-    <string name="title_activity_set" translatable="false">SetActivity</string>
-    <string name="new_set">New set</string>
-    <string name="move_to_trash">Move to Trash</string>
-    <string name="set_color">Set Color</string>
-    <string name="card_text_color">Card Text Color</string>
-    <string name="card_background_color">Card Background Color</string>
-    <string name="set_name">Set Name</string>
-    <string name="add_to_favorite">Add to favorite</string>
-    <string name="add_new_card">Add new card</string>
-    <string name="add_new_card_CAPS">ADD NEW CARD</string>
+
+    <string name="all">All sets</string>
+    <string name="recents">Recents</string>
+    <string name="trash">Trash</string>
+
     <string name="labels">Labels</string>
-    <string name="enter_label">Enter label</string>
-    <string name="no_labels_yet">This set has no labels yet..</string>
+    <string name="important">Important</string>
+    <string name="todo">Todo</string>
+    <string name="dictionary">Dictionary</string>
+
+    <string name="n_cards">%1$s cards</string>
+
+    <string name="edit_set_name">Edit set name</string>
+    <string name="add_labels">Add labels</string>
+    <string name="edit_labels">Edit labels</string>
+    <string name="label_name">Label name</string>
+    <string name="move_to_trash">Move to Trash</string>
+    <string name="are_you_sure_to_move_to_trash">Are you sure to move this set to Trash?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="done">Done</string>
+    <string name="put_back_trash">Would you like to put back this set?</string>
+    <string name="empty_trash">Are you going to empty the Trash?</string>
+    <string name="trash_cleared">Trash is empty</string>
+
+    <string name="statistics">Statistics</string>
+    <string name="reverse_cards">Reverse all cards</string>
+    <string name="export_to_csv">Export to CSV</string>
+    <string name="import_from_csv">Import from CSV</string>
+
+    <string name="connection_error">Connection error</string>
+    <string name="app_internal_error">App internal error</string>
+    <string name="server_error">Server error</string>
+    <string name="set_with_no_cards_error">Set is empty, ignoring the export operation</string>
+    <string name="csv_export_error">Failed to export to CSV, try again later</string>
+    <string name="file_is_not_csv_error">This file is not CSV file</string>
+    <string name="csv_import_error">Failed to import from CSV, try again later</string>
+    <string name="xls_export_error">Failed to export to Excel, try again later</string>
+    <string name="no_stats_found">No statistics for this set for now</string>
+    <string name="save_image_error">Could not save image</string>
+
+    <string name="untitled_set">Untitled set</string>
+    <string name="set_name">Set name</string>
+    <string name="set_name_example">e.g. Korean Vocabulary</string>
+    <string name="label_name_example">Must be unique, e.g. Todo</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="front_side">Front side</string>
+    <string name="back_side">Back side</string>
+
+    <string name="color">Color</string>
+    <string name="choose_set_color">Choose set color</string>
+    <string name="choose_card_background_color">Choose a card background color</string>
+    <string name="choose_card_text_color">Choose a card text color</string>
+    <string name="choose_drawing_color">Choose drawing color</string>
+
+    <string name="edit_text">Edit text</string>
+    <string name="edit_text_hint">Type anything..</string>
+    <string name="add_image">Add image</string>
+    <string name="drawing">Drawing</string>
+    <string name="choose_image">Choose image</string>
+
+    <string name="permission_error">Unless you don\'t give permission, app cannot access your photos</string>
+    <string name="label_must_be_unique">There is a label with this name</string>
+
     <string name="study">Study</string>
     <string name="quiz">Quiz</string>
+    <string name="stats">Statistics</string>
 
-    <string name="are_you_sure_you_want_to_empty_the_trash">Are you sure you want to empty Trash?</string>
-    <string name="example_front">Hello, World!</string>
-    <string name="example_back">Привет мир!</string>
-    <string name="put_back">Would you like to put back this set?</string>
-    <string name="yes">Yes</string>
-    <string name="cancel">Cancel</string>
+    <string name="no_all_sets_found">Looks like there are no sets yet, create new set with \'+\' button on bottom right
+        corner
+    </string>
+    <string name="no_label_sets_found">There are no sets for this label yet, add this label to sets, you will see them
+        listed here
+    </string>
+    <string name="no_trash_sets_found">Trash is empty, deleted sets will be listed here</string>
+    <string name="folder_is_empty">Empty folder</string>
+    <string name="folder">Folder</string>
+    <string name="select_csv_files">Select CSV files</string>
+    <string name="give_permission_storage">Unless you grant the permission, you cannot import CSV files</string>
+    <string name="delete_this_label">Are you sure to delete this label?</string>
 
-    <string name="insert_image">Insert image</string>
-    <string name="drawing">Drawing</string>
-    <string name="cannot_load">Could not load image to card, try again ..</string>
+    <string name="accuracy">Accuracy</string>
+    <string name="based_on_quiz_results">Based on quiz results</string>
+    <string name="number_of_cards">Number of cards</string>
+    <string name="future">Future</string>
+    <string name="past">Past</string>
 
-    <string name="insert_text">Insert text</string>
-    <string name="type_something">Type something ..</string>
+    <string name="duration">Minutes</string>
+    <string name="study_duration_for_quiz">Quiz preparation time duration (minutes)</string>
 
-    <string name="title_activity_study">StudyActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="are_you_sure_you_want_to_delete_the_set">Are you sure you want to delete the set?</string>
-    <string name="are_you_sure_you_want_to_delete_the_card">Are you sure you want to delete the card?</string>
-    <string name="are_you_sure_you_want_to_delete_the_label">Are you sure you want to delete the label from this set?</string>
-    <string name="true_answers">True answers</string>
-    <string name="true_answers_explanation">Percentage of true answers in Quiz mode</string>
-    <string name="studied">Studied</string>
-    <string name="studied_explanation">Number of times you flipped the card in Study mode</string>
+    <string name="copyright">© 2019 Abduaziz Kayumov</string>
+    <string name="email_us">Email us</string>
+    <string name="send_email">Send email..</string>
+    <string name="play_store">Rate us on the Play Store</string>
+    <string name="youtube">Watch us on Youtube</string>
+    <string name="developer_email">kayumovabduaziz@gmail.com</string>
+    <string name="app_link">https://play.google.com/store/apps/details?id=com.piapps.flashcardspro</string>
+    <string name="youtube_channel">https://www.youtube.com/channel/UCnQ3vq3LNsxrYGlGdziTrhA</string>
+    <string name="crop_image">Crop image</string>
 
-    <string name="copy_right">Abduaziz Kayumov © 2018–2019</string>
-    <string name="description">Speed up your learning with Flashcards! Create sets, add flashcards and play with them anywhere. Export flashcard sets to CSV files and share them with friends.\nGive us 5 stars!</string>
-    <string name="no_sets_yet">There are no flashcard sets..\nTo create new one, click on the button in the right corner</string>
-
-    <string name="trash_is_empty">Trash is empty..\nRecycled flashcard sets will be stored here.</string>
-    <string name="statistics">Statistics</string>
-    <string name="created">Created</string>
-    <string name="export_to_csv">Export to CSV</string>
-    <string name="exporting_to_csv_plz_wait">Exporting to CSV,\nplease, wait a moment.</string>
-    <string name="failed_to_export">Failed to export this set, please, try again later or contact us.</string>
-    <string name="exported_to_csv_file">Successfully exported to CSV file. \nPlease, check "Flashcards" folder in your external storage, filename:</string>
-    <string name="import_from_csv_file">Import from CSV file</string>
-    <string name="importing_from_csv_file">Importing from CSV file:</string>
-    <string name="imported_new_set">Imported new set</string>
-
-    <string name="about_contact_us">Contact us</string>
-    <string name="about_github">See source code on Github</string>
-    <string name="about_website">Visit our website</string>
-    <string name="about_facebook">Like us on Facebook</string>
-    <string name="about_youtube">Watch us on Youtube</string>
-    <string name="about_playstore">Rate us on Play Store</string>
-    <string name="title_activity_set_preview">SetPreviewActivity</string>
+    <string name="csv_export_info">Successfully exported. You can find the exported CSV file in \n"/Flashcards folder" in an external storage</string>
+    <string name="open">Open</string>
 
 </resources>

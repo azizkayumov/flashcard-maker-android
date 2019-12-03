@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.rm:freedrawview:1.1.2@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2e1c22f23b8733f0fc6d37a5be4e54b8/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2e1c22f23b8733f0fc6d37a5be4e54b8/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.rm/freedrawview/1.1.2/90efc312f20df7d6f5bef77e83934a90256a7949/freedrawview-1.1.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -18,4 +18,58 @@
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
-#-renamesourcefileattribute SourceFile
+-renamesourcefileattribute SourceFile
+
+
+##---------------Glide--------------------------------------------------------------------------------------------------------------------------------
+# Glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+    **[] $VALUES;
+    public *;
+}
+##----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+##---------------Support libs--------------------------------------------------------------------------------------------------------------------------------
+-keep class android.support.v4.app.** { *; }
+-keep interface android.support.v4.app.** { *; }
+
+# support-v7-appcompat
+-keep public class android.support.v7.widget.** { *; }
+-keep public class android.support.v7.internal.widget.** { *; }
+-keep public class android.support.v7.internal.view.menu.** { *; }
+-keep public class * extends android.support.v4.view.ActionProvider {
+    public <init>(android.content.Context);
+}
+# support-design
+-dontwarn android.support.design.**
+-keep class android.support.design.** { *; }
+-keep interface android.support.design.** { *; }
+-keep public class android.support.design.R$* { *; }
+
+-keep class android.support.v4.app.** { *; }
+-keep interface android.support.v4.app.** { *; }
+
+-keep public class android.support.design.widget.BottomNavigationView { *; }
+-keep public class android.support.design.internal.BottomNavigationMenuView { *; }
+-keep public class android.support.design.internal.BottomNavigationPresenter { *; }
+-keep public class android.support.design.internal.BottomNavigationItemView { *; }
+##----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+##-----------------Kotlin Anko-----------------------------------------------------------------------------------------------------------------------------------
+-dontwarn kotlin.jvm.internal.Intrinsics
+##----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+##-----------------MpAndroidChart-----------------------------------------------------------------------------------------------------------------------------------
+-keep class com.github.mikephil.charting.** { *; }
+##----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+##-----------------Dagger2-----------------------------------------------------------------------------------------------------------------------------------
+-dontwarn com.google.errorprone.annotations.**
+##----------------------------------------------------------------------------------------------------------------------------------------------------
+
+

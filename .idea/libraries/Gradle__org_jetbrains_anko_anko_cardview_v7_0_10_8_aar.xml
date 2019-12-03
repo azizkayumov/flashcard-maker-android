@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.anko:anko-cardview-v7:0.10.8@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/49454d7f193d23f33face858199c0eab/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/49454d7f193d23f33face858199c0eab/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.anko/anko-cardview-v7/0.10.8/ce53dbccf20382ab0150b15fbf78a7f971967934/anko-cardview-v7-0.10.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

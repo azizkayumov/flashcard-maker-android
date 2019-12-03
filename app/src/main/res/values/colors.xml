@@ -1,51 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFF</color>
-    <color name="colorPrimaryDark">#EFEFEF</color>
+    <color name="colorPrimary">#FCFCFC</color>
+    <color name="colorPrimaryDark">#CCC</color>
     <color name="colorAccent">#FFFF4040</color>
+    <color name="colorBackground">#EFEFEF</color>
 
-    <color name="white">#FFF</color>
+    <!--Icon-->
+    <color name="colorIconActive">#8A000000</color>
+    <color name="colorIconInactive">#42000000</color>
 
-    <color name="c1">#EF9A9A</color>
-    <color name="c2">#F48FB1</color>
-    <color name="c3">#CE93D8</color>
-    <color name="c4">#B39DDB</color>
-    <color name="c5">#9FA8DA</color>
-    <color name="c6">#90CAF9</color>
-    <color name="c7">#81D4fA</color>
-    <color name="c8">#80DEEA</color>
-    <color name="c9">#80CBC4</color>
-    <color name="c10">#A5D6A7</color>
-    <color name="c11">#C5E1A5</color>
-    <color name="c12">#AED581</color>
-    <color name="c13">#FF8A65</color>
-    <color name="c14">#FFE082</color>
-    <color name="c15">#FFCC80</color>
-    <color name="c16">#FFAB91</color>
-    <color name="c17">#BCAAA4</color>
-    <color name="c18">#B0BBC5</color>
-    <color name="c19">#EEEEEE</color>
-    <color name="c20">#757575</color>
+    <!--Text-->
+    <color name="colorPrimaryText">#DE000000</color>
+    <color name="colorSecondaryText">#8A000000</color>
 
-    <color name="c1dark">#E57373</color>
-    <color name="c2dark">#F06292</color>
-    <color name="c3dark">#BA68C8</color>
-    <color name="c4dark">#9575CD</color>
-    <color name="c5dark">#7986CB</color>
-    <color name="c6dark">#64B5F6</color>
-    <color name="c7dark">#4fC3F7</color>
-    <color name="c8dark">#4DD0E1</color>
-    <color name="c9dark">#4DB6AC</color>
-    <color name="c10dark">#81C784</color>
-    <color name="c11dark">#AED581</color>
-    <color name="c12dark">#9CCC65</color>
-    <color name="c13dark">#FF7043</color>
-    <color name="c14dark">#FFD54F</color>
-    <color name="c15dark">#FFB74D</color>
-    <color name="c16dark">#FF8A65</color>
-    <color name="c17dark">#A1887F</color>
-    <color name="c18dark">#90A4AE</color>
+    <!--Divider-->
+    <color name="colorDivider">#d9e3f3</color>
+    <color name="colorDividerLight">#EFEFEF</color>
 
+    <color name="white">#FEFEFE</color>
+    <color name="black">#000</color>
+    <color name="transparent">@android:color/transparent</color>
+
+    <color name="cropBackground">#1C1C1C</color>
+    <color name="cropOverlay">#AA1C1C1C</color>
+
+    <color name="c1">#FF8A80</color>
+    <color name="c2">#FF80AB</color>
+    <color name="c3">#EA80FC</color>
+    <color name="c4">#B388FF</color>
+    <color name="c5">#8C9EFF</color>
+    <color name="c6">#82B1FF</color>
+    <color name="c7">#448AFF</color>
+    <color name="c8">#80D8FF</color>
+    <color name="c9">#26C6DA</color>
+    <color name="c10">#1DE9B6</color>
+    <color name="c11">#00BFA5</color>
+    <color name="c12">#FFE57F</color>
+    <color name="c13">#FFD180</color>
+    <color name="c14">#FF9E80</color>
+    <color name="c15">#BDBDBD</color>
+
+    <!-- google's material design colours from
+http://www.google.com/design/spec/style/color.html#color-ui-color-palette -->
+    <!--reds-->
     <color name="md_red_50">#FFEBEE</color>
     <color name="md_red_100">#FFCDD2</color>
     <color name="md_red_200">#EF9A9A</color>
@@ -340,4 +337,5 @@
     <color name="md_blue_grey_900">#263238</color>
 
     <color name="black_overlay">#66000000</color>
+
 </resources>
