@@ -1,10 +1,15 @@
 package com.piapps.flashcardpro.features.main
 
+import android.animation.Animator
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.NavigationView
 import android.support.v4.content.ContextCompat
@@ -13,6 +18,7 @@ import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.View
+import android.view.ViewAnimationUtils
 import android.widget.TextView
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.db.tables.SetDb
@@ -33,6 +39,7 @@ import com.piapps.flashcardpro.features.main.entity.NavView
 import com.piapps.flashcardpro.features.main.entity.SetView
 import com.piapps.flashcardpro.features.settings.SettingsFragment
 import org.jetbrains.anko.*
+import kotlin.math.hypot
 
 /**
  * Created by abduaziz on 2019-09-22 at 00:52.
@@ -106,7 +113,11 @@ class MainFragment : BaseFragment(), MainView,
         }
 
         ivNightMode.setOnClickListener {
-            toggleNightMode()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                toggleNightModeWithAnimation()
+            } else {
+                toggleNightMode()
+            }
         }
     }
 
@@ -137,6 +148,37 @@ class MainFragment : BaseFragment(), MainView,
         rvNavigation.adapter = navigationAdapter
 
         (activity as MainActivity).changeStatusBarColor(theme.colorPrimaryDark)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    fun toggleNightModeWithAnimation() {
+        val w = fragmentView!!.measuredWidth
+        val h = fragmentView!!.measuredHeight
+
+        val bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        drawerLayout!!.draw(canvas)
+
+        (activity as MainActivity).showBitmapTemporarily(bitmap)
+
+        val centerX = w - fragmentView!!.dip(56 + 28)
+        val centerY = fragmentView!!.dip(56)
+        val radius = hypot(w.toFloat(), h.toFloat())
+        val anim =
+            ViewAnimationUtils.createCircularReveal(fragmentView, centerX.toInt(), centerY.toInt(), 0F, radius)
+        anim.duration = 500L
+        anim.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator?) {
+                toggleNightMode()
+            }
+
+            override fun onAnimationRepeat(animation: Animator?) {}
+            override fun onAnimationCancel(animation: Animator?) {}
+            override fun onAnimationEnd(animation: Animator?) {
+                (activity as MainActivity).hideBitmap()
+            }
+        })
+        anim.start()
     }
 
     fun createNavigation() {
@@ -185,7 +227,12 @@ class MainFragment : BaseFragment(), MainView,
             try {
                 activity?.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
             } catch (anfe: android.content.ActivityNotFoundException) {
-                activity?.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")))
+                activity?.startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                    )
+                )
             }
         }
         if (item.id == 1) {

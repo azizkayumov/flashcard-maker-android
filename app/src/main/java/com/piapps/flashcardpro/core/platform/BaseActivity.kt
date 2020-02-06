@@ -3,12 +3,14 @@ package com.piapps.flashcardpro.core.platform
 import android.animation.Animator
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.AppCompatImageView
 import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -36,6 +38,9 @@ open class BaseActivity : AppCompatActivity() {
     // root view: all fragments are added, removed
     private lateinit var rootView: FrameLayout
 
+    // imageview to show the old theme temporarily
+    private lateinit var iv: AppCompatImageView
+
     // back stack
     private val fragments = arrayListOf<BaseFragment>()
 
@@ -49,6 +54,13 @@ open class BaseActivity : AppCompatActivity() {
         // add root view
         rootView = FrameLayout(this)
         rootView.layoutParams = ViewGroup.LayoutParams(matchParent, matchParent)
+
+
+        iv = AppCompatImageView(this)
+        iv.layoutParams = FrameLayout.LayoutParams(matchParent, matchParent)
+        iv.visibility = View.GONE
+        rootView.addView(iv)
+
         setContentView(rootView)
         touchSlop = ViewConfiguration.get(this).scaledTouchSlop
     }
@@ -73,6 +85,7 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun dispatchTouchEvent(motionEvent: MotionEvent?): Boolean {
         if (motionEvent == null || topFragment()?.canSwipeBack() == false) return super.dispatchTouchEvent(motionEvent)
+
         val w = topFragment()?.fragmentView?.width ?: 0
         when (motionEvent.action) {
             MotionEvent.ACTION_DOWN -> {
@@ -142,6 +155,16 @@ open class BaseActivity : AppCompatActivity() {
             return
         }
         super.onBackPressed()
+    }
+
+    fun showBitmapTemporarily(bitmap: Bitmap) {
+        iv.setImageBitmap(bitmap)
+        iv.visibility = VISIBLE
+    }
+
+    fun hideBitmap() {
+        iv.visibility = GONE
+        iv.setImageDrawable(null)
     }
 
     fun openFragment(baseFragment: BaseFragment, animate: Boolean = false) {
@@ -286,8 +309,8 @@ open class BaseActivity : AppCompatActivity() {
     private fun removeFragment(baseFragment: BaseFragment, animate: Boolean, resumeTopFragment: Boolean = true) {
         hideSoftInput()
         val pos = rootView.indexOfChild(baseFragment.parentView)
-        if (pos >= 0 && pos < fragments.size) {
-            fragments.removeAt(pos)
+        if (pos >= 0 && pos <= fragments.size) {
+            fragments.removeAt(pos-1)
             if (animate) {
                 when (baseFragment.exitAnimation) {
                     EXIT_TO_RIGHT -> {

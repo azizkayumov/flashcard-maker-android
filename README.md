@@ -1,4 +1,4 @@
-[<img src="https://github.com/AbduazizKayumov/Flashcard-Maker-Android/blob/master/art/get.png" width="128" height="37.6">](https://play.google.com/store/apps/details?id=com.piapps.flashcard)
+[<img src="https://github.com/AbduazizKayumov/Flashcard-Maker-Android/blob/master/art/get.png" width="128" height="37.6">](https://play.google.com/store/apps/details?id=com.piapps.flashcardpro)
 ## Flashcard-Maker-Android
 **Flashcard Maker** is a study app that helps to create flashcards.
 
