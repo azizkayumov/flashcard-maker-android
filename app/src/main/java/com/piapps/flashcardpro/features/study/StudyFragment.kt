@@ -105,6 +105,7 @@ class StudyFragment : BaseFragment(), StudyView {
     }
 
     fun shuffle() {
+        if (adapter.list.isEmpty()) return // BUG FIX: random from = 0 until 0 throws IllegalArgumentException
         val current = layoutManager.findFirstCompletelyVisibleItemPosition()
         val random = presenter.random(adapter.list.size, current)
         rv.scrollToPosition(random)
