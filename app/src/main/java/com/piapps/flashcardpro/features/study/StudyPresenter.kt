@@ -48,6 +48,7 @@ class StudyPresenter(var view: StudyView?) : BasePresenter(view) {
     }
 
     fun random(until: Int, notEqual: Int): Int {
+        if (until == 1) return 0 // BUG FIX: App not responding
         var random = Random.nextInt(0, until)
         while (random == notEqual)
             random = Random.nextInt(0, until)
