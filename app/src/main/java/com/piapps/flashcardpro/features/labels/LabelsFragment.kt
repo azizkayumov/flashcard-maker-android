@@ -1,20 +1,20 @@
 package com.piapps.flashcardpro.features.labels
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.db.tables.LabelDb
+import com.piapps.flashcardpro.core.extension.alert
 import com.piapps.flashcardpro.core.extension.getLocalizedString
+import com.piapps.flashcardpro.core.extension.positiveButton
 import com.piapps.flashcardpro.core.extension.toast
 import com.piapps.flashcardpro.core.platform.BaseFragment
 import com.piapps.flashcardpro.features.MainActivity
-import com.piapps.flashcardpro.features.editor.adapter.LabelsEditAdapter
-import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.alert
 
 /**
  * Created by abduaziz on 2019-10-26 at 21:00.
@@ -48,9 +48,7 @@ class LabelsFragment : BaseFragment(), LabelsView, AddLabelFragment.OnLabelAdded
 
     var adapter = LabelsEditAdapter(arrayListOf())
 
-    override fun createView(context: Context): View? {
-        return LabelsUI().createView(AnkoContext.Companion.create(context, this))
-    }
+    override fun createView(context: Context) = UI()
 
     override fun viewCreated(view: View?, args: Bundle?) {
         super.viewCreated(view, args)
@@ -81,6 +79,7 @@ class LabelsFragment : BaseFragment(), LabelsView, AddLabelFragment.OnLabelAdded
     }
 
     override fun onEditName(s: String) {
+        if (s.isBlank()) return
         val label = LabelDb(System.currentTimeMillis(), s)
         presenter.checkSaveLabel(label)
     }
@@ -91,16 +90,17 @@ class LabelsFragment : BaseFragment(), LabelsView, AddLabelFragment.OnLabelAdded
     }
 
     override fun onDeleteLabel(l: LabelDb) {
-        ctx.alert {
-            message = ctx.getLocalizedString(R.string.delete_this_label)
+        val dialog = ctx.alert {
+            setMessage(ctx.getLocalizedString(R.string.delete_this_label))
             positiveButton(ctx.getLocalizedString(R.string.yes)) {
                 presenter.deleteLabelOffline(l)
                 adapter.remove(l)
             }
-            negativeButton(ctx.getLocalizedString(R.string.no)) {
-                it.dismiss()
-            }
-        }.show()
+        }
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, ctx.getLocalizedString(R.string.no)) { d, i ->
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
     override fun showToast(res: Int) {

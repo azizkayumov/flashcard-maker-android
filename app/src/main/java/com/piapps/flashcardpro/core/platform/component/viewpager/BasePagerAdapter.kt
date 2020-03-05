@@ -1,9 +1,9 @@
 package com.piapps.flashcardpro.core.platform.component.viewpager
 
 import android.app.Activity
-import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
+import androidx.viewpager.widget.PagerAdapter
 import com.piapps.flashcardpro.core.platform.BaseFragment
 
 /**

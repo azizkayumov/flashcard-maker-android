@@ -4,16 +4,13 @@ import android.content.Context
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.os.Build
-import android.support.design.widget.FloatingActionButton
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.AppCompatImageView
 import android.telephony.PhoneNumberUtils
 import android.text.TextUtils
-import android.util.TypedValue
-import android.view.View
-import android.view.ViewManager
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.github.mikephil.charting.charts.LineChart
@@ -24,11 +21,8 @@ import com.piapps.flashcardpro.core.platform.component.ActionBar
 import com.piapps.flashcardpro.core.platform.component.AutoResizeTextView
 import com.piapps.flashcardpro.core.platform.component.CircleDownloadView
 import com.piapps.flashcardpro.core.platform.component.CircleProfileView
-import com.piapps.flashcardpro.core.platform.component.viewpager.HorizontalScrollIndicator
 import com.rm.freedrawview.FreeDrawView
 import de.hdodenhof.circleimageview.CircleImageView
-import org.jetbrains.anko.AnkoViewDslMarker
-import org.jetbrains.anko.custom.ankoView
 
 /**
  * Created by abduaziz on 2019-09-22 at 00:13.
@@ -55,24 +49,6 @@ fun ImageView.load(any: Any) =
         .load(any)
         .transition(DrawableTransitionOptions.withCrossFade())
         .into(this)
-
-fun View.setRippleEffect() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        val outValue = TypedValue()
-        context.theme.resolveAttribute(android.R.attr.selectableItemBackground, outValue, true)
-        setBackgroundResource(outValue.resourceId)
-        isClickable = true
-    }
-}
-
-fun View.setRippleEffectBorderless() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        val outValue = TypedValue()
-        context.theme.resolveAttribute(android.R.attr.selectableItemBackgroundBorderless, outValue, true)
-        setBackgroundResource(outValue.resourceId)
-        isClickable = true
-    }
-}
 
 fun TextView.setStyle(context: Context, resId: Int) {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
@@ -110,60 +86,58 @@ fun TextView.formatPhone() {
     if (text.equals("+null")) text = t
 }
 
-fun AppCompatImageView.setIconColor(context: Context, color: Int) {
-    this.setColorFilter(ContextCompat.getColor(context, color), android.graphics.PorterDuff.Mode.SRC_IN)
+inline fun ViewGroup.circleDownloadView(init: CircleDownloadView.() -> Unit): CircleDownloadView {
+    val c = CircleDownloadView(context, null).apply(init)
+    addView(c)
+    return c
 }
 
-fun AppCompatImageView.setIconColorWithRealColor(color: Int) {
-    this.setColorFilter(color, android.graphics.PorterDuff.Mode.SRC_IN)
+inline fun ViewGroup.circleImageView(init: CircleImageView.() -> Unit): CircleImageView {
+    val c = CircleImageView(context).apply(init)
+    addView(c)
+    return c
 }
 
-fun FloatingActionButton.setIconColor(context: Context, color: Int) {
-    this.setColorFilter(ContextCompat.getColor(context, color), android.graphics.PorterDuff.Mode.SRC_IN)
+inline fun ViewGroup.autoResizeTextView(init: AutoResizeTextView.() -> Unit): AutoResizeTextView {
+    val a = AutoResizeTextView(context).apply(init)
+    addView(a)
+    return a
 }
 
-inline fun ViewManager.appCompatImageView(init: (@AnkoViewDslMarker AppCompatImageView).() -> Unit): AppCompatImageView {
-    return ankoView({ AppCompatImageView(it, null) }, theme = 0) { init() }
+inline fun ViewGroup.actionBar(init: ActionBar.() -> Unit): ActionBar {
+    val a = ActionBar(context).apply(init)
+    addView(a)
+    return a
 }
 
-inline fun ViewManager.circleDownloadView(init: (@AnkoViewDslMarker CircleDownloadView).() -> Unit): CircleDownloadView {
-    return ankoView({ CircleDownloadView(it, null) }, theme = 0) { init() }
+inline fun ViewGroup.circleProfileView(init: CircleProfileView.() -> Unit): CircleProfileView {
+    val c = CircleProfileView(context).apply(init)
+    addView(c)
+    return c
 }
 
-inline fun ViewManager.circleImageView(init: (@AnkoViewDslMarker CircleImageView).() -> Unit): CircleImageView {
-    return ankoView({ CircleImageView(it, null) }, theme = 0) { init() }
+inline fun ViewGroup.lineChart(init: LineChart.() -> Unit): LineChart {
+    val l = LineChart(context).apply(init)
+    addView(l)
+    return l
 }
 
-inline fun ViewManager.autoResizeTextView(init: (@AnkoViewDslMarker AutoResizeTextView).() -> Unit): AutoResizeTextView {
-    return ankoView({ AutoResizeTextView(it, null) }, theme = 0) { init() }
+inline fun ViewGroup.radarChart(init: RadarChart.() -> Unit): RadarChart {
+    val r = RadarChart(context).apply(init)
+    addView(r)
+    return r
 }
 
-inline fun ViewManager.actionBar(init: (@AnkoViewDslMarker ActionBar).() -> Unit): ActionBar {
-    return ankoView({ ActionBar(it) }, theme = 0) { init() }
+inline fun ViewGroup.cropImageView(init: CropImageView.() -> Unit): CropImageView {
+    val c = CropImageView(context).apply(init)
+    addView(c)
+    return c
 }
 
-inline fun ViewManager.circleProfileView(init: (@AnkoViewDslMarker CircleProfileView).() -> Unit): CircleProfileView {
-    return ankoView({ CircleProfileView(it) }, theme = 0) { init() }
-}
-
-inline fun ViewManager.recyclerIndicatorLayout(init: (@AnkoViewDslMarker HorizontalScrollIndicator).() -> Unit): HorizontalScrollIndicator {
-    return ankoView({ HorizontalScrollIndicator(it) }, theme = 0) { init() }
-}
-
-inline fun ViewManager.lineChart(init: (@AnkoViewDslMarker LineChart).() -> Unit): LineChart {
-    return ankoView({ LineChart(it) }, theme = 0) { init() }
-}
-
-inline fun ViewManager.radarChart(init: (@AnkoViewDslMarker RadarChart).() -> Unit): RadarChart {
-    return ankoView({ RadarChart(it) }, theme = 0) { init() }
-}
-
-inline fun ViewManager.cropImageView(init: (@AnkoViewDslMarker CropImageView).() -> Unit): CropImageView {
-    return ankoView({ CropImageView(it) }, theme = 0) { init() }
-}
-
-inline fun ViewManager.drawView(init: (@AnkoViewDslMarker FreeDrawView).() -> Unit): FreeDrawView {
-    return ankoView({ FreeDrawView(it) }, theme = 0) { init() }
+inline fun ViewGroup.drawView(init: FreeDrawView.() -> Unit): FreeDrawView {
+    val d = FreeDrawView(context).apply(init)
+    addView(d)
+    return d
 }
 
 fun BaseFragment.toast(res: Int) {
@@ -172,4 +146,24 @@ fun BaseFragment.toast(res: Int) {
 
 fun BaseFragment.toast(s: String) {
     android.widget.Toast.makeText(this.activity, s, android.widget.Toast.LENGTH_SHORT).show()
+}
+
+fun Context.alert(init: AlertDialog.Builder.() -> Unit): AlertDialog {
+    return AlertDialog.Builder(this).also(init).create()
+}
+
+fun AlertDialog.Builder.positiveButton(message: String, event: () -> Unit = {}) {
+    setPositiveButton(message) { d, i ->
+        event.invoke()
+    }
+}
+
+fun AlertDialog.Builder.negativeButton(message: String, event: () -> Unit = {}) {
+    setNegativeButton(message) { d, i ->
+        event.invoke()
+    }
+}
+
+fun CircleImageView.setIconColor(color: Int) {
+    this.setColorFilter(color, android.graphics.PorterDuff.Mode.SRC_IN)
 }

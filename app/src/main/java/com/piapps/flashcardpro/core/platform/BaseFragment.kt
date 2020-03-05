@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import com.kent.layouts.matchParent
 import com.piapps.flashcardpro.AndroidApplication
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.di.ApplicationComponent
@@ -15,9 +16,8 @@ import com.piapps.flashcardpro.core.platform.component.menu.Menu
 import com.piapps.flashcardpro.core.platform.component.menu.MenuItem
 import com.piapps.flashcardpro.core.platform.theme.Theme
 import com.piapps.flashcardpro.core.settings.Prefs
-import org.jetbrains.anko.matchParent
 
-abstract class BaseFragment() {
+abstract class BaseFragment {
 
     companion object {
         val ENTER_FROM_RIGHT = 0
@@ -40,10 +40,13 @@ abstract class BaseFragment() {
 
     // parent view: hosts both ghost view and fragment view
     internal lateinit var parentView: FrameLayout
+
     // ghost view for alpha animation
     internal var ghostView: View? = null
+
     // fragment view: to perform enter / exit animations
     internal var fragmentView: View? = null
+
     // action bar
     var actionBar: ActionBar? = null
 

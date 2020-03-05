@@ -1,19 +1,20 @@
 package com.piapps.flashcardpro.features.quiz.adapter
 
+import android.content.Context
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.piapps.flashcardpro.R
-import com.piapps.flashcardpro.core.extension.*
-import org.jetbrains.anko.*
-import org.jetbrains.anko.cardview.v7.cardView
+import com.kent.layouts.*
+import com.kent.layouts.viewgroup.frameLayout
+import com.kent.layouts.viewgroup.lparams
+import com.piapps.flashcardpro.core.extension.appTheme
+import com.piapps.flashcardpro.core.extension.autoResizeTextView
 
 /**
  * Created by abduaziz on 2019-10-01 at 20:38.
  */
 
-class CardUI : AnkoComponent<ViewGroup> {
+class CardUI {
 
     companion object {
         val rootId = 9
@@ -27,15 +28,17 @@ class CardUI : AnkoComponent<ViewGroup> {
         val backIvId = 22
     }
 
-    override fun createView(ui: AnkoContext<ViewGroup>) = with(ui) {
+    fun createView(ctx: Context) = with(ctx) {
         frameLayout {
             lparams(matchParent, matchParent)
 
             cardView {
                 id = rootId
                 layoutParams = FrameLayout.LayoutParams(matchParent, matchParent).apply {
-                    verticalMargin = dip(54)
-                    horizontalMargin = dip(38)
+                    topMargin = dip(54)
+                    bottomMargin = dip(54)
+                    leftMargin = dip(38)
+                    rightMargin = dip(38)
                 }
 
                 // front
@@ -43,7 +46,7 @@ class CardUI : AnkoComponent<ViewGroup> {
                     id = frontId
                     layoutParams = FrameLayout.LayoutParams(matchParent, matchParent)
 
-                    appCompatImageView {
+                    imageView {
                         id = frontIvId
                         layoutParams = FrameLayout.LayoutParams(matchParent, matchParent)
                     }
@@ -51,7 +54,8 @@ class CardUI : AnkoComponent<ViewGroup> {
                     autoResizeTextView {
                         id = frontTvId
                         layoutParams = FrameLayout.LayoutParams(matchParent, matchParent).apply {
-                            verticalMargin = dip(48)
+                            topMargin = dip(48)
+                            bottomMargin = dip(48)
                         }
                         padding = dip(16)
                         textSize = 32F
@@ -66,7 +70,7 @@ class CardUI : AnkoComponent<ViewGroup> {
                     layoutParams = FrameLayout.LayoutParams(matchParent, matchParent)
                     visibility = View.GONE
 
-                    appCompatImageView {
+                    imageView {
                         id = backIvId
                         layoutParams = FrameLayout.LayoutParams(matchParent, matchParent)
                     }
@@ -74,7 +78,8 @@ class CardUI : AnkoComponent<ViewGroup> {
                     autoResizeTextView {
                         id = backTvId
                         layoutParams = FrameLayout.LayoutParams(matchParent, matchParent).apply {
-                            verticalMargin = dip(48)
+                            topMargin = dip(48)
+                            bottomMargin = dip(48)
                         }
                         padding = dip(16)
                         textSize = 32F

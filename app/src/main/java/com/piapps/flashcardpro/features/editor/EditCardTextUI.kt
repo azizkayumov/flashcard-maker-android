@@ -1,65 +1,63 @@
 package com.piapps.flashcardpro.features.editor
 
-import android.support.v4.content.ContextCompat
 import android.view.Gravity
+import android.view.View
 import android.widget.FrameLayout
+import androidx.core.content.ContextCompat
+import com.kent.layouts.*
+import com.kent.layouts.viewgroup.frameLayout
+import com.kent.layouts.viewgroup.lparams
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.extension.actionBar
-import com.piapps.flashcardpro.core.extension.appCompatImageView
 import com.piapps.flashcardpro.core.extension.getLocalizedString
-import com.piapps.flashcardpro.core.extension.setIconColor
-import org.jetbrains.anko.*
 
 /**
  * Created by abduaziz on 2019-10-09 at 23:56.
  */
 
-class EditCardTextUI : AnkoComponent<EditCardTextFragment> {
+fun EditCardTextFragment.UI(): View {
+    return ctx.frameLayout {
+        lparams(matchParent, matchParent)
+        backgroundColorResource = theme.colorBackground
 
-    override fun createView(ui: AnkoContext<EditCardTextFragment>) = with(ui) {
-        frameLayout {
-            lparams(matchParent, matchParent)
-            backgroundColorResource = owner.theme.colorBackground
+        actionBar = actionBar {
+            layoutParams = FrameLayout.LayoutParams(matchParent, dip(56))
+            backgroundColorResource = theme.colorPrimary
+            tvTitle.textColorResource = theme.colorPrimaryText
+            ivControl.setIconColor(ctx, theme.colorIconActive)
+            ivMenu.setIconColor(ctx, theme.colorIconActive)
 
-            ui.owner.actionBar = actionBar {
-                layoutParams = FrameLayout.LayoutParams(matchParent, dip(56))
-                backgroundColorResource = owner.theme.colorPrimary
-                tvTitle.textColorResource = owner.theme.colorPrimaryText
-                ivControl.setIconColor(ctx, owner.theme.colorIconActive)
-                ivMenu.setIconColor(ctx, owner.theme.colorIconActive)
+            onBackClick { close() }
+            setTitle(ctx.getLocalizedString(R.string.edit_text))
+        }
 
-                onBackClick { ui.owner.close() }
-                setTitle(ctx.getLocalizedString(R.string.edit_text))
+        ivOk = imageView {
+            layoutParams = FrameLayout.LayoutParams(dip(56), dip(56)).apply {
+                gravity = Gravity.END
             }
+            padding = dip(16)
+            setImageResource(R.drawable.ic_check)
+            setIconColor(ctx, theme.colorIconActive)
+        }
 
-            ui.owner.ivOk = appCompatImageView {
-                layoutParams = FrameLayout.LayoutParams(dip(56), dip(56)).apply {
-                    gravity = Gravity.END
-                }
-                padding = dip(16)
-                imageResource = R.drawable.ic_check
-                setIconColor(ctx, owner.theme.colorIconActive)
+        editText = editText {
+            layoutParams = FrameLayout.LayoutParams(matchParent, matchParent).apply {
+                topMargin = dip(72)
+                leftMargin = dip(16)
+                rightMargin = dip(16)
             }
+            hint = ctx.getLocalizedString(R.string.edit_text_hint)
+            textColorResource = theme.colorPrimaryText
+            setHintTextColor(ContextCompat.getColor(ctx, theme.colorSecondaryText))
+            gravity = Gravity.TOP
+        }
 
-            ui.owner.editText = editText {
-                layoutParams = FrameLayout.LayoutParams(matchParent, matchParent).apply {
-                    topMargin = dip(72)
-                    horizontalMargin = dip(16)
-                }
-                hint = ctx.getLocalizedString(R.string.edit_text_hint)
-                textColorResource = owner.theme.colorPrimaryText
-                setHintTextColor(ContextCompat.getColor(ctx, owner.theme.colorSecondaryText))
-                gravity = Gravity.TOP
+        // elevation
+        view {
+            layoutParams = FrameLayout.LayoutParams(matchParent, dip(2)).apply {
+                topMargin = dip(56)
             }
-
-            // elevation
-            view {
-                layoutParams = FrameLayout.LayoutParams(matchParent, dip(2)).apply {
-                    topMargin = dip(56)
-                }
-                backgroundResource = R.drawable.pre_lollipop_elevation
-            }
+            setBackgroundResource(R.drawable.pre_lollipop_elevation)
         }
     }
-
 }

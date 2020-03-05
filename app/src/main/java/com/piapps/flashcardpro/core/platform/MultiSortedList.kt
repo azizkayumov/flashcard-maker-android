@@ -1,7 +1,7 @@
 package com.piapps.flashcardpro.core.platform
 
-import android.support.v7.widget.RecyclerView
 import android.util.Log
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * Created by abduaziz on 5/26/18.

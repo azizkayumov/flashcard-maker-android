@@ -8,15 +8,16 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.AppCompatImageView
 import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
+import com.kent.layouts.matchParent
 import com.piapps.flashcardpro.core.extension.longLog
 import com.piapps.flashcardpro.core.platform.BaseFragment.Companion.ENTER_FADEIN
 import com.piapps.flashcardpro.core.platform.BaseFragment.Companion.ENTER_FROM_BOTTOM
@@ -31,7 +32,6 @@ import com.piapps.flashcardpro.core.platform.component.menu.MenuItem
 import com.piapps.flashcardpro.core.platform.component.menu.OnMenuClickListener
 import com.piapps.flashcardpro.core.platform.theme.Theme
 import com.piapps.flashcardpro.core.settings.Prefs
-import org.jetbrains.anko.matchParent
 
 open class BaseActivity : AppCompatActivity() {
 
@@ -310,7 +310,7 @@ open class BaseActivity : AppCompatActivity() {
         hideSoftInput()
         val pos = rootView.indexOfChild(baseFragment.parentView)
         if (pos >= 0 && pos <= fragments.size) {
-            fragments.removeAt(pos-1)
+            fragments.removeAt(pos - 1)
             if (animate) {
                 when (baseFragment.exitAnimation) {
                     EXIT_TO_RIGHT -> {
@@ -527,6 +527,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         topFragment()?.onActivityResult(requestCode, resultCode, data)
     }
 

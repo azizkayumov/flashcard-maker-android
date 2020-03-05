@@ -1,4 +1,4 @@
-package uz.yuridik.client.features.files.presenter
+package com.piapps.flashcardpro.features.files.presenter
 
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.features.files.view.FilesView

@@ -2,20 +2,19 @@ package com.piapps.flashcardpro.features.quiz
 
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.LinearSnapHelper
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.piapps.flashcardpro.core.db.tables.CardDb
 import com.piapps.flashcardpro.core.extension.toast
 import com.piapps.flashcardpro.core.platform.BaseFragment
 import com.piapps.flashcardpro.features.MainActivity
 import com.piapps.flashcardpro.features.quiz.adapter.CardsAdapter
 import com.piapps.flashcardpro.features.stats.StatsFragment
-import org.jetbrains.anko.AnkoContext
 
 /**
  * Created by abduaziz on 2019-10-29 at 13:10.
@@ -52,9 +51,7 @@ class QuizFragment : BaseFragment(), QuizView {
     lateinit var fabWrong: FloatingActionButton
     lateinit var tvCurrentCard: TextView
 
-    override fun createView(context: Context): View? {
-        return QuizUI().createView(AnkoContext.Companion.create(context, this))
-    }
+    override fun createView(context: Context) = UI()
 
     override fun viewCreated(view: View?, args: Bundle?) {
         super.viewCreated(view, args)

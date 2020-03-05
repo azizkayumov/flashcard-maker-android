@@ -1,18 +1,17 @@
 package com.piapps.flashcardpro.core.platform.component.bottom
 
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.recyclerview.widget.RecyclerView
 import com.piapps.flashcardpro.R
-import org.jetbrains.anko.AnkoContext
 
 class BottomMenuAdapter(var bottomMenu: BottomMenu, var bottomMenuClickListener: OnBottomMenuClickListener?) :
     RecyclerView.Adapter<BottomMenuAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ViewHolder(BottomMenuItemUI().createView(AnkoContext.Companion.create(parent.context, parent)))
+        ViewHolder(BottomMenuItemUI().createView(parent.context))
 
     override fun getItemCount() = bottomMenu.size()
 

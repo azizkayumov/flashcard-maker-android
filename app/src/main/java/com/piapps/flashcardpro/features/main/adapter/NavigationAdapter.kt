@@ -1,20 +1,19 @@
 package com.piapps.flashcardpro.features.main.adapter
 
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.recyclerview.widget.RecyclerView
 import com.piapps.flashcardpro.features.main.adapter.cells.*
 import com.piapps.flashcardpro.features.main.entity.NavView
-import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.imageResource
 
 /**
  * Created by abduaziz on 2019-09-26 at 12:29.
  */
 
-class NavigationAdapter(val list: ArrayList<NavView> =  arrayListOf<NavView>()) : RecyclerView.Adapter<NavigationAdapter.ViewHolder>() {
+class NavigationAdapter(val list: ArrayList<NavView> = arrayListOf<NavView>()) :
+    RecyclerView.Adapter<NavigationAdapter.ViewHolder>() {
 
     fun add(item: NavView) {
         list.add(item)
@@ -35,16 +34,16 @@ class NavigationAdapter(val list: ArrayList<NavView> =  arrayListOf<NavView>()) 
 
     override fun onCreateViewHolder(p0: ViewGroup, viewType: Int): ViewHolder {
         if (viewType == NavView.TYPE_HEADER) // todo
-            return ViewHolder(NavHeaderUI().createView(AnkoContext.Companion.create(p0.context, p0)))
+            return ViewHolder(NavHeaderUI().createView(p0.context))
         if (viewType == NavView.TYPE_MENU_GROUP)
-            return ViewHolder(NavGroupUI().createView(AnkoContext.Companion.create(p0.context, p0)))
+            return ViewHolder(NavGroupUI().createView(p0.context))
         if (viewType == NavView.TYPE_MENU)
-            return ViewHolder(NavMenuUI().createView(AnkoContext.Companion.create(p0.context, p0)))
+            return ViewHolder(NavMenuUI().createView(p0.context))
         if (viewType == NavView.TYPE_LABEL)
-            return ViewHolder(NavMenuUI().createView(AnkoContext.Companion.create(p0.context, p0)))
+            return ViewHolder(NavMenuUI().createView(p0.context))
         if (viewType == NavView.TYPE_SMALL_DIVIDER)
-            return ViewHolder(NavSmallDividerUI().createView(AnkoContext.Companion.create(p0.context, p0)))
-        return ViewHolder(NavDividerUI().createView(AnkoContext.Companion.create(p0.context, p0)))
+            return ViewHolder(NavSmallDividerUI().createView(p0.context))
+        return ViewHolder(NavDividerUI().createView(p0.context))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -88,7 +87,7 @@ class NavigationAdapter(val list: ArrayList<NavView> =  arrayListOf<NavView>()) 
         }
 
         fun bindMenu(item: NavView) {
-            iv?.imageResource = item.icon
+            iv?.setImageResource(item.icon)
             tv?.text = item.title
         }
 

@@ -2,8 +2,8 @@ package com.piapps.flashcardpro.features.stats
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -11,6 +11,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
+import com.kent.layouts.dip
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.db.tables.Stats
 import com.piapps.flashcardpro.core.extension.getLocalizedString
@@ -18,8 +19,6 @@ import com.piapps.flashcardpro.core.extension.longLog
 import com.piapps.flashcardpro.core.extension.toast
 import com.piapps.flashcardpro.core.platform.BaseFragment
 import com.piapps.flashcardpro.core.util.DateUtils
-import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.dip
 import kotlin.math.ceil
 
 /**
@@ -50,9 +49,7 @@ class StatsFragment : BaseFragment(), StatsView, OnChartValueSelectedListener {
     lateinit var lineChartAccuracy: LineChart
     lateinit var lineChartStudy: LineChart
 
-    override fun createView(context: Context): View? {
-        return StatsUI().createView(AnkoContext.Companion.create(context, this))
-    }
+    override fun createView(context: Context) = UI()
 
     override fun viewCreated(view: View?, args: Bundle?) {
         super.viewCreated(view, args)

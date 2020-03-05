@@ -4,10 +4,10 @@ import android.os.Environment
 import com.opencsv.CSVWriter
 import com.piapps.flashcardpro.core.db.DatabaseRepository
 import com.piapps.flashcardpro.core.exception.Failure
+import com.piapps.flashcardpro.core.extension.doAsync
+import com.piapps.flashcardpro.core.extension.uiThread
 import com.piapps.flashcardpro.core.functional.Either
 import com.piapps.flashcardpro.core.util.DateUtils
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 import java.io.File
 import java.io.FileWriter
 import javax.inject.Inject

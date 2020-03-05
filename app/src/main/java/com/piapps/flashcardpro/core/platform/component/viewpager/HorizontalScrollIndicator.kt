@@ -1,10 +1,10 @@
 package com.piapps.flashcardpro.core.platform.component.viewpager
 
 import android.content.Context
-import android.support.v7.widget.AppCompatImageView
 import android.widget.LinearLayout
+import androidx.appcompat.widget.AppCompatImageView
+import com.kent.layouts.dip
 import com.piapps.flashcardpro.R
-import org.jetbrains.anko.dip
 
 /**
  * Created by abduaziz on 9/24/18.

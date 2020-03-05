@@ -1,7 +1,6 @@
 package com.piapps.flashcardpro.core.db
 
 import com.piapps.flashcardpro.core.db.tables.*
-import com.piapps.flashcardpro.core.db.tables.SetDb
 import io.objectbox.BoxStore
 import javax.inject.Inject
 import javax.inject.Singleton

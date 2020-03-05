@@ -5,21 +5,17 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.piapps.flashcardpro.R
+import com.piapps.flashcardpro.core.extension.*
 import com.piapps.flashcardpro.core.platform.BaseFragment
 import com.piapps.flashcardpro.core.util.FileUtils
 import com.piapps.flashcardpro.core.util.PermissionUtils
 import com.piapps.flashcardpro.features.MainActivity
 import com.piapps.flashcardpro.features.editor.adapter.PhotosAdapter
-import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 /**
  * Created by abduaziz on 2019-10-14 at 22:40.
@@ -38,9 +34,7 @@ class PhotosFragment : BaseFragment(), PhotosAdapter.OnImageSelectedListener, Cr
     lateinit var ivOk: AppCompatImageView
     var adapter = PhotosAdapter()
 
-    override fun createView(context: Context): View? {
-        return PhotosUI().createView(AnkoContext.create(context, this))
-    }
+    override fun createView(context: Context) = UI()
 
     override fun viewCreated(view: View?, args: Bundle?) {
         super.viewCreated(view, args)
@@ -78,12 +72,13 @@ class PhotosFragment : BaseFragment(), PhotosAdapter.OnImageSelectedListener, Cr
         if (PermissionUtils.permissionGranted(requestCode, grantResults, PermissionUtils.READ_EXTERNAL_STORAGE)) {
             fetchPhotos()
         } else {
-            ctx.alert(R.string.permission_error) {
-                positiveButton(R.string.yes) {
+            ctx.alert {
+                setMessage(ctx.getLocalizedString(R.string.permission_error))
+                positiveButton(ctx.getLocalizedString(R.string.yes)) {
                     PermissionUtils.openPermissionSettings(activity!!)
                     close()
                 }
-                negativeButton(R.string.no) {
+                negativeButton(ctx.getLocalizedString(R.string.no)) {
                     close()
                 }
             }.show()

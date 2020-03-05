@@ -1,31 +1,32 @@
 package com.piapps.flashcardpro.features.files.controller
 
+import android.content.Context
 import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
-import com.piapps.flashcardpro.core.extension.appCompatImageView
+import com.kent.layouts.*
+import com.kent.layouts.viewgroup.horizontalLayout
+import com.kent.layouts.viewgroup.lparams
+import com.kent.layouts.viewgroup.verticalLayout
 import com.piapps.flashcardpro.core.extension.appTheme
-import com.piapps.flashcardpro.core.extension.setRippleEffect
-import org.jetbrains.anko.*
 
-class FilesItemUI : AnkoComponent<ViewGroup> {
+class FilesItemUI {
     companion object {
         var ivIconId = 1
         var tvNameId = 2
         var tvDescriptionId = 3
     }
 
-    override fun createView(ui: AnkoContext<ViewGroup>): View = with(ui) {
-        linearLayout {
+    fun createView(ctx: Context): View = with(ctx) {
+        horizontalLayout {
             lparams(matchParent, wrapContent).apply {
                 rightPadding = dip(12)
             }
-            backgroundResource = ctx.appTheme().colorBackground
+            setBackgroundResource(ctx.appTheme().colorBackground)
             setRippleEffect()
 
-            appCompatImageView {
+            imageView {
                 layoutParams = LinearLayout.LayoutParams(dip(56), dip(56)).apply {
                     padding = dip(12)
                 }

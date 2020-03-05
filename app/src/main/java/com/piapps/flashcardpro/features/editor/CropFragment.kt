@@ -4,14 +4,13 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.support.v7.widget.AppCompatImageView
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
 import com.isseiaoki.simplecropview.CropImageView
 import com.isseiaoki.simplecropview.callback.CropCallback
 import com.isseiaoki.simplecropview.callback.LoadCallback
 import com.piapps.flashcardpro.core.extension.toast
 import com.piapps.flashcardpro.core.platform.BaseFragment
-import org.jetbrains.anko.AnkoContext
 import java.io.File
 
 /**
@@ -42,9 +41,7 @@ class CropFragment : BaseFragment(), CropView {
     lateinit var ivRight: AppCompatImageView
     lateinit var ivDone: AppCompatImageView
 
-    override fun createView(context: Context): View? {
-        return CropUI().createView(AnkoContext.Companion.create(context, this))
-    }
+    override fun createView(context: Context) = UI()
 
     override fun viewCreated(view: View?, args: Bundle?) {
         super.viewCreated(view, args)

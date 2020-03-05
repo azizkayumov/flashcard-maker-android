@@ -1,11 +1,11 @@
 package com.piapps.flashcardpro.features.main.adapter
 
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.db.tables.SetDb
 import com.piapps.flashcardpro.core.extension.color
@@ -14,7 +14,6 @@ import com.piapps.flashcardpro.core.extension.toColor
 import com.piapps.flashcardpro.core.platform.MultiSortedList
 import com.piapps.flashcardpro.features.main.adapter.cells.SetItemUI
 import com.piapps.flashcardpro.features.main.entity.SetView
-import org.jetbrains.anko.AnkoContext
 
 /**
  * Created by abduaziz on 2019-09-25 at 23:20.
@@ -32,7 +31,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
         }
     }, this)
 
-    fun clearSets(){
+    fun clearSets() {
         list.clear()
     }
 
@@ -51,7 +50,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
-        return ViewHolder(SetItemUI().createView(AnkoContext.Companion.create(p0.context, p0)))
+        return ViewHolder(SetItemUI().createView(p0.context))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

@@ -3,17 +3,16 @@ package com.piapps.flashcardpro.features.editor
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.AppCompatImageView
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
+import com.kent.layouts.dip
+import com.kent.layouts.setIconColor
 import com.piapps.flashcardpro.R
-import com.piapps.flashcardpro.core.extension.setIconColor
 import com.piapps.flashcardpro.core.extension.toast
 import com.piapps.flashcardpro.core.platform.BaseFragment
 import com.piapps.flashcardpro.features.MainActivity
 import com.rm.freedrawview.FreeDrawView
-import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.dip
 
 /**
  * Created by abduaziz on 2019-11-17 at 02:51.
@@ -40,9 +39,7 @@ class DrawFragment : BaseFragment(), DrawView, ColorFragment.OnDrawingColorSelec
 
     lateinit var drawView: FreeDrawView
 
-    override fun createView(context: Context): View? {
-        return DrawUI().createView(AnkoContext.Companion.create(context, this))
-    }
+    override fun createView(context: Context) = UI()
 
     override fun viewCreated(view: View?, args: Bundle?) {
         super.viewCreated(view, args)

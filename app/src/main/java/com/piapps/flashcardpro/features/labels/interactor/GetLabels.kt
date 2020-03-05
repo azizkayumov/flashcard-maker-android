@@ -2,8 +2,8 @@ package com.piapps.flashcardpro.features.labels.interactor
 
 import com.piapps.flashcardpro.core.db.DatabaseRepository
 import com.piapps.flashcardpro.core.db.tables.LabelDb
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
+import com.piapps.flashcardpro.core.extension.doAsync
+import com.piapps.flashcardpro.core.extension.uiThread
 import javax.inject.Inject
 
 /**

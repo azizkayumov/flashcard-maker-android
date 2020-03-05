@@ -108,7 +108,9 @@
     <string name="youtube_channel">https://www.youtube.com/channel/UCnQ3vq3LNsxrYGlGdziTrhA</string>
     <string name="crop_image">Crop image</string>
 
-    <string name="csv_export_info">Successfully exported. You can find the exported CSV file in \n"/Flashcards folder" in an external storage</string>
+    <string name="csv_export_info">Successfully exported. You can find the exported CSV file in \n"/Flashcards folder"
+        in your phone\'s external storage
+    </string>
     <string name="open">Open</string>
 
 </resources>

@@ -1,17 +1,20 @@
 package com.piapps.flashcardpro.features.main.adapter.cells
 
+import android.content.Context
 import android.view.Gravity
-import android.view.ViewGroup
 import android.widget.LinearLayout
+import com.kent.layouts.*
+import com.kent.layouts.viewgroup.horizontalLayout
+import com.kent.layouts.viewgroup.lparams
 import com.piapps.flashcardpro.R
-import com.piapps.flashcardpro.core.extension.*
-import org.jetbrains.anko.*
+import com.piapps.flashcardpro.core.extension.appTheme
+import com.piapps.flashcardpro.core.extension.getLocalizedString
 
 /**
  * Created by abduaziz on 2019-09-26 at 12:34.
  */
 
-class NavMenuUI : AnkoComponent<ViewGroup> {
+class NavMenuUI {
 
     companion object {
         val dividerId = 10
@@ -19,12 +22,12 @@ class NavMenuUI : AnkoComponent<ViewGroup> {
         val tvId = 12
     }
 
-    override fun createView(ui: AnkoContext<ViewGroup>) = with(ui) {
-        linearLayout {
+    fun createView(ctx: Context) = with(ctx) {
+        horizontalLayout {
             lparams(matchParent, dip(48))
             setRippleEffect()
 
-            appCompatImageView {
+            imageView {
                 id = ivId
                 layoutParams = LinearLayout.LayoutParams(dip(48), dip(48))
                 padding = dip(12)

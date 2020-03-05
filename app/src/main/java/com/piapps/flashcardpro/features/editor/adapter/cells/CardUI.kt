@@ -1,20 +1,21 @@
 package com.piapps.flashcardpro.features.editor.adapter.cells
 
+import android.content.Context
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.ImageView
+import com.kent.layouts.*
+import com.kent.layouts.viewgroup.frameLayout
+import com.kent.layouts.viewgroup.lparams
+import com.piapps.flashcardpro.core.extension.appTheme
+import com.piapps.flashcardpro.core.extension.autoResizeTextView
 import com.piapps.flashcardpro.R
-import com.piapps.flashcardpro.core.extension.*
-import org.jetbrains.anko.*
-import org.jetbrains.anko.cardview.v7.cardView
 
 /**
  * Created by abduaziz on 2019-10-01 at 20:38.
  */
 
-class CardUI : AnkoComponent<ViewGroup> {
+class CardUI {
 
     companion object {
         val rootId = 9
@@ -33,15 +34,17 @@ class CardUI : AnkoComponent<ViewGroup> {
         val backIvFlipId = 24
     }
 
-    override fun createView(ui: AnkoContext<ViewGroup>) = with(ui) {
+    fun createView(ctx: Context) = with(ctx) {
         frameLayout {
             lparams(matchParent, matchParent)
 
             cardView {
                 id = rootId
                 layoutParams = FrameLayout.LayoutParams(matchParent, matchParent).apply {
-                    verticalMargin = dip(32)
-                    horizontalMargin = dip(16)
+                    topMargin = dip(32)
+                    bottomMargin = dip(32)
+                    leftMargin = dip(16)
+                    rightMargin = dip(16)
                 }
 
                 // front
@@ -49,45 +52,46 @@ class CardUI : AnkoComponent<ViewGroup> {
                     id = frontId
                     layoutParams = FrameLayout.LayoutParams(matchParent, matchParent)
 
-                    appCompatImageView {
+                    imageView {
                         id = frontIvId
                         layoutParams = FrameLayout.LayoutParams(matchParent, matchParent)
                     }
 
-                    appCompatImageView {
+                    imageView {
                         id = frontIvEditId
                         layoutParams = FrameLayout.LayoutParams(dip(48), dip(48))
                         padding = dip(12)
-                        imageResource = R.drawable.ic_add
+                        setImageResource(R.drawable.ic_add)
                         setIconColor(ctx, R.color.colorIconActive)
                         setRippleEffect()
                     }
 
-                    appCompatImageView {
+                    imageView {
                         id = frontIvDeleteId
                         layoutParams = FrameLayout.LayoutParams(dip(48), dip(48)).apply {
                             gravity = Gravity.END
                         }
                         padding = dip(12)
-                        imageResource = R.drawable.ic_close
+                        setImageResource(R.drawable.ic_close)
                         setIconColor(ctx, R.color.colorIconActive)
                         setRippleEffect()
                     }
 
-                    appCompatImageView {
+                    imageView {
                         id = frontIvFlipId
                         layoutParams = FrameLayout.LayoutParams(dip(48), dip(48)).apply {
                             gravity = Gravity.END or Gravity.BOTTOM
                         }
                         padding = dip(12)
-                        imageResource = R.drawable.ic_flip
+                        setImageResource(R.drawable.ic_flip)
                         setIconColor(ctx, R.color.colorIconActive)
                     }
 
                     autoResizeTextView {
                         id = frontTvId
                         layoutParams = FrameLayout.LayoutParams(matchParent, matchParent).apply {
-                            verticalMargin = dip(48)
+                            topMargin = dip(48)
+                            bottomMargin = dip(48)
                         }
                         padding = dip(16)
                         textSize = 32F
@@ -102,35 +106,36 @@ class CardUI : AnkoComponent<ViewGroup> {
                     layoutParams = FrameLayout.LayoutParams(matchParent, matchParent)
                     visibility = View.GONE
 
-                    appCompatImageView {
+                    imageView {
                         id = backIvId
                         layoutParams = FrameLayout.LayoutParams(matchParent, matchParent)
                     }
 
-                    appCompatImageView {
+                    imageView {
                         id = backIvEditId
                         layoutParams = FrameLayout.LayoutParams(dip(48), dip(48))
                         padding = dip(12)
-                        imageResource = R.drawable.ic_add
+                        setImageResource(R.drawable.ic_add)
                         setIconColor(ctx, R.color.colorIconActive)
                         setRippleEffect()
                     }
 
-                    appCompatImageView {
+                    imageView {
                         id = backIvFlipId
                         layoutParams = FrameLayout.LayoutParams(dip(48), dip(48)).apply {
                             gravity = Gravity.END or Gravity.BOTTOM
                         }
                         padding = dip(12)
-                        imageResource = R.drawable.ic_flip
+                        setImageResource(R.drawable.ic_flip)
                         setIconColor(ctx, R.color.colorIconActive)
                         setRippleEffect()
                     }
 
-                    autoResizeTextView {
+                    textView {
                         id = backTvId
                         layoutParams = FrameLayout.LayoutParams(matchParent, matchParent).apply {
-                            verticalMargin = dip(48)
+                            topMargin = dip(48)
+                            bottomMargin = dip(48)
                         }
                         padding = dip(16)
                         textSize = 32F

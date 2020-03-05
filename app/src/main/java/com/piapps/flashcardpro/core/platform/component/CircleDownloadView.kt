@@ -5,13 +5,13 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.os.Handler
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.AppCompatImageView
 import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
+import com.kent.layouts.dip
 import com.piapps.flashcardpro.R
-import org.jetbrains.anko.dip
 
 /**
  * Created by abduaziz on 6/16/18.

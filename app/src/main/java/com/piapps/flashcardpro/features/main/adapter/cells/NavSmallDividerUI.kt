@@ -1,17 +1,18 @@
 package com.piapps.flashcardpro.features.main.adapter.cells
 
-import android.view.ViewGroup
+import android.content.Context
 import android.widget.LinearLayout
+import com.kent.layouts.*
+import com.kent.layouts.viewgroup.verticalLayout
 import com.piapps.flashcardpro.core.extension.appTheme
-import org.jetbrains.anko.*
 
 /**
  * Created by abduaziz on 2019-09-26 at 12:34.
  */
 
-class NavSmallDividerUI : AnkoComponent<ViewGroup> {
+class NavSmallDividerUI {
 
-    override fun createView(ui: AnkoContext<ViewGroup>) = with(ui) {
+    fun createView(ctx: Context) = with(ctx) {
         verticalLayout {
             layoutParams = LinearLayout.LayoutParams(matchParent, wrapContent)
 /*
@@ -29,7 +30,6 @@ class NavSmallDividerUI : AnkoComponent<ViewGroup> {
                 layoutParams = LinearLayout.LayoutParams(matchParent, 1)
                 backgroundColorResource = ctx.appTheme().colorAccent
             }*/
-
         }
     }
 }

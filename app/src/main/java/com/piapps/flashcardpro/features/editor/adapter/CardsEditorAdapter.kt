@@ -1,13 +1,14 @@
 package com.piapps.flashcardpro.features.editor.adapter
 
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.CardView
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
+import com.kent.layouts.textColorResource
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.db.tables.CardDb
 import com.piapps.flashcardpro.core.extension.color
@@ -17,8 +18,6 @@ import com.piapps.flashcardpro.core.extension.toColor
 import com.piapps.flashcardpro.core.platform.LONG_ANIMATION
 import com.piapps.flashcardpro.core.platform.component.FlipAnimation
 import com.piapps.flashcardpro.features.editor.adapter.cells.CardUI
-import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.textColorResource
 
 /**
  * Created by abduaziz on 2019-10-01 at 21:26.
@@ -76,7 +75,7 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
-        return ViewHolder(CardUI().createView(AnkoContext.Companion.create(p0.context, p0)))
+        return ViewHolder(CardUI().createView(p0.context))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, pos: Int) {

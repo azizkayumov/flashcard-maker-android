@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.kent.layouts:layouts:1.0.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5e78821c51b40856c72bb8b004dba4ef/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5e78821c51b40856c72bb8b004dba4ef/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.kent.layouts/layouts/1.0.0/3b3f177b208e806bd89c953aad246994285964c5/layouts-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

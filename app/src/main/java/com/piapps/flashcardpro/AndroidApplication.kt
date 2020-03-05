@@ -1,7 +1,7 @@
 package com.piapps.flashcardpro
 
 import android.app.Application
-import android.support.v7.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate
 import com.piapps.flashcardpro.core.di.ApplicationComponent
 import com.piapps.flashcardpro.core.di.ApplicationModule
 import com.piapps.flashcardpro.core.di.DaggerApplicationComponent

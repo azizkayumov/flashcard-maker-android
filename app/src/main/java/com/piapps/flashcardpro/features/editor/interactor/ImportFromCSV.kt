@@ -5,9 +5,9 @@ import com.piapps.flashcardpro.core.db.DatabaseRepository
 import com.piapps.flashcardpro.core.db.tables.CardDb
 import com.piapps.flashcardpro.core.db.tables.SetDb
 import com.piapps.flashcardpro.core.exception.Failure
+import com.piapps.flashcardpro.core.extension.doAsync
+import com.piapps.flashcardpro.core.extension.uiThread
 import com.piapps.flashcardpro.core.functional.Either
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 import java.io.File
 import java.io.FileReader
 import javax.inject.Inject

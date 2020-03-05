@@ -1,19 +1,18 @@
 package com.piapps.flashcardpro.features.files.controller
 
 import android.os.Environment
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.recyclerview.widget.RecyclerView
+import com.kent.layouts.setIconColor
 import com.piapps.flashcardpro.R
+import com.piapps.flashcardpro.core.extension.doAsync
 import com.piapps.flashcardpro.core.extension.getLocalizedString
-import com.piapps.flashcardpro.core.extension.setIconColor
+import com.piapps.flashcardpro.core.extension.uiThread
 import com.piapps.flashcardpro.core.util.FileUtils
 import com.piapps.flashcardpro.core.util.FileUtils.getFileIcon
-import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 import java.io.File
 
 class FilesAdapter : RecyclerView.Adapter<FilesAdapter.ViewHolder>() {
@@ -21,7 +20,7 @@ class FilesAdapter : RecyclerView.Adapter<FilesAdapter.ViewHolder>() {
     var isParent: ArrayList<Boolean> = arrayListOf()
     var selectedFiles: ArrayList<File> = arrayListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            ViewHolder(FilesItemUI().createView(AnkoContext.Companion.create(parent.context, parent)))
+        ViewHolder(FilesItemUI().createView(parent.context))
 
     override fun getItemCount(): Int = list.size
 
@@ -134,7 +133,7 @@ class FilesAdapter : RecyclerView.Adapter<FilesAdapter.ViewHolder>() {
                 } else {
                     selectedFiles.add(list[adapterPosition])
                     ivIcon.setImageResource(R.drawable.ic_check_circle)
-                    ivIcon.setIconColor(itemView.context,R.color.colorAccent)
+                    ivIcon.setIconColor(itemView.context, R.color.colorAccent)
                 }
                 setFabVisibility()
             }
@@ -150,6 +149,7 @@ class FilesAdapter : RecyclerView.Adapter<FilesAdapter.ViewHolder>() {
     }
 
     var onItemClickListener: OnItemClickListener? = null
+
     fun addItemClickListener(onItemClickListener: OnItemClickListener) {
         this.onItemClickListener = onItemClickListener
     }

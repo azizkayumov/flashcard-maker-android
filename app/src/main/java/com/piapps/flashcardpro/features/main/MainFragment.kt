@@ -2,6 +2,7 @@ package com.piapps.flashcardpro.features.main
 
 import android.animation.Animator
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
@@ -9,21 +10,25 @@ import android.graphics.Canvas
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.RequiresApi
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.NavigationView
-import android.support.v4.content.ContextCompat
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.RecyclerView
-import android.view.Gravity
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
+import com.kent.layouts.backgroundColorResource
+import com.kent.layouts.dip
+import com.kent.layouts.setIconColor
+import com.kent.layouts.textColorResource
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.db.tables.SetDb
+import com.piapps.flashcardpro.core.extension.alert
 import com.piapps.flashcardpro.core.extension.getLocalizedString
-import com.piapps.flashcardpro.core.extension.setIconColor
 import com.piapps.flashcardpro.core.extension.toast
 import com.piapps.flashcardpro.core.platform.BaseFragment
 import com.piapps.flashcardpro.core.platform.component.menu.Menu
@@ -38,7 +43,6 @@ import com.piapps.flashcardpro.features.main.adapter.NavigationAdapter
 import com.piapps.flashcardpro.features.main.entity.NavView
 import com.piapps.flashcardpro.features.main.entity.SetView
 import com.piapps.flashcardpro.features.settings.SettingsFragment
-import org.jetbrains.anko.*
 import kotlin.math.hypot
 
 /**
@@ -68,9 +72,7 @@ class MainFragment : BaseFragment(), MainView,
     lateinit var fab: FloatingActionButton
     lateinit var tvNothing: TextView
 
-    override fun createView(context: Context): View {
-        return MainUI().createView(AnkoContext.Companion.create(context, this))
-    }
+    override fun createView(context: Context) = UI()
 
     override fun createMenu(): Menu? {
         return Menu().apply {
@@ -95,16 +97,17 @@ class MainFragment : BaseFragment(), MainView,
 
         fab.setOnClickListener {
             if (presenter.currentNav == TRASH) {
-                ctx.alert {
-                    message = ctx.getLocalizedString(R.string.empty_trash)
-                    positiveButton(ctx.getLocalizedString(R.string.yes)) {
-                        presenter.clearTrash()
-                        it.dismiss()
-                    }
-                    negativeButton(ctx.getLocalizedString(R.string.no)) {
-                        it.dismiss()
-                    }
-                }.show()
+                val dialog = ctx.alert {
+                    setMessage(ctx.getLocalizedString(R.string.empty_trash))
+                }
+                dialog.setButton(DialogInterface.BUTTON_POSITIVE, ctx.getLocalizedString(R.string.yes)) { d, i ->
+                    presenter.clearTrash()
+                    dialog.dismiss()
+                }
+                dialog.setButton(DialogInterface.BUTTON_NEGATIVE, ctx.getLocalizedString(R.string.no)) { d, i ->
+                    dialog.dismiss()
+                }
+                dialog.show()
                 return@setOnClickListener
             }
             (activity as MainActivity).openFragment(SetFragment.newSet().apply {
@@ -157,7 +160,7 @@ class MainFragment : BaseFragment(), MainView,
 
         val bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
-        drawerLayout!!.draw(canvas)
+        drawerLayout.draw(canvas)
 
         (activity as MainActivity).showBitmapTemporarily(bitmap)
 
@@ -197,9 +200,9 @@ class MainFragment : BaseFragment(), MainView,
 
     override fun onNavigationClick(nav: NavView) {
         if (nav.icon == R.drawable.ic_trash) {
-            fab.imageResource = R.drawable.ic_empty_trash
+            fab.setImageResource(R.drawable.ic_empty_trash)
         } else {
-            fab.imageResource = R.drawable.ic_add
+            fab.setImageResource(R.drawable.ic_add)
         }
         when (nav.icon) {
             R.drawable.ic_all -> {
@@ -242,11 +245,11 @@ class MainFragment : BaseFragment(), MainView,
     }
 
     fun openDrawer() {
-        drawerLayout.openDrawer(Gravity.START)
+        drawerLayout.openDrawer(GravityCompat.START)
     }
 
     fun closeDrawer() {
-        drawerLayout.closeDrawer(Gravity.START)
+        drawerLayout.closeDrawer(GravityCompat.START)
     }
 
     override fun setTitle(res: Int) {
@@ -268,16 +271,17 @@ class MainFragment : BaseFragment(), MainView,
 
     override fun onSetClicked(set: SetView) {
         if (set.isTrash) {
-            ctx.alert {
-                message = ctx.getLocalizedString(R.string.put_back_trash)
-                positiveButton(ctx.getLocalizedString(R.string.yes)) {
-                    presenter.putBack(set.id)
-                    it.dismiss()
-                }
-                negativeButton(ctx.getLocalizedString(R.string.no)) {
-                    it.dismiss()
-                }
-            }.show()
+            val dialog = ctx.alert {
+                setMessage(ctx.getLocalizedString(R.string.put_back_trash))
+            }
+            dialog.setButton(DialogInterface.BUTTON_POSITIVE, ctx.getLocalizedString(R.string.yes)) { d, i ->
+                presenter.putBack(set.id)
+                dialog.dismiss()
+            }
+            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, ctx.getLocalizedString(R.string.no)) { d, i ->
+                dialog.dismiss()
+            }
+            dialog.show()
             return
         }
         val fragment = SetFragment.set(set.id)
@@ -324,7 +328,7 @@ class MainFragment : BaseFragment(), MainView,
     }
 
     override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(Gravity.START)) {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             closeDrawer()
             return
         }

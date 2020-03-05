@@ -2,13 +2,12 @@ package com.piapps.flashcardpro.features.editor
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.widget.AppCompatImageView
 import android.view.View
 import android.widget.EditText
+import androidx.appcompat.widget.AppCompatImageView
 import com.piapps.flashcardpro.core.platform.BaseFragment
 import com.piapps.flashcardpro.core.platform.component.bottom.BottomMenuFragment
 import com.piapps.flashcardpro.features.MainActivity
-import org.jetbrains.anko.AnkoContext
 
 /**
  * Created by abduaziz on 2019-10-09 at 23:55.
@@ -35,9 +34,7 @@ class EditCardTextFragment : BaseFragment() {
     lateinit var editText: EditText
     lateinit var ivOk: AppCompatImageView
 
-    override fun createView(context: Context): View? {
-        return EditCardTextUI().createView(AnkoContext.Companion.create(context, this))
-    }
+    override fun createView(context: Context) = UI()
 
     override fun viewCreated(view: View?, args: Bundle?) {
         super.viewCreated(view, args)

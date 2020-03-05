@@ -106,13 +106,14 @@ object FileUtils {
                 uri, projection, null,
                 null, null
             )
-            column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+            if (cursor == null) return listOfAllImages
+            column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
             while (cursor.moveToNext()) {
                 absolutePathOfImage = cursor.getString(column_index)
                 listOfAllImages.add(absolutePathOfImage)
             }
             listOfAllImages.reverse()
-            cursor?.close()
+            cursor.close()
         }
         return listOfAllImages
     }

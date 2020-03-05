@@ -3,9 +3,9 @@ package com.piapps.flashcardpro.features.editor.interactor
 import android.content.Context
 import android.graphics.Bitmap
 import com.piapps.flashcardpro.core.exception.Failure
+import com.piapps.flashcardpro.core.extension.doAsync
+import com.piapps.flashcardpro.core.extension.uiThread
 import com.piapps.flashcardpro.core.functional.Either
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 import java.io.File
 import java.io.FileOutputStream
 import javax.inject.Inject

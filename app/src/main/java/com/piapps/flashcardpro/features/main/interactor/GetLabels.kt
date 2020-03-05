@@ -1,9 +1,9 @@
 package com.piapps.flashcardpro.features.main.interactor
 
 import com.piapps.flashcardpro.core.db.DatabaseRepository
+import com.piapps.flashcardpro.core.extension.doAsync
+import com.piapps.flashcardpro.core.extension.uiThread
 import com.piapps.flashcardpro.features.main.entity.NavView
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 import javax.inject.Inject
 
 /**

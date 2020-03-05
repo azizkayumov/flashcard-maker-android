@@ -6,7 +6,7 @@ import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
-import org.jetbrains.anko.dip
+import com.kent.layouts.dip
 
 val SHORT_ANIMATION = 150L
 val MID_ANIMATION = 200L

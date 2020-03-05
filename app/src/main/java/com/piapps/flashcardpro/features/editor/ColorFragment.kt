@@ -2,14 +2,13 @@ package com.piapps.flashcardpro.features.editor
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.extension.getLocalizedString
 import com.piapps.flashcardpro.core.platform.BaseFragment
 import com.piapps.flashcardpro.features.editor.adapter.ColorAdapter
-import org.jetbrains.anko.AnkoContext
 
 /**
  * Created by abduaziz on 2019-10-06 at 19:51.
@@ -46,12 +45,10 @@ class ColorFragment : BaseFragment(), ColorAdapter.OnItemClickListener {
     lateinit var tv: TextView
     lateinit var rv: RecyclerView
 
-    val adapter = ColorAdapter()
+    val colorAdapter = ColorAdapter()
     var type = SET_COLOR
 
-    override fun createView(context: Context): View? {
-        return ColorUI().createView(AnkoContext.Companion.create(context, this))
-    }
+    override fun createView(context: Context) = UI()
 
     override fun viewCreated(view: View?, args: Bundle?) {
         super.viewCreated(view, args)
@@ -70,7 +67,7 @@ class ColorFragment : BaseFragment(), ColorAdapter.OnItemClickListener {
         type = args?.getInt("type", SET_COLOR) ?: SET_COLOR
         when (type) {
             SET_COLOR, CARD_COLOR -> {
-                adapter.list.addAll(
+                colorAdapter.list.addAll(
                     listOf(
                         ColorAdapter.ColorEntity(R.color.c1),
                         ColorAdapter.ColorEntity(R.color.c2),
@@ -91,7 +88,7 @@ class ColorFragment : BaseFragment(), ColorAdapter.OnItemClickListener {
                 )
             }
             CARD_TEXT, DRAWING_COLOR -> {
-                adapter.list.addAll(
+                colorAdapter.list.addAll(
                     listOf(
                         ColorAdapter.ColorEntity(R.color.md_red_900),
                         ColorAdapter.ColorEntity(R.color.md_pink_900),
@@ -111,8 +108,8 @@ class ColorFragment : BaseFragment(), ColorAdapter.OnItemClickListener {
                 )
             }
         }
-        adapter.onItemClickListener = this
-        adapter.notifyDataSetChanged()
+        colorAdapter.onItemClickListener = this
+        colorAdapter.notifyDataSetChanged()
     }
 
     override fun onItemClick(c: ColorAdapter.ColorEntity) {
@@ -136,6 +133,7 @@ class ColorFragment : BaseFragment(), ColorAdapter.OnItemClickListener {
     }
 
     var onDrawingColorSelectedListener: OnDrawingColorSelectedListener? = null
+
     interface OnDrawingColorSelectedListener {
         fun onDrawingColorSelected(color: Int)
     }

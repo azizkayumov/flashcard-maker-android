@@ -7,7 +7,6 @@ import android.widget.EditText
 import android.widget.TextView
 import com.piapps.flashcardpro.core.platform.BaseFragment
 import com.piapps.flashcardpro.features.MainActivity
-import org.jetbrains.anko.AnkoContext
 
 /**
  * Created by abduaziz on 2019-10-03 at 21:39.
@@ -34,9 +33,7 @@ class EditNameFragment : BaseFragment() {
     lateinit var et: EditText
     lateinit var tvOk: TextView
 
-    override fun createView(context: Context): View? {
-        return EditNameUI().createView(AnkoContext.create(context, this))
-    }
+    override fun createView(context: Context) = UI()
 
     override fun viewCreated(view: View?, args: Bundle?) {
         super.viewCreated(view, args)

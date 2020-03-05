@@ -4,15 +4,14 @@ package com.piapps.flashcardpro.features.editor.adapter
  * Created by abduaziz on 2019-10-14 at 22:31.
  */
 
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.recyclerview.widget.RecyclerView
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.extension.load
 import com.piapps.flashcardpro.features.editor.adapter.cells.PhotosItemUI
-import org.jetbrains.anko.AnkoContext
 
 class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
 
@@ -22,7 +21,7 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
     private var currentSelectedPos = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(PhotosItemUI().createView(AnkoContext.Companion.create(parent.context, parent)))
+        ViewHolder(PhotosItemUI().createView(parent.context))
 
     override fun getItemCount(): Int = list.size
 

@@ -1,20 +1,21 @@
 package com.piapps.flashcardpro.core.platform.component
 
 import android.content.Context
-import android.support.v7.widget.AppCompatTextView
 import android.text.Layout.Alignment
 import android.text.StaticLayout
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 
 /**
  * Created by abduaziz on 2/18/17.
  */
 
 class AutoResizeTextView// Default constructor override
-@JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : AppCompatTextView(context, attrs, defStyle) {
+@JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
+    AppCompatTextView(context, attrs, defStyle) {
 
     // Registered resize listener
     private var mTextResizeListener: OnTextResizeListener? = null

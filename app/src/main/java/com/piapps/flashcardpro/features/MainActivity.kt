@@ -6,7 +6,6 @@ import com.piapps.flashcardpro.core.di.ApplicationComponent
 import com.piapps.flashcardpro.core.extension.appTheme
 import com.piapps.flashcardpro.core.platform.BaseActivity
 import com.piapps.flashcardpro.core.settings.Settings
-import com.piapps.flashcardpro.features.editor.SetFragment
 import com.piapps.flashcardpro.features.main.MainFragment
 import javax.inject.Inject
 
@@ -33,5 +32,4 @@ class MainActivity : BaseActivity() {
         else
             openFragment(MainFragment())
     }
-
 }

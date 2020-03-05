@@ -1,19 +1,18 @@
 package com.piapps.flashcardpro.features.main.adapter.cells
 
-import android.support.v4.content.ContextCompat
-import android.view.ViewGroup
+import android.content.Context
 import android.widget.FrameLayout
+import androidx.core.content.ContextCompat
+import com.kent.layouts.*
+import com.kent.layouts.viewgroup.frameLayout
+import com.kent.layouts.viewgroup.lparams
+import com.kent.layouts.viewgroup.verticalLayout
 import com.piapps.flashcardpro.R
-import com.piapps.flashcardpro.core.extension.ellipsize
-import com.piapps.flashcardpro.core.extension.makeBold
-import com.piapps.flashcardpro.core.extension.setRippleEffect
-import org.jetbrains.anko.*
-import org.jetbrains.anko.cardview.v7.cardView
 
 /**
  * Created by abduaziz on 2019-09-25 at 23:39.
  */
-class SetItemUI : AnkoComponent<ViewGroup> {
+class SetItemUI {
 
     companion object {
         val parentId = 9
@@ -21,7 +20,7 @@ class SetItemUI : AnkoComponent<ViewGroup> {
         val tvCountId = 11
     }
 
-    override fun createView(ui: AnkoContext<ViewGroup>) = with(ui) {
+    fun createView(ctx: Context) = with(ctx) {
         frameLayout {
             lparams(matchParent, wrapContent)
 

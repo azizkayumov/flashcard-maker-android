@@ -1,16 +1,14 @@
 package com.piapps.flashcardpro.core.platform.component
 
 import android.content.Context
-import android.support.v7.widget.AppCompatImageView
 import android.view.Gravity
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
+import com.kent.layouts.*
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.extension.ellipsize
-import com.piapps.flashcardpro.core.extension.setIconColor
-import com.piapps.flashcardpro.core.extension.setRippleEffectBorderless
 import com.piapps.flashcardpro.core.extension.setStyle
-import org.jetbrains.anko.*
 
 class ActionBar(context: Context) : FrameLayout(context) {
 

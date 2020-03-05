@@ -2,17 +2,19 @@ package com.piapps.flashcardpro.features.editor
 
 import android.Manifest
 import android.content.Context
+import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.LinearSnapHelper
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.kent.layouts.setIconColor
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.db.tables.CardDb
 import com.piapps.flashcardpro.core.extension.*
@@ -43,10 +45,6 @@ import com.piapps.flashcardpro.features.labels.LabelsFragment
 import com.piapps.flashcardpro.features.quiz.QuizFragment
 import com.piapps.flashcardpro.features.stats.StatsFragment
 import com.piapps.flashcardpro.features.study.StudyFragment
-import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.noButton
-import org.jetbrains.anko.okButton
 import java.io.File
 
 /**
@@ -100,9 +98,7 @@ class SetFragment : BaseFragment(), SetEditorView,
     lateinit var ivQuiz: AppCompatImageView
     lateinit var tvCurrentCard: TextView
 
-    override fun createView(context: Context): View? {
-        return SetUI().createView(AnkoContext.Companion.create(context, this))
-    }
+    override fun createView(context: Context) = UI()
 
     override fun createMenu(): Menu? {
         return Menu().apply {
@@ -173,19 +169,20 @@ class SetFragment : BaseFragment(), SetEditorView,
                 }, true)
             }
             R.string.move_to_trash -> {
-                ctx.alert {
-                    message = ctx.getLocalizedString(R.string.are_you_sure_to_move_to_trash)
-                    okButton {
-                        presenter.moveSetToTrash()
-                        onSetUpdatedListener?.onSetMovedToTrash(presenter.set)
-                        onSetUpdatedListener = null
-                        it.dismiss()
-                        close()
-                    }
-                    noButton {
-                        it.dismiss()
-                    }
-                }.show()
+                val dialog = ctx.alert {
+                    setMessage(ctx.getLocalizedString(R.string.are_you_sure_to_move_to_trash))
+                }
+                dialog.setButton(DialogInterface.BUTTON_NEGATIVE, ctx.getLocalizedString(R.string.yes)) { d, i ->
+                    presenter.moveSetToTrash()
+                    onSetUpdatedListener?.onSetMovedToTrash(presenter.set)
+                    onSetUpdatedListener = null
+                    dialog.dismiss()
+                    close()
+                }
+                dialog.setButton(DialogInterface.BUTTON_POSITIVE, ctx.getLocalizedString(R.string.yes)) { d, i ->
+                    dialog.dismiss()
+                }
+                dialog.show()
             }
         }
     }
@@ -276,7 +273,7 @@ class SetFragment : BaseFragment(), SetEditorView,
     }
 
     override fun setSetColor(cs: String) {
-        ivSetColor.setIconColorWithRealColor(cs.toColor())
+        ivSetColor.setIconColor(cs.toColor())
         adapter.defaultColor = cs
     }
 

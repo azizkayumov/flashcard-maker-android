@@ -2,12 +2,11 @@ package com.piapps.flashcardpro.core.platform.component.bottom
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.piapps.flashcardpro.core.platform.BaseFragment
 import com.piapps.flashcardpro.features.MainActivity
-import org.jetbrains.anko.AnkoContext
 
 open class BottomMenuFragment(
     var title: String = "",
@@ -27,8 +26,7 @@ open class BottomMenuFragment(
     var onBottomMenuClickListener: OnBottomMenuClickListener? = null
 
     override fun createView(context: Context): View? {
-        return BottomMenuUI()
-            .createView(AnkoContext.create(context, this))
+        return BottomMenuUI().createView(this)
     }
 
     override fun viewCreated(view: View?, args: Bundle?) {

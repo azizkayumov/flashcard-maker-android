@@ -11,12 +11,12 @@ import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.widget.RelativeLayout
 import android.widget.TextView
-import com.piapps.flashcardpro.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.piapps.flashcardpro.R
 import de.hdodenhof.circleimageview.CircleImageView
 
 class CircleProfileView(context: Context) : RelativeLayout(context) {

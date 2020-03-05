@@ -1,23 +1,24 @@
 package com.piapps.flashcardpro.features.editor.adapter.cells
 
+import android.content.Context
 import android.view.Gravity
-import android.view.ViewGroup
 import android.widget.FrameLayout
+import com.kent.layouts.*
+import com.kent.layouts.viewgroup.frameLayout
+import com.kent.layouts.viewgroup.lparams
 import com.piapps.flashcardpro.R
-import com.piapps.flashcardpro.core.extension.appTheme
-import org.jetbrains.anko.*
 
 /**
  * Created by abduaziz on 2019-10-26 at 19:33.
  */
 
-class LabelUI : AnkoComponent<ViewGroup> {
+class LabelUI {
 
     companion object {
         val tvId = 44
     }
 
-    override fun createView(ui: AnkoContext<ViewGroup>) = with(ui) {
+    fun createView(ctx: Context) = with(ctx) {
         frameLayout {
             lparams(wrapContent, wrapContent)
             verticalPadding = dip(8)
@@ -26,7 +27,7 @@ class LabelUI : AnkoComponent<ViewGroup> {
             textView {
                 id = tvId
                 layoutParams = FrameLayout.LayoutParams(wrapContent, dip(24))
-                backgroundResource = R.drawable.tag
+                setBackgroundResource(R.drawable.tag)
                 gravity = Gravity.CENTER
                 textSize = 12F
                 textColorResource = R.color.white

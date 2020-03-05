@@ -1,20 +1,15 @@
 package com.piapps.flashcardpro.core.platform.component.menu
 
-import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
-import com.piapps.flashcardpro.R
+import androidx.recyclerview.widget.RecyclerView
+import com.kent.layouts.*
 import com.piapps.flashcardpro.core.extension.appTheme
 import com.piapps.flashcardpro.core.extension.ellipsize
-import com.piapps.flashcardpro.core.extension.setRippleEffect
 import com.piapps.flashcardpro.core.extension.setStyle
-import org.jetbrains.anko.dip
-import org.jetbrains.anko.matchParent
-import org.jetbrains.anko.textColorResource
-import org.jetbrains.anko.wrapContent
 
 internal class MenuAdapter(var menu: Menu) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
 

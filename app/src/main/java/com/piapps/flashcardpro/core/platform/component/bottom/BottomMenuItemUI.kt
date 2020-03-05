@@ -1,26 +1,25 @@
 package com.piapps.flashcardpro.core.platform.component.bottom
 
+import android.content.Context
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
-import com.piapps.flashcardpro.core.extension.appCompatImageView
+import com.kent.layouts.*
+import com.kent.layouts.viewgroup.horizontalLayout
+import com.kent.layouts.viewgroup.lparams
 import com.piapps.flashcardpro.core.extension.appTheme
-import com.piapps.flashcardpro.core.extension.setIconColor
-import com.piapps.flashcardpro.core.extension.setRippleEffect
-import org.jetbrains.anko.*
 
-class BottomMenuItemUI : AnkoComponent<ViewGroup> {
+class BottomMenuItemUI {
     companion object {
         var ivId = 32
         var tvId = 980
     }
 
-    override fun createView(ui: AnkoContext<ViewGroup>): View = with(ui) {
-        linearLayout {
+    fun createView(ctx: Context): View {
+        return ctx.horizontalLayout {
             lparams(matchParent, wrapContent)
             setRippleEffect()
-            appCompatImageView {
+            imageView {
                 id = ivId
                 layoutParams = LinearLayout.LayoutParams(dip(56), dip(56)).apply {
                     topPadding = dip(16)
