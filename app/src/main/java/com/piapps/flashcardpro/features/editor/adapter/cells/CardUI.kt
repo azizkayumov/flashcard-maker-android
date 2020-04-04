@@ -94,7 +94,7 @@ class CardUI {
                             bottomMargin = dip(48)
                         }
                         padding = dip(16)
-                        textSize = 32F
+                        textSize = 28F
                         textColorResource = ctx.appTheme().colorPrimaryText
                         gravity = Gravity.CENTER
                     }
@@ -138,7 +138,7 @@ class CardUI {
                             bottomMargin = dip(48)
                         }
                         padding = dip(16)
-                        textSize = 32F
+                        textSize = 28F
                         textColorResource = ctx.appTheme().colorPrimaryText
                         gravity = Gravity.CENTER
                     }
