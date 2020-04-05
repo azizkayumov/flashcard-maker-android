@@ -58,8 +58,8 @@ class FlipAnimation(
             toView!!.visibility = View.VISIBLE
         }
 
-        if (forward)
-            degrees = -degrees //determines direction of rotation when flip begins
+        //if (forward)
+            //degrees = -degrees //determines direction of rotation when flip begins
 
         val matrix = t.matrix
         camera!!.save()
