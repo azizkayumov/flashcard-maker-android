@@ -91,13 +91,21 @@ class StudyFragment : BaseFragment(), StudyView {
 
     fun scrollNext() {
         val current = layoutManager.findFirstCompletelyVisibleItemPosition()
-        if (current + 1 >= adapter.list.size) return
+        if (current + 1 == adapter.list.size){
+            rv.scrollToPosition(0)
+            tvCurrentCard.text = "${1} / ${adapter.list.size}"
+            return
+        }
         rv.smoothScrollToPosition(current + 1)
     }
 
     fun scrollPrevious() {
         val current = layoutManager.findFirstCompletelyVisibleItemPosition()
-        if (current - 1 < 0) return
+        if (current - 1 == -1){
+            rv.scrollToPosition(adapter.list.size - 1)
+            tvCurrentCard.text = "${adapter.list.size} / ${adapter.list.size}"
+            return
+        }
         rv.smoothScrollToPosition(current - 1)
     }
 

@@ -172,15 +172,15 @@ class SetFragment : BaseFragment(), SetEditorView,
                 val dialog = ctx.alert {
                     setMessage(ctx.getLocalizedString(R.string.are_you_sure_to_move_to_trash))
                 }
-                dialog.setButton(DialogInterface.BUTTON_NEGATIVE, ctx.getLocalizedString(R.string.yes)) { d, i ->
+                dialog.setButton(DialogInterface.BUTTON_NEGATIVE, ctx.getLocalizedString(R.string.no)) { d, i ->
+                    dialog.dismiss()
+                }
+                dialog.setButton(DialogInterface.BUTTON_POSITIVE, ctx.getLocalizedString(R.string.yes)) { d, i ->
                     presenter.moveSetToTrash()
                     onSetUpdatedListener?.onSetMovedToTrash(presenter.set)
                     onSetUpdatedListener = null
                     dialog.dismiss()
                     close()
-                }
-                dialog.setButton(DialogInterface.BUTTON_POSITIVE, ctx.getLocalizedString(R.string.yes)) { d, i ->
-                    dialog.dismiss()
                 }
                 dialog.show()
             }
