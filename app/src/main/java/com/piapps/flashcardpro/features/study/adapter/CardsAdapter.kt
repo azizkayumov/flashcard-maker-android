@@ -36,11 +36,12 @@ class CardsAdapter : RecyclerView.Adapter<CardsAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, pos: Int) {
-        holder.bind(list[pos])
+        val card = list[pos % list.size]
+        holder.bind(card)
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return if (list.size == 0) 0 else Int.MAX_VALUE
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {

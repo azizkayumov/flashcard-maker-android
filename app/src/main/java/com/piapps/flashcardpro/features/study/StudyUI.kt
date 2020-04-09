@@ -36,14 +36,6 @@ fun StudyFragment.UI(): View {
             layoutManager = this@UI.layoutManager
             adapter = this@UI.adapter
             snapHelper.attachToRecyclerView(this)
-            addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    super.onScrollStateChanged(recyclerView, newState)
-                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                        setOnCardScrolled()
-                    }
-                }
-            })
         }
 
         ivPrevious = imageView {
@@ -52,16 +44,6 @@ fun StudyFragment.UI(): View {
             }
             padding = dip(16)
             setImageResource(R.drawable.ic_arrow_back)
-            setIconColor(ctx, theme.colorIconActive)
-            setRippleEffectBorderless()
-        }
-
-        ivFlip = imageView {
-            layoutParams = FrameLayout.LayoutParams(dip(56), dip(56)).apply {
-                gravity = Gravity.BOTTOM or Gravity.CENTER
-            }
-            padding = dip(16)
-            setImageResource(R.drawable.ic_flip)
             setIconColor(ctx, theme.colorIconActive)
             setRippleEffectBorderless()
         }

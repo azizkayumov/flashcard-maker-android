@@ -47,11 +47,11 @@ class StudyPresenter(var view: StudyView?) : BasePresenter(view) {
         studyStart = System.currentTimeMillis()
     }
 
-    fun random(until: Int, notEqual: Int): Int {
-        if (until == 1) return 0 // BUG FIX: App not responding
-        var random = Random.nextInt(0, until)
+    fun random(from: Int, until: Int, notEqual: Int): Int {
+        if (until - from <= 1) return from
+        var random = Random.nextInt(from, until)
         while (random == notEqual)
-            random = Random.nextInt(0, until)
+            random = Random.nextInt(from, until)
         return random
     }
 

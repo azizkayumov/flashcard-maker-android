@@ -44,10 +44,11 @@ class StudyFragment : BaseFragment(), StudyView {
     lateinit var ivClose: AppCompatImageView
     lateinit var rv: RecyclerView
     lateinit var ivPrevious: AppCompatImageView
-    lateinit var ivFlip: AppCompatImageView
     lateinit var ivNext: AppCompatImageView
     lateinit var ivShuffle: AppCompatImageView
     lateinit var tvCurrentCard: TextView
+
+    var currentCardPosition = 0
 
     override fun createView(context: Context) = UI()
 
@@ -68,10 +69,6 @@ class StudyFragment : BaseFragment(), StudyView {
             scrollNext()
         }
 
-        ivFlip.setOnClickListener {
-            flip()
-        }
-
         ivShuffle.setOnClickListener {
             shuffle()
         }
@@ -82,39 +79,30 @@ class StudyFragment : BaseFragment(), StudyView {
             presenter.loadCards()
     }
 
-    fun flip() {
-        val current = layoutManager.findFirstCompletelyVisibleItemPosition()
-        if (current < 0 || current >= adapter.list.size) return
-        val vh = rv.findViewHolderForAdapterPosition(current)
-        (vh as CardsAdapter.ViewHolder).flip()
-    }
-
     fun scrollNext() {
-        val current = layoutManager.findFirstCompletelyVisibleItemPosition()
-        if (current + 1 == adapter.list.size){
-            rv.scrollToPosition(0)
-            tvCurrentCard.text = "${1} / ${adapter.list.size}"
-            return
-        }
-        rv.smoothScrollToPosition(current + 1)
+        // if the number of cards is 1, no need to scroll
+        if (adapter.list.size == 1) return
+        currentCardPosition += 1
+        validateCurrentCardPosition()
+        rv.smoothScrollToPosition(currentCardPosition)
+        showCardPosition()
     }
 
     fun scrollPrevious() {
-        val current = layoutManager.findFirstCompletelyVisibleItemPosition()
-        if (current - 1 == -1){
-            rv.scrollToPosition(adapter.list.size - 1)
-            tvCurrentCard.text = "${adapter.list.size} / ${adapter.list.size}"
-            return
-        }
-        rv.smoothScrollToPosition(current - 1)
+        // if the number of cards is 1, no need to scroll
+        if (adapter.list.size == 1) return
+        currentCardPosition -= 1
+        validateCurrentCardPosition()
+        rv.smoothScrollToPosition(currentCardPosition)
+        showCardPosition()
     }
 
     fun shuffle() {
         if (adapter.list.isEmpty()) return // BUG FIX: random from = 0 until 0 throws IllegalArgumentException
-        val current = layoutManager.findFirstCompletelyVisibleItemPosition()
-        val random = presenter.random(adapter.list.size, current)
-        rv.scrollToPosition(random)
-        tvCurrentCard.text = "${random + 1} / ${adapter.list.size}"
+        val until = if (Int.MAX_VALUE - adapter.list.size < currentCardPosition) currentCardPosition else currentCardPosition + adapter.list.size
+        currentCardPosition = presenter.random(currentCardPosition, until, currentCardPosition)
+        rv.scrollToPosition(currentCardPosition)
+        showCardPosition()
     }
 
     override fun setSetColor(color: String) {
@@ -125,13 +113,21 @@ class StudyFragment : BaseFragment(), StudyView {
         adapter.list.clear()
         adapter.list.addAll(cards)
         adapter.notifyDataSetChanged()
+
+        // Initialising currentCardPosition for the first time:
+        // 1) Init currentCardPosition as:
+        //          currentCardPosition = Int.MAX_VALUE / 2
+        // 2) Add Int.MAX_VALUE / 2 mod (number of cards) to currentCardPosition so that:
+        //          - number of cards is a divisor of currentCardPosition
+        //    P.S. if the number of cards is a divisor of currentCardPosition, the first card of the set
+        //         is displayed first
+        currentCardPosition = Int.MAX_VALUE / 2 + Int.MAX_VALUE / 2 % cards.size
+        rv.scrollToPosition(currentCardPosition)
+        showCardPosition()
     }
 
-    override fun setOnCardScrolled() {
-        val pos = layoutManager.findLastCompletelyVisibleItemPosition()
-        val card = adapter.list.getOrNull(pos)
-        if (card == null) return
-        tvCurrentCard.text = "${pos + 1} / ${adapter.list.size}"
+    override fun showCardPosition() {
+        tvCurrentCard.text = "${currentCardPosition % adapter.list.size + 1} / ${adapter.list.size}"
     }
 
     override fun showToast(res: Int) {
@@ -151,4 +147,12 @@ class StudyFragment : BaseFragment(), StudyView {
         fun onSetStudiedDuration(duration: Long)
     }
 
+    fun validateCurrentCardPosition() {
+        // Noone is gonna scroll Int.MAX_VALUE / 2 times (billion times)
+        // Validate against if some dude scrolls billion times (happens with very low probability)
+        if (currentCardPosition == Int.MAX_VALUE)
+            currentCardPosition -= 1
+        else if (currentCardPosition == -1)
+            currentCardPosition = 0
+    }
 }

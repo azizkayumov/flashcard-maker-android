@@ -11,6 +11,6 @@ interface StudyView : BaseView {
 
     fun setSetColor(color: String)
     fun showCards(cards: List<CardDb>)
-    fun setOnCardScrolled()
+    fun showCardPosition()
 
 }
