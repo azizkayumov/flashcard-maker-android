@@ -1,6 +1,7 @@
 package com.piapps.flashcardpro.features.study
 
 import android.content.Context
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -50,6 +51,7 @@ class StudyFragment : BaseFragment(), StudyView {
     lateinit var tvCurrentCard: TextView
 
     var currentCardPosition = 0
+    lateinit var font: Typeface
 
     override fun createView(context: Context) = UI()
 
@@ -73,6 +75,9 @@ class StudyFragment : BaseFragment(), StudyView {
         ivShuffle.setOnClickListener {
             shuffle()
         }
+
+        font = Typeface.createFromAsset(ctx.assets, "SansForgetica-Regular.otf")
+        adapter.typeface = font
     }
 
     override fun resume() {

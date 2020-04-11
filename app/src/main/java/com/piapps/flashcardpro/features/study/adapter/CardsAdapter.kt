@@ -1,5 +1,6 @@
 package com.piapps.flashcardpro.features.study.adapter
 
+import android.graphics.Typeface
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -26,6 +27,7 @@ class CardsAdapter : RecyclerView.Adapter<CardsAdapter.ViewHolder>() {
 
     val list = arrayListOf<CardDb>()
     var defaultColor = ""
+    var typeface = Typeface.DEFAULT
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
@@ -69,6 +71,9 @@ class CardsAdapter : RecyclerView.Adapter<CardsAdapter.ViewHolder>() {
 
             front.setOnClickListener(this)
             back.setOnClickListener(this)
+
+            tvFront.setTypeface(typeface)
+            tvBack.setTypeface(typeface)
         }
 
         fun bind(card: CardDb) {
