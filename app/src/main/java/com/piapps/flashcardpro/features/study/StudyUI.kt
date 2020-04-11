@@ -36,6 +36,14 @@ fun StudyFragment.UI(): View {
             layoutManager = this@UI.layoutManager
             adapter = this@UI.adapter
             snapHelper.attachToRecyclerView(this)
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        showCurrentCardPosition()
+                    }
+                }
+            })
         }
 
         ivPrevious = imageView {

@@ -189,7 +189,7 @@ class MainFragment : BaseFragment(), MainView,
         navigationAdapter.add(NavView.header(-11))
         navigationAdapter.add(NavView.divider(-10))
         navigationAdapter.add(NavView.menu(-9, ctx.getLocalizedString(R.string.all), R.drawable.ic_all))
-        ///navigationAdapter.add(NavView.menu(-7, ctx.getLocalizedString(R.string.recents), R.drawable.ic_recents))
+        // navigationAdapter.add(NavView.menu(-7, "Learned", R.drawable.ic_recents))
         navigationAdapter.add(NavView.menu(-8, ctx.getLocalizedString(R.string.trash), R.drawable.ic_trash))
         // navigationAdapter.add(NavView.divider(-7))
         // navigationAdapter.add(NavView.menu(-6, ctx.getLocalizedString(R.string.settings), R.drawable.ic_settings))

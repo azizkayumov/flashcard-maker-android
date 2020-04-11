@@ -2,6 +2,7 @@ package com.piapps.flashcardpro.features.study
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
@@ -85,7 +86,7 @@ class StudyFragment : BaseFragment(), StudyView {
         currentCardPosition += 1
         validateCurrentCardPosition()
         rv.smoothScrollToPosition(currentCardPosition)
-        showCardPosition()
+        showCurrentCardPosition()
     }
 
     fun scrollPrevious() {
@@ -94,7 +95,7 @@ class StudyFragment : BaseFragment(), StudyView {
         currentCardPosition -= 1
         validateCurrentCardPosition()
         rv.smoothScrollToPosition(currentCardPosition)
-        showCardPosition()
+        showCurrentCardPosition()
     }
 
     fun shuffle() {
@@ -102,7 +103,7 @@ class StudyFragment : BaseFragment(), StudyView {
         val until = if (Int.MAX_VALUE - adapter.list.size < currentCardPosition) currentCardPosition else currentCardPosition + adapter.list.size
         currentCardPosition = presenter.random(currentCardPosition, until, currentCardPosition)
         rv.scrollToPosition(currentCardPosition)
-        showCardPosition()
+        showCurrentCardPosition()
     }
 
     override fun setSetColor(color: String) {
@@ -117,16 +118,19 @@ class StudyFragment : BaseFragment(), StudyView {
         // Initialising currentCardPosition for the first time:
         // 1) Init currentCardPosition as:
         //          currentCardPosition = Int.MAX_VALUE / 2
-        // 2) Add Int.MAX_VALUE / 2 mod (number of cards) to currentCardPosition so that:
+        // 2) Substract Int.MAX_VALUE / 2 mod (number of cards) to currentCardPosition so that:
         //          - number of cards is a divisor of currentCardPosition
         //    P.S. if the number of cards is a divisor of currentCardPosition, the first card of the set
         //         is displayed first
-        currentCardPosition = Int.MAX_VALUE / 2 + Int.MAX_VALUE / 2 % cards.size
+        currentCardPosition = Int.MAX_VALUE / 2 - Int.MAX_VALUE / 2 % cards.size
         rv.scrollToPosition(currentCardPosition)
-        showCardPosition()
+        showCurrentCardPosition()
     }
 
-    override fun showCardPosition() {
+    override fun showCurrentCardPosition() {
+        val pos = layoutManager.findFirstCompletelyVisibleItemPosition()
+        if (pos != -1)
+            currentCardPosition = pos
         tvCurrentCard.text = "${currentCardPosition % adapter.list.size + 1} / ${adapter.list.size}"
     }
 

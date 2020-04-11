@@ -72,7 +72,7 @@ fun SetFragment.UI(): View {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
                     if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                        setOnCardScrolled()
+                        showCurrentCardPosition()
                     }
                 }
             })

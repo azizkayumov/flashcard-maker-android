@@ -32,5 +32,5 @@ interface SetEditorView : BaseView {
     fun showLabels(labels: String)
 
     fun showSetExported(path: String)
-    fun setOnCardScrolled()
+    fun showCurrentCardPosition()
 }

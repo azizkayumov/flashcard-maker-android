@@ -321,6 +321,7 @@ class SetFragment : BaseFragment(), SetEditorView,
         if (card == null) return
         adapter.remove(card)
         presenter.deleteCardOffline(card)
+        showCurrentCardPosition()
     }
 
     override fun onCardEditTextClick() {
@@ -404,7 +405,7 @@ class SetFragment : BaseFragment(), SetEditorView,
         presenter.set.lastStudyDuration = presenter.set.lastStudyDuration + duration
     }
 
-    override fun setOnCardScrolled() {
+    override fun showCurrentCardPosition() {
         val pos = layoutManager.findFirstCompletelyVisibleItemPosition()
         val card = adapter.list.getOrNull(pos)
         if (card == null) return
