@@ -13,4 +13,6 @@ interface StudyView : BaseView {
     fun showCards(cards: List<CardDb>)
     fun showCurrentCardPosition()
 
+    fun toggleTypeface()
+
 }

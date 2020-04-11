@@ -56,6 +56,16 @@ fun StudyFragment.UI(): View {
             setRippleEffectBorderless()
         }
 
+        ivFont = imageView {
+            layoutParams = FrameLayout.LayoutParams(dip(56), dip(56)).apply {
+                gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
+            }
+            padding = dip(16)
+            setImageResource(R.drawable.ic_font)
+            setIconColor(ctx, theme.colorIconActive)
+            setRippleEffectBorderless()
+        }
+
         ivNext = imageView {
             layoutParams = FrameLayout.LayoutParams(dip(56), dip(56)).apply {
                 gravity = Gravity.BOTTOM or Gravity.END

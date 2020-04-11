@@ -71,9 +71,6 @@ class CardsAdapter : RecyclerView.Adapter<CardsAdapter.ViewHolder>() {
 
             front.setOnClickListener(this)
             back.setOnClickListener(this)
-
-            tvFront.setTypeface(typeface)
-            tvBack.setTypeface(typeface)
         }
 
         fun bind(card: CardDb) {
@@ -81,6 +78,9 @@ class CardsAdapter : RecyclerView.Adapter<CardsAdapter.ViewHolder>() {
             back.visibility = View.GONE
 
             card.order = adapterPosition
+
+            tvFront.setTypeface(typeface)
+            tvBack.setTypeface(typeface)
             // set texts
             tvFront.text =
                 if (card.front.isNotBlank() || card.frontImage.isNotBlank()) card.front else

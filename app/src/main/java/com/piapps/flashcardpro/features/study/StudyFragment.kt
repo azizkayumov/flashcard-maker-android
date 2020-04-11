@@ -3,7 +3,6 @@ package com.piapps.flashcardpro.features.study
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
@@ -47,11 +46,12 @@ class StudyFragment : BaseFragment(), StudyView {
     lateinit var rv: RecyclerView
     lateinit var ivPrevious: AppCompatImageView
     lateinit var ivNext: AppCompatImageView
+    lateinit var ivFont: AppCompatImageView
     lateinit var ivShuffle: AppCompatImageView
     lateinit var tvCurrentCard: TextView
 
     var currentCardPosition = 0
-    lateinit var font: Typeface
+    lateinit var forgetica: Typeface
 
     override fun createView(context: Context) = UI()
 
@@ -76,8 +76,11 @@ class StudyFragment : BaseFragment(), StudyView {
             shuffle()
         }
 
-        font = Typeface.createFromAsset(ctx.assets, "SansForgetica-Regular.otf")
-        adapter.typeface = font
+        ivFont.setOnClickListener {
+            toggleTypeface()
+        }
+
+        forgetica = Typeface.createFromAsset(ctx.assets, "SansForgetica-Regular.otf")
     }
 
     override fun resume() {
@@ -137,6 +140,15 @@ class StudyFragment : BaseFragment(), StudyView {
         if (pos != -1)
             currentCardPosition = pos
         tvCurrentCard.text = "${currentCardPosition % adapter.list.size + 1} / ${adapter.list.size}"
+    }
+
+    override fun toggleTypeface() {
+        if (adapter.typeface == Typeface.DEFAULT){
+            adapter.typeface = forgetica
+        }else{
+            adapter.typeface = Typeface.DEFAULT
+        }
+        adapter.notifyDataSetChanged()
     }
 
     override fun showToast(res: Int) {
