@@ -55,7 +55,6 @@ class StudyFragment : BaseFragment(), StudyView {
 
     override fun viewCreated(view: View?, args: Bundle?) {
         super.viewCreated(view, args)
-        activity?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         presenter = StudyPresenter(this)
         appComponent.inject(presenter)
 
