@@ -35,10 +35,10 @@ class CardUI {
             cardView {
                 id = rootId
                 layoutParams = FrameLayout.LayoutParams(matchParent, matchParent).apply {
-                    topMargin = dip(54)
-                    bottomMargin = dip(54)
-                    leftMargin = dip(38)
-                    rightMargin = dip(38)
+                    topMargin = dip(32)
+                    bottomMargin = dip(32)
+                    leftMargin = dip(8)
+                    rightMargin = dip(8)
                 }
 
                 // front
