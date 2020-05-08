@@ -92,7 +92,7 @@ class SetFragment : BaseFragment(), SetEditorView,
     lateinit var ivSetColor: AppCompatImageView
     lateinit var rv: RecyclerView
     lateinit var rvLabels: RecyclerView
-    lateinit var fab: FloatingActionButton
+    lateinit var ivAdd: AppCompatImageView
     lateinit var ivBottomMenu: AppCompatImageView
     lateinit var ivStudy: AppCompatImageView
     lateinit var ivQuiz: AppCompatImageView
@@ -121,7 +121,7 @@ class SetFragment : BaseFragment(), SetEditorView,
             showSetTitleEditor(presenter.set.title)
         }
 
-        fab.setOnClickListener {
+        ivAdd.setOnClickListener {
             presenter.addNewCard()
         }
 
