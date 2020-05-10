@@ -63,7 +63,6 @@ fun SetFragment.UI(): View {
             }
             itemAnimator = LandingAnimator()
             clipToPadding = false
-            padding = dip(32)
             this@UI.layoutManager = LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false)
             layoutManager = this@UI.layoutManager
             adapter = this@UI.adapter
@@ -118,6 +117,14 @@ fun SetFragment.UI(): View {
                 setIconColor(ctx, theme.colorIconActive)
                 setRippleEffect()
             }
+            
+            ivAdd = imageView {
+                layoutParams = FrameLayout.LayoutParams(dip(56), dip(56))
+                padding = dip(14)
+                setImageResource(R.drawable.ic_add)
+                setIconColor(ctx, theme.colorIconActive)
+                setRippleEffect()
+            }
         }
 
         view {
@@ -126,18 +133,6 @@ fun SetFragment.UI(): View {
                 gravity = Gravity.BOTTOM
             }
             setBackgroundResource(R.drawable.pre_lollipop_elevation_up)
-        }
-
-        fab = floatingActionButton {
-            layoutParams = FrameLayout.LayoutParams(dip(56), dip(56)).apply {
-                gravity = Gravity.BOTTOM or Gravity.END
-                bottomMargin = dip(28)
-                rightMargin = dip(16)
-            }
-            backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(ctx, theme.colorAccent))
-            rippleColor = ContextCompat.getColor(ctx, theme.colorDivider)
-            setImageResource(R.drawable.ic_add)
-            setIconColor(ctx, theme.white)
         }
 
         view {
