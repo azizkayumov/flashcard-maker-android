@@ -7,6 +7,7 @@ import com.kent.layouts.*
 import com.kent.layouts.viewgroup.frameLayout
 import com.kent.layouts.viewgroup.lparams
 import com.piapps.flashcardpro.R
+import com.piapps.flashcardpro.core.extension.appTheme
 
 /**
  * Created by abduaziz on 2019-10-26 at 19:33.
@@ -20,18 +21,20 @@ class LabelUI {
 
     fun createView(ctx: Context) = with(ctx) {
         frameLayout {
-            lparams(wrapContent, wrapContent)
-            verticalPadding = dip(8)
+            lparams(wrapContent, dip(32))
             horizontalPadding = dip(4)
 
             textView {
                 id = tvId
-                layoutParams = FrameLayout.LayoutParams(wrapContent, dip(24))
+                layoutParams = FrameLayout.LayoutParams(wrapContent, wrapContent).apply {
+                    gravity = Gravity.CENTER_VERTICAL
+                }
                 setBackgroundResource(R.drawable.tag)
                 gravity = Gravity.CENTER
                 textSize = 12F
                 textColorResource = R.color.white
                 horizontalPadding = dip(4)
+                verticalPadding = dip(2)
             }
         }
     }

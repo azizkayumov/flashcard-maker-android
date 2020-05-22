@@ -1,5 +1,6 @@
 package com.piapps.flashcardpro.core.di
 
+import android.app.Service
 import android.content.Context
 import com.piapps.flashcardpro.AndroidApplication
 import com.piapps.flashcardpro.core.db.DatabaseRepository

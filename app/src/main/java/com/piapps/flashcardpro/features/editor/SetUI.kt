@@ -78,7 +78,7 @@ fun SetFragment.UI(): View {
         }
 
         rvLabels = recyclerView {
-            layoutParams = FrameLayout.LayoutParams(matchParent, wrapContent).apply {
+            layoutParams = FrameLayout.LayoutParams(matchParent, dip(32)).apply {
                 topMargin = dip(56)
             }
             layoutManager = LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false)
@@ -117,7 +117,7 @@ fun SetFragment.UI(): View {
                 setIconColor(ctx, theme.colorIconActive)
                 setRippleEffect()
             }
-            
+
             ivAdd = imageView {
                 layoutParams = FrameLayout.LayoutParams(dip(56), dip(56))
                 padding = dip(14)
