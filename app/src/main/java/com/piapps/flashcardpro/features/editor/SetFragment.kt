@@ -91,12 +91,16 @@ class SetFragment : BaseFragment(), SetEditorView,
 
     lateinit var ivSetColor: AppCompatImageView
     lateinit var rv: RecyclerView
+    lateinit var ivPrevious: AppCompatImageView
+    lateinit var ivNext: AppCompatImageView
     lateinit var rvLabels: RecyclerView
     lateinit var ivAdd: AppCompatImageView
     lateinit var ivBottomMenu: AppCompatImageView
     lateinit var ivStudy: AppCompatImageView
     lateinit var ivQuiz: AppCompatImageView
     lateinit var tvCurrentCard: TextView
+        
+    var currentCardPosition = 0
 
     override fun createView(context: Context) = UI()
 
@@ -145,6 +149,14 @@ class SetFragment : BaseFragment(), SetEditorView,
             (activity as MainActivity).openFragment(QuizFragment.set(presenter.set.id).apply {
                 onCardsUpdatedListener = this@SetFragment
             }, true)
+        }
+        
+        ivPrevious.setOnClickListener {
+            scrollPrevious()
+        }
+
+        ivNext.setOnClickListener {
+            scrollNext()
         }
     }
 
@@ -407,9 +419,9 @@ class SetFragment : BaseFragment(), SetEditorView,
 
     override fun showCurrentCardPosition() {
         val pos = layoutManager.findFirstCompletelyVisibleItemPosition()
-        val card = adapter.list.getOrNull(pos)
-        if (card == null) return
-        tvCurrentCard.text = "${pos + 1} / ${adapter.list.size}"
+        if (pos != -1)
+            currentCardPosition = pos
+        tvCurrentCard.text = "${currentCardPosition % adapter.list.size + 1} / ${adapter.list.size}"
     }
 
     override fun showToast(res: Int) {
@@ -423,5 +435,32 @@ class SetFragment : BaseFragment(), SetEditorView,
             onSetUpdatedListener?.onSetUpdated(presenter.set)
         presenter.clear()
         super.removed()
+    }
+        
+    fun scrollNext() {
+        // if the number of cards is 1, no need to scroll
+        if (adapter.list.size == 1) return
+        currentCardPosition += 1
+        validateCurrentCardPosition()
+        rv.smoothScrollToPosition(currentCardPosition)
+        showCurrentCardPosition()
+    }
+
+    fun scrollPrevious() {
+        // if the number of cards is 1, no need to scroll
+        if (adapter.list.size == 1) return
+        currentCardPosition -= 1
+        validateCurrentCardPosition()
+        rv.smoothScrollToPosition(currentCardPosition)
+        showCurrentCardPosition()
+    }
+        
+    fun validateCurrentCardPosition() {
+        // Noone is gonna scroll Int.MAX_VALUE / 2 times (billion times)
+        // Validate against if some dude scrolls billion times (happens with very low probability)
+        if (currentCardPosition == Int.MAX_VALUE)
+            currentCardPosition -= 1
+        else if (currentCardPosition == -1)
+            currentCardPosition = 0
     }
 }
