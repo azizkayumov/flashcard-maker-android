@@ -286,7 +286,7 @@ open class BaseActivity : AppCompatActivity() {
                 foregroundFragment()?.let {
                     removeFragment(it, false, false)
                 }
-            }, SHORT_ANIMATION)
+            }, SHORT_ANIMATION + 1)
         } else {
             topFragment()?.let {
                 removeFragment(it, false)
@@ -426,6 +426,14 @@ open class BaseActivity : AppCompatActivity() {
     fun <T> removeFragmentType(clazz: Class<T>) {
         fragments.find {
             it.javaClass == clazz
+        }?.let {
+            removeFragment(it, false, false)
+        }
+    }
+
+    fun <T> removeAllExceptFragmentType(clazz: Class<T>) {
+        fragments.find {
+            it.javaClass != clazz
         }?.let {
             removeFragment(it, false, false)
         }

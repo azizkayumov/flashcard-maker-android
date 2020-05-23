@@ -13,7 +13,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.kent.layouts.setIconColor
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.db.tables.CardDb
@@ -97,6 +96,8 @@ class SetFragment : BaseFragment(), SetEditorView,
     lateinit var ivStudy: AppCompatImageView
     lateinit var ivQuiz: AppCompatImageView
     lateinit var tvCurrentCard: TextView
+    lateinit var ivNext: AppCompatImageView
+    lateinit var ivPrev: AppCompatImageView
 
     override fun createView(context: Context) = UI()
 
@@ -132,7 +133,6 @@ class SetFragment : BaseFragment(), SetEditorView,
         }
 
         ivStudy.setOnClickListener {
-            adapter.updateOrders()
             presenter.autoSave(adapter.list)
             (activity as MainActivity).openFragment(StudyFragment.set(presenter.set.id).apply {
                 onSetStudyDurationUpdatedListener = this@SetFragment
@@ -140,11 +140,18 @@ class SetFragment : BaseFragment(), SetEditorView,
         }
 
         ivQuiz.setOnClickListener {
-            adapter.updateOrders()
             presenter.autoSave(adapter.list)
             (activity as MainActivity).openFragment(QuizFragment.set(presenter.set.id).apply {
                 onCardsUpdatedListener = this@SetFragment
             }, true)
+        }
+
+        ivNext.setOnClickListener {
+            scrollNext()
+        }
+
+        ivPrev.setOnClickListener {
+            scrollPrevious()
         }
     }
 
@@ -401,6 +408,15 @@ class SetFragment : BaseFragment(), SetEditorView,
         }
     }
 
+    override fun onNewWeakSetGenerated(setId: Long) {
+        // clear everything and load
+        adapter.list.clear()
+        presenter.loadSetDetails(setId)
+        presenter.loadCards()
+
+        showSetTitleEditor(presenter.set.title)
+    }
+
     override fun onSetStudiedDuration(duration: Long) {
         presenter.set.lastStudyDuration = presenter.set.lastStudyDuration + duration
     }
@@ -412,12 +428,27 @@ class SetFragment : BaseFragment(), SetEditorView,
         tvCurrentCard.text = "${pos + 1} / ${adapter.list.size}"
     }
 
+    fun scrollNext() {
+        val pos = layoutManager.findFirstCompletelyVisibleItemPosition()
+        val card = adapter.list.getOrNull(pos + 1)
+        if (card == null) return
+        rv.smoothScrollToPosition(pos + 1)
+        showCurrentCardPosition()
+    }
+
+    fun scrollPrevious() {
+        val pos = layoutManager.findFirstCompletelyVisibleItemPosition()
+        val card = adapter.list.getOrNull(pos - 1)
+        if (card == null) return
+        rv.smoothScrollToPosition(pos - 1)
+        showCurrentCardPosition()
+    }
+
     override fun showToast(res: Int) {
         toast(res)
     }
 
     override fun removed() {
-        adapter.updateOrders()
         presenter.autoSave(adapter.list)
         if (!presenter.set.isTrash)
             onSetUpdatedListener?.onSetUpdated(presenter.set)

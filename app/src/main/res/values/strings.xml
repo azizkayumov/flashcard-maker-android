@@ -74,6 +74,8 @@
 
     <string name="study">Study</string>
     <string name="quiz">Quiz</string>
+    <string name="quiz_results">Grading on a scale from 0 – 100</string>
+    <string name="create_new_set_with_weak_cards">Would you like to create a new set with the cards you are not good at?</string>
     <string name="stats">Statistics</string>
 
     <string name="no_all_sets_found">Looks like there are no sets yet, create new set with \'+\' button on bottom right

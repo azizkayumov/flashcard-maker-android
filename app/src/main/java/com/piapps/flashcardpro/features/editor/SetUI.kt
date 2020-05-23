@@ -1,11 +1,10 @@
 package com.piapps.flashcardpro.features.editor
 
-import android.content.res.ColorStateList
 import android.view.Gravity
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import android.widget.FrameLayout
-import androidx.core.content.ContextCompat
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kent.layouts.*
@@ -94,7 +93,7 @@ fun SetFragment.UI(): View {
             backgroundColorResource = theme.colorPrimary
 
             ivBottomMenu = imageView {
-                layoutParams = FrameLayout.LayoutParams(dip(56), dip(56))
+                layoutParams = LinearLayout.LayoutParams(dip(56), dip(56))
                 padding = dip(16)
                 setImageResource(R.drawable.ic_navigation_menu)
                 setIconColor(ctx, theme.colorIconActive)
@@ -103,7 +102,7 @@ fun SetFragment.UI(): View {
             }
 
             ivStudy = imageView {
-                layoutParams = FrameLayout.LayoutParams(dip(56), dip(56))
+                layoutParams = LinearLayout.LayoutParams(dip(56), dip(56))
                 padding = dip(16)
                 setImageResource(R.drawable.ic_study)
                 setIconColor(ctx, theme.colorIconActive)
@@ -111,17 +110,40 @@ fun SetFragment.UI(): View {
             }
 
             ivQuiz = imageView {
-                layoutParams = FrameLayout.LayoutParams(dip(56), dip(56))
+                layoutParams = LinearLayout.LayoutParams(dip(56), dip(56))
                 padding = dip(16)
                 setImageResource(R.drawable.ic_quiz_me)
                 setIconColor(ctx, theme.colorIconActive)
                 setRippleEffect()
             }
 
+            // Distance set-related buttons(quiz, study) from card-related buttons (add, next, prev)
+            view {
+                layoutParams = LinearLayout.LayoutParams(0, dip(56)).apply {
+                    weight = 1F
+                }
+            }
+
             ivAdd = imageView {
-                layoutParams = FrameLayout.LayoutParams(dip(56), dip(56))
+                layoutParams = LinearLayout.LayoutParams(dip(56), dip(56))
                 padding = dip(14)
                 setImageResource(R.drawable.ic_add)
+                setIconColor(ctx, theme.colorIconActive)
+                setRippleEffect()
+            }
+
+            ivPrev = imageView {
+                layoutParams = LinearLayout.LayoutParams(dip(56), dip(56))
+                padding = dip(14)
+                setImageResource(R.drawable.ic_arrow_back)
+                setIconColor(ctx, theme.colorIconActive)
+                setRippleEffect()
+            }
+
+            ivNext = imageView {
+                layoutParams = LinearLayout.LayoutParams(dip(56), dip(56))
+                padding = dip(14)
+                setImageResource(R.drawable.ic_arrow_forward)
                 setIconColor(ctx, theme.colorIconActive)
                 setRippleEffect()
             }

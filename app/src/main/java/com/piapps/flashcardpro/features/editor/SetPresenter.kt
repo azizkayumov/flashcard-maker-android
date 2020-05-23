@@ -4,6 +4,7 @@ import com.piapps.flashcardpro.core.db.tables.CardDb
 import com.piapps.flashcardpro.core.db.tables.SetDb
 import com.piapps.flashcardpro.core.exception.Failure
 import com.piapps.flashcardpro.core.extension.color
+import com.piapps.flashcardpro.core.extension.longLog
 import com.piapps.flashcardpro.core.platform.BasePresenter
 import com.piapps.flashcardpro.features.editor.interactor.*
 import java.io.File

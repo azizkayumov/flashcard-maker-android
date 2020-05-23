@@ -14,7 +14,7 @@ class GetCards
 @Inject constructor(private val repository: DatabaseRepository) {
     operator fun invoke(setId: Long, onResult: (List<CardDb>) -> Unit = {}) {
         doAsync {
-            val result = repository.getCardsByRating(setId).shuffled()
+            val result = repository.getCardsByRating(setId)
             uiThread {
                 onResult(result)
             }

@@ -13,4 +13,9 @@ interface QuizView : BaseView {
     fun showCards(cards: List<CardDb>)
     fun setOnCardScrolled()
 
+    fun showSummary(accuracy: Int, weakCount: Int)
+    fun showNewSet(setId: Long)
+
+    fun hide()
+
 }

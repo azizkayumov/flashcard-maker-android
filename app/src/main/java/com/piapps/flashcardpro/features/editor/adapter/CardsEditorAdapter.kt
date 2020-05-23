@@ -63,13 +63,6 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
         notifyDataSetChanged()
     }
 
-    fun updateOrders() {
-        list.forEachIndexed { index, card ->
-            card.order = index
-        }
-        notifyDataSetChanged()
-    }
-
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }

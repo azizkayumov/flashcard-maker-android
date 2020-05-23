@@ -24,6 +24,11 @@
     <color name="cropBackground">#1C1C1C</color>
     <color name="cropOverlay">#AA1C1C1C</color>
 
+    <!--Color for Quiz results-->
+    <color name="colorBadGrade">#F44336</color>
+    <color name="colorAverageGrade">#FB8C00</color>
+    <color name="colorGoodGrade">#4CAF50</color>
+
     <color name="c1">#FF8A80</color>
     <color name="c2">#FF80AB</color>
     <color name="c3">#EA80FC</color>

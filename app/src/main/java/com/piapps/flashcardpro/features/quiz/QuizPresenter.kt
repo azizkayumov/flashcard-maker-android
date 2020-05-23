@@ -28,9 +28,13 @@ class QuizPresenter(var view: QuizView?) : BasePresenter(view) {
     @Inject
     lateinit var saveSet: SaveSet
 
+    @Inject
+    lateinit var saveNewSet: SaveNewSet
+
     private var setId = 0L
     var set = SetDb()
     private var answers = arrayListOf<Int>()
+    private var weakCards = arrayListOf<CardDb>()
 
     fun loadSetDetails(id: Long) {
         this.setId = id
@@ -55,7 +59,7 @@ class QuizPresenter(var view: QuizView?) : BasePresenter(view) {
     }
 
     fun setCardAnswered(pos: Int, card: CardDb) {
-        if (answers[pos] == 1 || answers[pos] == 0) return
+        if (answers[pos] != -1) return
         answers[pos] = 1
 
         card.rating = card.rating + 1
@@ -64,18 +68,20 @@ class QuizPresenter(var view: QuizView?) : BasePresenter(view) {
     }
 
     fun setCardNotAnswered(pos: Int, card: CardDb) {
-        if (answers[pos] == 1 || answers[pos] == 0) return
+        if (answers[pos] != -1) return
         answers[pos] = 0
 
         card.rating = card.rating - 1
         if (card.rating < -5) card.rating = -5
         saveCard(card)
+
+        weakCards.add(card)
     }
 
     fun saveStats() {
         val stats = Stats(System.currentTimeMillis())
 
-        var accuracy = answers.filter { it == 1 }.size
+        val accuracy = answers.filter { it == 1 }.size
 
         stats.accuracy = (100 * accuracy.toFloat() / set.count).toInt()
         if (stats.accuracy > 100) stats.accuracy = 100
@@ -88,5 +94,26 @@ class QuizPresenter(var view: QuizView?) : BasePresenter(view) {
 
         set.lastStudyDuration = 0L
         saveSet(set)
+
+        view?.showSummary(stats.accuracy, weakCards.size)
+    }
+
+    fun createNewSetWithWeakCards() {
+        if (weakCards.size == 0) {
+            view?.hide()
+            return
+        }
+        val newSetId = System.currentTimeMillis()
+        set.id = newSetId
+        set.count = weakCards.size
+
+        weakCards.forEachIndexed { index, card ->
+            card.id = newSetId + index + 1
+            card.setId = newSetId
+        }
+
+        saveNewSet(set, weakCards)
+
+        view?.showNewSet(newSetId)
     }
 }

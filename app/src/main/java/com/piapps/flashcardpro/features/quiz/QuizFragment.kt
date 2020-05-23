@@ -2,6 +2,7 @@ package com.piapps.flashcardpro.features.quiz
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
@@ -12,15 +13,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.piapps.flashcardpro.core.db.tables.CardDb
 import com.piapps.flashcardpro.core.extension.toast
 import com.piapps.flashcardpro.core.platform.BaseFragment
+import com.piapps.flashcardpro.core.platform.SHORT_ANIMATION
 import com.piapps.flashcardpro.features.MainActivity
 import com.piapps.flashcardpro.features.quiz.adapter.CardsAdapter
-import com.piapps.flashcardpro.features.stats.StatsFragment
 
 /**
  * Created by abduaziz on 2019-10-29 at 13:10.
  */
 
-class QuizFragment : BaseFragment(), QuizView {
+class QuizFragment : BaseFragment(), QuizView, QuizSummaryFragment.OnCreateNewSetListener {
 
     companion object {
         fun set(setId: Long): QuizFragment {
@@ -91,12 +92,17 @@ class QuizFragment : BaseFragment(), QuizView {
             presenter.setCardAnswered(current, adapter.list[current])
         }
         if (current + 1 >= adapter.list.size) {
-            presenter.saveStats()
             onCardsUpdatedListener?.onCardsRatingUpdated(adapter.list)
-            (activity as MainActivity).replaceFragment(StatsFragment.set(presenter.set.id), true)
+            presenter.saveStats()
             return
         }
         rv.smoothScrollToPosition(current + 1)
+    }
+
+    override fun showSummary(accuracy: Int, weakCount: Int) {
+        val fragment = QuizSummaryFragment.summaryWith(accuracy, weakCount)
+        fragment.onCreateNewSetListener = this
+        (activity as MainActivity).openFragment(fragment, true)
     }
 
     override fun setSetColor(color: String) {
@@ -116,6 +122,22 @@ class QuizFragment : BaseFragment(), QuizView {
         tvCurrentCard.text = "${pos + 1} / ${adapter.list.size}"
     }
 
+    override fun onCreateNewSetWithWeakCards() {
+        presenter.createNewSetWithWeakCards()
+    }
+
+    override fun showNewSet(setId: Long) {
+        close()
+        // wait for the closing animation
+        Handler().postDelayed({
+            onCardsUpdatedListener?.onNewWeakSetGenerated(setId)
+        }, SHORT_ANIMATION + 1)
+    }
+
+    override fun hide() {
+        close()
+    }
+
     override fun showToast(res: Int) {
         toast(res)
     }
@@ -130,5 +152,6 @@ class QuizFragment : BaseFragment(), QuizView {
 
     interface OnCardsUpdatedListener {
         fun onCardsRatingUpdated(list: List<CardDb>)
+        fun onNewWeakSetGenerated(setId: Long)
     }
 }
