@@ -125,6 +125,22 @@ fun SetFragment.UI(): View {
                 setIconColor(ctx, theme.colorIconActive)
                 setRippleEffect()
             }
+            
+            ivPrevious = imageView {
+                layoutParams = FrameLayout.LayoutParams(dip(56), dip(56))
+                padding = dip(16)
+                setImageResource(R.drawable.ic_arrow_back)
+                setIconColor(ctx, theme.colorIconActive)
+                setRippleEffect()
+            }
+            
+            ivNext = imageView {
+                layoutParams = FrameLayout.LayoutParams(dip(56), dip(56))
+                padding = dip(16)
+                setImageResource(R.drawable.ic_arrow_forward)
+                setIconColor(ctx, theme.colorIconActive)
+                setRippleEffect()
+            }
         }
 
         view {
