@@ -7,9 +7,9 @@ import android.widget.FrameLayout
 import com.kent.layouts.*
 import com.kent.layouts.viewgroup.frameLayout
 import com.kent.layouts.viewgroup.lparams
+import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.extension.appTheme
 import com.piapps.flashcardpro.core.extension.autoResizeTextView
-import com.piapps.flashcardpro.R
 
 /**
  * Created by abduaziz on 2019-10-01 at 20:38.
@@ -32,6 +32,8 @@ class CardUI {
         val backIvId = 22
         val backIvEditId = 23
         val backIvFlipId = 24
+
+        val ivSelectedIndicatorId = 99
     }
 
     fun createView(ctx: Context) = with(ctx) {
@@ -142,6 +144,18 @@ class CardUI {
                         textColorResource = ctx.appTheme().colorPrimaryText
                         gravity = Gravity.CENTER
                     }
+                }
+
+                imageView {
+                    id = ivSelectedIndicatorId
+                    layoutParams = FrameLayout.LayoutParams(dip(24), dip(24)).apply {
+                        gravity = Gravity.END
+                        margin = dip(12)
+                    }
+                    setBackgroundResource(R.drawable.circle_white)
+                    setImageResource(R.drawable.ic_selected)
+                    setIconColor(ctx, R.color.c7)
+                    visibility = View.GONE
                 }
             }
         }

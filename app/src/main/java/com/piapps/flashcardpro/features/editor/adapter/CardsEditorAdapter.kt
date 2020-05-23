@@ -27,6 +27,7 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
 
     val list = arrayListOf<CardDb>()
     var defaultColor = ""
+    var isSelecting = false
 
     fun addNewCard(card: CardDb, pos: Int) {
         list.add(pos, card)
@@ -34,15 +35,16 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
     }
 
     fun addAll(cards: List<CardDb>) {
-        list.addAll(cards)
+        list.addAll(0, cards)
         notifyDataSetChanged()
     }
 
     fun updateCard(card: CardDb) {
-        list.forEachIndexed { index, c ->
-            if (c.id == card.id) {
-                list[index] = card
-                notifyItemChanged(index)
+        for (i in 0 until list.size){
+            if (list[i].id == card.id) {
+                list[i] = card
+                notifyItemChanged(i)
+                break
             }
         }
     }
@@ -70,6 +72,15 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
         notifyDataSetChanged()
     }
 
+    fun unselectCards(){
+        for (i in 0 until list.size){
+            if (list[i].isSelected) {
+                list[i].isSelected = false
+                notifyItemChanged(i)
+            }
+        }
+    }
+
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
@@ -86,7 +97,8 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
         return list.size
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener, View.OnLongClickListener {
 
         val root: CardView
 
@@ -103,8 +115,11 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
         val tvBack: TextView
         val ivBack: AppCompatImageView
 
+        val ivSelected: AppCompatImageView
+
         init {
             root = itemView.findViewById(CardUI.rootId)
+            root.setOnLongClickListener(this)
 
             front = itemView.findViewById(CardUI.frontId)
             tvFront = itemView.findViewById(CardUI.frontTvId)
@@ -119,6 +134,7 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             ivBackFlip = itemView.findViewById(CardUI.backIvFlipId)
 
             ivDelete = itemView.findViewById(CardUI.frontIvDeleteId)
+            ivSelected = itemView.findViewById(CardUI.ivSelectedIndicatorId)
 
             ivFrontEdit.setOnClickListener(this)
             ivFrontFlip.setOnClickListener(this)
@@ -127,6 +143,9 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             ivBackFlip.setOnClickListener(this)
             tvBack.setOnClickListener(this)
             ivDelete.setOnClickListener(this)
+
+            tvFront.setOnLongClickListener(this)
+            tvBack.setOnLongClickListener(this)
         }
 
         fun bind(card: CardDb) {
@@ -177,9 +196,21 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
                 ivBack.load(card.backImage)
             else
                 ivBack.load("")
+
+            ivSelected.visibility = if (card.isSelected) View.VISIBLE else View.GONE
+        }
+
+        fun flip(reverse: Boolean = false) {
+            val anim = FlipAnimation(front, back, LONG_ANIMATION.toInt())
+            if (reverse) anim.reverse()
+            root.startAnimation(anim)
         }
 
         override fun onClick(v: View?) {
+            if (isSelecting) {
+                onLongClick(v) // do the same with onLongClick
+                return
+            }
             when (v) {
                 ivFrontEdit -> {
                     list[adapterPosition].isEditingBack = false
@@ -209,10 +240,15 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             }
         }
 
-        fun flip(reverse: Boolean = false) {
-            val anim = FlipAnimation(front, back, LONG_ANIMATION.toInt())
-            if (reverse) anim.reverse()
-            root.startAnimation(anim)
+        override fun onLongClick(v: View?): Boolean {
+            showToggleSelection()
+            onCardClickListener?.onCardSelectionToggle()
+            return true
+        }
+
+        private fun showToggleSelection() {
+            list[adapterPosition].isSelected = !list[adapterPosition].isSelected
+            ivSelected.visibility = if (list[adapterPosition].isSelected) View.VISIBLE else View.GONE
         }
     }
 
@@ -222,5 +258,6 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
         fun onCardEditClick()
         fun onCardDeleteClick()
         fun onCardEditTextClick()
+        fun onCardSelectionToggle()
     }
 }

@@ -14,6 +14,7 @@ interface SetEditorView : BaseView {
         val REVERSE = 1L
         val IMPORT = 2L
         val EXPORT = 3L
+        val PASTE = 4L
 
         val CARD_TEXT = 100L
         val CARD_IMAGE = 101L
@@ -28,9 +29,14 @@ interface SetEditorView : BaseView {
     fun showSetTitleEditor(current: String)
     fun showCards(cards: List<CardDb>)
     fun showNewCard(card: CardDb)
+    fun cards(): List<CardDb>
 
     fun showLabels(labels: String)
 
     fun showSetExported(path: String)
     fun showCurrentCardPosition()
+
+    fun showSelectionOptions()
+    fun hideSelectionOptions()
+    fun setSelectedCardsCounter(count: Int)
 }

@@ -3,7 +3,6 @@ package com.piapps.flashcardpro.core.db.tables
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 import io.objectbox.annotation.Transient
-import io.objectbox.annotation.Uid
 
 /**
  * Created by abduaziz on 2019-09-27 at 22:15.
@@ -28,7 +27,9 @@ class CardDb(
     var flags: Int = 0,
 
     @Transient
-    var isEditingBack: Boolean = false
+    var isEditingBack: Boolean = false,
+    @Transient
+    var isSelected: Boolean = false
 ) {
     constructor() : this(0, 0)
 
@@ -45,5 +46,22 @@ class CardDb(
         this.backImage = fImage
         this.backColor = fColor
         this.backTextColor = fTextColor
+    }
+
+    fun clone(): CardDb {
+        return CardDb(
+            id, setId, order,
+            front, back,
+            frontColor, backColor,
+            frontTextColor, backTextColor,
+            frontImage, backImage,
+            rating, flags
+        )
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (other == null) return false
+        if (other !is CardDb) return false
+        return other.id == id
     }
 }

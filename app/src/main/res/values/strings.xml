@@ -113,4 +113,8 @@
     </string>
     <string name="open">Open</string>
 
+    <string name="copy">Copy</string>
+    <string name="move">Move</string>
+    <string name="paste_cards">Paste selected cards</string>
+
 </resources>

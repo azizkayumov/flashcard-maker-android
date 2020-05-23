@@ -6,7 +6,6 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Pos" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
@@ -114,11 +113,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="618602f0-f769-4d31-8236-6c8d5ad8a6cb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/db/Clipboard.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_copy.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_delete_forever.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_move.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_paste.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_selected.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/di/ApplicationModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/di/ApplicationModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/db/tables/CardDb.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/db/tables/CardDb.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetEditorView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetEditorView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetPresenter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetUI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetUI.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/adapter/cells/LabelUI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/adapter/cells/LabelUI.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/adapter/CardsEditorAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/adapter/CardsEditorAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/adapter/cells/CardUI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/adapter/cells/CardUI.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -139,12 +150,28 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetFragment.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="148" column="36" selection-start-line="148" selection-start-column="36" selection-end-line="148" selection-end-column="36" />
+              <folding>
+                <element signature="e#4880#4902#1" expanded="true" />
+                <element signature="e#4969#4988#1" expanded="true" />
+                <element signature="e#5058#5080#1" expanded="true" />
+                <element signature="e#8923#8943#1" expanded="true" />
+                <element signature="e#8381#8984#2" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/db/tables/CardDb.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="15" column="20" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+            <state relative-caret-position="449">
+              <caret line="58" column="8" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -164,20 +191,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>autosave</find>
-      <find>color</find>
-      <find>textColor</find>
-      <find>save</find>
-      <find>studyfra</find>
-      <find>close</find>
-      <find>removeF</find>
-      <find>removeT</find>
-      <find>createMenu</find>
-      <find>'</find>
-      <find>setOnCar</find>
-      <find>StudyFra</find>
-      <find>onCardIma</find>
-      <find>themeChanged</find>
       <find>onBack</find>
       <find>onBackPressed</find>
       <find>random</find>
@@ -194,6 +207,20 @@
       <find>alert</find>
       <find>delete</find>
       <find>dip</find>
+      <find>onCardEd</find>
+      <find>showCards</find>
+      <find>cards</find>
+      <find>autoSave</find>
+      <find>clear</find>
+      <find>showMore</find>
+      <find>hideSele</find>
+      <find>paste</find>
+      <find>toggle</find>
+      <find>autosave</find>
+      <find>copy</find>
+      <find>showSele</find>
+      <find>move</find>
+      <find>ivStudy</find>
     </findStrings>
     <replaceStrings>
       <replace>imageView</replace>
@@ -211,12 +238,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/main/interactor/GetLabelSets.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/main/interactor/GetLabels.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/main/interactor/GetTrashSets.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/main/interactor/PutBackSet.kt" />
-        <option value="$PROJECT_DIR$/gradle.properties" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/platform/BaseFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/platform/component/CircleDownloadView.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/platform/component/menu/MenuFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/platform/component/viewpager/BasePagerAdapter.kt" />
@@ -226,7 +247,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/DrawUI.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/EditCardTextUI.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/PhotosFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/adapter/CardsEditorAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/files/view/FilesFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/files/view/FilesFragmentUI.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/main/MainUI.kt" />
@@ -235,7 +255,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/stats/StatsFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/stats/StatsUI.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/labels/AddLabelUI.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/ColorUI.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/adapter/cells/ColorItemUI.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/adapter/ColorAdapter.kt" />
@@ -254,14 +273,22 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/study/StudyPresenter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/main/MainFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/study/StudyUI.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/study/StudyFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/di/ApplicationModule.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/platform/Animations.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetUI.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/tag.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/adapter/cells/LabelUI.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/adapter/cells/CardUI.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetUI.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/Clipboard.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/adapter/CardsEditorAdapter.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/db/Clipboard.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetEditorView.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetPresenter.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/db/tables/CardDb.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetFragment.kt" />
       </list>
     </option>
   </component>
@@ -297,6 +324,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -313,7 +341,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -337,14 +364,16 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="flashcardpro" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="features" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Flashcards v3" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="flashcardpro" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="features" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="Flashcards v3" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
           <select />
@@ -386,11 +415,11 @@
       <recent name="com.piapps.flashcardpro.features.quiz.interactor" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.piapps.flashcardpro.core.db" />
       <recent name="com.piapps.flashcardpro.features.labels" />
       <recent name="com.piapps.flashcardpro.model" />
       <recent name="com.piapps.flashcardpro.features.labels.interactor" />
       <recent name="com.piapps.flashcardpro.core.db.tables" />
-      <recent name="com.piapps.flashcardpro.features.main.adapter.cells" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro" />
@@ -533,11 +562,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="1" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" sideWeight="0.4992928" visible="true" weight="0.23182553" />
+      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.4992928" visible="true" weight="0.23182553" />
       <window_info id="Structure" order="3" sideWeight="0.5007072" side_tool="true" weight="0.33441034" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Build Variants" order="5" side_tool="true" />
@@ -553,7 +581,7 @@
       <window_info anchor="bottom" id="Build" order="6" sideWeight="0.4983845" weight="0.35643566" />
       <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="Run" order="8" weight="0.32956153" />
-      <window_info anchor="bottom" id="Debug" order="9" />
+      <window_info anchor="bottom" id="Debug" order="9" weight="0.407355" />
       <window_info anchor="bottom" id="Inspection Results" order="10" weight="0.4893918" />
       <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" weight="0.16801292" />
@@ -567,72 +595,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher2_round.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher2.png" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="16" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" column="36" lean-forward="true" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/files/view/FilesFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="93" column="16" selection-start-line="93" selection-start-column="16" selection-end-line="93" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/PhotosFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="74" column="16" selection-start-line="74" selection-start-column="16" selection-end-line="74" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/main/MainUI.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="81" column="17" lean-forward="true" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/db/DatabaseRepository.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/quiz/interactor/GetCards.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
@@ -679,12 +641,12 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
           <caret line="20" column="51" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
         </state>
       </provider>
+      <provider editor-type-id="android-manifest" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/main/MainFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
@@ -693,20 +655,6 @@
           <folding>
             <element signature="e#47#2124#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/adapter/CardsEditorAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/study/StudyUI.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="42" column="47" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -760,27 +708,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/settings/Settings.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/study/StudyFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="56" column="37" lean-forward="true" selection-start-line="56" selection-start-column="37" selection-end-line="56" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
         </state>
       </provider>
     </entry>
@@ -846,35 +773,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/adapter/cells/CardUI.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="31" column="25" lean-forward="true" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetUI.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
-          <folding>
-            <element signature="e#49#814#0" expanded="true" />
-            <element signature="e#3499#4993#2" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/tag.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="5" column="43" lean-forward="true" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="7" column="15" lean-forward="true" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
         </state>
       </provider>
     </entry>
@@ -885,27 +787,188 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetFragment.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/quiz/QuizFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="366" column="11" selection-start-line="366" selection-start-column="11" selection-end-line="366" selection-end-column="11" />
+        <state relative-caret-position="224">
+          <caret line="28" column="40" lean-forward="true" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="32" column="36" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="69" column="61" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/circle_white.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="5" column="16" lean-forward="true" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/circle_gray.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/platform/theme/Theme.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_back.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/study/StudyUI.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="42" column="47" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/adapter/cells/CardUI.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="96" column="25" lean-forward="true" selection-start-line="96" selection-start-column="25" selection-end-line="96" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetUI.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="187" column="13" lean-forward="true" selection-start-line="187" selection-start-column="13" selection-end-line="187" selection-end-column="13" />
           <folding>
-            <element signature="e#15185#15209#1" expanded="true" />
+            <element signature="e#49#764#0" expanded="true" />
+            <element signature="e#1009#1564#2" />
+            <element signature="e#1597#1937#2" />
+            <element signature="e#1965#3047#2" />
+            <element signature="e#3081#3418#2" />
+            <element signature="e#5768#6026#2" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/platform/component/bottom/BottomMenu.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.3.61/fe3b9d48f4c3947639b6b1760213c1b79281383e/kotlin-stdlib-common-1.3.61-sources.jar!/generated/_Collections.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="1173" column="28" lean-forward="true" selection-start-line="1173" selection-start-column="28" selection-end-line="1173" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/interactor/SaveSet.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+        <state relative-caret-position="224">
+          <caret line="17" column="9" lean-forward="true" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build/tmp/kapt3/stubs/debug/com/piapps/flashcardpro/core/di/ApplicationComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/db/Clipboard.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="59">
+          <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
+          <folding>
+            <element signature="e#41#123#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/platform/BasePresenter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="30" column="23" lean-forward="true" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/settings/Settings.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetEditorView.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="39" column="8" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="39">
+          <caret line="86" column="41" lean-forward="true" selection-start-line="86" selection-start-column="41" selection-end-line="86" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-29/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="362" column="18" selection-start-line="362" selection-start-column="18" selection-end-line="362" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/core/db/tables/CardDb.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="15" column="20" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+        <state relative-caret-position="449">
+          <caret line="58" column="8" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/adapter/CardsEditorAdapter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="29" column="27" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/study/StudyFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="130" column="22" lean-forward="true" selection-start-line="130" selection-start-column="22" selection-end-line="130" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetPresenter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="194" column="5" lean-forward="true" selection-start-line="194" selection-start-column="5" selection-end-line="194" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/piapps/flashcardpro/features/editor/SetFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="148" column="36" selection-start-line="148" selection-start-column="36" selection-end-line="148" selection-end-column="36" />
+          <folding>
+            <element signature="e#4880#4902#1" expanded="true" />
+            <element signature="e#4969#4988#1" expanded="true" />
+            <element signature="e#5058#5080#1" expanded="true" />
+            <element signature="e#8923#8943#1" expanded="true" />
+            <element signature="e#8381#8984#2" />
+          </folding>
         </state>
       </provider>
     </entry>

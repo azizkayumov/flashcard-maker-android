@@ -1,5 +1,6 @@
 package com.piapps.flashcardpro.features.editor
 
+import com.piapps.flashcardpro.core.db.Clipboard
 import com.piapps.flashcardpro.core.db.tables.CardDb
 import com.piapps.flashcardpro.core.db.tables.SetDb
 import com.piapps.flashcardpro.core.exception.Failure
@@ -33,9 +34,14 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
     @Inject
     lateinit var importFromCSV: ImportFromCSV
 
+    @Inject
+    lateinit var clipboard: Clipboard
+
     private var setId = 0L
     var set = SetDb()
     var editingCard = CardDb()
+
+    var selectedCards = arrayListOf<CardDb>()
 
     fun loadSetDetails(id: Long) {
         this.setId = id
@@ -46,6 +52,7 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
 
     fun createNewSet(failure: Failure) {
         set = SetDb(id = System.currentTimeMillis())
+        setId = set.id
         set.lastEdited = System.currentTimeMillis()
         view?.setTitle(set.title)
         saveSet(set)
@@ -163,8 +170,56 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
         view?.showCards(cards)
     }
 
-    fun autoSave(cards: List<CardDb>) {
+    fun autoSave() {
+        val cards = view?.cards() ?: arrayListOf()
         set.count = cards.size
         saveSet(set, cards)
+    }
+
+    fun toggleCardSelection(card: CardDb) {
+        if (card.isSelected)
+            selectedCards.add(card.clone())
+        else
+            selectedCards.removeAll { it.id == card.id }
+
+        view?.setSelectedCardsCounter(selectedCards.size)
+        if (selectedCards.isNotEmpty())
+            view?.showSelectionOptions()
+        else
+            view?.hideSelectionOptions()
+    }
+
+    fun cancelCardsSelection() {
+        selectedCards.clear()
+        view?.hideSelectionOptions()
+    }
+
+    fun copyCards() {
+        val now = System.currentTimeMillis()
+        // we're copying cards, give new ids to the selected cards
+        for (i in 0 until selectedCards.size)
+            selectedCards[i].id = now + i
+        clipboard.addToClipboard(selectedCards)
+        view?.hideSelectionOptions()
+    }
+
+    fun moveCards() {
+        clipboard.addToClipboard(selectedCards)
+        view?.hideSelectionOptions()
+    }
+
+    fun canPasteCards(): Boolean {
+        return !clipboard.isEmpty()
+    }
+
+    fun pasteCards() {
+        val cards = clipboard.getBufferedCards()
+        clipboard.clearClipboard()
+
+        for (i in 0 until cards.size)
+            cards[i].setId = setId
+        view?.showCards(cards)
+
+        autoSave()
     }
 }

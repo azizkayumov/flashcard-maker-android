@@ -7,13 +7,13 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.kent.layouts.setIconColor
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.db.tables.CardDb
@@ -35,6 +35,7 @@ import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.CARD_TEXT
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.CARD_TEXT_COLOR
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.EXPORT
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.IMPORT
+import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.PASTE
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.REVERSE
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.STATS
 import com.piapps.flashcardpro.features.editor.adapter.CardsEditorAdapter
@@ -97,6 +98,13 @@ class SetFragment : BaseFragment(), SetEditorView,
     lateinit var ivStudy: AppCompatImageView
     lateinit var ivQuiz: AppCompatImageView
     lateinit var tvCurrentCard: TextView
+    lateinit var ivNext: AppCompatImageView
+    lateinit var ivPrev: AppCompatImageView
+    lateinit var llSelectionParent: LinearLayout
+    lateinit var ivCancelSelection: AppCompatImageView
+    lateinit var tvSelectedCount: TextView
+    lateinit var tvCopy: TextView
+    lateinit var tvMove: TextView
 
     override fun createView(context: Context) = UI()
 
@@ -131,20 +139,46 @@ class SetFragment : BaseFragment(), SetEditorView,
             }, true)
         }
 
+        ivBottomMenu.setOnClickListener {
+            showMoreOptions()
+        }
+
         ivStudy.setOnClickListener {
             adapter.updateOrders()
-            presenter.autoSave(adapter.list)
-            (activity as MainActivity).openFragment(StudyFragment.set(presenter.set.id).apply {
-                onSetStudyDurationUpdatedListener = this@SetFragment
-            }, true)
+            presenter.autoSave()
+            if (cards().isNotEmpty())
+                (activity as MainActivity).openFragment(StudyFragment.set(presenter.set.id).apply {
+                    onSetStudyDurationUpdatedListener = this@SetFragment
+                }, true)
         }
 
         ivQuiz.setOnClickListener {
             adapter.updateOrders()
-            presenter.autoSave(adapter.list)
-            (activity as MainActivity).openFragment(QuizFragment.set(presenter.set.id).apply {
-                onCardsUpdatedListener = this@SetFragment
-            }, true)
+            presenter.autoSave()
+            if (cards().isNotEmpty())
+                (activity as MainActivity).openFragment(QuizFragment.set(presenter.set.id).apply {
+                    onCardsUpdatedListener = this@SetFragment
+                }, true)
+        }
+
+        ivNext.setOnClickListener {
+            scrollNext()
+        }
+
+        ivPrev.setOnClickListener {
+            scrollPrevious()
+        }
+
+        ivCancelSelection.setOnClickListener {
+            presenter.cancelCardsSelection()
+        }
+
+        tvCopy.setOnClickListener {
+            presenter.copyCards()
+        }
+
+        tvMove.setOnClickListener {
+            presenter.moveCards()
         }
     }
 
@@ -193,9 +227,16 @@ class SetFragment : BaseFragment(), SetEditorView,
             addMenu(REVERSE, ctx.getLocalizedString(R.string.reverse_cards), R.drawable.ic_flip)
             addMenu(EXPORT, ctx.getLocalizedString(R.string.export_to_csv), R.drawable.ic_export)
             addMenu(IMPORT, ctx.getLocalizedString(R.string.import_from_csv), R.drawable.ic_import)
+            if (presenter.canPasteCards()) {
+                addMenu(PASTE, ctx.getLocalizedString(R.string.paste_cards), R.drawable.ic_paste)
+            }
         })
         menu.onBottomMenuClickListener = this
         (activity as MainActivity).openFragment(menu, true)
+    }
+
+    override fun cards(): List<CardDb> {
+        return adapter.list
     }
 
     override fun onCardEditClick() {
@@ -226,7 +267,7 @@ class SetFragment : BaseFragment(), SetEditorView,
             REVERSE -> {
                 (activity as MainActivity).closeBottomMenu()
                 adapter.reverseCards()
-                presenter.autoSave(adapter.list)
+                presenter.autoSave()
             }
             EXPORT -> {
                 (activity as MainActivity).closeBottomMenu()
@@ -236,6 +277,10 @@ class SetFragment : BaseFragment(), SetEditorView,
                 (activity as MainActivity).replaceFragment(FilesFragment().apply {
                     onFilesSelectedListener = this@SetFragment
                 }, true)
+            }
+            PASTE -> {
+                (activity as MainActivity).closeBottomMenu()
+                presenter.pasteCards()
             }
             CARD_TEXT -> {
                 (activity as MainActivity).closeBottomMenu(false)
@@ -360,6 +405,27 @@ class SetFragment : BaseFragment(), SetEditorView,
         adapter.updateCard(presenter.editingCard)
     }
 
+    override fun onCardSelectionToggle() {
+        val card = adapter.list.getOrNull(layoutManager.findFirstCompletelyVisibleItemPosition())
+        if (card == null) return
+        presenter.toggleCardSelection(card)
+    }
+
+    override fun showSelectionOptions() {
+        adapter.isSelecting = true
+        llSelectionParent.visibility = View.VISIBLE
+    }
+
+    override fun hideSelectionOptions() {
+        adapter.isSelecting = false
+        llSelectionParent.visibility = View.GONE
+        adapter.unselectCards()
+    }
+
+    override fun setSelectedCardsCounter(count: Int) {
+        tvSelectedCount.text = "$count"
+    }
+
     fun checkAndExportToCSV() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(
                 ctx, Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -412,13 +478,29 @@ class SetFragment : BaseFragment(), SetEditorView,
         tvCurrentCard.text = "${pos + 1} / ${adapter.list.size}"
     }
 
+    fun scrollNext() {
+        val pos = layoutManager.findFirstCompletelyVisibleItemPosition()
+        val card = adapter.list.getOrNull(pos + 1)
+        if (card == null) return
+        rv.smoothScrollToPosition(pos + 1)
+        showCurrentCardPosition()
+    }
+
+    fun scrollPrevious() {
+        val pos = layoutManager.findFirstCompletelyVisibleItemPosition()
+        val card = adapter.list.getOrNull(pos - 1)
+        if (card == null) return
+        rv.smoothScrollToPosition(pos - 1)
+        showCurrentCardPosition()
+    }
+
     override fun showToast(res: Int) {
         toast(res)
     }
 
     override fun removed() {
         adapter.updateOrders()
-        presenter.autoSave(adapter.list)
+        presenter.autoSave()
         if (!presenter.set.isTrash)
             onSetUpdatedListener?.onSetUpdated(presenter.set)
         presenter.clear()
