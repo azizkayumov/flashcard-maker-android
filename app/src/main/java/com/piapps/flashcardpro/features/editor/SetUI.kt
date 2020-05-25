@@ -218,7 +218,7 @@ fun SetFragment.UI(): View {
                 layoutParams = LinearLayout.LayoutParams(wrapContent, matchParent)
                 gravity = Gravity.CENTER
                 horizontalPadding = dip(16)
-                text = ctx.getLocalizedString(R.string.move).toUpperCase()
+                text = ctx.getLocalizedString(R.string.cut).toUpperCase()
                 textColorResource = theme.colorPrimaryText
                 textSize = 15F
                 makeBold()

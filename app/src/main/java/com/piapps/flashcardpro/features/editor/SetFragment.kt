@@ -351,7 +351,9 @@ class SetFragment : BaseFragment(), SetEditorView,
     }
 
     override fun showCards(cards: List<CardDb>) {
-        adapter.addAll(cards)
+        var currentPosition = layoutManager.findFirstCompletelyVisibleItemPosition()
+        if (currentPosition < 0) currentPosition = 0
+        adapter.addAll(cards, currentPosition)
     }
 
     override fun showNewCard(card: CardDb) {

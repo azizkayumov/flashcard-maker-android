@@ -34,13 +34,30 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
         notifyItemInserted(pos)
     }
 
-    fun addAll(cards: List<CardDb>) {
-        list.addAll(0, cards)
+    fun addAll(cards: List<CardDb>, index: Int = -1) {
+        // remove if the pasting cards exist
+        for (card in cards){
+            for(i in 0 until list.size){
+                if (list[i].id == card.id){
+                    list.removeAt(i)
+                    break
+                }
+            }
+        }
+
+        // paste
+        if (index < 0) {
+            list.addAll(0, cards)
+        } else if (index >= list.size) {
+            list.addAll(cards)
+        } else {
+            list.addAll(index, cards)
+        }
         notifyDataSetChanged()
     }
 
     fun updateCard(card: CardDb) {
-        for (i in 0 until list.size){
+        for (i in 0 until list.size) {
             if (list[i].id == card.id) {
                 list[i] = card
                 notifyItemChanged(i)
@@ -72,8 +89,8 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
         notifyDataSetChanged()
     }
 
-    fun unselectCards(){
-        for (i in 0 until list.size){
+    fun unselectCards() {
+        for (i in 0 until list.size) {
             if (list[i].isSelected) {
                 list[i].isSelected = false
                 notifyItemChanged(i)
