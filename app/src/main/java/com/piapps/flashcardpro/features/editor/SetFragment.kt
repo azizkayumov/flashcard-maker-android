@@ -104,7 +104,7 @@ class SetFragment : BaseFragment(), SetEditorView,
     lateinit var ivCancelSelection: AppCompatImageView
     lateinit var tvSelectedCount: TextView
     lateinit var tvCopy: TextView
-    lateinit var tvMove: TextView
+    lateinit var tvCut: TextView
 
     override fun createView(context: Context) = UI()
 
@@ -177,7 +177,7 @@ class SetFragment : BaseFragment(), SetEditorView,
             presenter.copyCards()
         }
 
-        tvMove.setOnClickListener {
+        tvCut.setOnClickListener {
             presenter.moveCards()
         }
     }

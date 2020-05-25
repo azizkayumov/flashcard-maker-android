@@ -203,22 +203,22 @@ fun SetFragment.UI(): View {
                 }
             }
 
-            tvCopy = textView {
+            tvCut = textView {
                 layoutParams = LinearLayout.LayoutParams(wrapContent, matchParent)
                 gravity = Gravity.CENTER
                 horizontalPadding = dip(16)
-                text = ctx.getLocalizedString(R.string.copy).toUpperCase()
+                text = ctx.getLocalizedString(R.string.cut).toUpperCase()
                 textColorResource = theme.colorPrimaryText
                 textSize = 15F
                 makeBold()
                 setRippleEffect()
             }
 
-            tvMove = textView {
+            tvCopy = textView {
                 layoutParams = LinearLayout.LayoutParams(wrapContent, matchParent)
                 gravity = Gravity.CENTER
                 horizontalPadding = dip(16)
-                text = ctx.getLocalizedString(R.string.cut).toUpperCase()
+                text = ctx.getLocalizedString(R.string.copy).toUpperCase()
                 textColorResource = theme.colorPrimaryText
                 textSize = 15F
                 makeBold()
