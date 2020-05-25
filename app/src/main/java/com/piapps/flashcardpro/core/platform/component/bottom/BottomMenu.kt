@@ -9,11 +9,11 @@ class BottomMenu(
 
     private val menus = arrayListOf<BottomMenuItem>()
 
-    fun addMenu(id: Long, s: String, iconRes: Int = R.color.transparent) {
+    fun addMenu(id: Float, s: String, iconRes: Int = R.color.transparent) {
         menus.add(BottomMenuItem(id, s, iconRes))
     }
 
-    fun removeMenu(id: Long) {
+    fun removeMenu(id: Float) {
         menus.removeAll { it.id == id }
     }
 
@@ -23,7 +23,7 @@ class BottomMenu(
         return null
     }
 
-    fun getMenuById(id: Long): BottomMenuItem? {
+    fun getMenuById(id: Float): BottomMenuItem? {
         return menus.find { it.id == id }
     }
 

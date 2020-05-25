@@ -37,6 +37,7 @@ import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.EXPORT
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.IMPORT
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.PASTE
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.REVERSE
+import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.SHUFFLE
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.STATS
 import com.piapps.flashcardpro.features.editor.adapter.CardsEditorAdapter
 import com.piapps.flashcardpro.features.editor.adapter.LabelsAdapter
@@ -225,6 +226,7 @@ class SetFragment : BaseFragment(), SetEditorView,
         val menu = BottomMenuFragment("", BottomMenu().apply {
             addMenu(STATS, ctx.getLocalizedString(R.string.statistics), R.drawable.ic_stats)
             addMenu(REVERSE, ctx.getLocalizedString(R.string.reverse_cards), R.drawable.ic_flip)
+            addMenu(SHUFFLE, ctx.getLocalizedString(R.string.shuffle_cards), R.drawable.ic_shuffle)
             addMenu(EXPORT, ctx.getLocalizedString(R.string.export_to_csv), R.drawable.ic_export)
             addMenu(IMPORT, ctx.getLocalizedString(R.string.import_from_csv), R.drawable.ic_import)
             if (presenter.canPasteCards()) {
@@ -267,6 +269,11 @@ class SetFragment : BaseFragment(), SetEditorView,
             REVERSE -> {
                 (activity as MainActivity).closeBottomMenu()
                 adapter.reverseCards()
+                presenter.autoSave()
+            }
+            SHUFFLE -> {
+                (activity as MainActivity).closeBottomMenu()
+                adapter.shuffleCards()
                 presenter.autoSave()
             }
             EXPORT -> {

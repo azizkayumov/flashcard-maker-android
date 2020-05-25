@@ -29,11 +29,12 @@
     <string name="no">No</string>
     <string name="done">Done</string>
     <string name="put_back_trash">Would you like to put back this set?</string>
-    <string name="empty_trash">Are you going to empty the Trash?</string>
+    <string name="empty_trash">Are you sure you want to empty the Trash?</string>
     <string name="trash_cleared">Trash is empty</string>
 
     <string name="statistics">Statistics</string>
-    <string name="reverse_cards">Reverse all cards</string>
+    <string name="reverse_cards">Reverse cards</string>
+    <string name="shuffle_cards">Shuffle cards</string>
     <string name="export_to_csv">Export to CSV</string>
     <string name="import_from_csv">Import from CSV</string>
 

@@ -36,9 +36,9 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
 
     fun addAll(cards: List<CardDb>, index: Int = -1) {
         // remove if the pasting cards exist
-        for (card in cards){
-            for(i in 0 until list.size){
-                if (list[i].id == card.id){
+        for (card in cards) {
+            for (i in 0 until list.size) {
+                if (list[i].id == card.id) {
                     list.removeAt(i)
                     break
                 }
@@ -80,6 +80,11 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             it.reverse()
         }
         notifyDataSetChanged()
+    }
+
+    fun shuffleCards() {
+        list.shuffle()
+        updateOrders()
     }
 
     fun updateOrders() {

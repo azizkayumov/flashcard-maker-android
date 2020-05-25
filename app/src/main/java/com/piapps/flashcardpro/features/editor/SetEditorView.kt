@@ -10,17 +10,18 @@ import com.piapps.flashcardpro.core.platform.BaseView
 interface SetEditorView : BaseView {
 
     companion object {
-        val STATS = 0L
-        val REVERSE = 1L
-        val IMPORT = 2L
-        val EXPORT = 3L
-        val PASTE = 4L
+        val STATS = 0f
+        val REVERSE = 1f
+        val IMPORT = 2f
+        val EXPORT = 3f
+        val PASTE = 4f
+        val SHUFFLE = 5f
 
-        val CARD_TEXT = 100L
-        val CARD_IMAGE = 101L
-        val CARD_DRAWING = 102L
-        val CARD_TEXT_COLOR = 103L
-        val CARD_BACK_COLOR = 104L
+        val CARD_TEXT = 100f
+        val CARD_IMAGE = 101f
+        val CARD_DRAWING = 102f
+        val CARD_TEXT_COLOR = 103f
+        val CARD_BACK_COLOR = 104f
     }
 
     fun setTitle(s: String)
