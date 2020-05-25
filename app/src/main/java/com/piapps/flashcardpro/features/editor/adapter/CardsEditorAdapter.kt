@@ -87,6 +87,13 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
         updateOrders()
     }
 
+    fun sortCardsAlphabetically() {
+        list.sortBy {
+            it.front
+        }
+        updateOrders()
+    }
+
     fun updateOrders() {
         list.forEachIndexed { index, card ->
             card.order = index
