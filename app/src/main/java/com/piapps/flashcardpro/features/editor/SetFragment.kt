@@ -425,21 +425,19 @@ class SetFragment : BaseFragment(), SetEditorView,
         val card = adapter.list.getOrNull(layoutManager.findFirstCompletelyVisibleItemPosition())
         if (card == null) return
         presenter.toggleCardSelection(card)
-        // since the selection process has just started or completed
-        // update others itemviews (to make card action views visible/invisible)
-        if (presenter.selectedCards.size <= 1)
-            adapter.notifyDataSetChanged()
     }
 
     override fun showSelectionOptions() {
         adapter.isSelecting = true
         llSelectionParent.visibility = View.VISIBLE
+        adapter.notifyDataSetChanged()
     }
 
     override fun hideSelectionOptions() {
         adapter.isSelecting = false
         llSelectionParent.visibility = View.GONE
         adapter.unselectCards()
+        adapter.notifyDataSetChanged()
     }
 
     override fun setSelectedCardsCounter(count: Int) {
