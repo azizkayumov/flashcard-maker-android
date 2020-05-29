@@ -1,5 +1,6 @@
 package com.piapps.flashcardpro.features.editor.adapter
 
+import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -8,13 +9,11 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.kent.layouts.setIconColor
 import com.kent.layouts.textColorResource
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.db.tables.CardDb
-import com.piapps.flashcardpro.core.extension.color
-import com.piapps.flashcardpro.core.extension.getLocalizedString
-import com.piapps.flashcardpro.core.extension.load
-import com.piapps.flashcardpro.core.extension.toColor
+import com.piapps.flashcardpro.core.extension.*
 import com.piapps.flashcardpro.core.platform.LONG_ANIMATION
 import com.piapps.flashcardpro.core.platform.component.FlipAnimation
 import com.piapps.flashcardpro.features.editor.adapter.cells.CardUI
@@ -148,7 +147,6 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
 
         init {
             root = itemView.findViewById(CardUI.rootId)
-            root.setOnLongClickListener(this)
 
             front = itemView.findViewById(CardUI.frontId)
             tvFront = itemView.findViewById(CardUI.frontTvId)
@@ -162,7 +160,7 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             ivBackEdit = itemView.findViewById(CardUI.backIvEditId)
             ivBackFlip = itemView.findViewById(CardUI.backIvFlipId)
 
-            ivDelete = itemView.findViewById(CardUI.frontIvDeleteId)
+            ivDelete = itemView.findViewById(CardUI.ivDeleteId)
             ivSelected = itemView.findViewById(CardUI.ivSelectedIndicatorId)
 
             ivFrontEdit.setOnClickListener(this)
@@ -172,9 +170,11 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             ivBackFlip.setOnClickListener(this)
             tvBack.setOnClickListener(this)
             ivDelete.setOnClickListener(this)
+            ivSelected.setOnClickListener(this)
 
             tvFront.setOnLongClickListener(this)
             tvBack.setOnLongClickListener(this)
+            root.setOnLongClickListener(this)
         }
 
         fun bind(card: CardDb) {
@@ -196,14 +196,24 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             else if (defaultColor.isNotBlank())
                 front.setBackgroundColor(defaultColor.toColor())
             else
-                front.setBackgroundColor(ContextCompat.getColor(itemView.context, card.setId.color()))
+                front.setBackgroundColor(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        card.setId.color()
+                    )
+                )
 
             if (card.backColor.isNotBlank())
                 back.setBackgroundColor(card.backColor.toColor())
             else if (defaultColor.isNotBlank())
                 back.setBackgroundColor(defaultColor.toColor())
             else
-                back.setBackgroundColor(ContextCompat.getColor(itemView.context, card.setId.color()))
+                back.setBackgroundColor(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        card.setId.color()
+                    )
+                )
 
             // set text colors
             if (card.frontTextColor.isNotBlank())
@@ -226,7 +236,11 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             else
                 ivBack.load("")
 
-            ivSelected.visibility = if (card.isSelected) View.VISIBLE else View.GONE
+            showIsSelected()
+            if (isSelecting)
+                hideActions()
+            else
+                showActions()
         }
 
         fun flip(reverse: Boolean = false) {
@@ -235,9 +249,14 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             root.startAnimation(anim)
         }
 
+        override fun onLongClick(v: View?): Boolean {
+            toggleSelection()
+            return true
+        }
+
         override fun onClick(v: View?) {
             if (isSelecting) {
-                onLongClick(v) // do the same with onLongClick
+                toggleSelection()
                 return
             }
             when (v) {
@@ -266,18 +285,56 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
                 ivBackFlip -> {
                     flip(true)
                 }
+                ivSelected -> {
+                    toggleSelection()
+                }
             }
         }
 
-        override fun onLongClick(v: View?): Boolean {
-            showToggleSelection()
+        private fun toggleSelection() {
+            list[adapterPosition].isSelected = !list[adapterPosition].isSelected
+            showIsSelected()
             onCardClickListener?.onCardSelectionToggle()
-            return true
         }
 
-        private fun showToggleSelection() {
-            list[adapterPosition].isSelected = !list[adapterPosition].isSelected
-            ivSelected.visibility = if (list[adapterPosition].isSelected) View.VISIBLE else View.GONE
+        private fun showIsSelected() {
+            if (list[adapterPosition].isSelected) {
+                ivSelected.setBackgroundResource(
+                    if (itemView.context.appTheme().isNight())
+                        R.drawable.circle_gray
+                    else
+                        R.drawable.circle_white
+                )
+                ivSelected.setImageResource(R.drawable.ic_check_circle)
+                ivSelected.setIconColor(ContextCompat.getColor(itemView.context, R.color.c7))
+                hideActions()
+            } else {
+                ivSelected.setBackgroundColor(Color.TRANSPARENT)
+                ivSelected.setImageResource(R.drawable.ic_check)
+                ivSelected.setIconColor(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        itemView.context.appTheme().colorIconActive
+                    )
+                )
+                showActions()
+            }
+        }
+
+        private fun hideActions() {
+            ivFrontEdit.visibility = View.INVISIBLE
+            ivBackEdit.visibility = View.INVISIBLE
+            ivDelete.visibility = View.INVISIBLE
+            ivFrontFlip.visibility = View.INVISIBLE
+            ivBackFlip.visibility = View.INVISIBLE
+        }
+
+        private fun showActions() {
+            ivFrontEdit.visibility = View.VISIBLE
+            ivBackEdit.visibility = View.VISIBLE
+            ivDelete.visibility = View.VISIBLE
+            ivFrontFlip.visibility = View.VISIBLE
+            ivBackFlip.visibility = View.VISIBLE
         }
     }
 

@@ -220,6 +220,7 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
             cards[i].setId = setId
         view?.showCards(cards)
 
+        view?.showCurrentCardPosition()
         autoSave()
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
+import androidx.core.content.ContextCompat
 import com.kent.layouts.*
 import com.kent.layouts.viewgroup.frameLayout
 import com.kent.layouts.viewgroup.lparams
@@ -25,7 +26,7 @@ class CardUI {
         val frontIvId = 12
         val frontIvEditId = 13
         val frontIvFlipId = 14
-        val frontIvDeleteId = 15
+        val ivDeleteId = 15
 
         val backId = 20
         val backTvId = 21
@@ -63,18 +64,7 @@ class CardUI {
                         id = frontIvEditId
                         layoutParams = FrameLayout.LayoutParams(dip(48), dip(48))
                         padding = dip(12)
-                        setImageResource(R.drawable.ic_add)
-                        setIconColor(ctx, R.color.colorIconActive)
-                        setRippleEffect()
-                    }
-
-                    imageView {
-                        id = frontIvDeleteId
-                        layoutParams = FrameLayout.LayoutParams(dip(48), dip(48)).apply {
-                            gravity = Gravity.END
-                        }
-                        padding = dip(12)
-                        setImageResource(R.drawable.ic_close)
+                        setImageResource(R.drawable.ic_edit)
                         setIconColor(ctx, R.color.colorIconActive)
                         setRippleEffect()
                     }
@@ -117,7 +107,7 @@ class CardUI {
                         id = backIvEditId
                         layoutParams = FrameLayout.LayoutParams(dip(48), dip(48))
                         padding = dip(12)
-                        setImageResource(R.drawable.ic_add)
+                        setImageResource(R.drawable.ic_edit)
                         setIconColor(ctx, R.color.colorIconActive)
                         setRippleEffect()
                     }
@@ -149,16 +139,24 @@ class CardUI {
                 imageView {
                     id = ivSelectedIndicatorId
                     layoutParams = FrameLayout.LayoutParams(dip(24), dip(24)).apply {
-                        gravity = Gravity.END
+                        gravity = Gravity.BOTTOM
                         margin = dip(12)
                     }
-                    setBackgroundResource(R.drawable.circle_white)
-                    setImageResource(R.drawable.ic_selected)
-                    setIconColor(ctx, R.color.c7)
-                    visibility = View.GONE
+                    setImageResource(R.drawable.ic_check)
+                    setIconColor(ContextCompat.getColor(ctx, ctx.appTheme().colorIconActive))
+                }
+
+                imageView {
+                    id = ivDeleteId
+                    layoutParams = FrameLayout.LayoutParams(dip(48), dip(48)).apply {
+                        gravity = Gravity.END
+                    }
+                    padding = dip(12)
+                    setImageResource(R.drawable.ic_close)
+                    setIconColor(ctx, ctx.appTheme().colorIconActive)
+                    setRippleEffect()
                 }
             }
         }
     }
-
 }

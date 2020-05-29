@@ -63,4 +63,6 @@ class Theme(
             colorBackground = R.color.colorBackground_NIGHT
         }
     }
+
+    fun isNight() = id == THEME_NIGHT
 }
