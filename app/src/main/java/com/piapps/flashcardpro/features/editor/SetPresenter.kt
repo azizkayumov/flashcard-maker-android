@@ -218,6 +218,7 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
 
         for (i in 0 until cards.size)
             cards[i].setId = setId
+
         view?.showCards(cards)
 
         view?.showCurrentCardPosition()

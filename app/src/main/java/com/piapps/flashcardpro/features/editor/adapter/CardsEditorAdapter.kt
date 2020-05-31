@@ -109,6 +109,11 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
         }
     }
 
+    fun hideSelectedCards(){
+        list.removeAll { it.isSelected }
+        notifyDataSetChanged()
+    }
+
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }

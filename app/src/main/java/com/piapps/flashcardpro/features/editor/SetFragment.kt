@@ -180,6 +180,8 @@ class SetFragment : BaseFragment(), SetEditorView,
         }
 
         tvCut.setOnClickListener {
+            adapter.hideSelectedCards()
+            showCurrentCardPosition()
             presenter.moveCards()
         }
     }
@@ -199,19 +201,27 @@ class SetFragment : BaseFragment(), SetEditorView,
                 showSetTitleEditor(presenter.set.title)
             }
             R.string.add_labels -> {
-                (activity as MainActivity).openFragment(LabelsFragment.forLabels(presenter.set.labels).apply {
-                    onLabelsEditListener = this@SetFragment
-                    onLabelsEditListener
-                }, true)
+                (activity as MainActivity).openFragment(
+                    LabelsFragment.forLabels(presenter.set.labels).apply {
+                        onLabelsEditListener = this@SetFragment
+                        onLabelsEditListener
+                    }, true
+                )
             }
             R.string.move_to_trash -> {
                 val dialog = ctx.alert {
                     setMessage(ctx.getLocalizedString(R.string.are_you_sure_to_move_to_trash))
                 }
-                dialog.setButton(DialogInterface.BUTTON_NEGATIVE, ctx.getLocalizedString(R.string.no)) { d, i ->
+                dialog.setButton(
+                    DialogInterface.BUTTON_NEGATIVE,
+                    ctx.getLocalizedString(R.string.no)
+                ) { d, i ->
                     dialog.dismiss()
                 }
-                dialog.setButton(DialogInterface.BUTTON_POSITIVE, ctx.getLocalizedString(R.string.yes)) { d, i ->
+                dialog.setButton(
+                    DialogInterface.BUTTON_POSITIVE,
+                    ctx.getLocalizedString(R.string.yes)
+                ) { d, i ->
                     presenter.moveSetToTrash()
                     onSetUpdatedListener?.onSetMovedToTrash(presenter.set)
                     onSetUpdatedListener = null
@@ -251,7 +261,11 @@ class SetFragment : BaseFragment(), SetEditorView,
             addMenu(CARD_TEXT, ctx.getLocalizedString(R.string.edit_text), R.drawable.ic_text)
             addMenu(CARD_IMAGE, ctx.getLocalizedString(R.string.add_image), R.drawable.ic_image)
             addMenu(CARD_DRAWING, ctx.getLocalizedString(R.string.drawing), R.drawable.ic_brush)
-            addMenu(CARD_TEXT_COLOR, ctx.getLocalizedString(R.string.choose_card_text_color), R.drawable.ic_color)
+            addMenu(
+                CARD_TEXT_COLOR,
+                ctx.getLocalizedString(R.string.choose_card_text_color),
+                R.drawable.ic_color
+            )
             addMenu(
                 CARD_BACK_COLOR,
                 ctx.getLocalizedString(R.string.choose_card_background_color),
@@ -266,7 +280,10 @@ class SetFragment : BaseFragment(), SetEditorView,
     override fun bottomMenuClick(item: BottomMenuItem) {
         when (item.id) {
             STATS -> {
-                (activity as MainActivity).replaceFragment(StatsFragment.set(presenter.set.id), true)
+                (activity as MainActivity).replaceFragment(
+                    StatsFragment.set(presenter.set.id),
+                    true
+                )
             }
             REVERSE -> {
                 (activity as MainActivity).closeBottomMenu()
@@ -368,6 +385,9 @@ class SetFragment : BaseFragment(), SetEditorView,
         var currentPosition = layoutManager.findFirstCompletelyVisibleItemPosition()
         if (currentPosition < 0) currentPosition = 0
         adapter.addAll(cards, currentPosition)
+
+        if (adapter.list.isNotEmpty())
+            tvCurrentCard.text = "${currentPosition + 1} / ${adapter.list.size}"
     }
 
     override fun showNewCard(card: CardDb) {
@@ -458,8 +478,17 @@ class SetFragment : BaseFragment(), SetEditorView,
         presenter.exportCSV()
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if (PermissionUtils.permissionGranted(requestCode, grantResults, PermissionUtils.WRITE_EXTERNAL_STORAGE)) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (PermissionUtils.permissionGranted(
+                requestCode,
+                grantResults,
+                PermissionUtils.WRITE_EXTERNAL_STORAGE
+            )
+        ) {
             checkAndExportToCSV()
         }
     }
