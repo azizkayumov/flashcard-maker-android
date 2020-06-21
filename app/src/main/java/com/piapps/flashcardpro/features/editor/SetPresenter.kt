@@ -145,6 +145,18 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
         saveCard(editingCard)
     }
 
+    fun clearCardSide() {
+        if (editingCard.isEditingBack) {
+            editingCard.back = ""
+            editingCard.backImage = ""
+        } else {
+            editingCard.front = ""
+            editingCard.back = ""
+        }
+        saveCard(editingCard)
+        view?.updateCard(editingCard)
+    }
+
     fun saveCard(card: CardDb) {
         set.lastEdited = System.currentTimeMillis()
         saveSet(set, listOf(card))

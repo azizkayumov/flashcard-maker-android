@@ -72,19 +72,25 @@ open class BaseActivity : AppCompatActivity() {
 
     // currentX
     private var cX = 0F
+
     // currentY
     private var cY = 0F
+
     // currentTime
     private var cTime = 0L
+
     // currentSpeed
     private var cSpeed = 0F
+
     // swiping begins
     var swiping = false
     // disable double tap
     //var lastTouchTime = 0L
 
     override fun dispatchTouchEvent(motionEvent: MotionEvent?): Boolean {
-        if (motionEvent == null || topFragment()?.canSwipeBack() == false) return super.dispatchTouchEvent(motionEvent)
+        if (motionEvent == null || topFragment()?.canSwipeBack() == false) return super.dispatchTouchEvent(
+            motionEvent
+        )
 
         val w = topFragment()?.fragmentView?.width ?: 0
         when (motionEvent.action) {
@@ -205,7 +211,8 @@ open class BaseActivity : AppCompatActivity() {
             if (animate) {
                 when (baseFragment.enterAnimation) {
                     ENTER_FROM_RIGHT -> {
-                        val backgroundView =/*TODO -> if (baseFragment is ChatFragment) baseFragment.ivBackground else*/
+                        val backgroundView =
+/*TODO -> if (baseFragment is ChatFragment) baseFragment.ivBackground else*/
                             null
                         enterFromRight(fragmentView, backgroundView).apply {
                             addListener(object : Animator.AnimatorListener {
@@ -306,7 +313,11 @@ open class BaseActivity : AppCompatActivity() {
         openFragment(baseFragment, animate)
     }
 
-    private fun removeFragment(baseFragment: BaseFragment, animate: Boolean, resumeTopFragment: Boolean = true) {
+    private fun removeFragment(
+        baseFragment: BaseFragment,
+        animate: Boolean,
+        resumeTopFragment: Boolean = true
+    ) {
         hideSoftInput()
         val pos = rootView.indexOfChild(baseFragment.parentView)
         if (pos >= 0 && pos <= fragments.size) {
@@ -314,7 +325,8 @@ open class BaseActivity : AppCompatActivity() {
             if (animate) {
                 when (baseFragment.exitAnimation) {
                     EXIT_TO_RIGHT -> {
-                        val backgroundView =/*TODO -> if (baseFragment is ChatFragment) baseFragment.ivBackground else*/
+                        val backgroundView =
+/*TODO -> if (baseFragment is ChatFragment) baseFragment.ivBackground else*/
                             null
                         rootView.getChildAt(pos)?.let {
                             exitToRight(
@@ -521,7 +533,11 @@ open class BaseActivity : AppCompatActivity() {
         this.windowToken = et.windowToken
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         // only the top fragment may receive the results ;-)
         topFragment()?.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
@@ -536,6 +552,7 @@ open class BaseActivity : AppCompatActivity() {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             window.statusBarColor = ContextCompat.getColor(this, color)
+            window.navigationBarColor = ContextCompat.getColor(this, color)
         }
     }
 }

@@ -22,7 +22,8 @@ interface SetEditorView : BaseView {
         val CARD_IMAGE = 101f
         val CARD_DRAWING = 102f
         val CARD_TEXT_COLOR = 103f
-        val CARD_BACK_COLOR = 104f
+        val CARD_BACKGROUND_COLOR = 104f
+        val CARD_CLEAR_SIDE = 105f
     }
 
     fun setTitle(s: String)
@@ -31,6 +32,7 @@ interface SetEditorView : BaseView {
     fun showSetTitleEditor(current: String)
     fun showCards(cards: List<CardDb>)
     fun showNewCard(card: CardDb)
+    fun updateCard(card: CardDb)
     fun cards(): List<CardDb>
 
     fun showLabels(labels: String)

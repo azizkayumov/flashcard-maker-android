@@ -64,6 +64,7 @@
     <string name="choose_card_background_color">Choose a card background color</string>
     <string name="choose_card_text_color">Choose a card text color</string>
     <string name="choose_drawing_color">Choose drawing color</string>
+    <string name="clear_card_side">Clear the card side</string>
 
     <string name="edit_text">Edit text</string>
     <string name="edit_text_hint">Type anything..</string>

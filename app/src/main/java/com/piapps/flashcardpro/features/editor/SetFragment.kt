@@ -28,7 +28,8 @@ import com.piapps.flashcardpro.core.platform.component.menu.MenuItem
 import com.piapps.flashcardpro.core.util.PermissionUtils
 import com.piapps.flashcardpro.features.MainActivity
 import com.piapps.flashcardpro.features.dialog.DialogFragment
-import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.CARD_BACK_COLOR
+import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.CARD_BACKGROUND_COLOR
+import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.CARD_CLEAR_SIDE
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.CARD_DRAWING
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.CARD_IMAGE
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.CARD_TEXT
@@ -267,9 +268,14 @@ class SetFragment : BaseFragment(), SetEditorView,
                 R.drawable.ic_color
             )
             addMenu(
-                CARD_BACK_COLOR,
+                CARD_BACKGROUND_COLOR,
                 ctx.getLocalizedString(R.string.choose_card_background_color),
                 R.drawable.ic_text_color
+            )
+            addMenu(
+                CARD_CLEAR_SIDE,
+                ctx.getLocalizedString(R.string.clear_card_side),
+                R.drawable.ic_clear
             )
         }
         val fragment = BottomMenuFragment("", menu)
@@ -332,10 +338,14 @@ class SetFragment : BaseFragment(), SetEditorView,
                     onDrawingListener = this@SetFragment
                 }, true)
             }
-            CARD_BACK_COLOR -> {
+            CARD_BACKGROUND_COLOR -> {
                 (activity as MainActivity).replaceFragment(ColorFragment.cardBackground().apply {
                     onColorSelectedListener = this@SetFragment
                 }, true)
+            }
+            CARD_CLEAR_SIDE -> {
+                (activity as MainActivity).closeBottomMenu()
+                presenter.clearCardSide()
             }
         }
     }
@@ -395,6 +405,10 @@ class SetFragment : BaseFragment(), SetEditorView,
         if (pos < 0) pos = 0
         adapter.addNewCard(card, pos)
         rv.smoothScrollToPosition(pos)
+    }
+
+    override fun updateCard(card: CardDb) {
+        adapter.updateCard(card)
     }
 
     override fun onCardDeleteClick() {
