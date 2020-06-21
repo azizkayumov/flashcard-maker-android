@@ -65,7 +65,7 @@ class CardUI {
                         layoutParams = FrameLayout.LayoutParams(dip(48), dip(48))
                         padding = dip(12)
                         setImageResource(R.drawable.ic_edit)
-                        setIconColor(ctx, R.color.colorIconActive)
+                        setIconColor(ContextCompat.getColor(ctx, ctx.appTheme().colorIconActive))
                         setRippleEffect()
                     }
 
@@ -76,7 +76,7 @@ class CardUI {
                         }
                         padding = dip(12)
                         setImageResource(R.drawable.ic_flip)
-                        setIconColor(ctx, R.color.colorIconActive)
+                        setIconColor(ContextCompat.getColor(ctx, ctx.appTheme().colorIconActive))
                     }
 
                     autoResizeTextView {
@@ -108,7 +108,7 @@ class CardUI {
                         layoutParams = FrameLayout.LayoutParams(dip(48), dip(48))
                         padding = dip(12)
                         setImageResource(R.drawable.ic_edit)
-                        setIconColor(ctx, R.color.colorIconActive)
+                        setIconColor(ContextCompat.getColor(ctx, ctx.appTheme().colorIconActive))
                         setRippleEffect()
                     }
 
@@ -119,7 +119,7 @@ class CardUI {
                         }
                         padding = dip(12)
                         setImageResource(R.drawable.ic_flip)
-                        setIconColor(ctx, R.color.colorIconActive)
+                        setIconColor(ContextCompat.getColor(ctx, ctx.appTheme().colorIconActive))
                         setRippleEffect()
                     }
 

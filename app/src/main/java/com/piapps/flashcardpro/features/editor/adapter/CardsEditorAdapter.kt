@@ -109,7 +109,7 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
         }
     }
 
-    fun hideSelectedCards(){
+    fun hideSelectedCards() {
         list.removeAll { it.isSelected }
         notifyDataSetChanged()
     }
@@ -124,6 +124,10 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
 
     override fun onBindViewHolder(holder: ViewHolder, pos: Int) {
         holder.bind(list[pos])
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
+        holder.bind(list[position])
     }
 
     override fun getItemCount(): Int {
@@ -183,8 +187,13 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
         }
 
         fun bind(card: CardDb) {
-            front.visibility = View.VISIBLE
-            back.visibility = View.GONE
+            if (!card.isEditingBack) {
+                front.visibility = View.VISIBLE
+                back.visibility = View.GONE
+            } else {
+                front.visibility = View.GONE
+                back.visibility = View.VISIBLE
+            }
 
             card.order = adapterPosition
             // set texts
