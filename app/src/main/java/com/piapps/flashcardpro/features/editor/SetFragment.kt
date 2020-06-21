@@ -542,17 +542,25 @@ class SetFragment : BaseFragment(), SetEditorView,
     fun scrollNext() {
         val pos = layoutManager.findFirstCompletelyVisibleItemPosition()
         val card = adapter.list.getOrNull(pos + 1)
-        if (card == null) return
-        rv.smoothScrollToPosition(pos + 1)
-        showCurrentCardPosition()
+        if (card == null) {
+            rv.scrollToPosition(0)
+            tvCurrentCard.text = "${1} / ${adapter.list.size}"
+        } else {
+            rv.smoothScrollToPosition(pos + 1)
+            showCurrentCardPosition()
+        }
     }
 
     fun scrollPrevious() {
         val pos = layoutManager.findFirstCompletelyVisibleItemPosition()
         val card = adapter.list.getOrNull(pos - 1)
-        if (card == null) return
-        rv.smoothScrollToPosition(pos - 1)
-        showCurrentCardPosition()
+        if (card == null) {
+            rv.scrollToPosition(adapter.list.size - 1)
+            tvCurrentCard.text = "${adapter.list.size} / ${adapter.list.size}"
+        } else {
+            rv.smoothScrollToPosition(pos - 1)
+            showCurrentCardPosition()
+        }
     }
 
     override fun showToast(res: Int) {
