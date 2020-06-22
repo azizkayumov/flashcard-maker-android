@@ -151,7 +151,7 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
             editingCard.backImage = ""
         } else {
             editingCard.front = ""
-            editingCard.back = ""
+            editingCard.frontImage = ""
         }
         saveCard(editingCard)
         view?.updateCard(editingCard)
