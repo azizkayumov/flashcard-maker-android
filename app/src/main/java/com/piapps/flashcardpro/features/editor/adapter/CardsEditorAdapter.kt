@@ -17,6 +17,7 @@ import com.piapps.flashcardpro.core.extension.*
 import com.piapps.flashcardpro.core.platform.LONG_ANIMATION
 import com.piapps.flashcardpro.core.platform.component.FlipAnimation
 import com.piapps.flashcardpro.features.editor.adapter.cells.CardUI
+import java.util.*
 
 /**
  * Created by abduaziz on 2019-10-01 at 21:26.
@@ -88,7 +89,7 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
 
     fun sortCardsAlphabetically() {
         list.sortBy {
-            it.front
+            it.front.toLowerCase(Locale.getDefault())
         }
         updateOrders()
     }
