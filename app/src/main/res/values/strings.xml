@@ -33,7 +33,7 @@
     <string name="trash_cleared">Trash is empty</string>
 
     <string name="statistics">Statistics</string>
-    <string name="reverse_cards">Reverse cards</string>
+    <string name="reverse_cards">Flip cards</string>
     <string name="shuffle_cards">Shuffle cards</string>
     <string name="sort_cards_alph">Sort cards alphabetically</string>
     <string name="export_to_csv">Export to CSV</string>
