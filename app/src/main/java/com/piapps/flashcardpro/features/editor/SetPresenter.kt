@@ -145,13 +145,23 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
         saveCard(editingCard)
     }
 
-    fun defaultFontSize() = if (editingCard.isEditingBack) editingCard.backTextSize else editingCard.frontTextSize
-    fun editCardFontSize(size: Float){
+    fun defaultFontSize() =
+        if (editingCard.isEditingBack) editingCard.backTextSize else editingCard.frontTextSize
+
+    fun editCardFontSize(size: Float) {
         if (editingCard.isEditingBack)
             editingCard.backTextSize = size
         else
             editingCard.frontTextSize = size
         saveCard(editingCard)
+    }
+
+    fun editAllCardsFontSize(size: Float) {
+        view?.cards()?.forEach {
+            it.frontTextSize = size
+            it.backTextSize = size
+        }
+        saveSet(set, view?.cards() ?: listOf())
     }
 
     fun clearCardSide() {

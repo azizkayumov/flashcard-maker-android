@@ -3,6 +3,7 @@ package com.piapps.flashcardpro.features.editor
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.CheckBox
 import android.widget.SeekBar
 import android.widget.TextView
 import com.piapps.flashcardpro.core.platform.BaseFragment
@@ -32,6 +33,7 @@ class EditFontSizeFragment : BaseFragment() {
 
     lateinit var tvCurFontSize: TextView
     lateinit var seekBarFont: SeekBar
+    lateinit var chbAll: CheckBox
 
     override fun createView(context: Context) = UI()
 
@@ -50,16 +52,22 @@ class EditFontSizeFragment : BaseFragment() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 val newFontSize = progress.toFloat() + 14F
-                onEditFontSizeListener?.onCardTextSizeChanged(newFontSize)
+                onEditFontSizeListener?.onCardTextSizeChanged(newFontSize, chbAll.isChecked)
                 tvCurFontSize.text = newFontSize.toInt().toString()
             }
         })
+
+        chbAll.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                val newFontSize = seekBarFont.progress.toFloat() + 14F
+                onEditFontSizeListener?.onCardTextSizeChanged(newFontSize, chbAll.isChecked)
+            }
+        }
     }
 
     var onEditFontSizeListener: OnEditFontSizeListener? = null
-
     interface OnEditFontSizeListener {
-        fun onCardTextSizeChanged(newSize: Float)
+        fun onCardTextSizeChanged(newSize: Float, forAll: Boolean)
     }
 
 }

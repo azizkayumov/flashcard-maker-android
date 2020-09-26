@@ -471,9 +471,14 @@ class SetFragment : BaseFragment(), SetEditorView,
         adapter.updateCard(presenter.editingCard)
     }
 
-    override fun onCardTextSizeChanged(newSize: Float) {
-        presenter.editCardFontSize(newSize)
-        adapter.updateCard(presenter.editingCard)
+    override fun onCardTextSizeChanged(newSize: Float, forAll: Boolean) {
+        if (forAll) {
+            presenter.editAllCardsFontSize(newSize)
+            adapter.notifyDataSetChanged()
+        } else {
+            presenter.editCardFontSize(newSize)
+            adapter.updateCard(presenter.editingCard)
+        }
     }
 
     override fun onCardSelectionToggle() {

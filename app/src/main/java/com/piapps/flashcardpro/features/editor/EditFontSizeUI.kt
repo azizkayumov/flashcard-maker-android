@@ -54,6 +54,12 @@ fun EditFontSizeFragment.UI(): View {
                 max = 56
                 progress = 14
             }
+
+            chbAll = checkBox {
+                layoutParams = LinearLayout.LayoutParams(matchParent, wrapContent)
+                text = ctx.getLocalizedString(R.string.set_the_font_size_for_all)
+                textColorResource = theme.colorPrimaryText
+            }
         }
     }
 }

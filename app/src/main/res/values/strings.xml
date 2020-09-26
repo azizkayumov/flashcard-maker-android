@@ -63,6 +63,7 @@
     <string name="choose_set_color">Choose set color</string>
     <string name="choose_card_background_color">Choose the card background color</string>
     <string name="edit_card_text_size">Set the card font size</string>
+    <string name="set_the_font_size_for_all">Set the font size for all cards</string>
     <string name="choose_card_text_color">Choose the card text color</string>
     <string name="choose_drawing_color">Choose the drawing color</string>
     <string name="clear_card_side">Clear the card side</string>
