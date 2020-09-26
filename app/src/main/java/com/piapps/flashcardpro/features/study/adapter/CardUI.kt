@@ -51,7 +51,7 @@ class CardUI {
                         layoutParams = FrameLayout.LayoutParams(matchParent, matchParent)
                     }
 
-                    autoResizeTextView {
+                    textView {
                         id = frontTvId
                         layoutParams = FrameLayout.LayoutParams(matchParent, matchParent).apply {
                             topMargin = dip(48)
@@ -75,7 +75,7 @@ class CardUI {
                         layoutParams = FrameLayout.LayoutParams(matchParent, matchParent)
                     }
 
-                    autoResizeTextView {
+                    textView {
                         id = backTvId
                         layoutParams = FrameLayout.LayoutParams(matchParent, matchParent).apply {
                             topMargin = dip(48)
