@@ -23,7 +23,10 @@ class CardDb(
     var frontImage: String = "", // path to front image
     var backImage: String = "", // path to back image
 
-    var rating: Int = 0, // if true in Quiz, +1 else equals-1
+    var frontTextSize: Float? = 28F,
+    var backTextSize: Float? = 28F,
+
+    var rating: Int = 0, // if true in Quiz, +1 else -1
     var flags: Int = 0,
 
     @Transient
@@ -55,6 +58,7 @@ class CardDb(
             frontColor, backColor,
             frontTextColor, backTextColor,
             frontImage, backImage,
+            frontTextSize, backTextSize,
             rating, flags
         )
     }

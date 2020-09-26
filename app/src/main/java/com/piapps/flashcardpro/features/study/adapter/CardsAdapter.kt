@@ -1,5 +1,6 @@
 package com.piapps.flashcardpro.features.study.adapter
 
+import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -44,7 +45,8 @@ class CardsAdapter : RecyclerView.Adapter<CardsAdapter.ViewHolder>() {
         return if (list.size == 0) 0 else Int.MAX_VALUE
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
 
         val root: CardView
 
@@ -90,14 +92,24 @@ class CardsAdapter : RecyclerView.Adapter<CardsAdapter.ViewHolder>() {
             else if (defaultColor.isNotBlank())
                 front.setBackgroundColor(defaultColor.toColor())
             else
-                front.setBackgroundColor(ContextCompat.getColor(itemView.context, card.setId.color()))
+                front.setBackgroundColor(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        card.setId.color()
+                    )
+                )
 
             if (card.backColor.isNotBlank())
                 back.setBackgroundColor(card.backColor.toColor())
             else if (defaultColor.isNotBlank())
                 back.setBackgroundColor(defaultColor.toColor())
             else
-                back.setBackgroundColor(ContextCompat.getColor(itemView.context, card.setId.color()))
+                back.setBackgroundColor(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        card.setId.color()
+                    )
+                )
 
             // set text colors
             if (card.frontTextColor.isNotBlank())
@@ -119,6 +131,10 @@ class CardsAdapter : RecyclerView.Adapter<CardsAdapter.ViewHolder>() {
                 ivBack.load(card.backImage)
             else
                 ivBack.load("")
+
+            // set font size
+            tvFront.setTextSize(TypedValue.COMPLEX_UNIT_SP, card.frontTextSize ?: 28F)
+            tvBack.setTextSize(TypedValue.COMPLEX_UNIT_SP, card.backTextSize ?: 28F)
         }
 
         override fun onClick(v: View?) {

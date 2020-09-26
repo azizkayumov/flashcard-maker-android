@@ -79,7 +79,7 @@ class CardUI {
                         setIconColor(ContextCompat.getColor(ctx, ctx.appTheme().colorIconActive))
                     }
 
-                    autoResizeTextView {
+                    textView {
                         id = frontTvId
                         layoutParams = FrameLayout.LayoutParams(matchParent, matchParent).apply {
                             topMargin = dip(48)

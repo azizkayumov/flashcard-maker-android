@@ -24,6 +24,7 @@ interface SetEditorView : BaseView {
         val CARD_TEXT_COLOR = 103f
         val CARD_BACKGROUND_COLOR = 104f
         val CARD_CLEAR_SIDE = 105f
+        val CARD_TEXT_SIZE = 106F
     }
 
     fun setTitle(s: String)

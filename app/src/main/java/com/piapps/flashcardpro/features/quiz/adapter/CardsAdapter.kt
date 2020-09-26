@@ -1,5 +1,6 @@
 package com.piapps.flashcardpro.features.quiz.adapter
 
+import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -111,6 +112,10 @@ class CardsAdapter : RecyclerView.Adapter<CardsAdapter.ViewHolder>() {
                 ivFront.load(card.frontImage)
             if (card.backImage.isNotBlank())
                 ivBack.load(card.backImage)
+
+            // set font size
+            tvFront.setTextSize(TypedValue.COMPLEX_UNIT_SP, card.frontTextSize ?: 28F)
+            tvBack.setTextSize(TypedValue.COMPLEX_UNIT_SP, card.backTextSize ?: 28F)
         }
 
         fun flip() {

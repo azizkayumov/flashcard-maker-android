@@ -13,4 +13,6 @@
         <item name="android:splitMotionEvents">false</item>
     </style>
 
+    <style name="discrete_seekbar" parent="Widget.AppCompat.SeekBar.Discrete"/>
+
 </resources>

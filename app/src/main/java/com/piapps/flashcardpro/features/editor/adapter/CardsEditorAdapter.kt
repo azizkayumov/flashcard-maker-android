@@ -1,6 +1,7 @@
 package com.piapps.flashcardpro.features.editor.adapter
 
 import android.graphics.Color
+import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -250,6 +251,10 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
                 ivBack.load(card.backImage)
             else
                 ivBack.load("")
+
+            // set font size
+            tvFront.setTextSize(TypedValue.COMPLEX_UNIT_SP, card.frontTextSize ?: 28F)
+            tvBack.setTextSize(TypedValue.COMPLEX_UNIT_SP, card.backTextSize ?: 28F)
 
             showIsSelected()
             if (isSelecting)

@@ -7,11 +7,9 @@ import android.os.Build
 import android.telephony.PhoneNumberUtils
 import android.text.TextUtils
 import android.view.ViewGroup
-import android.view.ViewManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.github.mikephil.charting.charts.LineChart
@@ -24,7 +22,6 @@ import com.piapps.flashcardpro.core.platform.component.CircleDownloadView
 import com.piapps.flashcardpro.core.platform.component.CircleProfileView
 import com.rm.freedrawview.FreeDrawView
 import de.hdodenhof.circleimageview.CircleImageView
-import java.lang.Exception
 
 /**
  * Created by abduaziz on 2019-09-22 at 00:13.

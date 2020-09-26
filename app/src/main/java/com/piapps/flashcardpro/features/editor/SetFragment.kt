@@ -34,6 +34,7 @@ import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.CARD_DRAW
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.CARD_IMAGE
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.CARD_TEXT
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.CARD_TEXT_COLOR
+import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.CARD_TEXT_SIZE
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.EXPORT
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.IMPORT
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.PASTE
@@ -59,6 +60,7 @@ class SetFragment : BaseFragment(), SetEditorView,
     EditNameFragment.OnEditNameListener,
     CardsEditorAdapter.OnCardClickListener,
     ColorFragment.OnColorSelectedListener,
+    EditFontSizeFragment.OnEditFontSizeListener,
     EditCardTextFragment.OnCardTextEditedListener,
     PhotosFragment.OnCardImageSelectedListener,
     DrawFragment.OnDrawingListener,
@@ -263,6 +265,11 @@ class SetFragment : BaseFragment(), SetEditorView,
             addMenu(CARD_IMAGE, ctx.getLocalizedString(R.string.add_image), R.drawable.ic_image)
             addMenu(CARD_DRAWING, ctx.getLocalizedString(R.string.drawing), R.drawable.ic_brush)
             addMenu(
+                CARD_TEXT_SIZE,
+                ctx.getLocalizedString(R.string.edit_card_text_size),
+                R.drawable.ic_text_size
+            )
+            addMenu(
                 CARD_TEXT_COLOR,
                 ctx.getLocalizedString(R.string.choose_card_text_color),
                 R.drawable.ic_color
@@ -337,6 +344,15 @@ class SetFragment : BaseFragment(), SetEditorView,
                 (activity as MainActivity).replaceFragment(DrawFragment().apply {
                     onDrawingListener = this@SetFragment
                 }, true)
+            }
+            CARD_TEXT_SIZE -> {
+                (activity as MainActivity).replaceFragment(
+                    EditFontSizeFragment.withDefault(
+                        presenter.defaultFontSize() ?: 28F
+                    ).apply {
+                        onEditFontSizeListener = this@SetFragment
+                    }, true
+                )
             }
             CARD_BACKGROUND_COLOR -> {
                 (activity as MainActivity).replaceFragment(ColorFragment.cardBackground().apply {
@@ -452,6 +468,11 @@ class SetFragment : BaseFragment(), SetEditorView,
 
     override fun onDrawingImageSelected(path: String) {
         presenter.editCardBackgroundImage(path)
+        adapter.updateCard(presenter.editingCard)
+    }
+
+    override fun onCardTextSizeChanged(newSize: Float) {
+        presenter.editCardFontSize(newSize)
         adapter.updateCard(presenter.editingCard)
     }
 
