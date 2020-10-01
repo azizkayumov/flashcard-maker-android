@@ -265,6 +265,7 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
 
         fun flip(reverse: Boolean = false) {
             val anim = FlipAnimation(front, back, LONG_ANIMATION.toInt())
+            list[adapterPosition].reverse()
             if (reverse) anim.reverse()
             root.startAnimation(anim)
         }
