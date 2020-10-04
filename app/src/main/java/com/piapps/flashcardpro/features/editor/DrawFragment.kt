@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import com.kent.layouts.dip
 import com.kent.layouts.setIconColor
 import com.piapps.flashcardpro.R
+import com.piapps.flashcardpro.core.extension.toHexColor
 import com.piapps.flashcardpro.core.extension.toast
 import com.piapps.flashcardpro.core.platform.BaseFragment
 import com.piapps.flashcardpro.features.MainActivity
@@ -102,8 +103,8 @@ class DrawFragment : BaseFragment(), DrawView, ColorFragment.OnDrawingColorSelec
     }
 
     override fun onDrawingColorSelected(color: Int) {
-        ivColor.setIconColor(ctx, color)
-        drawView.paintColor = ContextCompat.getColor(ctx, color)
+        ivColor.setIconColor(color)
+        drawView.paintColor = color
     }
 
     override fun showDrawingImageFile(path: String) {

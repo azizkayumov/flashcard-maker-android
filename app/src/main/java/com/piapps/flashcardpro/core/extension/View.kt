@@ -12,6 +12,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.flask.colorpicker.ColorPickerView
+import com.flask.colorpicker.slider.AlphaSlider
+import com.flask.colorpicker.slider.LightnessSlider
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.charts.RadarChart
 import com.isseiaoki.simplecropview.CropImageView
@@ -135,6 +138,24 @@ inline fun ViewGroup.cropImageView(init: CropImageView.() -> Unit): CropImageVie
 
 inline fun ViewGroup.drawView(init: FreeDrawView.() -> Unit): FreeDrawView {
     val d = FreeDrawView(context).apply(init)
+    addView(d)
+    return d
+}
+
+inline fun ViewGroup.colorWheel(init: ColorPickerView.() -> Unit): ColorPickerView {
+    val d = ColorPickerView(context).apply(init)
+    addView(d)
+    return d
+}
+
+inline fun ViewGroup.alphaSlider(init: AlphaSlider.() -> Unit): AlphaSlider {
+    val d = AlphaSlider(context).apply(init)
+    addView(d)
+    return d
+}
+
+inline fun ViewGroup.lightnessSlider(init: LightnessSlider.() -> Unit): LightnessSlider {
+    val d = LightnessSlider(context).apply(init)
     addView(d)
     return d
 }

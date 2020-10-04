@@ -1,20 +1,21 @@
 package com.piapps.flashcardpro.features.editor
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import com.flask.colorpicker.ColorPickerView
+import com.flask.colorpicker.slider.LightnessSlider
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.extension.getLocalizedString
 import com.piapps.flashcardpro.core.platform.BaseFragment
-import com.piapps.flashcardpro.features.editor.adapter.ColorAdapter
 
 /**
  * Created by abduaziz on 2019-10-06 at 19:51.
  */
 
-class ColorFragment : BaseFragment(), ColorAdapter.OnItemClickListener {
+class ColorFragment : BaseFragment() {
 
     companion object {
         val SET_COLOR = 0
@@ -43,9 +44,9 @@ class ColorFragment : BaseFragment(), ColorAdapter.OnItemClickListener {
     }
 
     lateinit var tv: TextView
-    lateinit var rv: RecyclerView
+    lateinit var colorPicker: ColorPickerView
+    lateinit var lightness: LightnessSlider
 
-    val colorAdapter = ColorAdapter()
     var type = SET_COLOR
 
     override fun createView(context: Context) = UI()
@@ -65,61 +66,22 @@ class ColorFragment : BaseFragment(), ColorAdapter.OnItemClickListener {
         }
 
         type = args?.getInt("type", SET_COLOR) ?: SET_COLOR
-        when (type) {
-            SET_COLOR, CARD_COLOR -> {
-                colorAdapter.list.addAll(
-                    listOf(
-                        ColorAdapter.ColorEntity(R.color.c1),
-                        ColorAdapter.ColorEntity(R.color.c2),
-                        ColorAdapter.ColorEntity(R.color.c3),
-                        ColorAdapter.ColorEntity(R.color.c4),
-                        ColorAdapter.ColorEntity(R.color.c5),
-                        ColorAdapter.ColorEntity(R.color.c6),
-                        ColorAdapter.ColorEntity(R.color.c7),
-                        ColorAdapter.ColorEntity(R.color.c8),
-                        ColorAdapter.ColorEntity(R.color.c9),
-                        ColorAdapter.ColorEntity(R.color.c10),
-                        ColorAdapter.ColorEntity(R.color.c11),
-                        ColorAdapter.ColorEntity(R.color.c12),
-                        ColorAdapter.ColorEntity(R.color.c13),
-                        ColorAdapter.ColorEntity(R.color.c14),
-                        ColorAdapter.ColorEntity(R.color.c15)
-                    )
-                )
-            }
-            CARD_TEXT, DRAWING_COLOR -> {
-                colorAdapter.list.addAll(
-                    listOf(
-                        ColorAdapter.ColorEntity(R.color.md_red_900),
-                        ColorAdapter.ColorEntity(R.color.md_pink_900),
-                        ColorAdapter.ColorEntity(R.color.md_purple_900),
-                        ColorAdapter.ColorEntity(R.color.md_deep_purple_900),
-                        ColorAdapter.ColorEntity(R.color.md_indigo_900),
-                        ColorAdapter.ColorEntity(R.color.md_blue_900),
-                        ColorAdapter.ColorEntity(R.color.md_light_blue_900),
-                        ColorAdapter.ColorEntity(R.color.md_teal_900),
-                        ColorAdapter.ColorEntity(R.color.md_light_green_900),
-                        ColorAdapter.ColorEntity(R.color.md_yellow_900),
-                        ColorAdapter.ColorEntity(R.color.md_amber_900),
-                        ColorAdapter.ColorEntity(R.color.md_brown_500),
-                        ColorAdapter.ColorEntity(R.color.white),
-                        ColorAdapter.ColorEntity(R.color.black)
-                    )
-                )
+        colorPicker.setLightnessSlider(lightness)
+        lightness.setColor(Color.WHITE)
+        colorPicker.addOnColorSelectedListener { color ->
+            when (type) {
+                SET_COLOR -> onColorSelectedListener?.onSetColorSelected(color)
+                CARD_COLOR -> onColorSelectedListener?.onCardBackgroundColorSelected(color)
+                CARD_TEXT -> onColorSelectedListener?.onCardTextColorSelected(color)
+                DRAWING_COLOR -> onDrawingColorSelectedListener?.onDrawingColorSelected(color)
             }
         }
-        colorAdapter.onItemClickListener = this
-        colorAdapter.notifyDataSetChanged()
-    }
-
-    override fun onItemClick(c: ColorAdapter.ColorEntity) {
-        when (type) {
-            SET_COLOR -> onColorSelectedListener?.onSetColorSelected(c.color)
-            CARD_COLOR -> onColorSelectedListener?.onCardBackgroundColorSelected(c.color)
-            CARD_TEXT -> onColorSelectedListener?.onCardTextColorSelected(c.color)
-            DRAWING_COLOR -> {
-                onDrawingColorSelectedListener?.onDrawingColorSelected(c.color)
-                close()
+        colorPicker.addOnColorChangedListener { color ->
+            when (type) {
+                SET_COLOR -> onColorSelectedListener?.onSetColorSelected(color)
+                CARD_COLOR -> onColorSelectedListener?.onCardBackgroundColorSelected(color)
+                CARD_TEXT -> onColorSelectedListener?.onCardTextColorSelected(color)
+                DRAWING_COLOR -> onDrawingColorSelectedListener?.onDrawingColorSelected(color)
             }
         }
     }

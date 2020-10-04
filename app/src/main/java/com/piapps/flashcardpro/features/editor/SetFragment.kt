@@ -401,10 +401,9 @@ class SetFragment : BaseFragment(), SetEditorView,
     }
 
     override fun onSetColorSelected(color: Int) {
-        ivSetColor.setIconColor(ctx, color)
-        presenter.setDefaultColor(ContextCompat.getColor(ctx, color).toHexColor())
-        adapter.defaultColor = ContextCompat.getColor(ctx, color).toHexColor()
-        adapter.notifyDataSetChanged()
+        ivSetColor.setIconColor(color)
+        presenter.setDefaultColor(color.toHexColor())
+        adapter.updateDefaultColor(color.toHexColor())
     }
 
     override fun showCards(cards: List<CardDb>) {
@@ -440,7 +439,8 @@ class SetFragment : BaseFragment(), SetEditorView,
         if (card == null) return
         presenter.editingCard = card
         (activity as MainActivity).openFragment(
-            EditCardTextFragment.withText(card.front).apply { onCardTextEditedListener = this@SetFragment }, true
+            EditCardTextFragment.withText(card.front)
+                .apply { onCardTextEditedListener = this@SetFragment }, true
         )
     }
 
@@ -450,12 +450,12 @@ class SetFragment : BaseFragment(), SetEditorView,
     }
 
     override fun onCardBackgroundColorSelected(color: Int) {
-        presenter.editCardBackgroundColor(ContextCompat.getColor(ctx, color).toHexColor())
+        presenter.editCardBackgroundColor(color.toHexColor())
         adapter.updateCard(presenter.editingCard)
     }
 
     override fun onCardTextColorSelected(color: Int) {
-        presenter.editCardTextColor(ContextCompat.getColor(ctx, color).toHexColor())
+        presenter.editCardTextColor(color.toHexColor())
         adapter.updateCard(presenter.editingCard)
     }
 

@@ -30,6 +30,15 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
     var defaultColor = ""
     var isSelecting = false
 
+    fun updateDefaultColor(color: String){
+        defaultColor = color
+        list.forEach {
+            it.frontColor = defaultColor
+            it.backColor = defaultColor
+        }
+        notifyDataSetChanged()
+    }
+
     fun addNewCard(card: CardDb, pos: Int) {
         list.add(pos, card)
         notifyItemInserted(pos)
