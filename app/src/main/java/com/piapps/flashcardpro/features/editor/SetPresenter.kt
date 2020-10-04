@@ -114,45 +114,29 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
     }
 
     fun editCardText(text: String) {
-        if (editingCard.isEditingBack)
-            editingCard.back = text
-        else
-            editingCard.front = text
+        editingCard.front = text
         saveCard(editingCard)
     }
 
     fun editCardBackgroundColor(color: String) {
-        if (editingCard.isEditingBack)
-            editingCard.backColor = color
-        else
-            editingCard.frontColor = color
+        editingCard.frontColor = color
         saveCard(editingCard)
     }
 
     fun editCardTextColor(color: String) {
-        if (editingCard.isEditingBack)
-            editingCard.backTextColor = color
-        else
-            editingCard.frontTextColor = color
+        editingCard.frontTextColor = color
         saveCard(editingCard)
     }
 
     fun editCardBackgroundImage(path: String) {
-        if (editingCard.isEditingBack)
-            editingCard.backImage = path
-        else
-            editingCard.frontImage = path
+        editingCard.frontImage = path
         saveCard(editingCard)
     }
 
-    fun defaultFontSize() =
-        if (editingCard.isEditingBack) editingCard.backTextSize else editingCard.frontTextSize
+    fun defaultFontSize() = editingCard.frontTextSize
 
     fun editCardFontSize(size: Float) {
-        if (editingCard.isEditingBack)
-            editingCard.backTextSize = size
-        else
-            editingCard.frontTextSize = size
+        editingCard.frontTextSize = size
         saveCard(editingCard)
     }
 
@@ -165,13 +149,8 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
     }
 
     fun clearCardSide() {
-        if (editingCard.isEditingBack) {
-            editingCard.back = ""
-            editingCard.backImage = ""
-        } else {
-            editingCard.front = ""
-            editingCard.frontImage = ""
-        }
+        editingCard.front = ""
+        editingCard.frontImage = ""
         saveCard(editingCard)
         view?.updateCard(editingCard)
     }

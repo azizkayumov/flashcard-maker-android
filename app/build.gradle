@@ -80,4 +80,7 @@ dependencies {
 
     // draw
     implementation 'com.rm:freedrawview:1.1.2'
+
+    // color wheel
+    implementation 'com.github.QuadFlask:colorpicker:0.0.15'
 }

@@ -189,13 +189,8 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
         }
 
         fun bind(card: CardDb) {
-            if (!card.isEditingBack) {
-                front.visibility = View.VISIBLE
-                back.visibility = View.GONE
-            } else {
-                front.visibility = View.GONE
-                back.visibility = View.VISIBLE
-            }
+            front.visibility = View.VISIBLE
+            back.visibility = View.GONE
 
             card.order = adapterPosition
             // set texts
@@ -282,19 +277,15 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             }
             when (v) {
                 ivFrontEdit -> {
-                    list[adapterPosition].isEditingBack = false
                     onCardClickListener?.onCardEditClick()
                 }
                 ivBackEdit -> {
-                    list[adapterPosition].isEditingBack = true
                     onCardClickListener?.onCardEditClick()
                 }
                 tvFront -> {
-                    list[adapterPosition].isEditingBack = false
                     onCardClickListener?.onCardEditTextClick()
                 }
                 tvBack -> {
-                    list[adapterPosition].isEditingBack = true
                     onCardClickListener?.onCardEditTextClick()
                 }
                 ivDelete -> {

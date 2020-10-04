@@ -30,8 +30,6 @@ class CardDb(
     var flags: Int = 0,
 
     @Transient
-    var isEditingBack: Boolean = false,
-    @Transient
     var isSelected: Boolean = false
 ) {
     constructor() : this(0, 0)
@@ -41,14 +39,17 @@ class CardDb(
         val fImage = frontImage
         val fColor = frontColor
         val fTextColor = frontTextColor
+        val fTextSize = frontTextSize
         this.front = back
         this.frontImage = backImage
         this.frontColor = backColor
         this.frontTextColor = backTextColor
+        this.frontTextSize = backTextSize
         this.back = f
         this.backImage = fImage
         this.backColor = fColor
         this.backTextColor = fTextColor
+        this.backTextSize = fTextSize
     }
 
     fun clone(): CardDb {

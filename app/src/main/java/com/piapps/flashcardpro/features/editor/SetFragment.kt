@@ -440,9 +440,7 @@ class SetFragment : BaseFragment(), SetEditorView,
         if (card == null) return
         presenter.editingCard = card
         (activity as MainActivity).openFragment(
-            EditCardTextFragment.withText(
-                if (card.isEditingBack) card.back else card.front
-            ).apply { onCardTextEditedListener = this@SetFragment }, true
+            EditCardTextFragment.withText(card.front).apply { onCardTextEditedListener = this@SetFragment }, true
         )
     }
 
