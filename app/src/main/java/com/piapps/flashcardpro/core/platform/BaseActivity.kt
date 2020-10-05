@@ -325,9 +325,7 @@ open class BaseActivity : AppCompatActivity() {
             if (animate) {
                 when (baseFragment.exitAnimation) {
                     EXIT_TO_RIGHT -> {
-                        val backgroundView =
-/*TODO -> if (baseFragment is ChatFragment) baseFragment.ivBackground else*/
-                            null
+                        val backgroundView = null
                         rootView.getChildAt(pos)?.let {
                             exitToRight(
                                 rootView.width.toFloat(),

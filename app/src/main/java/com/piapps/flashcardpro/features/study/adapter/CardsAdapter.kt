@@ -84,7 +84,7 @@ class CardsAdapter : RecyclerView.Adapter<CardsAdapter.ViewHolder>() {
                     itemView.context.getLocalizedString(R.string.front_side)
             tvBack.text =
                 if (card.back.isNotBlank() || card.backImage.isNotBlank()) card.back else
-                    itemView.context.getLocalizedString(R.string.back_side)
+                    itemView.context.getLocalizedString(R.string.front_side)
 
             // set background colors
             if (card.frontColor.isNotBlank())
