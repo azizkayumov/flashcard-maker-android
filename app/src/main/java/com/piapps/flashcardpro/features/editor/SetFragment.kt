@@ -14,10 +14,12 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.kent.layouts.setIconColor
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.db.tables.CardDb
-import com.piapps.flashcardpro.core.extension.*
+import com.piapps.flashcardpro.core.extension.alert
+import com.piapps.flashcardpro.core.extension.getLocalizedString
+import com.piapps.flashcardpro.core.extension.toHexColor
+import com.piapps.flashcardpro.core.extension.toast
 import com.piapps.flashcardpro.core.platform.BaseFragment
 import com.piapps.flashcardpro.core.platform.component.bottom.BottomMenu
 import com.piapps.flashcardpro.core.platform.component.bottom.BottomMenuFragment
@@ -95,7 +97,6 @@ class SetFragment : BaseFragment(), SetEditorView,
     var snapHelper = LinearSnapHelper()
     lateinit var layoutManager: LinearLayoutManager
 
-    lateinit var ivSetColor: AppCompatImageView
     lateinit var rv: RecyclerView
     lateinit var rvLabels: RecyclerView
     lateinit var ivAdd: AppCompatImageView
@@ -136,12 +137,6 @@ class SetFragment : BaseFragment(), SetEditorView,
 
         ivAdd.setOnClickListener {
             presenter.addNewCard()
-        }
-
-        ivSetColor.setOnClickListener {
-            (activity as MainActivity).openFragment(ColorFragment.setColor().apply {
-                onColorSelectedListener = this@SetFragment
-            }, true)
         }
 
         ivBottomMenu.setOnClickListener {
@@ -370,15 +365,6 @@ class SetFragment : BaseFragment(), SetEditorView,
         actionBar?.setTitle(if (s.isNotBlank()) s else ctx.getLocalizedString(R.string.untitled_set))
     }
 
-    override fun setSetColor(c: Int) {
-        ivSetColor.setIconColor(ctx, c)
-    }
-
-    override fun setSetColor(cs: String) {
-        ivSetColor.setIconColor(cs.toColor())
-        adapter.defaultColor = cs
-    }
-
     override fun showSetTitleEditor(current: String) {
         val fragment = EditNameFragment.current(current)
         fragment.onEditNameListener = this
@@ -400,10 +386,9 @@ class SetFragment : BaseFragment(), SetEditorView,
         presenter.saveLabels(labels)
     }
 
-    override fun onSetColorSelected(color: Int) {
-        ivSetColor.setIconColor(color)
-        presenter.setDefaultColor(color.toHexColor())
-        adapter.updateDefaultColor(color.toHexColor())
+    override fun setColors(backgroundColor: String, textColor: String) {
+        adapter.backgroundColor = backgroundColor
+        adapter.textColor = textColor
     }
 
     override fun showCards(cards: List<CardDb>) {
@@ -450,13 +435,13 @@ class SetFragment : BaseFragment(), SetEditorView,
     }
 
     override fun onCardBackgroundColorSelected(color: Int) {
-        presenter.editCardBackgroundColor(color.toHexColor())
-        adapter.updateCard(presenter.editingCard)
+        presenter.setDefaultColor(color.toHexColor())
+        adapter.updateBackgroundColor(color.toHexColor())
     }
 
     override fun onCardTextColorSelected(color: Int) {
-        presenter.editCardTextColor(color.toHexColor())
-        adapter.updateCard(presenter.editingCard)
+        presenter.setDefaultTextColor(color.toHexColor())
+        adapter.updateTextColor(color.toHexColor())
     }
 
     override fun onCardBackgroundImageSelected(path: String) {

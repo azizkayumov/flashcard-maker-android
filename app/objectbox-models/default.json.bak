@@ -64,7 +64,7 @@
     },
     {
       "id": "6:4533242286578166540",
-      "lastPropertyId": "13:2234567856548235147",
+      "lastPropertyId": "15:8296962035248377107",
       "name": "CardDb",
       "properties": [
         {
@@ -136,6 +136,18 @@
           "name": "flags",
           "type": 5,
           "flags": 4
+        },
+        {
+          "id": "14:7509120653692032231",
+          "name": "frontTextSize",
+          "type": 7,
+          "flags": 2
+        },
+        {
+          "id": "15:8296962035248377107",
+          "name": "backTextSize",
+          "type": 7,
+          "flags": 2
         }
       ],
       "relations": []

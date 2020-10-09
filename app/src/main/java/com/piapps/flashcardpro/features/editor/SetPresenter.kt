@@ -4,7 +4,6 @@ import com.piapps.flashcardpro.core.db.Clipboard
 import com.piapps.flashcardpro.core.db.tables.CardDb
 import com.piapps.flashcardpro.core.db.tables.SetDb
 import com.piapps.flashcardpro.core.exception.Failure
-import com.piapps.flashcardpro.core.extension.color
 import com.piapps.flashcardpro.core.platform.BasePresenter
 import com.piapps.flashcardpro.features.editor.interactor.*
 import java.io.File
@@ -61,12 +60,8 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
     fun showSetDetails(set: SetDb) {
         this.set = set
         view?.setTitle(set.title)
-        if (set.color.isNotBlank())
-            view?.setSetColor(set.color)
-        else
-            view?.setSetColor(set.id.color())
-
         view?.showLabels(set.labels)
+        view?.setColors(set.color, set.textColor ?: "")
     }
 
     fun loadCards() {
@@ -83,6 +78,11 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
 
     fun setDefaultColor(color: String) {
         set.color = color
+        saveSet(set)
+    }
+
+    fun setDefaultTextColor(color: String) {
+        set.textColor = color
         saveSet(set)
     }
 
@@ -115,16 +115,6 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
 
     fun editCardText(text: String) {
         editingCard.front = text
-        saveCard(editingCard)
-    }
-
-    fun editCardBackgroundColor(color: String) {
-        editingCard.frontColor = color
-        saveCard(editingCard)
-    }
-
-    fun editCardTextColor(color: String) {
-        editingCard.frontTextColor = color
         saveCard(editingCard)
     }
 

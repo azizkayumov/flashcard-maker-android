@@ -9,5 +9,6 @@ class SetView(
     var title: String,
     var flashcardsCount: Int,
     var color: String = "",
+    var colorText: String = "",
     var isTrash: Boolean = false
 )

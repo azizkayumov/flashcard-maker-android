@@ -33,7 +33,7 @@ fun Int.toHexColor(): String {
 }
 
 fun String.toColor(): Int {
-    if (this.length == 0) return Color.GRAY
+    if (this.length == 0) return Color.BLACK
     return Color.parseColor(this)
 }
 

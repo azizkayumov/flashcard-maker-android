@@ -28,8 +28,6 @@ interface SetEditorView : BaseView {
     }
 
     fun setTitle(s: String)
-    fun setSetColor(c: Int)
-    fun setSetColor(cs: String)
     fun showSetTitleEditor(current: String)
     fun showCards(cards: List<CardDb>)
     fun showNewCard(card: CardDb)
@@ -37,6 +35,7 @@ interface SetEditorView : BaseView {
     fun cards(): List<CardDb>
 
     fun showLabels(labels: String)
+    fun setColors(backgroundColor: String, textColor: String)
 
     fun showSetExported(path: String)
     fun showCurrentCardPosition()

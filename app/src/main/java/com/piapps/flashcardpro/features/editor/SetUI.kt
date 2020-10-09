@@ -35,20 +35,9 @@ fun SetFragment.UI(): View {
 
             setTitle(ctx.getLocalizedString(R.string.untitled_set))
             (tvTitle.layoutParams as FrameLayout.LayoutParams).apply {
-                marginEnd = dip(112)
+                marginEnd = dip(72)
             }
             onBackClick { close() }
-        }
-
-        ivSetColor = imageView {
-            layoutParams = FrameLayout.LayoutParams(dip(56), dip(56)).apply {
-                marginEnd = dip(56)
-                gravity = Gravity.END
-            }
-            padding = dip(16)
-            setImageResource(R.drawable.ic_color)
-            setIconColor(ctx, theme.colorIconActive)
-            setRippleEffect()
         }
 
         rv = recyclerView {

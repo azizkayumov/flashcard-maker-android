@@ -6,6 +6,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.kent.layouts.textColorResource
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.db.tables.SetDb
 import com.piapps.flashcardpro.core.extension.color
@@ -61,7 +62,8 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
         return list.size()
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
         val parent: LinearLayout
         val tvTitle: TextView
         val tvCount: TextView
@@ -77,12 +79,23 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
             tvTitle.text =
                 if (item.title.isNotBlank()) item.title else itemView.context.getLocalizedString(R.string.untitled_set)
             tvCount.text =
-                itemView.context.getLocalizedString(R.string.n_cards, arrayOf(item.flashcardsCount.toString()))
+                itemView.context.getLocalizedString(
+                    R.string.n_cards,
+                    arrayOf(item.flashcardsCount.toString())
+                )
 
             if (item.color.isNotBlank())
                 parent.setBackgroundColor(item.color.toColor())
             else
                 parent.setBackgroundColor(ContextCompat.getColor(itemView.context, item.id.color()))
+
+            if (item.colorText.isNotBlank()) {
+                tvTitle.setTextColor(item.colorText.toColor())
+                tvCount.setTextColor(item.colorText.toColor())
+            } else {
+                tvTitle.textColorResource = R.color.colorPrimaryText
+                tvCount.textColorResource = R.color.colorPrimaryText
+            }
         }
 
         override fun onClick(v: View?) {

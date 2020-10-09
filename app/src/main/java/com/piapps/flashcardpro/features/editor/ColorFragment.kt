@@ -18,12 +18,11 @@ import com.piapps.flashcardpro.core.platform.BaseFragment
 class ColorFragment : BaseFragment() {
 
     companion object {
-        val SET_COLOR = 0
         val CARD_TEXT = 1
         val CARD_COLOR = 2
         val DRAWING_COLOR = 3
 
-        fun selector(type: Int = SET_COLOR): ColorFragment {
+        fun selector(type: Int = CARD_COLOR): ColorFragment {
             return ColorFragment().apply {
                 arguments = Bundle().apply {
                     putInt("type", type)
@@ -31,7 +30,6 @@ class ColorFragment : BaseFragment() {
             }
         }
 
-        fun setColor() = selector(SET_COLOR)
         fun cardBackground() = selector(CARD_COLOR)
         fun cardTextColor() = selector(CARD_TEXT)
         fun drawingColor() = selector(DRAWING_COLOR)
@@ -47,7 +45,7 @@ class ColorFragment : BaseFragment() {
     lateinit var colorPicker: ColorPickerView
     lateinit var lightness: LightnessSlider
 
-    var type = SET_COLOR
+    var type = CARD_COLOR
 
     override fun createView(context: Context) = UI()
 
@@ -56,21 +54,18 @@ class ColorFragment : BaseFragment() {
         view?.setOnClickListener {
             close()
         }
-        type = args?.getInt("type", SET_COLOR) ?: SET_COLOR
+        type = args?.getInt("type", CARD_COLOR) ?: CARD_COLOR
 
         tv.text = when (type) {
-            SET_COLOR -> ctx.getLocalizedString(R.string.choose_set_color)
             CARD_COLOR -> ctx.getLocalizedString(R.string.choose_card_background_color)
             DRAWING_COLOR -> ctx.getLocalizedString(R.string.choose_drawing_color)
             else -> ctx.getLocalizedString(R.string.choose_card_text_color)
         }
 
-        type = args?.getInt("type", SET_COLOR) ?: SET_COLOR
         colorPicker.setLightnessSlider(lightness)
         lightness.setColor(Color.WHITE)
         colorPicker.addOnColorSelectedListener { color ->
             when (type) {
-                SET_COLOR -> onColorSelectedListener?.onSetColorSelected(color)
                 CARD_COLOR -> onColorSelectedListener?.onCardBackgroundColorSelected(color)
                 CARD_TEXT -> onColorSelectedListener?.onCardTextColorSelected(color)
                 DRAWING_COLOR -> onDrawingColorSelectedListener?.onDrawingColorSelected(color)
@@ -78,7 +73,6 @@ class ColorFragment : BaseFragment() {
         }
         colorPicker.addOnColorChangedListener { color ->
             when (type) {
-                SET_COLOR -> onColorSelectedListener?.onSetColorSelected(color)
                 CARD_COLOR -> onColorSelectedListener?.onCardBackgroundColorSelected(color)
                 CARD_TEXT -> onColorSelectedListener?.onCardTextColorSelected(color)
                 DRAWING_COLOR -> onDrawingColorSelectedListener?.onDrawingColorSelected(color)
@@ -89,7 +83,6 @@ class ColorFragment : BaseFragment() {
     var onColorSelectedListener: OnColorSelectedListener? = null
 
     interface OnColorSelectedListener {
-        fun onSetColorSelected(color: Int)
         fun onCardTextColorSelected(color: Int)
         fun onCardBackgroundColorSelected(color: Int)
     }

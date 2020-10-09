@@ -24,17 +24,16 @@ class CardUI {
         val frontId = 10
         val frontTvId = 11
         val frontIvId = 12
-        val frontIvEditId = 13
-        val frontIvFlipId = 14
-        val ivDeleteId = 15
+        val frontIvFlipId = 13
 
         val backId = 20
         val backTvId = 21
         val backIvId = 22
-        val backIvEditId = 23
-        val backIvFlipId = 24
+        val backIvFlipId = 23
 
-        val ivSelectedIndicatorId = 99
+        val ivEditId = 100
+        val ivDeleteId = 101
+        val ivSelectedIndicatorId = 102
     }
 
     fun createView(ctx: Context) = with(ctx) {
@@ -60,25 +59,6 @@ class CardUI {
                         layoutParams = FrameLayout.LayoutParams(matchParent, matchParent)
                     }
 
-                    imageView {
-                        id = frontIvEditId
-                        layoutParams = FrameLayout.LayoutParams(dip(48), dip(48))
-                        padding = dip(12)
-                        setImageResource(R.drawable.ic_edit)
-                        setIconColor(ContextCompat.getColor(ctx, ctx.appTheme().colorIconActive))
-                        setRippleEffect()
-                    }
-
-                    imageView {
-                        id = frontIvFlipId
-                        layoutParams = FrameLayout.LayoutParams(dip(48), dip(48)).apply {
-                            gravity = Gravity.END or Gravity.BOTTOM
-                        }
-                        padding = dip(12)
-                        setImageResource(R.drawable.ic_flip)
-                        setIconColor(ContextCompat.getColor(ctx, ctx.appTheme().colorIconActive))
-                    }
-
                     textView {
                         id = frontTvId
                         layoutParams = FrameLayout.LayoutParams(matchParent, matchParent).apply {
@@ -89,6 +69,17 @@ class CardUI {
                         textSize = 28F
                         textColorResource = ctx.appTheme().colorPrimaryText
                         gravity = Gravity.CENTER
+                    }
+
+                    imageView {
+                        id = frontIvFlipId
+                        layoutParams = FrameLayout.LayoutParams(dip(48), dip(48)).apply {
+                            gravity = Gravity.END or Gravity.BOTTOM
+                        }
+                        padding = dip(12)
+                        setImageResource(R.drawable.ic_flip)
+                        setIconColor(ContextCompat.getColor(ctx, ctx.appTheme().colorIconActive))
+                        setRippleEffect()
                     }
                 }
 
@@ -103,13 +94,16 @@ class CardUI {
                         layoutParams = FrameLayout.LayoutParams(matchParent, matchParent)
                     }
 
-                    imageView {
-                        id = backIvEditId
-                        layoutParams = FrameLayout.LayoutParams(dip(48), dip(48))
-                        padding = dip(12)
-                        setImageResource(R.drawable.ic_edit)
-                        setIconColor(ContextCompat.getColor(ctx, ctx.appTheme().colorIconActive))
-                        setRippleEffect()
+                    textView {
+                        id = backTvId
+                        layoutParams = FrameLayout.LayoutParams(matchParent, matchParent).apply {
+                            topMargin = dip(48)
+                            bottomMargin = dip(48)
+                        }
+                        padding = dip(16)
+                        textSize = 28F
+                        textColorResource = ctx.appTheme().colorPrimaryText
+                        gravity = Gravity.CENTER
                     }
 
                     imageView {
@@ -122,28 +116,16 @@ class CardUI {
                         setIconColor(ContextCompat.getColor(ctx, ctx.appTheme().colorIconActive))
                         setRippleEffect()
                     }
-
-                    textView {
-                        id = backTvId
-                        layoutParams = FrameLayout.LayoutParams(matchParent, matchParent).apply {
-                            topMargin = dip(48)
-                            bottomMargin = dip(48)
-                        }
-                        padding = dip(16)
-                        textSize = 28F
-                        textColorResource = ctx.appTheme().colorPrimaryText
-                        gravity = Gravity.CENTER
-                    }
                 }
 
+
                 imageView {
-                    id = ivSelectedIndicatorId
-                    layoutParams = FrameLayout.LayoutParams(dip(24), dip(24)).apply {
-                        gravity = Gravity.BOTTOM
-                        margin = dip(12)
-                    }
-                    setImageResource(R.drawable.ic_check)
+                    id = ivEditId
+                    layoutParams = FrameLayout.LayoutParams(dip(48), dip(48))
+                    padding = dip(12)
+                    setImageResource(R.drawable.ic_edit)
                     setIconColor(ContextCompat.getColor(ctx, ctx.appTheme().colorIconActive))
+                    setRippleEffect()
                 }
 
                 imageView {
@@ -155,6 +137,16 @@ class CardUI {
                     setImageResource(R.drawable.ic_close)
                     setIconColor(ctx, ctx.appTheme().colorIconActive)
                     setRippleEffect()
+                }
+
+                imageView {
+                    id = ivSelectedIndicatorId
+                    layoutParams = FrameLayout.LayoutParams(dip(24), dip(24)).apply {
+                        gravity = Gravity.BOTTOM
+                        margin = dip(12)
+                    }
+                    setImageResource(R.drawable.ic_check)
+                    setIconColor(ContextCompat.getColor(ctx, ctx.appTheme().colorIconActive))
                 }
             }
         }

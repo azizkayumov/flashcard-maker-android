@@ -19,13 +19,14 @@ class SetDb(
     var lastEdited: Long = 0,
     var lastStudyDuration: Long = 0,
     var color: String = "",
+    var textColor: String? = "",
     var isTrash: Boolean = false,
     var isPinned: Boolean = false,
     var flags: Int = 0
 ) {
     constructor() : this(0)
 
-    fun toSetView() = SetView(id, title, count, color, isTrash)
+    fun toSetView() = SetView(id, title, count, color, textColor ?: "", isTrash)
 
     fun setSomeFeature(set: SetDb) {
         set.flags = set.flags or 1

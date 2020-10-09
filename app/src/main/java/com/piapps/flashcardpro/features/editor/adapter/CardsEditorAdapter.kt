@@ -11,7 +11,6 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.kent.layouts.setIconColor
-import com.kent.layouts.textColorResource
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.db.tables.CardDb
 import com.piapps.flashcardpro.core.extension.*
@@ -27,14 +26,24 @@ import java.util.*
 class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>() {
 
     val list = arrayListOf<CardDb>()
-    var defaultColor = ""
+    var backgroundColor = ""
+    var textColor = ""
     var isSelecting = false
 
-    fun updateDefaultColor(color: String){
-        defaultColor = color
+    fun updateBackgroundColor(color: String) {
+        backgroundColor = color
         list.forEach {
-            it.frontColor = defaultColor
-            it.backColor = defaultColor
+            it.frontColor = backgroundColor
+            it.backColor = backgroundColor
+        }
+        notifyDataSetChanged()
+    }
+
+    fun updateTextColor(color: String) {
+        textColor = color
+        list.forEach {
+            it.frontTextColor = textColor
+            it.backTextColor = textColor
         }
         notifyDataSetChanged()
     }
@@ -151,18 +160,17 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
         val root: CardView
 
         val front: FrameLayout
-        val ivDelete: AppCompatImageView
-        val ivFrontEdit: AppCompatImageView
-        val ivFrontFlip: AppCompatImageView
         val tvFront: TextView
         val ivFront: AppCompatImageView
+        val ivFrontFlip: AppCompatImageView
 
         val back: FrameLayout
-        val ivBackEdit: AppCompatImageView
-        val ivBackFlip: AppCompatImageView
         val tvBack: TextView
         val ivBack: AppCompatImageView
+        val ivBackFlip: AppCompatImageView
 
+        val ivDelete: AppCompatImageView
+        val ivEdit: AppCompatImageView
         val ivSelected: AppCompatImageView
 
         init {
@@ -171,26 +179,25 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             front = itemView.findViewById(CardUI.frontId)
             tvFront = itemView.findViewById(CardUI.frontTvId)
             ivFront = itemView.findViewById(CardUI.frontIvId)
-            ivFrontEdit = itemView.findViewById(CardUI.frontIvEditId)
             ivFrontFlip = itemView.findViewById(CardUI.frontIvFlipId)
 
             back = itemView.findViewById(CardUI.backId)
             tvBack = itemView.findViewById(CardUI.backTvId)
             ivBack = itemView.findViewById(CardUI.backIvId)
-            ivBackEdit = itemView.findViewById(CardUI.backIvEditId)
             ivBackFlip = itemView.findViewById(CardUI.backIvFlipId)
 
+            ivEdit = itemView.findViewById(CardUI.ivEditId)
             ivDelete = itemView.findViewById(CardUI.ivDeleteId)
             ivSelected = itemView.findViewById(CardUI.ivSelectedIndicatorId)
 
-            ivFrontEdit.setOnClickListener(this)
-            ivFrontFlip.setOnClickListener(this)
             tvFront.setOnClickListener(this)
-            ivBackEdit.setOnClickListener(this)
-            ivBackFlip.setOnClickListener(this)
             tvBack.setOnClickListener(this)
+
             ivDelete.setOnClickListener(this)
             ivSelected.setOnClickListener(this)
+            ivEdit.setOnClickListener(this)
+            ivFrontFlip.setOnClickListener(this)
+            ivBackFlip.setOnClickListener(this)
 
             tvFront.setOnLongClickListener(this)
             tvBack.setOnLongClickListener(this)
@@ -211,46 +218,31 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
                     itemView.context.getLocalizedString(R.string.front_side)
 
             // set background colors
-            if (card.frontColor.isNotBlank())
-                front.setBackgroundColor(card.frontColor.toColor())
-            else if (defaultColor.isNotBlank())
-                front.setBackgroundColor(defaultColor.toColor())
-            else
-                front.setBackgroundColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        card.setId.color()
-                    )
+            val backColor =
+                if (backgroundColor.isNotBlank()) backgroundColor.toColor() else ContextCompat.getColor(
+                    itemView.context,
+                    card.setId.color()
                 )
-
-            if (card.backColor.isNotBlank())
-                back.setBackgroundColor(card.backColor.toColor())
-            else if (defaultColor.isNotBlank())
-                back.setBackgroundColor(defaultColor.toColor())
-            else
-                back.setBackgroundColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        card.setId.color()
-                    )
-                )
+            front.setBackgroundColor(backColor)
+            back.setBackgroundColor(backColor)
 
             // set text colors
-            if (card.frontTextColor.isNotBlank())
-                tvFront.setTextColor(card.frontTextColor.toColor())
-            else
-                tvFront.textColorResource = R.color.colorPrimaryText
-
-            if (card.backTextColor.isNotBlank())
-                tvBack.setTextColor(card.backTextColor.toColor())
-            else
-                tvBack.textColorResource = R.color.colorPrimaryText
+            val txtColor = textColor.toColor()
+            tvFront.setTextColor(txtColor)
+            tvBack.setTextColor(txtColor)
+            ivFrontFlip.setIconColor(txtColor)
+            ivBackFlip.setIconColor(txtColor)
+            ivFrontFlip.setIconColor(txtColor)
+            ivSelected.setIconColor(txtColor)
+            ivEdit.setIconColor(txtColor)
+            ivDelete.setIconColor(txtColor)
 
             // set images
             if (card.frontImage.isNotBlank())
                 ivFront.load(card.frontImage)
             else
                 ivFront.load("")
+
             if (card.backImage.isNotBlank())
                 ivBack.load(card.backImage)
             else
@@ -267,7 +259,7 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
                 showActions()
         }
 
-        fun flip(reverse: Boolean = false) {
+        private fun flip(reverse: Boolean = false) {
             val anim = FlipAnimation(front, back, LONG_ANIMATION.toInt())
             list[adapterPosition].reverse()
             if (reverse) anim.reverse()
@@ -285,10 +277,7 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
                 return
             }
             when (v) {
-                ivFrontEdit -> {
-                    onCardClickListener?.onCardEditClick()
-                }
-                ivBackEdit -> {
+                ivEdit -> {
                     onCardClickListener?.onCardEditClick()
                 }
                 tvFront -> {
@@ -332,27 +321,20 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             } else {
                 ivSelected.setBackgroundColor(Color.TRANSPARENT)
                 ivSelected.setImageResource(R.drawable.ic_check)
-                ivSelected.setIconColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        itemView.context.appTheme().colorIconActive
-                    )
-                )
+                ivSelected.setIconColor(textColor.toColor())
                 showActions()
             }
         }
 
         private fun hideActions() {
-            ivFrontEdit.visibility = View.INVISIBLE
-            ivBackEdit.visibility = View.INVISIBLE
+            ivEdit.visibility = View.INVISIBLE
             ivDelete.visibility = View.INVISIBLE
             ivFrontFlip.visibility = View.INVISIBLE
             ivBackFlip.visibility = View.INVISIBLE
         }
 
         private fun showActions() {
-            ivFrontEdit.visibility = View.VISIBLE
-            ivBackEdit.visibility = View.VISIBLE
+            ivEdit.visibility = View.VISIBLE
             ivDelete.visibility = View.VISIBLE
             ivFrontFlip.visibility = View.VISIBLE
             ivBackFlip.visibility = View.VISIBLE
