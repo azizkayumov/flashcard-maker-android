@@ -56,7 +56,7 @@
     <string name="label_name_example">Must be unique, e.g. Todo</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    <string name="front_side">Front side</string>
+    <string name="text">Text</string>
 
     <string name="color">Color</string>
     <string name="choose_set_color">Choose set color</string>

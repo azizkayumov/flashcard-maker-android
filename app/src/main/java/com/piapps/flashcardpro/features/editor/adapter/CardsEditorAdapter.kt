@@ -212,10 +212,10 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             // set texts
             tvFront.text =
                 if (card.front.isNotBlank() || card.frontImage.isNotBlank()) card.front else
-                    itemView.context.getLocalizedString(R.string.front_side)
+                    itemView.context.getLocalizedString(R.string.text)
             tvBack.text =
                 if (card.back.isNotBlank() || card.backImage.isNotBlank()) card.back else
-                    itemView.context.getLocalizedString(R.string.front_side)
+                    itemView.context.getLocalizedString(R.string.text)
 
             // set background colors
             val backColor =
