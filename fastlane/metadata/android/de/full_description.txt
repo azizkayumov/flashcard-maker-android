@@ -1,0 +1,19 @@
+<p>Flashcards sind ein Satz von Karten, die Informationen in Form von Wörtern oder Zahlen auf einer oder beiden Seiten tragen und im Klassenzimmer oder im Selbststudium verwendet werden. Flashcards können Vokabeln, historische Daten, Formeln oder beliebige Themen enthalten, die über ein Frage-Antwort-Format gelernt werden können. Flashcards werden häufig als Lernübungen verwendet, um das Auswendiglernen mit Hilfe von Wiederholungen zu erleichtern.</p>
+<p>Flashcards und das Leitner-System sind ein fantastisches Werkzeug zum Auswendiglernen und Ausbohren von Fakten. Alles, was in einem schnellen "Frage und Antwort"-Format studiert werden kann, kann in Flashcards umgewandelt werden - Dinge wie kurze Definitionen, Fremdvokabeln, wissenschaftliche Symbole, historische Daten, Verkehrszeichen, Hauptstädte der Welt und andere Fakten.</p>
+<p>Mit <i>Flashcard Maker</i> lassen sich Sets erstellen, Karteikarten hinzufügen und mit ihnen in einem Studienmodus spielen. Flashcards können Texte, Bilder oder Zeichnungen enthalten. Flashcard Sets können farbig gestaltet und beschriftet werden, um sie später leicht wiederzufinden. In der Sektion "Meist verwendet" sehen Sie die 10 am häufigsten verwendeten Flashcard Sets.</p>
+<p>Diese App hat viele Features, einschließlich:</p><ul>
+<li>Erstellen, bearbeiten und studieren von Flashcards</li>
+<li>Antwort unbekannt? Umdrehen und wiederholen!</li>
+<li>Favoriten</li>
+<li>Offline Support</li>
+<li>Lern- und Quiz-Modi</li>
+<li>Statistiken</li>
+<li>Vollständig editierbare Flashcards: Text/Hintergrundfarbe lassen sich auf beiden Seiten bearbeiten.</li>
+<li>Nachtmodus</li>
+<li>Kein Internet-Zugang nötig</li>
+<li>Flashcard Sets in CSV-Dateien exportieren, um sie mit Freunden zu teilen</li>
+<li>Flashcard Sets aus CSV-Dateien importieren, anstatt alles auf dem Telefon einzugeben</li></ul>
+<p>Flashcards können auch am PC as CSV-Dateien vorbereitet werden, um sie dann in die App zu importieren.</p>
+<p><b>Flashcards bearbeiten:</b> Flashcards können auf beiden Seiten bearbeitet werden. Einfach eine beliebige Karteikarte umdrehen und ein Bild oder einen Text hinzufügen. Auch Hintergrundfarbe und Textfarbe können geändert werden.</p>
+<p><b>Studienmodus</b> ermöglicht das einfache Studium der Flashcards. Alle Flashcards können umgedreht werden.</p>
+<p><b>Quiz-Modus</b> ermöglicht es, die Flashcards für ein Quiz zu benutzen. Die Anzahl der richtigen Antworten wird für jedes Flashcard-Set verfolgt und gibt Statistiken zur effektiven Organisation der Lernzeit. Die Ergebnisse werden als Statistiken gespeichert, so dass der tägliche Fortschritt im Auge behalten werden kann.</p>
