@@ -21,7 +21,7 @@ fun StudyFragment.UI(): View {
         ivClose = imageView {
             layoutParams = FrameLayout.LayoutParams(dip(56), dip(56))
             padding = dip(16)
-            setImageResource(R.drawable.ic_close)
+            setImageResource(R.drawable.ic_arrow_back)
             setIconColor(ctx, theme.colorIconActive)
             setOnClickListener { close() }
         }
@@ -51,7 +51,7 @@ fun StudyFragment.UI(): View {
                 gravity = Gravity.BOTTOM or Gravity.START
             }
             padding = dip(16)
-            setImageResource(R.drawable.ic_arrow_back)
+            setImageResource(R.drawable.ic_left)
             setIconColor(ctx, theme.colorIconActive)
             setRippleEffectBorderless()
         }
@@ -61,7 +61,7 @@ fun StudyFragment.UI(): View {
                 gravity = Gravity.BOTTOM or Gravity.END
             }
             padding = dip(16)
-            setImageResource(R.drawable.ic_arrow_forward)
+            setImageResource(R.drawable.ic_right)
             setIconColor(ctx, theme.colorIconActive)
             setRippleEffectBorderless()
         }

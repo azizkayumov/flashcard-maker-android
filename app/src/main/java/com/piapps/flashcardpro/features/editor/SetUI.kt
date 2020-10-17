@@ -123,7 +123,7 @@ fun SetFragment.UI(): View {
             ivPrev = imageView {
                 layoutParams = LinearLayout.LayoutParams(dip(56), dip(56))
                 padding = dip(16)
-                setImageResource(R.drawable.ic_arrow_back)
+                setImageResource(R.drawable.ic_left)
                 setIconColor(ctx, theme.colorIconActive)
                 setRippleEffect()
             }
@@ -131,7 +131,7 @@ fun SetFragment.UI(): View {
             ivNext = imageView {
                 layoutParams = LinearLayout.LayoutParams(dip(56), dip(56))
                 padding = dip(16)
-                setImageResource(R.drawable.ic_arrow_forward)
+                setImageResource(R.drawable.ic_right)
                 setIconColor(ctx, theme.colorIconActive)
                 setRippleEffect()
             }

@@ -19,7 +19,7 @@ class ActionBar(context: Context) : FrameLayout(context) {
     // action bar menu
     var ivMenu: AppCompatImageView = AppCompatImageView(context)
 
-    var backIcon: Int = R.drawable.ic_back
+    var backIcon: Int = R.drawable.ic_arrow_back
 
     init {
         backgroundColorResource = R.color.colorPrimary

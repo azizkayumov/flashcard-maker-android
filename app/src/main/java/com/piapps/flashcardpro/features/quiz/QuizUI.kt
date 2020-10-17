@@ -27,7 +27,7 @@ fun QuizFragment.UI(): View {
         ivClose = imageView {
             layoutParams = FrameLayout.LayoutParams(dip(56), dip(56))
             padding = dip(16)
-            setImageResource(R.drawable.ic_close)
+            setImageResource(R.drawable.ic_arrow_back)
             setIconColor(ctx, theme.colorIconActive)
             setOnClickListener { close() }
         }
