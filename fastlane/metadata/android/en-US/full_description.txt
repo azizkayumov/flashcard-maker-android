@@ -1,0 +1,19 @@
+<p>A flashcard is a set of cards bearing information, as words or numbers, on either or both sides, used in classroom drills or in private study. Flashcards can bear vocabulary, historical dates, formulas or any subject matter that can be learned via a question-and-answer format. Flashcards are widely used as a learning drill to aid memorization by way of spaced repetition.</p>
+<p>Flashcards, and the Leitner system, is a fantastic tool for memorising and drilling facts. Anything that can be studied in a quick "question and answer" format can be turned into flashcards – things like short definitions, foreign vocabulary, scientific symbols, historical dates, traffic signs, world capitals and other fast facts.</p>
+<p>With <i>Flashcard Maker</i> you can create sets, add flashcards and play with them in a study mode. Flashcard can contain text, image or drawing. Flashcard sets can be colored, labeled to easily find them later. In most used section, you can see the top 10 used flashcards sets.</p>
+<p>This app has lots of features, including:</p><ul>
+<li>Create, edit and study your flashcards</li>
+<li>Don't know the answer, flip and repeat!</li>
+<li>Favorite flashcard sets</li>
+<li>Offline support</li>
+<li>Study and Quiz modes</li>
+<li>Statistics - get statistics from your learning process</li>
+<li>Full editable flashcards: edit text/background color on both sides.</li>
+<li>Night mode</li>
+<li>No internet connection is required to use</li>
+<li>Export flashcard sets to CSV files and share with your friends</li>
+<li>Import CSV files to create a new sets rather than typing everything on a phone</li></ul>
+<p>You can even prepare flashcards in your PC as CSV file and import it from the app.</p>
+<p><b>Edit flashcards:</b> Flashcards can be edited in both ways. Just flip any flashcard and add image or text Background color, text color can be changed too.</p>
+<p><b>Study mode</b> allows you to easily study your flashcards. All flashcards can be flipped.</p>
+<p><b>Quiz mode</b> allows you to take a quiz from your flashcards. Number of true answers to your flashcards is tracked for each flashcard set and gives you statistics to effectively organize your study time. The results are saved as statistics so that you will keep an eye on your daily progress.</p>

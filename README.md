@@ -1,4 +1,6 @@
 [<img src="https://github.com/AbduazizKayumov/Flashcard-Maker-Android/blob/master/art/get.png" width="128" height="37.6">](https://play.google.com/store/apps/details?id=com.piapps.flashcardpro)
+[<img src="https://github.com/AbduazizKayumov/Flashcard-Maker-Android/blob/master/art/IzzyOnDroid.png" width="128" height="37.6">](https://apt.izzysoft.de/fdroid/index/apk/com.piapps.flashcardpro)
+
 ## Flashcard-Maker-Android
 **Flashcard Maker** is a study app that helps to create flashcards.
 
