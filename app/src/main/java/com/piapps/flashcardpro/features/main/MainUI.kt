@@ -81,10 +81,9 @@ fun MainFragment.UI(): View {
                     margin = dip(16)
                 }
                 backgroundTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(ctx, theme.colorAccent))
+                    ColorStateList.valueOf(ContextCompat.getColor(ctx, theme.white))
                 rippleColor = ContextCompat.getColor(ctx, theme.colorDivider)
-                setImageResource(R.drawable.ic_add)
-                setIconColor(ctx, theme.white)
+                setImageResource(R.drawable.ic_rainbow_icon)
             }
 
             // elevation

@@ -139,9 +139,9 @@ class MainFragment : BaseFragment(), MainView,
         actionBar?.ivMenu?.setIconColor(ctx, theme.colorIconActive)
         ivNightMode.setIconColor(ctx, theme.colorIconActive)
         fab.backgroundTintList =
-            ColorStateList.valueOf(ContextCompat.getColor(ctx, theme.colorAccent))
+            ColorStateList.valueOf(ContextCompat.getColor(ctx, theme.white))
         fab.rippleColor = ContextCompat.getColor(ctx, theme.colorDivider)
-        fab.setIconColor(ctx, theme.white)
+        // fab.setIconColor(ctx, theme.white)
         navigationView.backgroundColorResource = theme.colorPrimary
 
         tvNothing.textColorResource = theme.colorSecondaryText
