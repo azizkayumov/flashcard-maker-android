@@ -57,32 +57,6 @@ fun QuizFragment.UI(): View {
             })
         }
 
-        horizontalLayout {
-            layoutParams = FrameLayout.LayoutParams(wrapContent, wrapContent).apply {
-                gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
-            }
-
-            fabWrong = floatingActionButton {
-                layoutParams = LinearLayout.LayoutParams(dip(56), dip(56)).apply {
-                    margin = dip(16)
-                }
-                backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(ctx, theme.colorAccent))
-                rippleColor = ContextCompat.getColor(ctx, theme.colorDivider)
-                setImageResource(R.drawable.ic_eye)
-                setIconColor(ctx, theme.white)
-            }
-
-            fabOk = floatingActionButton {
-                layoutParams = LinearLayout.LayoutParams(dip(56), dip(56)).apply {
-                    margin = dip(16)
-                }
-                backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(ctx, R.color.md_green_500))
-                rippleColor = ContextCompat.getColor(ctx, theme.colorDivider)
-                setImageResource(R.drawable.ic_check)
-                setIconColor(ctx, theme.white)
-            }
-        }
-
         tvCurrentCard = textView {
             layoutParams = FrameLayout.LayoutParams(wrapContent, wrapContent).apply {
                 gravity = Gravity.CENTER_HORIZONTAL
@@ -90,6 +64,26 @@ fun QuizFragment.UI(): View {
             }
             textSize = 12F
             textColorResource = theme.colorSecondaryText
+        }
+
+        ivWrong = imageView {
+            layoutParams = FrameLayout.LayoutParams(dip(56), dip(56)).apply {
+                gravity = Gravity.BOTTOM or Gravity.START
+            }
+            padding = dip(16)
+            setImageResource(R.drawable.ic_flip)
+            setIconColor(ctx, theme.colorIconActive)
+            setRippleEffectBorderless()
+        }
+
+        ivRight = imageView {
+            layoutParams = FrameLayout.LayoutParams(dip(56), dip(56)).apply {
+                gravity = Gravity.BOTTOM or Gravity.END
+            }
+            padding = dip(16)
+            setImageResource(R.drawable.ic_check)
+            setIconColor(ctx, theme.colorIconActive)
+            setRippleEffectBorderless()
         }
     }
 }

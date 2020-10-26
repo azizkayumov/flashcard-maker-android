@@ -50,6 +50,8 @@ class QuizFragment : BaseFragment(), QuizView {
     lateinit var fabOk: FloatingActionButton
     lateinit var fabWrong: FloatingActionButton
     lateinit var tvCurrentCard: TextView
+    lateinit var ivWrong: AppCompatImageView
+    lateinit var ivRight: AppCompatImageView
 
     override fun createView(context: Context) = UI()
 
@@ -61,11 +63,11 @@ class QuizFragment : BaseFragment(), QuizView {
         val id = args?.getLong("id", 1L) ?: 1L
         presenter.loadSetDetails(id)
 
-        fabWrong.setOnClickListener {
+        ivWrong.setOnClickListener {
             flip()
         }
 
-        fabOk.setOnClickListener {
+        ivRight.setOnClickListener {
             scrollNext()
         }
     }
