@@ -190,7 +190,8 @@ class MainFragment : BaseFragment(), MainView,
         navigationAdapter.add(NavView.divider(-10))
         navigationAdapter.add(NavView.menu(-9, ctx.getLocalizedString(R.string.all), R.drawable.ic_all))
         // navigationAdapter.add(NavView.menu(-7, "Learned", R.drawable.ic_recents))
-        navigationAdapter.add(NavView.menu(-8, ctx.getLocalizedString(R.string.trash), R.drawable.ic_trash))
+        navigationAdapter.add(NavView.menu(-8, ctx.getLocalizedString(R.string.archive), R.drawable.ic_archive))
+        navigationAdapter.add(NavView.menu(-7, ctx.getLocalizedString(R.string.trash), R.drawable.ic_trash))
         // navigationAdapter.add(NavView.divider(-7))
         // navigationAdapter.add(NavView.menu(-6, ctx.getLocalizedString(R.string.settings), R.drawable.ic_settings))
         // navigationAdapter.add(NavView.menu(-5, ctx.getLocalizedString(R.string.edit_labels), R.drawable.ic_label))
@@ -202,12 +203,16 @@ class MainFragment : BaseFragment(), MainView,
         if (nav.icon == R.drawable.ic_trash) {
             fab.setImageResource(R.drawable.ic_empty_trash)
         } else {
-            fab.setImageResource(R.drawable.ic_add)
+            fab.setImageResource(R.drawable.ic_rainbow_icon)
         }
         when (nav.icon) {
             R.drawable.ic_all -> {
                 setTitle(ctx.getLocalizedString(R.string.app_name))
                 presenter.loadAllSets()
+            }
+            R.drawable.ic_archive -> {
+                setTitle(nav.title)
+                presenter.loadArchiveSets()
             }
             R.drawable.ic_trash -> {
                 setTitle(nav.title)

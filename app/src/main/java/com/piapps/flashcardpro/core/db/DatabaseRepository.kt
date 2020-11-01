@@ -21,6 +21,7 @@ interface DatabaseRepository {
 
     fun getAllSets(): List<SetDb>
     fun getRecentSets(): List<SetDb>
+    fun getArchiveSets(): List<SetDb>
     fun getTrashSets(): List<SetDb>
     fun getLabelSets(l: String): List<SetDb>
 
@@ -62,6 +63,10 @@ interface DatabaseRepository {
 
         override fun getRecentSets(): List<SetDb> {
             return service.getRecentSets()
+        }
+
+        override fun getArchiveSets(): List<SetDb> {
+            return service.getArchiveSets()
         }
 
         override fun getTrashSets(): List<SetDb> {

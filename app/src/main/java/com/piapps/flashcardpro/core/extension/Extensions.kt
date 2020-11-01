@@ -3,12 +3,13 @@ package com.piapps.flashcardpro.core.extension
 import android.graphics.Color
 import com.piapps.flashcardpro.R
 import java.util.*
+import kotlin.math.abs
 
 /**
  * Created by abduaziz on 4/27/18.
  */
 
-fun Long.color() = when (this % 16) {
+fun Long.color() = when (abs(this) % 16) {
     0L -> R.color.c15
     1L -> R.color.c1
     2L -> R.color.c2

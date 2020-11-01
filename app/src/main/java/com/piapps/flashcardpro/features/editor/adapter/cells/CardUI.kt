@@ -118,7 +118,6 @@ class CardUI {
                     }
                 }
 
-
                 imageView {
                     id = ivEditId
                     layoutParams = FrameLayout.LayoutParams(dip(48), dip(48))
@@ -134,7 +133,7 @@ class CardUI {
                         gravity = Gravity.END
                     }
                     padding = dip(12)
-                    setImageResource(R.drawable.ic_close)
+                    setImageResource(R.drawable.ic_archive)
                     setIconColor(ctx, ctx.appTheme().colorIconActive)
                     setRippleEffect()
                 }

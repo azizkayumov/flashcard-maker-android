@@ -10,6 +10,7 @@
 
     <string name="all">All sets</string>
     <string name="recents">Recents</string>
+    <string name="archive">Archive</string>
     <string name="trash">Trash</string>
 
     <string name="labels">Labels</string>
@@ -86,6 +87,7 @@
     <string name="no_label_sets_found">There are no sets for this label yet, add this label to sets, you will see them
         listed here
     </string>
+    <string name="no_archive_sets_found">Archive is empty, archived cards will be stored here</string>
     <string name="no_trash_sets_found">Trash is empty, deleted sets will be listed here</string>
     <string name="folder_is_empty">Empty folder</string>
     <string name="folder">Folder</string>

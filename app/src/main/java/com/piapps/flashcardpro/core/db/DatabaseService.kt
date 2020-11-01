@@ -24,7 +24,7 @@ class DatabaseService
     fun deleteSets(list: List<SetDb>) = setTable.remove(list)
 
     fun getAllSets(): List<SetDb> {
-        val query = setTable.query().equal(SetDb_.isTrash, false)
+        val query = setTable.query().equal(SetDb_.isTrash, false).greater(SetDb_.id, 0)
         val list = query.build().find()
         return list
     }
@@ -36,6 +36,13 @@ class DatabaseService
             }
         })
         val list = query.build().find(0, 25)
+        query.close()
+        return list
+    }
+
+    fun getArchiveSets(): List<SetDb> {
+        val query = setTable.query().less(SetDb_.id, 0).greater(SetDb_.count, 0)
+        val list = query.build().find()
         query.close()
         return list
     }

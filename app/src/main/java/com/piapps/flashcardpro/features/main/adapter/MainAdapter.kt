@@ -15,6 +15,7 @@ import com.piapps.flashcardpro.core.extension.toColor
 import com.piapps.flashcardpro.core.platform.MultiSortedList
 import com.piapps.flashcardpro.features.main.adapter.cells.SetItemUI
 import com.piapps.flashcardpro.features.main.entity.SetView
+import kotlin.math.abs
 
 /**
  * Created by abduaziz on 2019-09-25 at 23:20.
@@ -87,7 +88,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
             if (item.color.isNotBlank())
                 parent.setBackgroundColor(item.color.toColor())
             else
-                parent.setBackgroundColor(ContextCompat.getColor(itemView.context, item.id.color()))
+                parent.setBackgroundColor(ContextCompat.getColor(itemView.context, abs(item.id).color()))
 
             if (item.colorText.isNotBlank()) {
                 tvTitle.setTextColor(item.colorText.toColor())

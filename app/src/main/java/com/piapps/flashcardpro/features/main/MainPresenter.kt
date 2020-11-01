@@ -15,7 +15,7 @@ class MainPresenter(var view: MainView?) : BasePresenter(view) {
 
     companion object {
         val ALL_SETS = 0
-        val TRASH = 1
+        val TRASH = 2
     }
 
     @Inject
@@ -23,6 +23,9 @@ class MainPresenter(var view: MainView?) : BasePresenter(view) {
 
     @Inject
     lateinit var getAllSets: GetAllSets
+
+    @Inject
+    lateinit var getArchiveSets: GetArchiveSets
 
     @Inject
     lateinit var getTrashSets: GetTrashSets
@@ -59,12 +62,25 @@ class MainPresenter(var view: MainView?) : BasePresenter(view) {
         }
     }
 
-    fun loadTrashSets() {
+    fun loadArchiveSets() {
         if (currentNav == 1) {
-            validateSets(R.string.no_trash_sets_found)
+            validateSets(R.string.no_archive_sets_found)
             return
         }
         currentNav = 1
+        view?.setTitle(R.string.archive)
+        getArchiveSets {
+            view?.showSets(it)
+            validateSets(R.string.no_archive_sets_found)
+        }
+    }
+
+    fun loadTrashSets() {
+        if (currentNav == 2) {
+            validateSets(R.string.no_trash_sets_found)
+            return
+        }
+        currentNav = 2
         view?.setTitle(R.string.trash)
         getTrashSets {
             view?.showSets(it)

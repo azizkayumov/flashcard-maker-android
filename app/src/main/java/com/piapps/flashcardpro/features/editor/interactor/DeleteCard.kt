@@ -11,6 +11,19 @@ import javax.inject.Inject
 class DeleteCard
 @Inject constructor(private val repository: DatabaseRepository) {
     operator fun invoke(card: CardDb) {
-        repository.delete(card)
+        val set = repository.getSet(card.setId)
+        set?.let {
+            var twin = repository.getSet(-it.id)
+            if (twin == null) {
+                twin = it.clone()
+                twin.id = -it.id
+                twin.count = 0
+            }
+            twin.isTrash = false
+            twin.count += 1
+            card.setId = twin.id
+            repository.save(card)
+            repository.save(twin)
+        }
     }
 }

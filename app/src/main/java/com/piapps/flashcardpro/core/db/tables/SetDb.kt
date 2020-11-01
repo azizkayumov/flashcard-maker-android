@@ -28,6 +28,8 @@ class SetDb(
 
     fun toSetView() = SetView(id, title, count, color, textColor ?: "", isTrash)
 
+    fun clone() = SetDb(id, parentId, title, count, labels, lastEdited, lastStudyDuration, color, textColor)
+
     fun setSomeFeature(set: SetDb) {
         set.flags = set.flags or 1
     }
