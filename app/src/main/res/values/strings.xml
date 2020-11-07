@@ -122,5 +122,7 @@
     <string name="copy">Copy</string>
     <string name="cut">Cut</string>
     <string name="paste_cards">Paste selected cards</string>
+    <string name="delete">Delete</string>
+    <string name="are_you_sure_to_delete_selected_cards">Are you sure to delete the selected cards?</string>
 
 </resources>

@@ -111,6 +111,7 @@ class SetFragment : BaseFragment(), SetEditorView,
     lateinit var tvSelectedCount: TextView
     lateinit var tvCopy: TextView
     lateinit var tvCut: TextView
+    lateinit var tvDelete: TextView
 
     override fun createView(context: Context) = UI()
 
@@ -181,6 +182,10 @@ class SetFragment : BaseFragment(), SetEditorView,
             adapter.hideSelectedCards()
             showCurrentCardPosition()
             presenter.moveCards()
+        }
+
+        tvDelete.setOnClickListener {
+            confirmCardDelete()
         }
     }
 
@@ -415,7 +420,7 @@ class SetFragment : BaseFragment(), SetEditorView,
         val card = adapter.list.getOrNull(layoutManager.findFirstCompletelyVisibleItemPosition())
         if (card == null) return
         adapter.remove(card)
-        presenter.deleteCardOffline(card)
+        presenter.archiveCardOffline(card)
         showCurrentCardPosition()
     }
 
@@ -570,6 +575,28 @@ class SetFragment : BaseFragment(), SetEditorView,
             rv.smoothScrollToPosition(pos - 1)
             showCurrentCardPosition()
         }
+    }
+
+    private fun confirmCardDelete() {
+        val dialog = ctx.alert {
+            setMessage(ctx.getLocalizedString(R.string.are_you_sure_to_delete_selected_cards))
+        }
+        dialog.setButton(
+            DialogInterface.BUTTON_NEGATIVE,
+            ctx.getLocalizedString(R.string.no)
+        ) { d, i ->
+            dialog.dismiss()
+        }
+        dialog.setButton(
+            DialogInterface.BUTTON_POSITIVE,
+            ctx.getLocalizedString(R.string.yes)
+        ) { d, i ->
+            adapter.hideSelectedCards()
+            showCurrentCardPosition()
+            presenter.deleteSelectedCards()
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
     override fun showToast(res: Int) {

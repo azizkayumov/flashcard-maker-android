@@ -25,7 +25,10 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
     lateinit var getCards: GetCards
 
     @Inject
-    lateinit var deleteCard: DeleteCard
+    lateinit var archiveCard: ArchiveCard
+
+    @Inject
+    lateinit var deleteCards: DeleteCards
 
     @Inject
     lateinit var exportToCSV: ExportToCSV
@@ -102,10 +105,10 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
         view?.showNewCard(card)
     }
 
-    fun deleteCardOffline(card: CardDb) {
+    fun archiveCardOffline(card: CardDb) {
         set.count--
         set.lastEdited = System.currentTimeMillis()
-        deleteCard(card)
+        archiveCard(card)
     }
 
     fun moveSetToTrash() {
@@ -223,5 +226,10 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
 
         view?.showCurrentCardPosition()
         autoSave()
+    }
+    
+    fun deleteSelectedCards(){
+        deleteCards(selectedCards)
+        view?.hideSelectionOptions()
     }
 }

@@ -8,7 +8,7 @@ import javax.inject.Inject
  * Created by abduaziz on 2019-10-06 at 17:20.
  */
 
-class DeleteCard
+class ArchiveCard
 @Inject constructor(private val repository: DatabaseRepository) {
     operator fun invoke(card: CardDb) {
         val set = repository.getSet(card.setId)

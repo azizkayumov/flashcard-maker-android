@@ -29,6 +29,7 @@ interface DatabaseRepository {
     fun save(cards: List<CardDb>)
     fun getCard(id: Long): CardDb?
     fun delete(card: CardDb)
+    fun deleteCards(cards: List<CardDb>)
     fun getCards(setId: Long): List<CardDb>
     fun getCardsByRating(setId: Long): List<CardDb>
 
@@ -43,7 +44,8 @@ interface DatabaseRepository {
 
 
     class Database
-    @Inject constructor(private val service: DatabaseService, private val settings: Settings) : DatabaseRepository {
+    @Inject constructor(private val service: DatabaseService, private val settings: Settings) :
+        DatabaseRepository {
 
         override fun save(set: SetDb) {
             service.saveSet(set)
@@ -91,6 +93,10 @@ interface DatabaseRepository {
 
         override fun delete(card: CardDb) {
             service.deleteCard(card)
+        }
+
+        override fun deleteCards(cards: List<CardDb>) {
+            service.deleteCards(cards)
         }
 
         override fun getCards(setId: Long): List<CardDb> {

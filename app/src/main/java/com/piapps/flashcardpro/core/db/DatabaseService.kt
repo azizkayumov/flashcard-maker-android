@@ -65,6 +65,7 @@ class DatabaseService
     fun saveCards(cards: List<CardDb>) = cardTable.put(cards)
     fun getCard(id: Long): CardDb? = cardTable.get(id)
     fun deleteCard(card: CardDb) = cardTable.remove(card)
+    fun deleteCards(cards: List<CardDb>) = cardTable.remove(cards)
     fun getCards(setId: Long): List<CardDb> {
         val query = cardTable.query().equal(CardDb_.setId, setId)
         val list = query.build().find()

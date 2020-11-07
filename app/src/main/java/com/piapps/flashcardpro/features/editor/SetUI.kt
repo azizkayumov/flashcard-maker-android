@@ -213,6 +213,17 @@ fun SetFragment.UI(): View {
                 makeBold()
                 setRippleEffect()
             }
+
+            tvDelete = textView {
+                layoutParams = LinearLayout.LayoutParams(wrapContent, matchParent)
+                gravity = Gravity.CENTER
+                horizontalPadding = dip(16)
+                text = ctx.getLocalizedString(R.string.delete).toUpperCase()
+                textColorResource = theme.colorPrimaryText
+                textSize = 15F
+                makeBold()
+                setRippleEffect()
+            }
         }
     }
 }
