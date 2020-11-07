@@ -272,7 +272,7 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
         }
 
         override fun onClick(v: View?) {
-            if (isSelecting) {
+            if (isSelecting && !(v == ivFrontFlip || v == ivBackFlip)) {
                 toggleSelection()
                 return
             }
@@ -329,15 +329,15 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
         private fun hideActions() {
             ivEdit.visibility = View.INVISIBLE
             ivDelete.visibility = View.INVISIBLE
-            ivFrontFlip.visibility = View.INVISIBLE
-            ivBackFlip.visibility = View.INVISIBLE
+            // ivFrontFlip.visibility = View.INVISIBLE
+            // ivBackFlip.visibility = View.INVISIBLE
         }
 
         private fun showActions() {
             ivEdit.visibility = View.VISIBLE
             ivDelete.visibility = View.VISIBLE
-            ivFrontFlip.visibility = View.VISIBLE
-            ivBackFlip.visibility = View.VISIBLE
+            // ivFrontFlip.visibility = View.VISIBLE
+            // ivBackFlip.visibility = View.VISIBLE
         }
     }
 
