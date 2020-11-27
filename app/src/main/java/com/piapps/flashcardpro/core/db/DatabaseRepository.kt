@@ -42,7 +42,6 @@ interface DatabaseRepository {
     fun getStats(setId: Long, from: Long, to: Long): List<Stats>
     fun clearStats(setId: Long)
 
-
     class Database
     @Inject constructor(private val service: DatabaseService, private val settings: Settings) :
         DatabaseRepository {

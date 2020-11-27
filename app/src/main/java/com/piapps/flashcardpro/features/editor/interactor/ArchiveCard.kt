@@ -22,6 +22,9 @@ class ArchiveCard
             twin.isTrash = false
             twin.count += 1
             card.setId = twin.id
+
+            set.count -= 1
+            repository.save(set)
             repository.save(card)
             repository.save(twin)
         }
