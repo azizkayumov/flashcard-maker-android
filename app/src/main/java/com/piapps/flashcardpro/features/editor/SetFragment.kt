@@ -70,6 +70,7 @@ class SetFragment : BaseFragment(), SetEditorView,
     OnFilesSelectedListener,
     QuizFragment.OnCardsUpdatedListener,
     StudyFragment.OnSetStudyDurationUpdatedListener,
+    CardsEditorAdapter.OnCardZoomGestureListener,
     OnBottomMenuClickListener {
 
     companion object {
@@ -128,6 +129,7 @@ class SetFragment : BaseFragment(), SetEditorView,
         presenter = SetPresenter(this)
         appComponent.inject(presenter)
         adapter.onCardClickListener = this
+        adapter.onCardZoomGestureListener = this
 
         val id = args?.getLong("id", 1L) ?: 1L
         presenter.loadSetDetails(id)
@@ -467,6 +469,10 @@ class SetFragment : BaseFragment(), SetEditorView,
             presenter.editCardFontSize(newSize)
             adapter.updateCard(presenter.editingCard)
         }
+    }
+
+    override fun onCardTextSizeChangedByPinchingKungfuPanda(newTextSize: Float) {
+        onCardTextSizeChanged(newTextSize, true)
     }
 
     override fun onCardSelectionToggle() {

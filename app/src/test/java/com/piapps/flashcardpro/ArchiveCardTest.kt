@@ -1,22 +1,12 @@
 package com.piapps.flashcardpro
 
-import android.content.Context
-import androidx.test.core.app.ApplicationProvider
-import com.piapps.flashcardpro.core.db.DatabaseRepository
-import com.piapps.flashcardpro.core.db.DatabaseService
 import com.piapps.flashcardpro.core.db.tables.CardDb
 import com.piapps.flashcardpro.core.db.tables.SetDb
-import com.piapps.flashcardpro.features.editor.SetPresenter
 import com.piapps.flashcardpro.features.editor.interactor.ArchiveCard
-import com.piapps.flashcardpro.features.editor.interactor.GetSetDetails
 import com.piapps.flashcardpro.features.editor.interactor.SaveSet
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
-import org.junit.Rule
 import org.junit.Test
-import org.mockito.InjectMocks
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnit
 import kotlin.random.Random
 
 /**
@@ -45,9 +35,10 @@ class ArchiveCardTest : AbstractDatabaseTest() {
         val archive = ArchiveCard(repository)
         var archivedCount = 0
         for (i in 0 until n) {
-            if (Random.nextInt(0, 3) == 0){
+            if (Random.nextInt(0, 3) == 0) {
                 archive(cards[i])
                 archivedCount++
+                cards[i].setId = -setId
             }
         }
 
@@ -63,7 +54,19 @@ class ArchiveCardTest : AbstractDatabaseTest() {
 
         // Test
         // 3. The card count of the original set must be equal to n - archivedCount
-        val originalSet = repository.getSet(setId)
+        var originalSet = repository.getSet(setId)
         assertEquals(originalSet?.count, n - archivedCount)
+
+        // Test
+        // 4. Archive the archived cards back to their original set
+        for (i in 0 until n){
+            if (cards[i].setId == -setId){
+                archive(cards[i])
+            }
+        }
+        originalSet = repository.getSet(setId)
+        assertEquals(originalSet?.count, n)
     }
+
+
 }

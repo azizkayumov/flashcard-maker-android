@@ -2,6 +2,7 @@ package com.piapps.flashcardpro.features.editor.adapter
 
 import android.graphics.Color
 import android.util.TypedValue
+import android.view.ScaleGestureDetector
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -155,7 +156,7 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        View.OnClickListener, View.OnLongClickListener {
+        View.OnClickListener, ScaleGestureDetector.OnScaleGestureListener {
 
         val root: CardView
 
@@ -172,6 +173,9 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
         val ivDelete: AppCompatImageView
         val ivEdit: AppCompatImageView
         val ivSelected: AppCompatImageView
+
+
+        val scaleGestureDetector: ScaleGestureDetector
 
         init {
             root = itemView.findViewById(CardUI.rootId)
@@ -199,9 +203,7 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             ivFrontFlip.setOnClickListener(this)
             ivBackFlip.setOnClickListener(this)
 
-            tvFront.setOnLongClickListener(this)
-            tvBack.setOnLongClickListener(this)
-            root.setOnLongClickListener(this)
+            scaleGestureDetector = ScaleGestureDetector(itemView.context, this)
         }
 
         fun bind(card: CardDb) {
@@ -216,6 +218,15 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             tvBack.text =
                 if (card.back.isNotBlank() || card.backImage.isNotBlank()) card.back else
                     itemView.context.getLocalizedString(R.string.text)
+
+            tvFront.setOnTouchListener { v, event ->
+                scaleGestureDetector.onTouchEvent(event)
+                false
+            }
+            tvBack.setOnTouchListener { v, event ->
+                scaleGestureDetector.onTouchEvent(event)
+                false
+            }
 
             // set background colors
             val backColor =
@@ -264,11 +275,6 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             list[adapterPosition].reverse()
             if (reverse) anim.reverse()
             root.startAnimation(anim)
-        }
-
-        override fun onLongClick(v: View?): Boolean {
-            toggleSelection()
-            return true
         }
 
         override fun onClick(v: View?) {
@@ -339,6 +345,29 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             // ivFrontFlip.visibility = View.VISIBLE
             // ivBackFlip.visibility = View.VISIBLE
         }
+
+        private fun isEditingBack(): Boolean {
+            return front.visibility == View.GONE
+        }
+
+        override fun onScaleBegin(detector: ScaleGestureDetector?): Boolean {
+            return true
+        }
+
+        private var newTextSize = 28F
+        override fun onScale(detector: ScaleGestureDetector?): Boolean {
+            val textView = if (isEditingBack()) tvBack else tvFront
+
+            val oldTextSize = textView.textSize / itemView.context.resources.displayMetrics.scaledDensity
+            val scaleFactor = scaleGestureDetector.scaleFactor
+            newTextSize = oldTextSize * scaleFactor
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, newTextSize)
+            return true
+        }
+
+        override fun onScaleEnd(detector: ScaleGestureDetector?) {
+            onCardZoomGestureListener?.onCardTextSizeChangedByPinchingKungfuPanda(newTextSize)
+        }
     }
 
     var onCardClickListener: OnCardClickListener? = null
@@ -348,5 +377,10 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
         fun onCardDeleteClick()
         fun onCardEditTextClick()
         fun onCardSelectionToggle()
+    }
+
+    var onCardZoomGestureListener: OnCardZoomGestureListener? = null
+    interface OnCardZoomGestureListener{
+        fun onCardTextSizeChangedByPinchingKungfuPanda(newTextSize: Float)
     }
 }
