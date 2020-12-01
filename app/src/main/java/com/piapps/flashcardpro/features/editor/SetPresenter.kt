@@ -167,6 +167,8 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
         importFromCSV(set, file) {
             it.callEither(::handleFailure, ::handleImportSuccess)
         }
+        editSetName(file.nameWithoutExtension)
+        view?.setTitle(file.nameWithoutExtension)
     }
 
     fun handleImportSuccess(cards: List<CardDb>) {

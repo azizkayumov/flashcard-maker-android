@@ -32,15 +32,14 @@ class ImportFromCSV
                 var line = reader.readNext()
                 var index = 0
                 while (line != null) {
-
                     var front = ""
                     if (line.isNotEmpty()) {
-                        front = line[0]
+                        front = line[0].trim()
                     }
 
                     var back = ""
                     if (line.size > 1) {
-                        back = line[1]
+                        back = line[1].trim()
                     }
 
                     // 2. Create new card for each entry
