@@ -91,4 +91,6 @@ dependencies {
 
     // color wheel
     implementation 'com.github.QuadFlask:colorpicker:0.0.15'
+
+    implementation 'com.google.mlkit:translate:16.1.1'
 }
