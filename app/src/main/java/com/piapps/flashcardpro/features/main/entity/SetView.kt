@@ -8,6 +8,7 @@ class SetView(
     var id: Long,
     var title: String,
     var flashcardsCount: Int,
+    var lastEdited: Long = 0L,
     var color: String = "",
     var colorText: String = "",
     var isTrash: Boolean = false

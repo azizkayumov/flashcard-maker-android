@@ -1,6 +1,5 @@
 package com.piapps.flashcardpro
 
-import android.os.Build
 import com.piapps.flashcardpro.core.db.tables.CardDb
 import com.piapps.flashcardpro.core.db.tables.SetDb
 import com.piapps.flashcardpro.features.editor.interactor.ArchiveCard
@@ -8,17 +7,12 @@ import com.piapps.flashcardpro.features.editor.interactor.SaveSet
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 import kotlin.random.Random
 
 /**
  * Created by abduaziz on 11/27/20 at 10:13 PM.
  */
 
-@RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.P])
 class ArchiveCardTest : AbstractDatabaseTest() {
 
     @Test

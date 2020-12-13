@@ -26,7 +26,7 @@ class SetDb(
 ) {
     constructor() : this(0)
 
-    fun toSetView() = SetView(id, title, count, color, textColor ?: "", isTrash)
+    fun toSetView() = SetView(id, title, count, lastEdited, color, textColor ?: "", isTrash)
 
     fun clone() = SetDb(id, parentId, title, count, labels, lastEdited, lastStudyDuration, color, textColor)
 
