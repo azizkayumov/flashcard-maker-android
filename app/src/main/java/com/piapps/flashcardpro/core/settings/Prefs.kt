@@ -17,6 +17,10 @@ object Prefs {
     val LANGUAGE_KOREAN = "ko"
     val LANGUAGE_UZBEK = "uz"
 
+    val COLOR_CARD_BACKGROUND = "color_card_background"
+    val COLOR_CARD_TEXT = "color_card_text"
+    val SIZE_CARD_TEXT = "size_card_text"
+
     val THEME_ID = "THEME_ID"
 
     val USER_FIRST_TIME = "is_user_first_time"

@@ -40,6 +40,3 @@ fun String.toColor(): Int {
 
 fun IntRange.random() =
     Random().nextInt((endInclusive + 1) - start) + start
-
-val SET_NAME = "SET_NAME"
-val SET_COLOR = "SET_COLOR"

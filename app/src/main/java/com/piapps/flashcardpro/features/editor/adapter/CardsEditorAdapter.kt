@@ -229,11 +229,7 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
             }
 
             // set background colors
-            val backColor =
-                if (backgroundColor.isNotBlank()) backgroundColor.toColor() else ContextCompat.getColor(
-                    itemView.context,
-                    card.setId.color()
-                )
+            val backColor = backgroundColor.toColor()
             front.setBackgroundColor(backColor)
             back.setBackgroundColor(backColor)
 

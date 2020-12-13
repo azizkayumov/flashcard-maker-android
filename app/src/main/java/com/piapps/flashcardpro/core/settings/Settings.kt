@@ -26,5 +26,16 @@ class Settings
     fun setTheme(id: Long) = Prefs.save(context, Prefs.THEME_ID, id)
     fun getTheme() = Theme.getTheme(Prefs.get(context, Prefs.THEME_ID, Theme.THEME_CLASSIC))
 
+    fun setDefaultCardBackgroundColor(color: String) =
+        Prefs.save(context, Prefs.COLOR_CARD_BACKGROUND, color)
+
+    fun getDefaultCardBackgroundColor() = Prefs.get(context, Prefs.COLOR_CARD_BACKGROUND, "#FFFFFF")
+
+    fun setDefaultCardTextColor(color: String) = Prefs.save(context, Prefs.COLOR_CARD_TEXT, color)
+    fun getDefaultCardTextColor() = Prefs.get(context, Prefs.COLOR_CARD_TEXT, "#000000")
+
+    fun setDefaultCardTextSize(size: Float) = Prefs.save(context, Prefs.SIZE_CARD_TEXT, size)
+    fun getDefaultCardTextSize() = Prefs.get(context, Prefs.SIZE_CARD_TEXT, 28F)
+
     fun clear() = Prefs.clear(context)
 }

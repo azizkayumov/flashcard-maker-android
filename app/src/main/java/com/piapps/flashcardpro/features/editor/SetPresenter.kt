@@ -5,6 +5,7 @@ import com.piapps.flashcardpro.core.db.tables.CardDb
 import com.piapps.flashcardpro.core.db.tables.SetDb
 import com.piapps.flashcardpro.core.exception.Failure
 import com.piapps.flashcardpro.core.platform.BasePresenter
+import com.piapps.flashcardpro.core.settings.Settings
 import com.piapps.flashcardpro.features.editor.interactor.*
 import java.io.File
 import javax.inject.Inject
@@ -39,6 +40,9 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
     @Inject
     lateinit var clipboard: Clipboard
 
+    @Inject
+    lateinit var settings: Settings
+
     private var setId = 0L
     var set = SetDb()
     var editingCard = CardDb()
@@ -56,7 +60,10 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
         set = SetDb(id = System.currentTimeMillis())
         setId = set.id
         set.lastEdited = System.currentTimeMillis()
+        set.color = settings.getDefaultCardBackgroundColor()
+        set.textColor = settings.getDefaultCardTextColor()
         view?.setTitle(set.title)
+        view?.setColors(settings.getDefaultCardBackgroundColor(), settings.getDefaultCardTextColor())
         saveSet(set)
     }
 
@@ -81,11 +88,13 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
 
     fun setDefaultColor(color: String) {
         set.color = color
+        settings.setDefaultCardBackgroundColor(color)
         saveSet(set)
     }
 
     fun setDefaultTextColor(color: String) {
         set.textColor = color
+        settings.setDefaultCardTextColor(color)
         saveSet(set)
     }
 
@@ -99,6 +108,8 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
         if (lastCardAddedTime > System.currentTimeMillis() - 300) return
         lastCardAddedTime = System.currentTimeMillis()
         val card = CardDb(System.currentTimeMillis(), set.id, order = set.count)
+        card.frontTextSize = settings.getDefaultCardTextSize()
+        card.backTextSize = settings.getDefaultCardTextSize()
         set.count++
         set.lastEdited = System.currentTimeMillis()
         saveSet(set, listOf(card))
@@ -130,10 +141,12 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
 
     fun editCardFontSize(size: Float) {
         editingCard.frontTextSize = size
+        settings.setDefaultCardTextSize(size)
         saveCard(editingCard)
     }
 
     fun editAllCardsFontSize(size: Float) {
+        settings.setDefaultCardTextSize(size)
         view?.cards()?.forEach {
             it.frontTextSize = size
             it.backTextSize = size
