@@ -50,7 +50,7 @@ fun MainFragment.UI(): View {
                 }
                 padding = dip(8)
                 layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-                itemAnimator = null
+                // itemAnimator = null
                 bottomPadding = dip(56)
                 clipToPadding = false
             }

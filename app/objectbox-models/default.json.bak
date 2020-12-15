@@ -154,7 +154,7 @@
     },
     {
       "id": "7:7131483851201200486",
-      "lastPropertyId": "11:8070963800128145202",
+      "lastPropertyId": "12:7466969468350583364",
       "name": "SetDb",
       "properties": [
         {
@@ -219,6 +219,11 @@
           "name": "flags",
           "type": 5,
           "flags": 4
+        },
+        {
+          "id": "12:7466969468350583364",
+          "name": "textColor",
+          "type": 9
         }
       ],
       "relations": []

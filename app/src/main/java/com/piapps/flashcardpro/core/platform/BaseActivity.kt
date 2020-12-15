@@ -65,6 +65,11 @@ open class BaseActivity : AppCompatActivity() {
         touchSlop = ViewConfiguration.get(this).scaledTouchSlop
     }
 
+    override fun onPause() {
+        super.onPause()
+        topFragment()?.paused()
+    }
+
     private var touchSlop = 0
 
     private var initialX = 0f
@@ -391,7 +396,7 @@ open class BaseActivity : AppCompatActivity() {
             } else {
                 if (baseFragment is MenuFragment) {
                     baseFragment.removed()
-                    Handler().postDelayed({
+                    Handler(mainLooper).postDelayed({
                         rootView.removeViewAt(pos)
                         if (resumeTopFragment) resumeTopFragment()
                     }, LONG_ANIMATION)
@@ -544,6 +549,8 @@ open class BaseActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         topFragment()?.onActivityResult(requestCode, resultCode, data)
     }
+
+
 
     fun changeStatusBarColor(color: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

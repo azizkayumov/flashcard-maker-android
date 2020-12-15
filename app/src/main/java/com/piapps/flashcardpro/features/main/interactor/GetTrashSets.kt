@@ -1,9 +1,9 @@
 package com.piapps.flashcardpro.features.main.interactor
 
 import com.piapps.flashcardpro.core.db.DatabaseRepository
+import com.piapps.flashcardpro.core.db.tables.SetDb
 import com.piapps.flashcardpro.core.extension.doAsync
 import com.piapps.flashcardpro.core.extension.uiThread
-import com.piapps.flashcardpro.features.main.entity.SetView
 import javax.inject.Inject
 
 /**
@@ -12,12 +12,12 @@ import javax.inject.Inject
 
 class GetTrashSets
 @Inject constructor(private val repository: DatabaseRepository) {
-    operator fun invoke(onResult: (ArrayList<SetView>) -> Unit = {}) {
+    operator fun invoke(onResult: (ArrayList<SetDb>) -> Unit = {}) {
         doAsync {
             val result = repository.getTrashSets()
-            val list = arrayListOf<SetView>()
+            val list = arrayListOf<SetDb>()
             result.forEach {
-                list.add(it.toSetView())
+                list.add(it)
             }
             uiThread {
                 onResult(list)

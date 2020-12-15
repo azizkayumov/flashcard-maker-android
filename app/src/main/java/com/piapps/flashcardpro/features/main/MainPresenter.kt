@@ -1,6 +1,7 @@
 package com.piapps.flashcardpro.features.main
 
 import com.piapps.flashcardpro.R
+import com.piapps.flashcardpro.core.db.tables.SetDb
 import com.piapps.flashcardpro.core.platform.BasePresenter
 import com.piapps.flashcardpro.core.platform.theme.Theme
 import com.piapps.flashcardpro.core.settings.Settings
@@ -37,10 +38,14 @@ class MainPresenter(var view: MainView?) : BasePresenter(view) {
     lateinit var putBackSet: PutBackSet
 
     @Inject
+    lateinit var saveSetOrders: SaveSetOrders
+
+    @Inject
     lateinit var emptyTrash: EmptyTrash
 
     @Inject
     lateinit var settings: Settings
+
 
     fun loadLabels() {
         getLabels {
@@ -118,6 +123,10 @@ class MainPresenter(var view: MainView?) : BasePresenter(view) {
         putBackSet(setId) {
             view?.onSetPutBack(it)
         }
+    }
+
+    fun syncSetOrders(sets: List<SetDb>) {
+        saveSetOrders(sets)
     }
 
     fun clearTrash() {

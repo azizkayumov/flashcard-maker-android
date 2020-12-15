@@ -16,11 +16,11 @@ import javax.inject.Inject
 interface DatabaseRepository {
 
     fun save(set: SetDb)
+    fun saveSets(sets: List<SetDb>)
     fun getSet(id: Long): SetDb?
     fun delete(set: SetDb)
 
     fun getAllSets(): List<SetDb>
-    fun getRecentSets(): List<SetDb>
     fun getArchiveSets(): List<SetDb>
     fun getTrashSets(): List<SetDb>
     fun getLabelSets(l: String): List<SetDb>
@@ -50,6 +50,10 @@ interface DatabaseRepository {
             service.saveSet(set)
         }
 
+        override fun saveSets(sets: List<SetDb>) {
+            service.saveSets(sets)
+        }
+
         override fun getSet(id: Long): SetDb? {
             return service.getSet(id)
         }
@@ -60,10 +64,6 @@ interface DatabaseRepository {
 
         override fun getAllSets(): List<SetDb> {
             return service.getAllSets()
-        }
-
-        override fun getRecentSets(): List<SetDb> {
-            return service.getRecentSets()
         }
 
         override fun getArchiveSets(): List<SetDb> {
