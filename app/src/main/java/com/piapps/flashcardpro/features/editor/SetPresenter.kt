@@ -214,11 +214,13 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
             selectedCards[i].id = now + i
         clipboard.addToClipboard(selectedCards)
         view?.hideSelectionOptions()
+        selectedCards.clear()
     }
 
     fun moveCards() {
         clipboard.addToClipboard(selectedCards)
         view?.hideSelectionOptions()
+        selectedCards.clear()
     }
 
     fun canPasteCards(): Boolean {
@@ -241,5 +243,6 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
     fun deleteSelectedCards(){
         deleteCards(selectedCards)
         view?.hideSelectionOptions()
+        selectedCards.clear()
     }
 }

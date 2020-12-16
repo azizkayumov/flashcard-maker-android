@@ -37,8 +37,11 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
             if (list[i].id == updatedSet.id){
                 list[i] = updatedSet
                 notifyItemChanged(i)
+                return
             }
         }
+        list.add(0, updatedSet)
+        notifyItemInserted(0)
     }
 
     fun removeSet(set: SetDb) {
@@ -46,6 +49,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
             if (list[i].id == set.id){
                 list.removeAt(i)
                 notifyItemRemoved(i)
+                break
             }
         }
     }
