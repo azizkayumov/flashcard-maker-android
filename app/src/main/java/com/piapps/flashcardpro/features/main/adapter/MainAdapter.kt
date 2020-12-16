@@ -36,7 +36,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
         for (i in 0 until list.size){
             if (list[i].id == updatedSet.id){
                 list[i] = updatedSet
-                notifyItemChanged(i)
+                notifyItemChanged(i, 1)
                 return
             }
         }
@@ -59,6 +59,11 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(list[position])
+    }
+
+    // to remove the fucking blinking animation
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
         holder.bind(list[position])
     }
 
