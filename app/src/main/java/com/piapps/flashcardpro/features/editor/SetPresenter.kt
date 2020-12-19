@@ -158,7 +158,7 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
     }
 
     fun saveCard(card: CardDb) {
-        saveCard(card)
+        saveSet(set, listOf(card))
     }
 
     fun exportCSV() {
