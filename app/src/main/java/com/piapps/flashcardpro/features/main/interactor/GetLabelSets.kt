@@ -12,15 +12,11 @@ import javax.inject.Inject
 
 class GetLabelSets
 @Inject constructor(private val repository: DatabaseRepository) {
-    operator fun invoke(label: String, onResult: (ArrayList<SetDb>) -> Unit = {}) {
+    operator fun invoke(label: String, onResult: (List<SetDb>) -> Unit = {}) {
         doAsync {
             val result = repository.getLabelSets(label)
-            val list = arrayListOf<SetDb>()
-            result.forEach {
-                list.add(it)
-            }
             uiThread {
-                onResult(list)
+                onResult(result)
             }
         }
     }

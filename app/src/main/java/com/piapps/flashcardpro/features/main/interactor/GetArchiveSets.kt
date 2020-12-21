@@ -12,15 +12,11 @@ import javax.inject.Inject
 
 class GetArchiveSets
 @Inject constructor(private val repository: DatabaseRepository) {
-    operator fun invoke(onResult: (ArrayList<SetDb>) -> Unit = {}) {
+    operator fun invoke(onResult: (List<SetDb>) -> Unit = {}) {
         doAsync {
             val result = repository.getArchiveSets()
-            val list = arrayListOf<SetDb>()
-            result.forEach {
-                list.add(it)
-            }
             uiThread {
-                onResult(list)
+                onResult(result)
             }
         }
     }

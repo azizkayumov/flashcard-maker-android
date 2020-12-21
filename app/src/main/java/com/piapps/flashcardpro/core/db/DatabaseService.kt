@@ -27,28 +27,28 @@ class DatabaseService
     fun getAllSets(): List<SetDb> {
         val query = setTable.query().equal(SetDb_.isTrash, false).greater(SetDb_.id, 0)
         val list = query.build().find()
-        return list
+        return list.sortedBy { it.order }
     }
 
     fun getArchiveSets(): List<SetDb> {
         val query = setTable.query().less(SetDb_.id, 0).greater(SetDb_.count, 0)
         val list = query.build().find()
         query.close()
-        return list
+        return list.sortedBy { it.order }
     }
 
     fun getTrashSets(): List<SetDb> {
         val query = setTable.query().equal(SetDb_.isTrash, true)
         val list = query.build().find()
         query.close()
-        return list
+        return list.sortedBy { it.order }
     }
 
     fun getLabelSets(label: String): List<SetDb> {
-        val query = setTable.query().contains(SetDb_.labels, label)
+        val query = setTable.query().contains(SetDb_.labels, label).greater(SetDb_.id, 0).greater(SetDb_.count, 0)
         val list = query.build().find()
         query.close()
-        return list
+        return list.sortedBy { it.order }
     }
 
     fun saveCard(card: CardDb) = cardTable.put(card)

@@ -103,9 +103,12 @@ class MainFragment : BaseFragment(), MainView,
                 source: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                val item = mainAdapter.list.removeAt(source.adapterPosition)
-                mainAdapter.list.add(target.adapterPosition, item)
-                mainAdapter.notifyItemMoved(source.adapterPosition, target.adapterPosition);
+                val from = source.adapterPosition
+                val to = target.adapterPosition
+                val item = mainAdapter.list.removeAt(from)
+                mainAdapter.list.add(to, item)
+                mainAdapter.notifyItemMoved(source.adapterPosition, target.adapterPosition)
+                presenter.syncSetOrders(mainAdapter.list)
                 return true
             }
 
@@ -162,11 +165,6 @@ class MainFragment : BaseFragment(), MainView,
         presenter.loadLabels()
         if (mainAdapter.itemCount == 0)
             presenter.loadAllSets()
-    }
-
-    override fun paused() {
-        super.paused()
-        presenter.syncSetOrders(mainAdapter.list)
     }
 
     fun toggleNightMode() {

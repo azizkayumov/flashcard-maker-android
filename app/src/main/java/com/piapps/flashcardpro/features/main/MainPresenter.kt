@@ -76,6 +76,7 @@ class MainPresenter(var view: MainView?) : BasePresenter(view) {
         view?.setTitle(R.string.archive)
         getArchiveSets {
             view?.showSets(it)
+
             validateSets(R.string.no_archive_sets_found)
         }
     }
