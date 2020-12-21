@@ -21,10 +21,8 @@ class SaveSetOrders
                 orders.add(sets[i].order)
             }
             orders.sort()
-            longLog(orders.toString())
             for (i in 0 until sets.size) {
                 sets[i].order = orders[i]
-                log("${sets[i].order} -> ${sets[i].title}")
             }
             repository.saveSets(sets)
         //}
