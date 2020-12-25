@@ -59,7 +59,6 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
     fun createNewSet(failure: Failure) {
         set = SetDb(id = System.currentTimeMillis())
         setId = set.id
-        set.lastEdited = System.currentTimeMillis()
         set.color = settings.getDefaultCardBackgroundColor()
         set.textColor = settings.getDefaultCardTextColor()
         view?.setTitle(set.title)
@@ -82,7 +81,6 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
 
     fun editSetName(title: String) {
         set.title = title
-        set.lastEdited = System.currentTimeMillis()
         saveSet(set)
     }
 
@@ -111,14 +109,12 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
         card.frontTextSize = settings.getDefaultCardTextSize()
         card.backTextSize = settings.getDefaultCardTextSize()
         set.count++
-        set.lastEdited = System.currentTimeMillis()
         saveSet(set, listOf(card))
         view?.showNewCard(card)
     }
 
     fun archiveCardOffline(card: CardDb) {
         set.count--
-        set.lastEdited = System.currentTimeMillis()
         archiveCard(card)
     }
 
@@ -162,7 +158,6 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
     }
 
     fun saveCard(card: CardDb) {
-        set.lastEdited = System.currentTimeMillis()
         saveSet(set, listOf(card))
     }
 
@@ -219,11 +214,13 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
             selectedCards[i].id = now + i
         clipboard.addToClipboard(selectedCards)
         view?.hideSelectionOptions()
+        selectedCards.clear()
     }
 
     fun moveCards() {
         clipboard.addToClipboard(selectedCards)
         view?.hideSelectionOptions()
+        selectedCards.clear()
     }
 
     fun canPasteCards(): Boolean {
@@ -246,5 +243,6 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
     fun deleteSelectedCards(){
         deleteCards(selectedCards)
         view?.hideSelectionOptions()
+        selectedCards.clear()
     }
 }

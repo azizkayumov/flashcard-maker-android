@@ -125,4 +125,6 @@
     <string name="delete">Delete</string>
     <string name="are_you_sure_to_delete_selected_cards">Are you sure to delete the selected cards?</string>
 
+    <string name="pin_to_top">Pin to Top</string>
+
 </resources>

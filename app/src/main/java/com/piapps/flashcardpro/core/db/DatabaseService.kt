@@ -19,6 +19,7 @@ class DatabaseService
     private val statsTable by lazy { boxStore.boxFor(Stats::class.java) }
 
     fun saveSet(set: SetDb) = setTable.put(set)
+    fun saveSets(sets: List<SetDb>) = setTable.put(sets)
     fun getSet(id: Long): SetDb? = setTable.get(id)
     fun deleteSet(set: SetDb) = setTable.remove(set)
     fun deleteSets(list: List<SetDb>) = setTable.remove(list)
@@ -26,39 +27,28 @@ class DatabaseService
     fun getAllSets(): List<SetDb> {
         val query = setTable.query().equal(SetDb_.isTrash, false).greater(SetDb_.id, 0)
         val list = query.build().find()
-        return list
-    }
-
-    fun getRecentSets(): List<SetDb> {
-        val query = setTable.query().sort(object : Comparator<SetDb> {
-            override fun compare(o1: SetDb?, o2: SetDb?): Int {
-                return o2!!.lastEdited.compareTo(o1!!.lastEdited)
-            }
-        })
-        val list = query.build().find(0, 25)
-        query.close()
-        return list
+        return list.sortedBy { it.order }
     }
 
     fun getArchiveSets(): List<SetDb> {
         val query = setTable.query().less(SetDb_.id, 0).greater(SetDb_.count, 0)
         val list = query.build().find()
         query.close()
-        return list
+        return list.sortedBy { it.order }
     }
 
     fun getTrashSets(): List<SetDb> {
         val query = setTable.query().equal(SetDb_.isTrash, true)
         val list = query.build().find()
         query.close()
-        return list
+        return list.sortedBy { it.order }
     }
 
     fun getLabelSets(label: String): List<SetDb> {
-        val query = setTable.query().contains(SetDb_.labels, label)
+        val query = setTable.query().contains(SetDb_.labels, label).greater(SetDb_.id, 0).greater(SetDb_.count, 0)
         val list = query.build().find()
         query.close()
-        return list
+        return list.sortedBy { it.order }
     }
 
     fun saveCard(card: CardDb) = cardTable.put(card)
@@ -82,7 +72,9 @@ class DatabaseService
         return list.sortedBy { it.rating }
     }
 
-    fun saveLabel(label: LabelDb) = labelTable.put(label) // throws UniqueViolationException for labels
+    fun saveLabel(label: LabelDb) =
+        labelTable.put(label) // throws UniqueViolationException for labels
+
     fun deleteLabel(label: LabelDb) = labelTable.remove(label)
     fun getLabels() = labelTable.all
 

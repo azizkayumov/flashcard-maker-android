@@ -1,6 +1,5 @@
 package com.piapps.flashcardpro.core.db.tables
 
-import com.piapps.flashcardpro.features.main.entity.SetView
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 
@@ -16,7 +15,7 @@ class SetDb(
     var title: String = "",
     var count: Int = 0,
     var labels: String = "",
-    var lastEdited: Long = 0,
+    var order: Long = 0,
     var lastStudyDuration: Long = 0,
     var color: String = "",
     var textColor: String? = "",
@@ -26,9 +25,7 @@ class SetDb(
 ) {
     constructor() : this(0)
 
-    fun toSetView() = SetView(id, title, count, lastEdited, color, textColor ?: "", isTrash)
-
-    fun clone() = SetDb(id, parentId, title, count, labels, lastEdited, lastStudyDuration, color, textColor)
+    fun clone() = SetDb(id, parentId, title, count, labels, order, lastStudyDuration, color, textColor)
 
     fun setSomeFeature(set: SetDb) {
         set.flags = set.flags or 1

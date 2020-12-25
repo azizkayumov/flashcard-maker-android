@@ -12,9 +12,7 @@ import com.piapps.flashcardpro.core.db.tables.SetDb
 import com.piapps.flashcardpro.core.extension.color
 import com.piapps.flashcardpro.core.extension.getLocalizedString
 import com.piapps.flashcardpro.core.extension.toColor
-import com.piapps.flashcardpro.core.platform.MultiSortedList
 import com.piapps.flashcardpro.features.main.adapter.cells.SetItemUI
-import com.piapps.flashcardpro.features.main.entity.SetView
 import kotlin.math.abs
 
 /**
@@ -23,32 +21,37 @@ import kotlin.math.abs
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
-    private val list = MultiSortedList(object : MultiSortedList.UpdateCallback<SetView> {
-        override fun sortBy(i1: SetView, i2: SetView): Int {
-            return i2.id.compareTo(i1.id)
-        }
-
-        override fun updateBy(oldItem: SetView, newItem: SetView): Int {
-            return newItem.id.compareTo(oldItem.id)
-        }
-    }, this)
+    val list = arrayListOf<SetDb>()
 
     fun clearSets() {
         list.clear()
+        notifyDataSetChanged()
     }
 
-    fun addAll(sets: List<SetView>) {
-        sets.forEach {
-            list.add(it)
+    fun addAll(sets: List<SetDb>) {
+        list.addAll(sets)
+    }
+
+    fun updateSet(updatedSet: SetDb) {
+        for (i in 0 until list.size){
+            if (list[i].id == updatedSet.id){
+                list[i] = updatedSet
+                notifyItemChanged(i, 1)
+                return
+            }
         }
-    }
-
-    fun updateSet(updatedSet: SetView) {
-        list.update(updatedSet)
+        list.add(0, updatedSet)
+        notifyItemInserted(0)
     }
 
     fun removeSet(set: SetDb) {
-        list.remove(set.toSetView())
+        for (i in 0 until list.size){
+            if (list[i].id == set.id){
+                list.removeAt(i)
+                notifyItemRemoved(i)
+                break
+            }
+        }
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
@@ -59,8 +62,13 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
         holder.bind(list[position])
     }
 
+    // to remove the fucking blinking animation
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
+        holder.bind(list[position])
+    }
+
     override fun getItemCount(): Int {
-        return list.size()
+        return list.size
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
@@ -76,23 +84,28 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
             parent.setOnClickListener(this)
         }
 
-        fun bind(item: SetView) {
+        fun bind(item: SetDb) {
             tvTitle.text =
                 if (item.title.isNotBlank()) item.title else itemView.context.getLocalizedString(R.string.untitled_set)
             tvCount.text =
                 itemView.context.getLocalizedString(
                     R.string.n_cards,
-                    arrayOf(item.flashcardsCount.toString())
+                    arrayOf(item.count.toString())
                 )
 
             if (item.color.isNotBlank())
                 parent.setBackgroundColor(item.color.toColor())
             else
-                parent.setBackgroundColor(ContextCompat.getColor(itemView.context, abs(item.id).color()))
+                parent.setBackgroundColor(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        abs(item.id).color()
+                    )
+                )
 
-            if (item.colorText.isNotBlank()) {
-                tvTitle.setTextColor(item.colorText.toColor())
-                tvCount.setTextColor(item.colorText.toColor())
+            if (!item.textColor.isNullOrBlank()) {
+                tvTitle.setTextColor(item.textColor!!.toColor())
+                tvCount.setTextColor(item.textColor!!.toColor())
             } else {
                 tvTitle.textColorResource = R.color.colorPrimaryText
                 tvCount.textColorResource = R.color.colorPrimaryText
@@ -107,6 +120,6 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     var onSetClickedListener: OnSetClickedListener? = null
 
     interface OnSetClickedListener {
-        fun onSetClicked(set: SetView)
+        fun onSetClicked(set: SetDb)
     }
 }

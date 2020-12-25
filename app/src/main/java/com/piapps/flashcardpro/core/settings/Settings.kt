@@ -37,5 +37,8 @@ class Settings
     fun setDefaultCardTextSize(size: Float) = Prefs.save(context, Prefs.SIZE_CARD_TEXT, size)
     fun getDefaultCardTextSize() = Prefs.get(context, Prefs.SIZE_CARD_TEXT, 28F)
 
+    fun isSetOrderInited() = Prefs.get(context, "inited", false)
+    fun setSetOrdersInited() = Prefs.save(context, "inited", true)
+
     fun clear() = Prefs.clear(context)
 }
