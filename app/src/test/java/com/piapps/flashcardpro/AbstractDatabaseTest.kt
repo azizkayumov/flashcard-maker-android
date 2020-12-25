@@ -12,6 +12,7 @@ import io.objectbox.BoxStore
 import io.objectbox.DebugFlags
 import org.junit.After
 import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
@@ -41,12 +42,15 @@ open class AbstractDatabaseTest {
         repository = DatabaseRepository.Database(service, Settings(ApplicationProvider.getApplicationContext()))
     }
 
+    @Test
+    fun isDatabaseValid(){
+        assert(store != null)
+    }
+
     @After
     fun cleanUp(){
         store?.close()
         store = null
         BoxStore.deleteAllFiles(testDbDirectory)
     }
-
-
 }
