@@ -10,7 +10,6 @@ import com.kent.layouts.viewgroup.frameLayout
 import com.kent.layouts.viewgroup.lparams
 import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.extension.appTheme
-import com.piapps.flashcardpro.core.extension.autoResizeTextView
 
 /**
  * Created by abduaziz on 2019-10-01 at 20:38.

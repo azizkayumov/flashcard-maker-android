@@ -42,21 +42,21 @@ object FileUtils {
     fun getMinutes(time: String?): Long {
         if (time == null || time.isEmpty() || time.isBlank())
             return 0
-        val l = java.lang.Long.valueOf(time)!!
+        val l = java.lang.Long.valueOf(time)
         return l / 60000
     }
 
     fun getSeconds(time: String?): Long {
         if (time == null || time.isEmpty() || time.isBlank())
             return 0
-        val l = java.lang.Long.valueOf(time)!!
+        val l = java.lang.Long.valueOf(time)
         return l % 60000 / 1000
     }
 
     fun getSize(size: String?): String {
         if (size == null || size.isEmpty() || size.isBlank())
             return ""
-        val l = java.lang.Long.valueOf(size)!!
+        val l = java.lang.Long.valueOf(size)
         return (l / (1024 * 1024)).toString()
     }
 
@@ -96,9 +96,7 @@ object FileUtils {
     }
 
     fun fetchPaths(context: Context?, uri: Uri): ArrayList<String> {
-        var column_index = 0
         val listOfAllImages = arrayListOf<String>()
-        var absolutePathOfImage = ""
         val projection = arrayOf(MediaStore.MediaColumns.DATA)
 
         if (context != null) {
@@ -107,9 +105,9 @@ object FileUtils {
                 null, null
             )
             if (cursor == null) return listOfAllImages
-            column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
+            val column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
             while (cursor.moveToNext()) {
-                absolutePathOfImage = cursor.getString(column_index)
+                val absolutePathOfImage = cursor.getString(column_index)
                 listOfAllImages.add(absolutePathOfImage)
             }
             listOfAllImages.reverse()

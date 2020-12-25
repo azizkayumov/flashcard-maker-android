@@ -134,14 +134,14 @@ class MainFragment : BaseFragment(), MainView,
                 dialog.setButton(
                     DialogInterface.BUTTON_POSITIVE,
                     ctx.getLocalizedString(R.string.yes)
-                ) { d, i ->
+                ) { _, _ ->
                     presenter.clearTrash()
                     dialog.dismiss()
                 }
                 dialog.setButton(
                     DialogInterface.BUTTON_NEGATIVE,
                     ctx.getLocalizedString(R.string.no)
-                ) { d, i ->
+                ) { _, _ ->
                     dialog.dismiss()
                 }
                 dialog.show()
@@ -352,14 +352,14 @@ class MainFragment : BaseFragment(), MainView,
             dialog.setButton(
                 DialogInterface.BUTTON_POSITIVE,
                 ctx.getLocalizedString(R.string.yes)
-            ) { d, i ->
+            ) { _, _ ->
                 presenter.putBack(set.id)
                 dialog.dismiss()
             }
             dialog.setButton(
                 DialogInterface.BUTTON_NEGATIVE,
                 ctx.getLocalizedString(R.string.no)
-            ) { d, i ->
+            ) { _, _ ->
                 dialog.dismiss()
             }
             dialog.show()

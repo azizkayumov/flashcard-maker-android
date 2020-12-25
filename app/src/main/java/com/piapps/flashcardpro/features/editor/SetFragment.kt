@@ -220,13 +220,13 @@ class SetFragment : BaseFragment(), SetEditorView,
                 dialog.setButton(
                     DialogInterface.BUTTON_NEGATIVE,
                     ctx.getLocalizedString(R.string.no)
-                ) { d, i ->
+                ) { _, _ ->
                     dialog.dismiss()
                 }
                 dialog.setButton(
                     DialogInterface.BUTTON_POSITIVE,
                     ctx.getLocalizedString(R.string.yes)
-                ) { d, i ->
+                ) { _, _ ->
                     presenter.moveSetToTrash()
                     onSetUpdatedListener?.onSetMovedToTrash(presenter.set)
                     onSetUpdatedListener = null
@@ -590,13 +590,13 @@ class SetFragment : BaseFragment(), SetEditorView,
         dialog.setButton(
             DialogInterface.BUTTON_NEGATIVE,
             ctx.getLocalizedString(R.string.no)
-        ) { d, i ->
+        ) { _, _ ->
             dialog.dismiss()
         }
         dialog.setButton(
             DialogInterface.BUTTON_POSITIVE,
             ctx.getLocalizedString(R.string.yes)
-        ) { d, i ->
+        ) { _, _ ->
             adapter.hideSelectedCards()
             showCurrentCardPosition()
             presenter.deleteSelectedCards()

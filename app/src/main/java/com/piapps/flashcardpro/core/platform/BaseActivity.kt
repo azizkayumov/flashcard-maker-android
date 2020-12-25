@@ -4,10 +4,7 @@ import android.animation.Animator
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.os.Build
-import android.os.Bundle
-import android.os.Handler
-import android.os.IBinder
+import android.os.*
 import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -292,7 +289,7 @@ open class BaseActivity : AppCompatActivity() {
     fun replaceFragment(baseFragment: BaseFragment, animate: Boolean = false) {
         if (animate) {
             openFragment(baseFragment, animate)
-            Handler().postDelayed({
+            Handler(Looper.getMainLooper()).postDelayed({
                 // the top fragment has ended its animation
                 // remove the foreground fragment
                 foregroundFragment()?.let {
@@ -490,7 +487,7 @@ open class BaseActivity : AppCompatActivity() {
                 OnMenuClickListener {
                 override fun onMenuClick(item: MenuItem) {
                     closeMenu()
-                    Handler().postDelayed({
+                    Handler(Looper.getMainLooper()).postDelayed({
                         topFragment()?.menuClicked(item)
                     }, LONG_ANIMATION + 1)
                 }

@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.os.Build
-import android.telephony.PhoneNumberUtils
 import android.text.TextUtils
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -20,7 +19,6 @@ import com.github.mikephil.charting.charts.RadarChart
 import com.isseiaoki.simplecropview.CropImageView
 import com.piapps.flashcardpro.core.platform.BaseFragment
 import com.piapps.flashcardpro.core.platform.component.ActionBar
-import com.piapps.flashcardpro.core.platform.component.AutoResizeTextView
 import com.piapps.flashcardpro.core.platform.component.CircleDownloadView
 import com.piapps.flashcardpro.core.platform.component.CircleProfileView
 import com.rm.freedrawview.FreeDrawView
@@ -78,16 +76,6 @@ fun TextView.underline() {
     paintFlags = paintFlags or Paint.UNDERLINE_TEXT_FLAG
 }
 
-fun TextView.formatPhone() {
-    val t = text
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        text = "+${PhoneNumberUtils.formatNumber(t.toString(), "UZ")}"
-    } else {
-        text = "+${PhoneNumberUtils.formatNumber(t.toString())}"
-    }
-    if (text.equals("+null")) text = t
-}
-
 inline fun ViewGroup.circleDownloadView(init: CircleDownloadView.() -> Unit): CircleDownloadView {
     val c = CircleDownloadView(context, null).apply(init)
     addView(c)
@@ -98,12 +86,6 @@ inline fun ViewGroup.circleImageView(init: CircleImageView.() -> Unit): CircleIm
     val c = CircleImageView(context).apply(init)
     addView(c)
     return c
-}
-
-inline fun ViewGroup.autoResizeTextView(init: AutoResizeTextView.() -> Unit): AutoResizeTextView {
-    val a = AutoResizeTextView(context).apply(init)
-    addView(a)
-    return a
 }
 
 inline fun ViewGroup.actionBar(init: ActionBar.() -> Unit): ActionBar {
@@ -173,13 +155,13 @@ fun Context.alert(init: AlertDialog.Builder.() -> Unit): AlertDialog {
 }
 
 fun AlertDialog.Builder.positiveButton(message: String, event: () -> Unit = {}) {
-    setPositiveButton(message) { d, i ->
+    setPositiveButton(message) { _, _ ->
         event.invoke()
     }
 }
 
 fun AlertDialog.Builder.negativeButton(message: String, event: () -> Unit = {}) {
-    setNegativeButton(message) { d, i ->
+    setNegativeButton(message) { _, _ ->
         event.invoke()
     }
 }

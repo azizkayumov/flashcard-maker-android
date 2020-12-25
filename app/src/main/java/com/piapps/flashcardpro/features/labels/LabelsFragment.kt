@@ -97,7 +97,7 @@ class LabelsFragment : BaseFragment(), LabelsView, AddLabelFragment.OnLabelAdded
                 adapter.remove(l)
             }
         }
-        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, ctx.getLocalizedString(R.string.no)) { d, i ->
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, ctx.getLocalizedString(R.string.no)) { _, _ ->
             dialog.dismiss()
         }
         dialog.show()

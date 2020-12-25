@@ -2,8 +2,6 @@ package com.piapps.flashcardpro.core.extension
 
 import android.content.Context
 import android.content.res.Configuration
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import com.piapps.flashcardpro.core.platform.theme.Theme
 import com.piapps.flashcardpro.core.settings.Prefs
 import java.util.*

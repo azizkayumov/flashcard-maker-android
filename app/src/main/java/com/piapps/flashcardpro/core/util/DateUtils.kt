@@ -24,7 +24,7 @@ object DateUtils {
     fun getHourMinuteSeconds(d: Long?): String {
         if (d == null) return ""
         if (d < 1511982000000) return ""
-        val date = Date(d!!)
+        val date = Date(d)
         val time = SimpleDateFormat("HH:mm:ss:SSS")
         return time.format(date)
     }
@@ -32,7 +32,7 @@ object DateUtils {
     fun getYear(d: Long?): String {
         if (d == null) return ""
         if (d < 1511982000000) return ""
-        val date = Date(d!!)
+        val date = Date(d)
         val year = SimpleDateFormat("yyyy")
         return year.format(date)
     }
@@ -40,7 +40,7 @@ object DateUtils {
     fun getStrictDay(d: Long?): String {
         if (d == null) return ""
         if (d < 1511982000000) return ""
-        val date = Date(d!!)
+        val date = Date(d)
         val day = SimpleDateFormat("MMM_dd")
         return day.format(date)
     }

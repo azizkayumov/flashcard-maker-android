@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.os.Handler
+import android.os.Looper
 import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
@@ -23,7 +24,7 @@ class CircleDownloadView(context: Context, attrs: AttributeSet?) : RelativeLayou
     val imageView: AppCompatImageView
 
     var isProgressing = false
-    var hand = Handler()
+    var hand = Handler(Looper.getMainLooper())
 
     init {
         isProgressing = false

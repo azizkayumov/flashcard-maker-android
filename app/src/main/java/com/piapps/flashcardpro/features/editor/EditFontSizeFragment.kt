@@ -57,7 +57,7 @@ class EditFontSizeFragment : BaseFragment() {
             }
         })
 
-        chbAll.setOnCheckedChangeListener { buttonView, isChecked ->
+        chbAll.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 val newFontSize = seekBarFont.progress.toFloat() + 14F
                 onEditFontSizeListener?.onCardTextSizeChanged(newFontSize, chbAll.isChecked)

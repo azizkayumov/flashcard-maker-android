@@ -40,7 +40,7 @@ class FilesAdapter : RecyclerView.Adapter<FilesAdapter.ViewHolder>() {
             return
         }
 
-        if (file.isDirectory && file.listFiles().size == 0) {
+        if (file.isDirectory && file.listFiles()?.size == 0) {
             onItemClickListener?.showToast(R.string.folder_is_empty)
             return
         }
@@ -50,19 +50,20 @@ class FilesAdapter : RecyclerView.Adapter<FilesAdapter.ViewHolder>() {
 
         doAsync {
             val childFiles = file.listFiles()
-            val dirs = childFiles.filter { it.isDirectory && it.canRead() }.sortedBy { it.name }
-            val notdirs = childFiles.filter { !it.isDirectory && it.canRead() }.sortedBy { it.name }
+            val dirs = childFiles?.filter { it.isDirectory && it.canRead() }?.sortedBy { it.name }
+            val notdirs = childFiles?.filter { !it.isDirectory && it.canRead() }?.sortedBy { it.name }
             if (file != Environment.getExternalStorageDirectory()) {
-                list.add(file.parentFile)
+                if (file.parentFile != null)
+                    list.add(file.parentFile!!)
                 isParent.add(true)
             }
-            dirs.forEach {
+            dirs?.forEach {
                 if (!it.name.startsWith(".")) {
                     list.add(it)
                     isParent.add(false)
                 }
             }
-            notdirs.forEach {
+            notdirs?.forEach {
                 list.add(it)
                 isParent.add(false)
             }

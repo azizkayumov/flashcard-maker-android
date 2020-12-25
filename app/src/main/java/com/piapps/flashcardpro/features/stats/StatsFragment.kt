@@ -82,7 +82,7 @@ class StatsFragment : BaseFragment(), StatsView, OnChartValueSelectedListener {
 
         val valueFormatter = object : IndexAxisValueFormatter() {
             override fun getFormattedValue(value: Float): String {
-                if (value == -1F) return return ctx.getLocalizedString(R.string.past)
+                if (value == -1F) return ctx.getLocalizedString(R.string.past)
                 if (value >= dates.size) return ctx.getLocalizedString(R.string.future)
                 return dates[value.toInt()]
             }

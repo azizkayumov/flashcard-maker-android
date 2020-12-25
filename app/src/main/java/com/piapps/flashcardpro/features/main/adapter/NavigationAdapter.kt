@@ -78,10 +78,6 @@ class NavigationAdapter(val list: ArrayList<NavView> = arrayListOf<NavView>()) :
                 itemView.setOnClickListener(this)
         }
 
-        fun bindHeader(item: NavView) {
-
-        }
-
         fun bindMenuGroup(item: NavView) {
             tv?.text = item.title
         }

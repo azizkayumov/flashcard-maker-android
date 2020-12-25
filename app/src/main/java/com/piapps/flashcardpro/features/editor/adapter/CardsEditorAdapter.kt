@@ -219,11 +219,11 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
                 if (card.back.isNotBlank() || card.backImage.isNotBlank()) card.back else
                     itemView.context.getLocalizedString(R.string.text)
 
-            tvFront.setOnTouchListener { v, event ->
+            tvFront.setOnTouchListener { _, event ->
                 scaleGestureDetector.onTouchEvent(event)
                 false
             }
-            tvBack.setOnTouchListener { v, event ->
+            tvBack.setOnTouchListener { _, event ->
                 scaleGestureDetector.onTouchEvent(event)
                 false
             }

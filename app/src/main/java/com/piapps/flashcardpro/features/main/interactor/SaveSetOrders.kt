@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class SaveSetOrders
 @Inject constructor(private val repository: DatabaseRepository) {
-    operator fun invoke(sets: List<SetDb>, onResult: () -> Unit = {}) {
+    operator fun invoke(sets: List<SetDb>) {
         //doAsync {
             val orders = arrayListOf<Long>()
             for (i in 0 until sets.size){
