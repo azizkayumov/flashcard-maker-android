@@ -1,7 +1,8 @@
 [<img src="https://github.com/AbduazizKayumov/Flashcard-Maker-Android/blob/master/art/get.png" width="128" height="37.6">](https://play.google.com/store/apps/details?id=com.piapps.flashcardpro)
 [<img src="https://github.com/AbduazizKayumov/Flashcard-Maker-Android/blob/master/art/IzzyOnDroid.png" width="128" height="37.6">](https://apt.izzysoft.de/fdroid/index/apk/com.piapps.flashcardpro)
 
-## Flashcard-Maker-Android
+## Flashcard-Maker-Android  [![build](https://github.com/AbduazizKayumov/Flashcard-Maker-Android/workflows/build/badge.svg)](https://github.com/AbduazizKayumov/Flashcard-Maker-Android/actions)
+
 **Flashcard Maker** is a study app that helps to create flashcards.
 
 Features:
@@ -14,8 +15,8 @@ Features:
 7. Sorted view of sets
 8. Export/import flashcard sets as CSV files and share with your friends
 
-Old version has **250K+** downloads on Google Play:
+The old version on Google Play:
 [Flashcard Maker - Study Fast](https://play.google.com/store/apps/details?id=com.piapps.flashcard)
 
-This is a full re-write of old version in Kotlin.
+This is a full re-write of the old version in Kotlin.
 Feel free to send pull requests.
