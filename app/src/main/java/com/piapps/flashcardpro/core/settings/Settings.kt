@@ -40,5 +40,8 @@ class Settings
     fun isSetOrderInited() = Prefs.get(context, "inited", false)
     fun setSetOrdersInited() = Prefs.save(context, "inited", true)
 
+    fun saveMainLabel(label: String) = Prefs.save(context, Prefs.MAIN_LABEL, label)
+    fun getMainLabel() = Prefs.get(context, Prefs.MAIN_LABEL, "")
+
     fun clear() = Prefs.clear(context)
 }

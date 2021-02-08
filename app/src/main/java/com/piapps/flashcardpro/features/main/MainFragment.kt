@@ -164,7 +164,7 @@ class MainFragment : BaseFragment(), MainView,
     override fun resume() {
         presenter.loadLabels()
         if (mainAdapter.itemCount == 0)
-            presenter.loadAllSets()
+            presenter.loadSets()
     }
 
     fun toggleNightMode() {

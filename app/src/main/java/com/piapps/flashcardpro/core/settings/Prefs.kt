@@ -25,6 +25,8 @@ object Prefs {
 
     val USER_FIRST_TIME = "is_user_first_time"
 
+    val MAIN_LABEL = "main_label"
+
     fun save(context: Context?, key: String, value: String) {
         var prefs = context?.getSharedPreferences(prefs, Context.MODE_PRIVATE)
         var editor = prefs?.edit()

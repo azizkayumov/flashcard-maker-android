@@ -45,7 +45,7 @@ class DatabaseService
     }
 
     fun getLabelSets(label: String): List<SetDb> {
-        val query = setTable.query().contains(SetDb_.labels, label).greater(SetDb_.id, 0).greater(SetDb_.count, 0)
+        val query = setTable.query().contains(SetDb_.labels, label).greater(SetDb_.id, 0)
         val list = query.build().find()
         query.close()
         return list.sortedBy { it.order }

@@ -53,12 +53,20 @@ class MainPresenter(var view: MainView?) : BasePresenter(view) {
         }
     }
 
+    fun loadSets() {
+        if (settings.getMainLabel().isNotBlank())
+            loadLabelSets(settings.getMainLabel())
+        else
+            loadAllSets()
+    }
+
     var currentNav = -1
     fun loadAllSets() {
         if (currentNav == 0) {
             validateSets(R.string.no_all_sets_found)
             return
         }
+        settings.saveMainLabel("")
         currentNav = 0
         view?.setTitle(R.string.app_name)
         getAllSets {
@@ -95,6 +103,7 @@ class MainPresenter(var view: MainView?) : BasePresenter(view) {
     }
 
     fun loadLabelSets(label: String) {
+        settings.saveMainLabel(label)
         currentNav = 100
         view?.setTitle(label)
         getLabelSets(label) {
