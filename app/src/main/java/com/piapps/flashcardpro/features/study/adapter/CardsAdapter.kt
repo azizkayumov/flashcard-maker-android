@@ -26,7 +26,8 @@ import com.piapps.flashcardpro.core.platform.component.FlipAnimation
 class CardsAdapter : RecyclerView.Adapter<CardsAdapter.ViewHolder>() {
 
     val list = arrayListOf<CardDb>()
-    var defaultColor = ""
+    var backgroundColor = ""
+    var textColor = ""
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
@@ -87,40 +88,14 @@ class CardsAdapter : RecyclerView.Adapter<CardsAdapter.ViewHolder>() {
                     itemView.context.getLocalizedString(R.string.text)
 
             // set background colors
-            if (card.frontColor.isNotBlank())
-                front.setBackgroundColor(card.frontColor.toColor())
-            else if (defaultColor.isNotBlank())
-                front.setBackgroundColor(defaultColor.toColor())
-            else
-                front.setBackgroundColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        card.setId.color()
-                    )
-                )
-
-            if (card.backColor.isNotBlank())
-                back.setBackgroundColor(card.backColor.toColor())
-            else if (defaultColor.isNotBlank())
-                back.setBackgroundColor(defaultColor.toColor())
-            else
-                back.setBackgroundColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        card.setId.color()
-                    )
-                )
+            val backColor = backgroundColor.toColor()
+            front.setBackgroundColor(backColor)
+            back.setBackgroundColor(backColor)
 
             // set text colors
-            if (card.frontTextColor.isNotBlank())
-                tvFront.setTextColor(card.frontTextColor.toColor())
-            else
-                tvFront.textColorResource = R.color.colorPrimaryText
-
-            if (card.backTextColor.isNotBlank())
-                tvBack.setTextColor(card.backTextColor.toColor())
-            else
-                tvBack.textColorResource = R.color.colorPrimaryText
+            val txtColor = textColor.toColor()
+            tvFront.setTextColor(txtColor)
+            tvBack.setTextColor(txtColor)
 
             // set images
             if (card.frontImage.isNotBlank())

@@ -9,7 +9,7 @@ import com.piapps.flashcardpro.core.platform.BaseView
 
 interface QuizView : BaseView {
 
-    fun setSetColor(color: String)
+    fun setColors(backgroundColor: String, textColor: String)
     fun showCards(cards: List<CardDb>)
     fun setOnCardScrolled()
 

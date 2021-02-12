@@ -9,7 +9,7 @@ import com.piapps.flashcardpro.core.platform.BaseView
 
 interface StudyView : BaseView {
 
-    fun setSetColor(color: String)
+    fun setColors(backgroundColor: String, textColor: String)
     fun showCards(cards: List<CardDb>)
     fun showCurrentCardPosition()
 

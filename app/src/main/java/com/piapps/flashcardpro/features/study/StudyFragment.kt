@@ -105,8 +105,9 @@ class StudyFragment : BaseFragment(), StudyView {
         showCurrentCardPosition()
     }
 
-    override fun setSetColor(color: String) {
-        adapter.defaultColor = color
+    override fun setColors(backgroundColor: String, textColor: String) {
+        adapter.backgroundColor = backgroundColor
+        adapter.textColor = textColor
     }
 
     override fun showCards(cards: List<CardDb>) {

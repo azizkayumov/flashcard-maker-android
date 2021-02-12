@@ -4,6 +4,7 @@ import com.piapps.flashcardpro.core.db.tables.CardDb
 import com.piapps.flashcardpro.core.db.tables.SetDb
 import com.piapps.flashcardpro.core.db.tables.Stats
 import com.piapps.flashcardpro.core.platform.BasePresenter
+import com.piapps.flashcardpro.core.settings.Settings
 import com.piapps.flashcardpro.features.quiz.interactor.*
 import javax.inject.Inject
 
@@ -28,6 +29,9 @@ class QuizPresenter(var view: QuizView?) : BasePresenter(view) {
     @Inject
     lateinit var saveSet: SaveSet
 
+    @Inject
+    lateinit var settings: Settings
+
     private var setId = 0L
     var set = SetDb()
     private var answers = arrayListOf<Int>()
@@ -41,8 +45,8 @@ class QuizPresenter(var view: QuizView?) : BasePresenter(view) {
 
     fun showSetDetails(set: SetDb) {
         this.set = set
-        if (set.color.isNotBlank())
-            view?.setSetColor(set.color)
+        view?.setColors(if (set.color.isNotBlank()) set.color else settings.getDefaultCardBackgroundColor(),
+            if (!set.textColor.isNullOrBlank()) set.textColor!! else settings.getDefaultCardTextColor())
     }
 
     fun loadCards() {

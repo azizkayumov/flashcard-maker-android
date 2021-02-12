@@ -2,6 +2,7 @@ package com.piapps.flashcardpro.features.study
 
 import com.piapps.flashcardpro.core.db.tables.SetDb
 import com.piapps.flashcardpro.core.platform.BasePresenter
+import com.piapps.flashcardpro.core.settings.Settings
 import com.piapps.flashcardpro.features.study.interactor.GetCards
 import com.piapps.flashcardpro.features.study.interactor.GetSetDetails
 import com.piapps.flashcardpro.features.study.interactor.SaveSet
@@ -23,6 +24,9 @@ class StudyPresenter(var view: StudyView?) : BasePresenter(view) {
     @Inject
     lateinit var saveSet: SaveSet
 
+    @Inject
+    lateinit var settings: Settings
+
     private var setId = 0L
     var set = SetDb()
     var studyStart = 0L
@@ -36,8 +40,8 @@ class StudyPresenter(var view: StudyView?) : BasePresenter(view) {
 
     fun showSetDetails(set: SetDb) {
         this.set = set
-        if (set.color.isNotBlank())
-            view?.setSetColor(set.color)
+        view?.setColors(if (set.color.isNotBlank()) set.color else settings.getDefaultCardBackgroundColor(),
+            if (!set.textColor.isNullOrBlank()) set.textColor!! else settings.getDefaultCardTextColor())
     }
 
     fun loadCards() {
