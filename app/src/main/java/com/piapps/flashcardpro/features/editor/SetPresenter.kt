@@ -70,7 +70,8 @@ class SetPresenter(var view: SetEditorView?) : BasePresenter(view) {
         this.set = set
         view?.setTitle(set.title)
         view?.showLabels(set.labels)
-        view?.setColors(set.color, set.textColor ?: "")
+        view?.setColors(if (set.color.isNotBlank()) set.color else settings.getDefaultCardBackgroundColor(),
+            if (!set.textColor.isNullOrBlank()) set.textColor!! else settings.getDefaultCardTextColor())
     }
 
     fun loadCards() {
