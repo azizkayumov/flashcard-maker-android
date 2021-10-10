@@ -127,4 +127,6 @@
 
     <string name="pin_to_top">Pin to Top</string>
 
+    <string name="leitner_score">Leitner System: Box %1$d</string>
+
 </resources>

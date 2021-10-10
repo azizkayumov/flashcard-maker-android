@@ -71,6 +71,16 @@ fun QuizFragment.UI(): View {
                 gravity = Gravity.BOTTOM or Gravity.START
             }
             padding = dip(16)
+            setImageResource(R.drawable.ic_close)
+            setIconColor(ctx, theme.colorIconActive)
+            setRippleEffectBorderless()
+        }
+
+        ivFlip = imageView {
+            layoutParams = FrameLayout.LayoutParams(dip(56), dip(56)).apply {
+                gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
+            }
+            padding = dip(16)
             setImageResource(R.drawable.ic_flip)
             setIconColor(ctx, theme.colorIconActive)
             setRippleEffectBorderless()

@@ -9,7 +9,9 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.piapps.flashcardpro.R
 import com.piapps.flashcardpro.core.db.tables.CardDb
+import com.piapps.flashcardpro.core.extension.getString
 import com.piapps.flashcardpro.core.extension.toast
 import com.piapps.flashcardpro.core.platform.BaseFragment
 import com.piapps.flashcardpro.features.study.adapter.CardsAdapter
@@ -48,6 +50,7 @@ class StudyFragment : BaseFragment(), StudyView {
     lateinit var ivNext: AppCompatImageView
     lateinit var ivShuffle: AppCompatImageView
     lateinit var tvCurrentCard: TextView
+    lateinit var tvLietnerScore: TextView
 
     var currentCardPosition = 0
 
@@ -132,6 +135,9 @@ class StudyFragment : BaseFragment(), StudyView {
         if (pos != -1)
             currentCardPosition = pos
         tvCurrentCard.text = "${currentCardPosition % adapter.list.size + 1} / ${adapter.list.size}"
+
+        if (adapter.list.isNotEmpty())
+            tvLietnerScore.text = ctx.getString(R.string.leitner_score, adapter.list[currentCardPosition % adapter.list.size].rating)
     }
 
     override fun showToast(res: Int) {
