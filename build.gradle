@@ -2,14 +2,15 @@
 
 buildscript {
     ext.kotlin_version = '1.5.30'
-    ext.objectboxVersion = '2.4.1'
+    ext.objectboxVersion = '2.9.1'
 
     repositories {
+        mavenCentral()
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.0'
+        classpath 'com.android.tools.build:gradle:7.0.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "io.objectbox:objectbox-gradle-plugin:$objectboxVersion"
         // NOTE: Do not place your application dependencies here; they belong
@@ -19,9 +20,10 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenCentral()
         google()
-        jcenter()
         maven { url 'https://jitpack.io' }
+        jcenter()
     }
 }
 
