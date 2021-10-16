@@ -56,6 +56,15 @@ fun StudyFragment.UI(): View {
             setRippleEffectBorderless()
         }
 
+        tvLietnerScore = textView {
+            layoutParams = FrameLayout.LayoutParams(wrapContent, wrapContent).apply {
+                gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
+                margin = dip(16)
+            }
+            textSize = 10F
+            textColorResource = theme.colorSecondaryText
+        }
+
         ivNext = imageView {
             layoutParams = FrameLayout.LayoutParams(dip(56), dip(56)).apply {
                 gravity = Gravity.BOTTOM or Gravity.END

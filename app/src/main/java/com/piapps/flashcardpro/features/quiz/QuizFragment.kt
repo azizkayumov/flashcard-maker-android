@@ -52,6 +52,7 @@ class QuizFragment : BaseFragment(), QuizView {
     lateinit var tvCurrentCard: TextView
     lateinit var ivWrong: AppCompatImageView
     lateinit var ivRight: AppCompatImageView
+    lateinit var ivFlip: AppCompatImageView
 
     override fun createView(context: Context) = UI()
 
@@ -64,11 +65,15 @@ class QuizFragment : BaseFragment(), QuizView {
         presenter.loadSetDetails(id)
 
         ivWrong.setOnClickListener {
+            scrollNext(answered = false)
+        }
+
+        ivFlip.setOnClickListener {
             flip()
         }
 
         ivRight.setOnClickListener {
-            scrollNext()
+            scrollNext(answered = true)
         }
     }
 
@@ -80,17 +85,17 @@ class QuizFragment : BaseFragment(), QuizView {
     fun flip() {
         val current = layoutManager.findFirstCompletelyVisibleItemPosition()
         if (current < 0 || current >= adapter.list.size) return
-
-        presenter.setCardNotAnswered(current, adapter.list[current])
-
         val vh = rv.findViewHolderForAdapterPosition(current)
         (vh as CardsAdapter.ViewHolder).flip()
     }
 
-    fun scrollNext() {
+    fun scrollNext(answered: Boolean) {
         val current = layoutManager.findFirstCompletelyVisibleItemPosition()
         if (current >= 0 && current < adapter.list.size) {
-            presenter.setCardAnswered(current, adapter.list[current])
+            if (answered)
+                presenter.setCardAnswered(current, adapter.list[current])
+            else
+                presenter.setCardNotAnswered(current, adapter.list[current])
         }
         if (current + 1 >= adapter.list.size) {
             presenter.saveStats()

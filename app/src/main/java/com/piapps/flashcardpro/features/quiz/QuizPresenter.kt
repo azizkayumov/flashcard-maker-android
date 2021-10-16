@@ -7,6 +7,8 @@ import com.piapps.flashcardpro.core.platform.BasePresenter
 import com.piapps.flashcardpro.core.settings.Settings
 import com.piapps.flashcardpro.features.quiz.interactor.*
 import javax.inject.Inject
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * Created by abduaziz on 2019-10-29 at 13:15.
@@ -62,8 +64,7 @@ class QuizPresenter(var view: QuizView?) : BasePresenter(view) {
         if (answers[pos] == 1 || answers[pos] == 0) return
         answers[pos] = 1
 
-        card.rating = card.rating + 1
-        if (card.rating > 5) card.rating = 5
+        card.rating = min(5, card.rating + 1)
         saveCard(card)
     }
 
@@ -71,8 +72,7 @@ class QuizPresenter(var view: QuizView?) : BasePresenter(view) {
         if (answers[pos] == 1 || answers[pos] == 0) return
         answers[pos] = 0
 
-        card.rating = card.rating - 1
-        if (card.rating < -5) card.rating = -5
+        card.rating = max(1,card.rating - 1)
         saveCard(card)
     }
 
