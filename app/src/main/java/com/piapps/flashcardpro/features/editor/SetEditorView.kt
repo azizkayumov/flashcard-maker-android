@@ -17,6 +17,7 @@ interface SetEditorView : BaseView {
         val PASTE = 4f
         val SHUFFLE = 5f
         val SORT_ALPH = 6f
+        val SHUFFLE_SIDES = 7f
 
         val CARD_TEXT = 100f
         val CARD_IMAGE = 101f

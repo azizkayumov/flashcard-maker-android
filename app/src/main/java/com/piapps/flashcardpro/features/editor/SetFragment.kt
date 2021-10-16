@@ -42,6 +42,7 @@ import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.IMPORT
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.PASTE
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.REVERSE
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.SHUFFLE
+import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.SHUFFLE_SIDES
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.SORT_ALPH
 import com.piapps.flashcardpro.features.editor.SetEditorView.Companion.STATS
 import com.piapps.flashcardpro.features.editor.adapter.CardsEditorAdapter
@@ -244,6 +245,7 @@ class SetFragment : BaseFragment(), SetEditorView,
             addMenu(STATS, ctx.getLocalizedString(R.string.statistics), R.drawable.ic_stats)
             addMenu(REVERSE, ctx.getLocalizedString(R.string.reverse_cards), R.drawable.ic_flip)
             addMenu(SHUFFLE, ctx.getLocalizedString(R.string.shuffle_cards), R.drawable.ic_shuffle)
+            addMenu(SHUFFLE_SIDES, ctx.getLocalizedString(R.string.shuffle_card_sides), R.drawable.ic_shuffle_sides)
             addMenu(SORT_ALPH, ctx.getLocalizedString(R.string.sort_cards_alph), R.drawable.ic_sort)
             addMenu(EXPORT, ctx.getLocalizedString(R.string.export_to_csv), R.drawable.ic_export)
             addMenu(IMPORT, ctx.getLocalizedString(R.string.import_from_csv), R.drawable.ic_import)
@@ -309,6 +311,12 @@ class SetFragment : BaseFragment(), SetEditorView,
             SHUFFLE -> {
                 (activity as MainActivity).closeBottomMenu()
                 adapter.shuffleCards()
+                scrollToFirst()
+                presenter.autoSave()
+            }
+            SHUFFLE_SIDES -> {
+                (activity as MainActivity).closeBottomMenu()
+                adapter.shuffleCardSides()
                 scrollToFirst()
                 presenter.autoSave()
             }
