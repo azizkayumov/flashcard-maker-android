@@ -26,7 +26,7 @@ class CardDb(
     var frontTextSize: Float? = 28F,
     var backTextSize: Float? = 28F,
 
-    var rating: Int = 0, // if true in Quiz, +1 else -1
+    var rating: Int = 1, // if true in Quiz, +1 else -1
     var flags: Int = 0,
 
     @Transient

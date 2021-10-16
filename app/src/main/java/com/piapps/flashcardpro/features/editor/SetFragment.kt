@@ -53,6 +53,7 @@ import com.piapps.flashcardpro.features.quiz.QuizFragment
 import com.piapps.flashcardpro.features.stats.StatsFragment
 import com.piapps.flashcardpro.features.study.StudyFragment
 import java.io.File
+import kotlin.math.min
 
 /**
  * Created by abduaziz on 2019-09-30 at 21:32.
@@ -308,6 +309,7 @@ class SetFragment : BaseFragment(), SetEditorView,
             SHUFFLE -> {
                 (activity as MainActivity).closeBottomMenu()
                 adapter.shuffleCards()
+                scrollToFirst()
                 presenter.autoSave()
             }
             SORT_ALPH -> {
@@ -554,8 +556,7 @@ class SetFragment : BaseFragment(), SetEditorView,
 
     override fun showCurrentCardPosition() {
         val pos = layoutManager.findFirstCompletelyVisibleItemPosition()
-        val card = adapter.list.getOrNull(pos)
-        if (card == null) return
+        val card = adapter.list.getOrNull(pos) ?: return
         tvCurrentCard.text = "${pos + 1} / ${adapter.list.size}"
     }
 
@@ -581,6 +582,11 @@ class SetFragment : BaseFragment(), SetEditorView,
             rv.smoothScrollToPosition(pos - 1)
             showCurrentCardPosition()
         }
+    }
+
+    fun scrollToFirst(){
+        rv.scrollToPosition(0)
+        tvCurrentCard.text = "${min(1, adapter.list.size)} / ${adapter.list.size}"
     }
 
     private fun confirmCardDelete() {

@@ -282,12 +282,14 @@ class CardsEditorAdapter : RecyclerView.Adapter<CardsEditorAdapter.ViewHolder>()
                 ivEdit -> {
                     onCardClickListener?.onCardEditClick()
                 }
-//                tvFront -> {
+                tvFront -> {
+                    flip()
 //                    onCardClickListener?.onCardEditTextClick()
-//                }
-//                tvBack -> {
+                }
+                tvBack -> {
+                    flip(true)
 //                    onCardClickListener?.onCardEditTextClick()
-//                }
+                }
                 ivDelete -> {
                     onCardClickListener?.onCardDeleteClick()
                 }
