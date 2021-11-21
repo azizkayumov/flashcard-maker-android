@@ -25,7 +25,7 @@ class DatabaseService
     fun deleteSets(list: List<SetDb>) = setTable.remove(list)
 
     fun getAllSets(): List<SetDb> {
-        // todo: Objectbox 2.9.1 BUG: less or greater not working 32-bit env.
+        // todo: Objectbox 2.9.1 BUG: less or greater is not working on 32-bit env.
         // val query = setTable.query().equal(SetDb_.isTrash, false).greater(SetDb_.id, 0)
         val query = setTable.query().equal(SetDb_.isTrash, false).greater(SetDb_.id, 0)
         val list = query.build().find()
@@ -37,7 +37,7 @@ class DatabaseService
     }
 
     fun getArchiveSets(): List<SetDb> {
-        // todo: Objectbox 2.9.1 BUG: less or greater not working 32-bit env.
+        // todo: Objectbox 2.9.1 BUG: less or greater is not working on 32-bit env.
         // val query = setTable.query().less(SetDb_.id, 0).greater(SetDb_.count, 0)
         val query = setTable.query().equal(SetDb_.isTrash, false)
         val list = query.build().find()

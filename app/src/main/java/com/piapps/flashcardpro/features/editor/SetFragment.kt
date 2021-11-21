@@ -6,6 +6,8 @@ import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -21,6 +23,7 @@ import com.piapps.flashcardpro.core.extension.getLocalizedString
 import com.piapps.flashcardpro.core.extension.toHexColor
 import com.piapps.flashcardpro.core.extension.toast
 import com.piapps.flashcardpro.core.platform.BaseFragment
+import com.piapps.flashcardpro.core.platform.OnMotionListener
 import com.piapps.flashcardpro.core.platform.component.bottom.BottomMenu
 import com.piapps.flashcardpro.core.platform.component.bottom.BottomMenuFragment
 import com.piapps.flashcardpro.core.platform.component.bottom.BottomMenuItem
@@ -54,6 +57,7 @@ import com.piapps.flashcardpro.features.quiz.QuizFragment
 import com.piapps.flashcardpro.features.stats.StatsFragment
 import com.piapps.flashcardpro.features.study.StudyFragment
 import java.io.File
+import kotlin.math.max
 import kotlin.math.min
 
 /**
@@ -166,13 +170,17 @@ class SetFragment : BaseFragment(), SetEditorView,
                 }, true)
         }
 
-        ivNext.setOnClickListener {
+        ivNext.setOnTouchListener(OnMotionListener(onPress = {
+            scrollNext(cycle = false)
+        },onSingleClick = {
             scrollNext()
-        }
+        }))
 
-        ivPrev.setOnClickListener {
+        ivPrev.setOnTouchListener(OnMotionListener(onPress = {
+            scrollPrevious(cycle = false)
+        }, onSingleClick = {
             scrollPrevious()
-        }
+        }))
 
         ivCancelSelection.setOnClickListener {
             presenter.cancelCardsSelection()
@@ -568,33 +576,38 @@ class SetFragment : BaseFragment(), SetEditorView,
         tvCurrentCard.text = "${pos + 1} / ${adapter.list.size}"
     }
 
-    fun scrollNext() {
+    fun scrollNext(cycle: Boolean = true) {
         val pos = layoutManager.findFirstCompletelyVisibleItemPosition()
         val card = adapter.list.getOrNull(pos + 1)
-        if (card == null) {
-            rv.scrollToPosition(0)
-            tvCurrentCard.text = "${1} / ${adapter.list.size}"
-        } else {
+        if (card != null) {
             rv.smoothScrollToPosition(pos + 1)
             showCurrentCardPosition()
+        } else if (cycle) {
+            rv.scrollToPosition(0)
+            tvCurrentCard.text = "${1} / ${adapter.list.size}"
         }
     }
 
-    fun scrollPrevious() {
+    fun scrollPrevious(cycle: Boolean = true) {
         val pos = layoutManager.findFirstCompletelyVisibleItemPosition()
         val card = adapter.list.getOrNull(pos - 1)
-        if (card == null) {
-            rv.scrollToPosition(adapter.list.size - 1)
-            tvCurrentCard.text = "${adapter.list.size} / ${adapter.list.size}"
-        } else {
+        if (card != null) {
             rv.smoothScrollToPosition(pos - 1)
             showCurrentCardPosition()
+        } else if (cycle) {
+            rv.scrollToPosition(adapter.list.size - 1)
+            tvCurrentCard.text = "${adapter.list.size} / ${adapter.list.size}"
         }
     }
 
     fun scrollToFirst(){
         rv.scrollToPosition(0)
         tvCurrentCard.text = "${min(1, adapter.list.size)} / ${adapter.list.size}"
+    }
+
+    fun scrollToLast(){
+        rv.scrollToPosition(adapter.list.size - 1)
+        tvCurrentCard.text = "${max(0, adapter.list.size - 1)} / ${adapter.list.size}"
     }
 
     private fun confirmCardDelete() {

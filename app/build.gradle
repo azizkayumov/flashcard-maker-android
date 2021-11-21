@@ -15,8 +15,8 @@ android {
         applicationId "com.piapps.flashcardpro"
         minSdkVersion 19
         targetSdkVersion 31
-        versionCode 36
-        versionName "v0.3.6"
+        versionCode 37
+        versionName "v0.3.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
