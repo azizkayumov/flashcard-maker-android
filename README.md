@@ -1,7 +1,10 @@
-[<img src="https://github.com/AbduazizKayumov/Flashcard-Maker-Android/blob/master/art/get.png" width="128" height="37.6">](https://play.google.com/store/apps/details?id=com.piapps.flashcardpro)
-[<img src="https://github.com/AbduazizKayumov/Flashcard-Maker-Android/blob/master/art/IzzyOnDroid.png" width="128" height="37.6">](https://apt.izzysoft.de/fdroid/index/apk/com.piapps.flashcardpro)
+## Archived
+This project is no longer actively used or maintained and has been archived because it is no longer maintainable.
+It remains available for historical purposes (capstone design project) and for any inspiration it may offer in flashcard design and learning animations.
 
 ## Flashcard-Maker-Android
+[<img src="https://github.com/AbduazizKayumov/Flashcard-Maker-Android/blob/master/art/get.png" width="128" height="37.6">](https://play.google.com/store/apps/details?id=com.piapps.flashcardpro)
+[<img src="https://github.com/AbduazizKayumov/Flashcard-Maker-Android/blob/master/art/IzzyOnDroid.png" width="128" height="37.6">](https://apt.izzysoft.de/fdroid/index/apk/com.piapps.flashcardpro)
 
 **Flashcard Maker** is a study app that helps to create flashcards.
 
